@@ -9,7 +9,7 @@ library(tidyverse)
 Introduction to R for GradAB  IAB.
 
 ```{r main, echo = F, out.height="70%",out.width="70%", fig.align="center"}
-# knitr::include_graphics("./pic/00_frontpage_iab.png")
+knitr::include_graphics("./pic/00_frontpage_iab.png")
 
 ```
 
