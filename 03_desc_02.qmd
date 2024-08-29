@@ -1,0 +1,484 @@
+# Einen Überblick erhalten {#tab}
+
+```{r setup03, echo = F, include=FALSE}
+if(Sys.getenv("USERNAME") == "filse" ) .libPaths("D:/R-library4") 
+if(Sys.getenv("USERNAME") == "filse" ) path <- "D:/uolCloud//RFS/"
+knitr::opts_chunk$set(collapse = F)
+library(tidyverse)
+ a14 <- readr::read_delim(paste0(path,"allbus_kumuliert.csv"), delim = ";", col_types = cols(.default = col_double())) %>% 
+   filter(year == 2014) # für Gini Illustration
+pend <- haven::read_dta("./orig/PENDDAT_cf_W13.dta")
+library(Statamarkdown)
+```
+
+Nachdem wir Datensätze importiert haben, wollen wir nun einen Überblick erhalten. Jede statistische Auswertung startet mit einer Beschreibung der Variablen. In dieser Session werden wir sehen, wie wir uns mit Tabellen einen Überblick über die Informationen in einem Datensatz verschaffen können. Wir werden auch in dieser Session mit dem ETB2018 arbeiten. Wir starten also mit dem Einlesen der Daten:
+```{r}
+#| eval: false
+install.packages("haven") # falls nicht schon installiert 
+```
+
+```{r W04_1, eval=F, echo = T}
+library(haven) # datenimport für stata-datensätze
+library(tidyverse) # tidyverse
+pend <- read_dta("./orig/PENDDAT_cf_W13.dta")
+```
+
+## Häufigkeitsauszählungen
+
+Uns stehen verschiedene Befehle zur Verfügung, um eine Häufigkeitsauszählung zu erstellen:
+
++ `table()`
++ `count()` aus `{dplyr}`
+
+
+Einfachster Befehl für die Auszählung von Häufigkeiten ist der `table()` Befehl. Beispielsweise mit der Variable `statakt` zur Ausbildung der Befragten.
+```{r W04_2, include=T, echo = T}
+table(pend$statakt)
+```
+Wir bekommen hier die absoluten Häufigkeiten angezeigt. In der ersten Zeile werden die verschiedenen Ausprägungen aufgelistet, in der zweiten Zeile stehen dann die Häufigkeiten. 
+
+Allerdings werden sowohl für `table()` die Labels in der Ausgabe erstmal ignoriert. 
+Ein Blick in den Datenreport oder die Labels verrät mit `attributes()` uns aber die Ausprägungen:
+```{r}
+attributes(pend$statakt)
+```
+```{r}
+t1 <- table(pend$statakt)
+```
+
+`r as.numeric(t1[4])` Befragte sind erwerbstätig, `r as.numeric(t1[6])` Befragte sind inaktiv usw. (Zu labels und die Arbeit mit value labels in R später mehr)
+
+Mit `count()` aus `{dplyr}` bekommen wir die labels direkt angezeigt, auch hier verwenden wir wieder die Schreibweise [mit der Pipe `%>%`](#pipe):
+```{r}
+pend %>% count(statakt)
+```
+
+
+Wir können auch Tabellen unter einem frei wählbaren Namen ablegen und später wieder aufrufen:
+```{r W04_3, include=T, echo = T}
+t1 <- table(pend$statakt)
+t2 <- pend %>% count(statakt)
+```
+
+Wir sehen hier, dass die Tabelle mit `table()` eine neue Objektform ist, ein table. Mit `count()` wird hingegen ein `data.frame` erstellt.
+```{r W04class, include=T, echo = T}
+class(t1)
+class(t2)
+```
+
+## Fehlende Werte in R: `NA` {#NA03}
+
+Etwas störend sind aber die negativen Werte.
+
+Um die Werte wie `-5` auch in R als fehlende Angabe zu kennzeichnen, müssen wir sie in `pend` auf `NA` setzen. 
+Dazu rufen wir `pend$statakt` auf und filtern mit `[]` nur die Werte für `statakt` gleich `-1` heraus. Im vorherigen Kapitel haben wir kennengelernt, dass wir so spezifische Werte aufrufen können:
+```{r}
+pend$statakt[pend$statakt == -5] # nur statakt = -5 aufrufen
+```
+(Hier bekommen wir nochmal die Labels ausgespuckt, was etwas suboptimal für die Übersichtlichkeit ist.)
+
+Wenn wir daran mit `<-` einen neuen Wert angeben, werden die aufgerufenen Werte damit überschrieben - hier überschreiben wir also alle Werte für `statakt == -1` mit `NA`: 
+```{r W04_3miss, include=T, echo = T}
+pend$statakt[pend$statakt == -5]  <- NA
+```
+
+`NA` ist in der R der Code für fehlende Angaben, sie werden dann in `table()` nicht aufgeführt:
+```{r W04_3miss_tab, include=T, echo = T}
+table(pend$statakt)
+```
+Wir können aber mit der Option `exclude = NULL` die Auszählung von `NA` explizit anfordern:
+```{r}
+table(pend$statakt,exclude = NULL)
+```
+
+Allerdings haben wir ja jetzt noch nicht alle negativen Werte überschrieben, die `-10` und `-9` fehlen noch.
+Natürlich wäre es so etwas möglich, aber etwas umständlich:
+```{r, eval = F}
+pend$statakt[pend$statakt == -9 ]  <- NA
+pend$statakt[pend$statakt == -10]  <- NA
+```
+
+Kürzer ist für die PASS-Daten `< 0`, weil alle Missing-Codes kleiner 0 sind:[^match_op03]
+```{r}
+pend$statakt[pend$statakt < 0 ]  <- NA
+```
+
+[^match_op03]: Für nicht-systematische Werte wir den `%in%`-Operator verwenden, den wir schon im Zusammenhang mit [`filter()`](#filter) kennengelernt hatten: `pend$var1[pend$var1 %in% c(-9,2,124) ]  <- NA`  (das ist aber hier nur )
+
+Damit sind wir für `statakt` am Ziel:
+```{r}
+table(pend$statakt)
+table(pend$statakt,exclude = NULL)
+```
+
+
+
+In `count()` wird `NA` auch mit ausgezählt:
+```{r}
+pend %>% count(statakt)
+```
+Möchten wir das umgehen, nehmen wir wieder `filter()` zu Hilfe - mit `is.na()` können wir `NA` identifizieren. Durch Voranstellen von `!` können wir damit anfordern, dass alle nicht-`NA`-Werte mit `TRUE` behalten werden:
+```{r}
+pend %>% filter(!is.na(statakt)) %>% count(statakt)
+```
+
+Mehr zu fehlenden Werten findet sich beispielsweise im [**The missing book**](https://tmb.njtierney.com/) von Nicholas Tierney & Allison Horst.
+
+### [Übung](#descue1) {#ue3_1}
+
+
+
+
+## Andere Tabellenwerte
+
+Mit Hilfe weiterer Funktionen können wir die Häufigkeitstabellen jeweils anpassen:
+
++ `prop.table()`: relative Werte/Anteile
+
+```{r W04_5, include=T, echo = T}
+table(pend$statakt) %>% prop.table(.) 
+```
+`r sprintf("%2.3f",prop.table(table(pend$statakt)) [2]*100)`% aller Befragten sind arbeitslos.
+
++ `cumsum()`: kumulierte Werte
+
+```{r W04_4, include=T, echo = T}
+table(pend$statakt) %>% cumsum(.)
+```
+```{r, echo = F}
+ct2 <- table(pend$statakt) %>% cumsum(.)
+```
+
+`r ct2[2]` Befragte sind erwerbstätig oder sind arbeitslos.
+
+
++ `prop.table()` mit `cumsum()`: kumulierte relative Häufigkeiten
+
+```{r}
+table(pend$statakt) %>% prop.table() %>% cumsum()
+```
+```{r,echo=FALSE}
+t2x <- cumsum(prop.table(table(pend$statakt)))
+```
+
+
+`r sprintf("%2.3f",round(t2x[2]*100,3))`% aller Befragten sind erwerbstätig oder arbeitslos (und nicht inaktiv).
+
+
+::: {.callout-tip collapse="true"}
+
+## Mehrere Kennzahlen in einer Tabelle
+
+Aus Stata kennen viele sicherlich folgende Ansicht mit `tab statakt`:
+```{stata miss5b, echo = F, collectcode=F}
+set linesize 80
+qui use "D:\oCloud\Home-Cloud\Lehre\R_IAB\orig/PENDDAT_cf_W13.dta", clear
+qui replace statakt = . if statakt < 0
+tab statakt , m
+```
+Standardmäßig ein `table()` oder `count()` immer nur eine Art von Kennzahlen. 
+Da wir aber mit `count()` die Auszählungen als `data.frame()` erhalten, können wir die relativen und kumulierten Häufigkeiten einfach als neue Variablen anfügen. 
+
+Dazu verwenden wir `dat1$var <- ....`, das wir im vorherigen Kapitel kennen gelernt hatten. 
+Um also eine neue Spalte `pct`in unseren `data.frame` mit den Auszählungen einzufügen gehen wir wie folgt vor:
++ Zuerst erstellen wir einen `data.frame` mit der Auszählung mit Hilfe von `count()`
+```{r tab1_first, echo = T}
+tab_statakt <- pend %>% count(statakt) # ausgangsbefehl
+tab_statakt
+```
+
+
++ Dann fügen wir eine neue Spalte für die relativen Häufigkeiten hinzu, welche mit `prop.table()` berechnet werden:
+```{r tab1_seco, echo = T}
+tab_statakt$pct <- prop.table(tab_statakt$n)
+tab_statakt
+```
+
+Wenn wir jetzt noch die kumulierten Häufigkeiten erstellen möchten, dann können wir `cumsum()` auf `pct` anwenden:
+```{r}
+tab_statakt$Cum <- cumsum(tab_statakt$pct)
+```
+
+Etwas störend ist aber noch das `NA`, die für fehlende Angaben steht und nicht berücksichtigt werden soll.
+Das können wir einfach `!is.na()` in `filter()` ausschließen:
+```{r}
+tab_statakt2 <- pend %>% filter(!is.na(statakt)) %>% count(statakt) 
+tab_statakt2$pct <- prop.table(tab_statakt2$n)
+tab_statakt2$Cum <- cumsum(tab_statakt2$pct)
+tab_statakt2
+```
+
+:::
+
+## Kontingenztabellen
+
+Aus Kontingenztabellen erfahren wir, wie häufig Merkmalskombinationen auftreten. Auch für Kontingenztabellen können wir `table()` verwenden. Zum Beispiel können wir uns eine Tabelle anzeigen lassen, die uns die Häufigkeiten des Erwerbsstatus getrennt nach Geschlechtern zeigt:
+```{r, include=T, echo = T}
+table(pend$zpsex, pend$statakt)
+```
+
+Wir erkennen aus dieser Tabelle beispielsweise, dass `r table(pend$zpsex, pend$statakt)[6]` Befragte weiblich (`zpsex=2`) und inaktiv (`statakt = 3`) sind.
+
+Mit `addmargins()` können wir die Tabelle um die Summenwerte erweitern:
+```{r, echo = T}
+table(pend$zpsex, pend$statakt) %>% addmargins()
+```
+
+
+Möchten wir jetzt die relativen Häufigkeiten, dann wenden wir wieder `prop.table()` an:
+```{r, echo = T}
+table(pend$zpsex, pend$statakt) %>% prop.table()
+```
+Für Zeilenprozente benötigen wir die zusätzliche Option `margin = 1`:
+```{r, echo = T}
+table(pend$zpsex, pend$statakt) %>% prop.table(margin = 1)
+```
+```{r}
+#| echo: false
+t1 <- table(pend$zpsex, pend$statakt) %>% prop.table(margin = 1) %>% pluck(6)*100
+t2 <- table(pend$zpsex, pend$statakt) %>% prop.table(margin = 2) %>% pluck(6)*100
+```
+
+>  `r format(t1,digits = 4)`% der weiblichen Befragten (`zpsex=2`) sind inaktiv (`statakt = 3`).
+
+
+Für Zeilenprozente dann `margin = 2`:
+```{r}
+table(pend$zpsex, pend$statakt) %>% prop.table(margin = 2)
+```
+
+> `r format(t2,digits = 4)`% der inaktiven Befragten (`statakt = 3`) sind weiblich (`zpsex=2`).
+
+
+Übrigens funktioniert auch hier `addmargins()`:
+```{r}
+table(pend$zpsex, pend$statakt) %>% prop.table(margin = 2) %>% addmargins()
+```
+
+Für eine Kontingenztabelle mit `count()` geben wir einfach die Variablen in `count()` an. Das Ergebnis wird immer im "long shape" Format ausgegeben:
+
+```{r}
+pend %>% count(zpsex,statakt)
+```
+
+Hier ist `count()` informativer als `table()`. Hier werden die Labels verwendet. Der Übersichtlichkeit halber verwende ich meistens `count()`, auch wenn das *long shape* Format etwas gewöhnungsbedürftig ist. 
+
+
+### [Übung](#descue2) {#ue3_2}
+
+::: {.callout-tip collapse=true}
+# Bei langen Tabellen gibt `count()` nicht alle Zeilen aus
+
+Bei langen Tabellen werden nicht alle Werte ausgegeben, sondern nur die ersten Zeilen. Um hier alle Werte zu bekommen, hilft `print(n=Inf)`:
+```{r}
+#| eval: true
+pend %>% count(palter) # wird abgeschnitten
+pend %>% count(palter) %>% print(n=Inf) # alle Werte werden gezeigt
+```
+
+
+:::
+
+##  Lage- & Konzentrationsmaße 
+
+Lagemaße sind statische Kennzahlen zur Beschreibung von metrischen Variablen, wie beispielsweise das arithmetische Mittel oder der Median. Einen Überblick bietet `summary()`:
+```{r sw5_quant_summary}
+summary(pend$netges)
+```
+
+Allerdings gibt es im Datensatz natürlich keine Befragten mit einem Bruttoverdienst von -5.0 EUR. 
+Werte kleiner Null sind Zahlencodes für *keine Angabe*:
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(gt)
+attributes(pend$netges)$labels %>% enframe() %>% gt() %>% tab_options(  table.font.size = 10)
+```
+
+Um aussagekräftige Werte zu bekommen, müssen wir diese Werte mit `NA` überschreiben:
+
+```{r sw5_2, include=T, echo = T, fig.align='center', fig.height=  3.5, fig.width= 3.5}
+pend$netges[pend$netges < 0 ] <- NA # missings überschreiben
+```
+
+```{r sw5_quant_summary2}
+summary(pend$netges)
+```
+
+
+Wir können aber auch bestimmte Kennzahlen anfordern sehen uns die Bruttoverdienste der Befragten zu beschreiben:
+
++ Minimum und Maximum: `min()`, `max()`
++ arithm. Mittel: `mean()`
++ Median: `median()`
++ Quantile: `quantile()`
++ Varianz: `var()`
++ Standardabweichung: `sd()`
++ Gini-Koeffizient: `Gini` aus dem Paket `{ineq}`
+
+
+Wenn eine Variable `NA` enthält, müssen diese explizit ignoriert werden - ansonsten wird nur `NA` ausgegeben:
+```{r sw5_3, include=T, echo = T, fig.align='center', fig.height=  3.5, fig.width= 3.5}
+mean(pend$netges)
+```
+Deshalb müssen wir die Option `na.rm = T` angeben:
+```{r sw5_3b, include=T, echo = T, fig.align='center', fig.height=  3.5, fig.width= 3.5}
+mean(pend$netges,na.rm = T)
+```
+
+Ein Quantil einer Verteilung trennt die Daten so in zwei Teile, dass `x`\% der Daten darunter und 100-`x`\% darüber liegen. Mit `quantile()`wir durch Angabe in der Option `probs =` beliebige Quantilgrenzen anfordern, zB. für die 40%-Quantilgrenze:  
+```{r sw5_quant2}
+quantile(pend$netges,probs = .4, na.rm = T)
+```
+
+Den [Gini-Koeffizienten](#gini_graph) können wir mit `Gini()` aus dem Paket `ineq` berechnen:
+```{r,eval=F}
+install.packages("ineq") # einmal installieren
+```
+
+```{r}
+library(ineq) # ineq laden
+Gini(pend$netges)
+```
+
+
+### Kennzahlentabelle mit `summarise`
+
+Mit Hilfe von `summarise()` aus `{dplyr}` können wir ein eigenes `summary()` bauen:
+
+```{r}
+pend %>% summarise(Minimum = min(netges,na.rm = T),
+                    Median = median(netges,na.rm = T),
+                    Mittelwert = mean(netges,na.rm = T),
+                    Maximum = max(netges,na.rm = T),
+                    Gini = Gini(netges))
+```
+
+
+Der Vorteil des Ganzen wird im nächsten Schritt klarer.
+
+### Lage- und Streuungsmaße vergleichen
+
+
+Häufig werden diese Kennzahlen erst im Vergleich richtig spannend.   
+Dafür hilft uns das Argument `.by =` in `summarise()`:
+```{r}
+pend %>% summarise(Minimum = min(netges,na.rm = T),
+                    Median = median(netges,na.rm = T),
+                    Mittelwert = mean(netges,na.rm = T),
+                    Maximum = max(netges,na.rm = T),
+                    Gini = Gini(netges),
+                   .by = welle)
+```
+Hier stört aber die Sortierung der Welle (R übernimmt die Sortierung aus den Daten).
+Also hängen wir ein `arrange()` an, um die Sortierung nach `welle` anzufordern:
+
+```{r}
+pend %>% summarise(Minimum = min(netges,na.rm = T),
+                    Median = median(netges,na.rm = T),
+                    Mittelwert = mean(netges,na.rm = T),
+                    Maximum = max(netges,na.rm = T),
+                    Gini = Gini(netges),
+                   .by = welle) %>% 
+  arrange(welle)
+```
+
+Was aber wenn wir nur Welle 1 und 10 vergleichen wollen? Wir schalten einen `filter()` vor:
+```{r}
+pend %>% 
+  filter(welle %in% c(1,10)) %>% 
+  summarise(Minimum = min(netges,na.rm = T),
+                    Median = median(netges,na.rm = T),
+                    Mittelwert = mean(netges,na.rm = T),
+                    Maximum = max(netges,na.rm = T),
+                    Gini = Gini(netges),
+                   .by = welle)
+```
+
+### [Übung](#descue3) {#ue3_3}
+
+
+## Übungen
+
+<!-- {{< include _03_0_ueb.qmd >}} -->
+Alle Übungen beziehen sich auf das PASS CampusFile:
+
+```{r einls, eval=F, echo = T}
+library(haven)
+pend <- read_dta("./orig/PENDDAT_cf_W13.dta")
+```
+
+**[Zur Erinnerung: hier geht's zur Übersicht der Einlesebefehle](02_intro.qmd#import)**
+
+
+### Übung 1 {#descue1}
+
+Wir interessieren uns für die Variable `famstand`, welche den Familienstand der Befragten enthält:
+```{r}
+#| echo: false
+# table(pend$famstand)
+library(gt)
+pend %>% count(famstand) %>% 
+  mutate(label = haven::as_factor(famstand)) %>% 
+  select(-n) %>% gt() %>% tab_options(  table.font.size = 9)
+# %>% kable(.) %>% 
+#   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>% 
+#   row_spec(0, color = "white",font_size = 0)
+```
+
+
++ Lassen Sie sich eine Tabelle mit den absoluten Häufigkeiten anzeigen, nutzen Sie dafür sowohl `table()` als auch `count()` (Denken Sie daran, `{tidyverse}` zu laden für `count()`). 
++ Überschreiben Sie Missing-Codes mit `NA`.
++ Hat das Überschreiben der Missings mit NA geklappt? Erstellen Sie die Tabelle erneut.
++ Lassen Sie sich der relativen Häufigkeiten (Anteile) ausgeben. Verwenden Sie `prop.table()` auf Basis des `table()`.
++ Erstellen Sie eine Kontingenztabelle, indem Sie neben `famstand` auch das Geschlecht `zpsex` (2 = Frauen, 1 = Männer) mit einbeziehen
+
+[Zurück nach oben](#ue3_1)
+
+### Übung 2 {#descue2}
+
+<!-- + Erstellen Sie mit Hilfe von `count()` eine Tabelle mit absoluten, relativen und kumulierten relativen Häufigkeiten für `famstand`. Erstellen Sie zunächst eine Auszählung mit `count()` und fügen Sie dann die relativen und kumulierten relativen Häufigkeiten hinzu. -->
++ Erstellen Sie eine Kontingenztabelle für `famstand` und `zpsex`
++ Wie viel Prozent der Befragten sind geschiedene Frauen? 
++ Wie viel Prozent der befragten Frauen sind geschieden? Nutzen Sie die `margin =`-Option
++ Wie viel Prozent der befragten Geschiedenen sind Frauen? Nutzen Sie die `margin =`-Option
+  
+[Zurück nach oben](#ue3_2)
+
+### Übung 3 {#descue3}
+
+Beschreiben Sie das Alter der Befragten (`palter`) mit `summary` und erstellen Sie selbst einen Überblick mit Hilfe von `summarise()`, der einen Vergleich des Befragtenalters nach Familienstand erlaubt.
+
+  + Überschreiben Sie zunächst die Missings mit `NA`: 
+```{r}
+#| eval: false
+pend$palter[pend$palter<0] <- NA
+pend$famstand[pend$famstand<0] <- NA
+```
+  
+  + Erstellen Sie einen Überblick mit `summary()`
+  + Erstellen Sie einen Überblick mit dem Minimum, Median, arith. Mittel, Varianz und Maximum der Alterswerte mit Hilfe von `summarise()`
+  + Erweitern Sie diesen Überblick dann so, dass sie einen Vergleich der Kennzahlen für die verschiedenen `famstand`-Kategorien ausgegeben bekommen.
+
+[Zurück nach oben](#ue3_3)
+
+## Hinweise 
+
+### Runden mit `round()` {#round}
+
+
+Erläuterung: Sie können mit `round(x , 3)` Werte auf eine gewisse Zahl von Ziffern runden. Die zweite Zahl in der Klammer (nach dem Komma) gibt an, wieviele Dezimalstellen wir möchten:
+```{r W04_9, include=T, echo = T}
+round(21.12121123,digits = 3)
+round(21.12121123,digits = 5)
+round(21.12121123,digits = 0)
+```
+
+Wir können also die relativen Häufigkeiten runden und so die Tabelle von oben übersichtlicher machen: 
+```{r}
+xtabs(~zpsex+statakt, data = pend) %>% 
+  prop.table(.,margin = 1) %>% 
+  round(.,3)
+```
+

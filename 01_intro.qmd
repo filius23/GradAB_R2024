@@ -1,0 +1,275 @@
+# Getting started with R
+
+```{r setup01, include=F}
+if(Sys.getenv("USERNAME") == "filse" )path <- "D:/oCloud/RFS/"
+```
+
+## Installing and Setting Up R & RStudio
+
+R is a completely free program that you can download from [CRAN](https://cran.r-project.org/). The RStudio extension is also free and can be downloaded [here](https://www.rstudio.com/products/rstudio/download/#download). RStudio enhances R by providing a significantly more informative and appealing interface, help, and auto-completion when writing syntax, as well as an overall improved user interface. However, RStudio is an extension of R, so you need both programs.
+
+::: callout-note
+Install R first and then RStudio, so that RStudio recognizes the installed R version, and the two programs usually connect automatically. R is essentially the engine, and RStudio is our cockpit. We could work directly with R, but RStudio offers a more comfortable option and a better overview.
+:::
+
+::: {#fig-rstudio layout-ncol="2"}
+![](./pic/101_engine_R.png){width="200"} 
+
+![](./pic/101_cockpit_rstudio2.png){width="200"}
+
+R and RStudio
+:::
+
+## Setting Up RStudio
+
+After successful installation, open the RStudio application ![](./pic/rstudio-icon.png){width="20px"} and you should see the following view:
+
+![](./pic/101_RStudio.png)
+
+To avoid problems when working with R in the future, please disable the automatic saving and loading of the workspace. To do this, go to the appropriate menu under the "Tools -> Global options" tab, disable "Restore .RData into workspace at startup," and set "Save workspace to .RData on exit:" to `Never`. Otherwise, RStudio will save all loaded objects when you end the session and automatically load them the next time you open the program, which can lead to problems.
+
+```{r workspace, echo = F, out.height="80%",out.width="80%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_setup.png"))
+# file.copy(from = paste0(path1,"101_RStudio_setup.png"),to = paste0(path2,"101_RStudio_setup.png"))
+```
+
+![](./pic/101_RStudio_setup.png)
+
+Confirm the settings with "Apply" and close the window with "OK."
+
+## First Steps in R
+
+After these basic settings, we can start with the first steps in R. To do this, first open a script by clicking on the white icon in the top left corner or pressing CTRL/Command + Shift + N simultaneously.
+
+```{r script1, echo = F, out.height="40%",out.width="40%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_script2.png"))
+```
+
+![](./pic/101_RStudio_script2.png){width="438"}
+
+A fourth window opens, so you should now see the following view:
+
+```{r default_layout, echo = F, out.height="80%",out.width="80%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_script.png"))
+
+```
+
+![](./pic/101_RStudio_script.png)
+
+This script editor is where we will create and execute commands. The script editor serves as a collection of all commands to be executed. We can save these collections to revisit them later, and, more importantly, we can share command collections with others or use scripts from others for ourselves. So, we first draft a calculation in the script editor:
+
+```{r script_entwurf, echo = F, out.height="40%",out.width="40%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_script0.png"))
+```
+
+![](./pic/101_RStudio_script0.png){width="340"}
+
+To execute it, click on the line to be executed so that the cursor is in that line, and then press CTRL and Enter simultaneously (Mac users: Command and Enter):
+
+```{r keyboard, echo = F, out.width="50%"}
+# myimages <- c( paste0(path1,"101_keyboard_pc.png"), paste0(path1,"101_keyboard_mac.png") )
+# knitr::include_graphics(myimages)
+```
+
+::: {#fig-keys layout-ncol="2"}
+![](./pic/101_keyboard_pc.png){width="390"}
+
+![](./pic/101_keyboard_mac.png){width="390"}
+
+Shortcuts for Calculations
+:::
+
+R outputs the results in the console below:
+
+```{r erste_rechnung,echo = F, out.height="35%",out.width="35%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_Erste_Rechnung.png"))
+```
+
+![](./pic/101_RStudio_Erste_Rechnung.png)
+
+This also works for multiple calculations at once by selecting multiple lines and then pressing CTRL and Enter again (Mac users: Command and Enter):
+
+```{r zweite_rechnung,echo = F, out.height="65%",out.width="65%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_Rechnung.png"))
+```
+
+![](./pic/101_RStudio_Rechnung.png)
+
+Inputs from the script editor and results from the console will be presented like this in the future:
+
+```{r W02_1, include=T, echo = T}
+2+5
+3-4
+5*6
+7/8
+```
+
+Of course, R also handles longer calculations, such as following the order of operations:
+
+```{r W02_2, include=T, echo = T}
+2+3*2
+(2+3)*2
+```
+
+Other operations are also possible:
+
+```{r W02_3, eval=F}
+4^2 ## 4²
+sqrt(4) ## Square root 
+exp(1) ## Exponential function (Euler's number)
+log(5) ## Natural logarithm
+log(exp(5)) ## log and exp cancel each other out
+```
+
+We can create sequences of numbers using `seq()` or `:`:
+```{r}
+2:6
+seq(2,11,3)
+```
+
+### Creating Objects
+
+So far, we have always displayed our calculations directly.
+For more extensive calculations—since we want to work with datasets starting in the next chapter—we want to save the intermediate steps.
+
+Results can be saved as objects under any name using `<-`. R will then not display the result but will repeat the command in the console:
+
+```{r W02_7, include=T, echo = T}
+x <- 4/2
+```
+
+In the "Environment" window at the top right, you can now see the stored object `x`:
+
+```{r enviro_bsp,echo = F, out.height="50%",out.width="50%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_Environment2.png"))
+```
+
+![](./pic/101_RStudio_Environment2.png)
+
+We can retrieve it later:
+
+```{r W02_7.0}
+x
+```
+
+Additionally, we can use objects in calculations—we simply use `x` and create, for example, `y`:
+
+```{r W02_7.1, include=T, echo = T}
+y <- x * 5
+y
+```
+
+```{r enviro_bsp2,echo = F, out.height="45%",out.width="45%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_Environment.png"))
+```
+
+![](./pic/101_RStudio_Environment.png)
+
+### Storing Multiple Values
+
+With `c()`, we can store multiple values under one object, and these can also be used in calculations:
+
+```{r W02_8, include=T, echo = T}
+x1 <- c(1,2,3)
+x1
+x1* 2
+```
+
+With `length()`, we can check the number of stored values:
+```{r length}
+length(x1)
+```
+
+```{r calc1, include=T, echo = T}
+y1 <- c(10,11,9)
+y1
+y1/x1
+```
+
+### Deleting Values
+
+Of course, we can also delete objects using `rm()`. If we try to call a non-existent object, we will get an error message:
+
+```{r error_test,error=TRUE}
+rm(x1)
+x1
+```
+
+With `rm(list = ls())`, all objects can be removed from the environment.
+
+### Saving Scripts
+
+We can save the script to call it again later.
+
+```{r save1,echo = F, out.height="80%",out.width="80%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_script3.png"))
+```
+
+![](./pic/101_RStudio_script3.png){width="342"}
+
+It is important to give the saved file the extension ".R", for example, "01_Script.R".
+
+```{r save2,echo = F, out.height="50%",out.width="50%", fig.align="center"}
+# knitr::include_graphics(paste0(path1,"101_RStudio_script4.png"))
+```
+
+### Comments
+
+Besides the actual commands, comments are a central part of a data analysis syntax.
+This allows future users (especially ourselves in 3 weeks or 2 years) to understand what is happening. Comments in R can be added with `#`:
+```{r}
+2+ 5 # this is a comment
+
+2+ # a comment can also be placed here
+  5
+```
+
+```{r}
+( 2 + # a 
+    3) * # comment
+  2 # across multiple lines
+```
+
+**Tip:** It’s best to create a folder right away where you can store all R scripts and datasets from this course.
+
+### Structuring Scripts
+
+```{r,eval = F}
+# Heading 1 ----
+
+## Section 1.1 ----
+3+2*4
+3+2*3
+## Section 1.2 ----
+3+2*sqrt(3)
+
+# Heading 2 ----
+x <- c(2,6,8,2,35)
+y <- seq(2,10,2)
+
+y/x
+```
+
+```{r}
+#| echo: false
+#| out-width: "40%"
+#| out-height: "40%"
+# knitr::include_graphics("./pic/101_skript_überschriften.png")
+```
+![](./pic/101_skript_überschriften.png){width="742"}
+
+## Exercises
+
+-   Create a sequence of numbers from 7 to 13. How can you adjust the sequence with `seq()` so that only the odd numbers are generated?
+-   Store the number of students at the University of Oldenburg (15643) in `stud`.
+-   Store the number of professorships at the University of Oldenburg (210) in `prof`.
+-   Calculate the number of students per professorship at the University of Oldenburg using the objects `stud` and `prof`.
+-   Store the result in `studprof` and recall the object again!
+-   Do you see the created variables in the Environment window?
+-   Store the student numbers of the University of Bremen (19173), University of Vechta (5333), and University of Oldenburg (15643) together in `studs`.
+-   Store the number of professors at the University of Bremen (322), University of Vechta (67), and University of Oldenburg (210) together in `profs`.
+-   Calculate the number of students per professorship for all three universities.
+-   You also want to include the student numbers (14000) and professorships (217) of the University of Osnabrück in `studs` and `profs`. How would you do that?
+-   Calculate the ratio of students to professorships for all four universities!
+-   Delete the object `stud`. How can you tell that it worked?
+-   Delete all objects from the Environment. How can you tell that it worked?

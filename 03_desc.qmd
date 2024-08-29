@@ -1,0 +1,416 @@
+# Getting an Overview {#tab}
+
+```{r setup03, echo = F, include=FALSE}
+if(Sys.getenv("USERNAME") == "filse" ) path <- "D:/uolCloud//RFS/"
+knitr::opts_chunk$set(collapse = F)
+library(tidyverse)
+ a14 <- readr::read_delim(paste0(path,"allbus_kumuliert.csv"), delim = ";", col_types = cols(.default = col_double())) %>% 
+   filter(year == 2014) # for Gini illustration
+pend <- haven::read_dta("./orig/PENDDAT_cf_W13.dta")
+library(Statamarkdown)
+```
+
+After importing datasets, we want to get an overview. Every statistical analysis starts with a description of the variables. In this session, we will see how to use tables to get an overview of the information in a dataset. We will also work with the PASS Campus File in this session. Let's start by loading the data:
+```{r}
+#| eval: false
+install.packages("haven") # if not already installed 
+```
+
+```{r W04_1, eval=F, echo = T}
+library(haven) # data import for Stata datasets
+library(tidyverse) # tidyverse
+pend <- read_dta("./orig/PENDDAT_cf_W13.dta")
+```
+
+## Frequency Counts
+
+We have various commands available to create a frequency count:
+
++ `table()`
++ `count()` from `{dplyr}`
+
+
+The simplest command for counting frequencies is the `table()` command. For example, with the variable `statakt` representing the education status of respondents:
+```{r W04_2, include=T, echo = T}
+table(pend$statakt)
+```
+Here, we see the absolute frequencies displayed. The first row lists the different values, and the second row shows the frequencies.
+
+However, the labels are ignored in the output of `table()`. A look into the PASS data report or using `attributes()` reveals the value labels:
+```{r}
+attributes(pend$statakt)
+```
+```{r}
+t1 <- table(pend$statakt)
+```
+
+`r as.numeric(t1[4])` respondents are employed, `r as.numeric(t1[6])` respondents are inactive, etc. (More on labels and working with value labels in R later.)
+
+With `count()` from `{dplyr}`, we get the labels displayed directly. Again, we use the [pipe `%>%`](#pipe):
+```{r}
+pend %>% count(statakt)
+```
+
+We can also store tables under a freely chosen name and call them up later:
+```{r W04_3, include=T, echo = T}
+t1 <- table(pend$statakt)
+t2 <- pend %>% count(statakt)
+```
+
+We see here that the table with `table()` creates a new object form, a table. With `count()`, however, a `data.frame` is created.
+```{r W04class, include=T, echo = T}
+class(t1)
+class(t2)
+```
+
+## Missing Values in R: `NA` {#NA03}
+
+Negative values are a bit annoying.
+
+To mark the values like `-5` as missing data in R, we need to set them to `NA` in `pend`. 
+To do this, we call `pend$statakt` and filter with `[]` only the values for `statakt` equal to `-1`. In the previous chapter, we learned how to call specific values this way:
+```{r}
+pend$statakt[pend$statakt == -5] # only call statakt = -5
+```
+(Here, we get the labels again, which is somewhat suboptimal for clarity.)
+
+If we then assign a new value with `<-`, the called values will be overwritten - here, we overwrite all values for `statakt == -1` with `NA`:
+```{r W04_3miss, include=T, echo = T}
+pend$statakt[pend$statakt == -5]  <- NA
+```
+
+`NA` is the code for missing data in R, and they will not be listed in `table()`:
+```{r W04_3miss_tab, include=T, echo = T}
+table(pend$statakt)
+```
+But we can explicitly request the count of `NA` with the option `exclude = NULL`:
+```{r}
+table(pend$statakt,exclude = NULL)
+```
+
+However, we have not yet overwritten all the negative values; `-10` and `-9` are still missing.
+Of course, it would be possible this way, but it's a bit cumbersome:
+```{r, eval = F}
+pend$statakt[pend$statakt == -9 ]  <- NA
+pend$statakt[pend$statakt == -10]  <- NA
+```
+
+For the PASS data, it's shorter to use `< 0`, because all missing codes are less than 0:[^match_op03]
+```{r}
+pend$statakt[pend$statakt < 0 ]  <- NA
+```
+
+[^match_op03]: For non-systematic values, we can use the `%in%` operator that we already learned about in connection with [`filter()`](#filter): `pend$var1[pend$var1 %in% c(-9,2,124) ]  <- NA` (this is just an example).
+
+Now we are done with `statakt`:
+```{r}
+table(pend$statakt)
+table(pend$statakt,exclude = NULL)
+```
+
+
+In `count()`, `NA` is also counted:
+```{r}
+pend %>% count(statakt)
+```
+If we want to avoid this, we use `filter()` again - with `is.na()`, we can identify `NA`. By prefixing with `!`, we can request that all non-`NA` values be retained with `TRUE`:
+```{r}
+pend %>% filter(!is.na(statakt)) %>% count(statakt)
+```
+
+More about missing values can be found, for example, in [**The missing book**](https://tmb.njtierney.com/) by Nicholas Tierney & Allison Horst.
+
+### [Exercise](#descue1) {#ue3_1}
+
+## Other Table Values
+
+With the help of additional functions, we can customize the frequency tables:
+
++ `prop.table()`: relative values/percentages
+
+```{r W04_5, include=T, echo = T}
+table(pend$statakt) %>% prop.table(.) 
+```
+`r sprintf("%2.3f",prop.table(table(pend$statakt)) [2]*100)`% of respondents are unemployed.
+
++ `cumsum()`: cumulative values
+
+```{r W04_4, include=T, echo = T}
+table(pend$statakt) %>% cumsum(.)
+```
+```{r, echo = F}
+ct2 <- table(pend$statakt) %>% cumsum(.)
+```
+
+`r ct2[2]` respondents are employed or unemployed.
+
++ `prop.table()` with `cumsum()`: cumulative relative frequencies
+
+```{r}
+table(pend$statakt) %>% prop.table() %>% cumsum()
+```
+```{r,echo=FALSE}
+t2x <- cumsum(prop.table(table(pend$statakt)))
+```
+
+
+`r sprintf("%2.3f",round(t2x[2]*100,3))`% of respondents are employed or unemployed (and not inactive).
+
+::: {.callout-tip collapse="true"}
+
+## Multiple Metrics in One Table
+
+Many are probably familiar with the following view from Stata with `tab statakt`:
+```{stata miss5b, echo = F, collectcode=F}
+set linesize 80
+qui use "D:/uolCloud/Home-Cloud\Lehre\R_IAB\orig/PENDDAT_cf_W13.dta", clear
+qui replace statakt = . if statakt < 0
+tab statakt , m
+```
+By default, `table()` or `count()` only provide one type of metric.
+However, since we get the counts as a `data.frame()` with `count()`, we can simply add the relative and cumulative frequencies as new variables.
+
+We use `dat1$var <- ....`, which we learned in the previous chapter.
+To add a new column `pct` to our `data.frame` with the counts, we proceed as follows:
++ First, we create a `data.frame` with the count using `count()`:
+```{r tab1_first, echo = T}
+tab_statakt <- pend %>% count(statakt) # base command
+tab_statakt
+```
+
+
++ Then we add a new column for the relative frequencies, calculated with `prop.table()`:
+```{r tab1_seco, echo = T}
+tab_statakt$pct <- prop.table(tab_statakt$n)
+```
+
+If we now want to create cumulative frequencies, we can apply `cumsum()` to `pct`:
+```{r}
+tab_statakt$Cum <- cumsum(tab_statakt$pct)
+tab_statakt
+```
+
+The `NA` is still somewhat annoying as it represents missing data and should not be included.
+We can exclude it simply with `!is.na()` in `filter()`:
+```{r}
+tab_statakt2 <- pend %>% filter(!is.na(statakt)) %>% count(statakt) 
+tab_statakt2$pct <- prop.table(tab_statakt2$n)
+tab_statakt2
+
+tab_statakt2$cum <- cumsum(tab_statakt2$pct)
+tab_statakt2
+```
+
+:::
+
+
+
+### Creating a Contingency Table
+
+Contingency tables allow us to explore how frequently combinations of different variables occur together. 
+Let's look at two ways to create contingency tables in R.
+
+Using the `table()` function, we create a contingency table by inserting two variables. 
+For instance, if we want to see the frequencies of employment status (`statakt`) by gender (`zpsex`), we can use the following command:
+
+```{r}
+table(pend$zpsex, pend$statakt)
+```
+
+This table shows the counts of respondents by gender and employment status. For example, if `zpsex=2` represents females and `statakt=3` represents inactivity, the table displays how many female respondents are inactive.
+
+To add row and column totals, use the `addmargins()` function:
+
+```{r}
+table(pend$zpsex, pend$statakt) %>% addmargins()
+```
+
+If you want to compute the relative frequencies instead of absolute counts, use the `prop.table()` function:
+
+```{r}
+table(pend$zpsex, pend$statakt) %>% prop.table()
+```
+
+For row-wise percentages (within each gender, how many fall into each employment status), use:
+
+```{r}
+table(pend$zpsex, pend$statakt) %>% prop.table(margin = 1)
+```
+
+For column-wise percentages (within each employment status, how many are male or female), use:
+
+```{r}
+table(pend$zpsex, pend$statakt) %>% prop.table(margin = 2)
+```
+
+### Working with `count()` from `{dplyr}`
+
+Another approach to generate frequency tables is using `count()` from the `{dplyr}` package. It provides a more readable output with labeled variables:
+
+```{r}
+pend %>% count(zpsex, statakt)
+```
+
+## Summary Statistics
+
+For numerical variables, such as income (`netges`), we often compute summary statistics like the mean, median, or quantiles. To get a quick overview, use `summary()`:
+
+```{r}
+summary(pend$netges)
+```
+
+### Handling Missing Data
+
+Negative values in the data (like -5 for `netges`) typically represent missing data. We can convert these to `NA`:
+
+```{r}
+pend$netges[pend$netges < 0] <- NA
+```
+
+### Calculating Specific Statistics
+
+To calculate specific statistics, we can use:
+
+- Minimum: `min()`
+- Maximum: `max()`
+- Mean: `mean()`
+- Median: `median()`
+- Quantiles: `quantile()`
+- Variance: `var()`
+- Standard Deviation: `sd()`
+
+For instance, the mean of income ignoring missing values:
+
+```{r}
+mean(pend$netges, na.rm = TRUE)
+```
+
+### Custom Summary with `summarise()`
+
+You can use `summarise()` from `{dplyr}` to create custom summary tables:
+
+```{r}
+pend %>% summarise(
+  Minimum = min(netges, na.rm = TRUE),
+  Median = median(netges, na.rm = TRUE),
+  Mean = mean(netges, na.rm = TRUE),
+  Maximum = max(netges, na.rm = TRUE)
+)
+```
+
+### Comparing Across Groups
+
+To compare statistics across groups, use `.by` in `summarise()`:
+
+```{r}
+pend %>% summarise(
+  Minimum = min(netges, na.rm = TRUE),
+  Median = median(netges, na.rm = TRUE),
+  Mean = mean(netges, na.rm = TRUE),
+  Maximum = max(netges, na.rm = TRUE),
+  .by = welle
+) %>% arrange(welle)
+```
+
+You can also filter for specific waves if needed:
+
+```{r}
+pend %>% 
+  filter(welle %in% c(1, 10)) %>% 
+  summarise(
+    Minimum = min(netges, na.rm = TRUE),
+    Median = median(netges, na.rm = TRUE),
+    Mean = mean(netges, na.rm = TRUE),
+    Maximum = max(netges, na.rm = TRUE),
+    .by = welle
+  )
+```
+
+These methods allow for thorough analysis of both categorical and numerical data in R.
+
+### [Exercise](#descue3) {#ue3_3}
+
+
+## Übungen
+
+<!-- {{< include _03_0_ueb.qmd >}} -->
+Alle Übungen beziehen sich auf das PASS CampusFile `PENDDAT_cf_W13.dta`:
+
+```{r einls, eval=F, echo = T}
+library(haven)
+pend <- read_dta("./orig/PENDDAT_cf_W13.dta")
+```
+
+**[Zur Erinnerung: hier geht's zur Übersicht der Einlesebefehle](02_intro.qmd#import)**
+
+
+### Übung 1 {#descue1}
+
+Wir interessieren uns für die Variable `famstand`, welche den Familienstand der Befragten enthält:
+```{r}
+#| echo: false
+# table(pend$famstand)
+library(gt)
+pend %>% count(famstand) %>% 
+  mutate(label = haven::as_factor(famstand)) %>% 
+  select(-n) %>% gt() %>% tab_options(  table.font.size = 9)
+# %>% kable(.) %>% 
+#   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>% 
+#   row_spec(0, color = "white",font_size = 0)
+```
+
+
++ Lassen Sie sich eine Tabelle mit den absoluten Häufigkeiten anzeigen, nutzen Sie dafür sowohl `table()` als auch `count()` (Denken Sie daran, `{tidyverse}` zu laden für `count()`). 
++ Überschreiben Sie Missing-Codes mit `NA`.
++ Hat das Überschreiben der Missings mit NA geklappt? Erstellen Sie die Tabelle erneut.
++ Lassen Sie sich der relativen Häufigkeiten (Anteile) ausgeben. Verwenden Sie `prop.table()` auf Basis des `table()`.
++ Erstellen Sie eine Kontingenztabelle, indem Sie neben `famstand` auch das Geschlecht `zpsex` (2 = Frauen, 1 = Männer) mit einbeziehen
+
+[Zurück nach oben](#ue3_1)
+
+### Übung 2 {#descue2}
+
+<!-- + Erstellen Sie mit Hilfe von `count()` eine Tabelle mit absoluten, relativen und kumulierten relativen Häufigkeiten für `famstand`. Erstellen Sie zunächst eine Auszählung mit `count()` und fügen Sie dann die relativen und kumulierten relativen Häufigkeiten hinzu. -->
++ Erstellen Sie eine Kontingenztabelle für `famstand` und `zpsex`
++ Wie viel Prozent der Befragten sind geschiedene Frauen? 
++ Wie viel Prozent der befragten Frauen sind geschieden? Nutzen Sie die `margin =`-Option
++ Wie viel Prozent der befragten Geschiedenen sind Frauen? Nutzen Sie die `margin =`-Option
+  
+[Zurück nach oben](#ue3_2)
+
+### Übung 3 {#descue3}
+
+Beschreiben Sie das Alter der Befragten (`palter`) mit `summary` und erstellen Sie selbst einen Überblick mit Hilfe von `summarise()`, der einen Vergleich des Befragtenalters nach Familienstand erlaubt.
+
+  + Überschreiben Sie zunächst die Missings mit `NA`: 
+```{r}
+#| eval: false
+pend$palter[pend$palter<0] <- NA
+pend$famstand[pend$famstand<0] <- NA
+```
+  
+  + Erstellen Sie einen Überblick mit `summary()`
+  + Erstellen Sie einen Überblick mit dem Minimum, Median, arith. Mittel, Varianz und Maximum der Alterswerte mit Hilfe von `summarise()`
+  + Erweitern Sie diesen Überblick dann so, dass sie einen Vergleich der Kennzahlen für die verschiedenen `famstand`-Kategorien ausgegeben bekommen.
+
+[Zurück nach oben](#ue3_3)
+
+## Hinweise 
+
+### Runden mit `round()` {#round}
+
+
+Erläuterung: Sie können mit `round(x , 3)` Werte auf eine gewisse Zahl von Ziffern runden. Die zweite Zahl in der Klammer (nach dem Komma) gibt an, wieviele Dezimalstellen wir möchten:
+```{r W04_9, include=T, echo = T}
+round(21.12121123,digits = 3)
+round(21.12121123,digits = 5)
+round(21.12121123,digits = 0)
+```
+
+Wir können also die relativen Häufigkeiten runden und so die Tabelle von oben übersichtlicher machen: 
+```{r}
+xtabs(~zpsex+statakt, data = pend) %>% 
+  prop.table(.,margin = 1) %>% 
+  round(.,3)
+```
+

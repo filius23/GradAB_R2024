@@ -1,0 +1,184 @@
+# Inferenzstatistik & Gewichtung
+
+```{r inf01, include=F}
+if(Sys.getenv("USERNAME") == "filse" ) .libPaths("D:/R-library4")
+```
+
+
+```{r readin}
+#| message: false
+#| warning: false
+library(tidyverse)
+
+pend_kap7 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                         col_select = c("pnr","welle","palter","zpsex","azges1","statakt")) %>% 
+  mutate(across(everything(), ~ifelse(.x < 0,NA,.x)) )
+```
+
+
+Bisher haben wir die Angaben aus unserem Datensatz immer als fix angesehen. 
+Ziel einer statistischen Auswertung ist aber meistens, Aussagen über die *Grundgesamtheit* oder *Population* zu treffen. 
+
+Für die grundlegenden Inferenztools helfen uns im wesentlichen 3 Funktionen:
+
++ `t.test()` zur Berechnung von t-Tests
++ `cor.test()` zur Berechnung von Korrelationen und weiterer Zusammenhangsmaße
++ `{survey}` zur Gewichtung
+
+Neue Pakete:
+```{r pckgs}
+#| eval: false
+install.packages("survey") # Gewichtung (weiter unten)
+```
+
+## t-Tests
+
+Eines der zentralen Werkzeuge der grundlegenden Inferenzstatistik ist der t-Test.
+In R steht uns dafür `t.test()` zur Verfügung.
+Mit der Option `mu =` können wir einen Wert für die $H_{A}$ angeben:
+```{r}
+t.test(pend_kap7$azges1, mu = 35)  
+```
+
+Ein weiterer typischer Anwendungsfall für t-Tests ist der Gruppenvergleich, dazu geben wir in `t.test()` die zu testende Variable und und nach einer `~`[^tilde2] die Gruppenvariable an. 
+Wir testen hier also auf Altersunterschiede zwischen Männern (`zpsex`=1, daher group1) und Frauen (`zpsex`=2, daher group2).
+
+[^tilde2]: Tastaturbefehle: `Alt Gr` + `*` auf Windows. Auf macOS `Alt` + `N` und anschließend ein Leerzeichen, damit die Tilde erscheint.
+```{r ttest1}
+t.test(pend_kap7$azges1~pend_kap7$zpsex)
+```
+
+Es hat sich als Konvention etabliert, von einem signifikanten Unterschied zu sprechen wenn die Irrtumswahrscheinlichkeit unter 5% liegt. Das bedeutet:
+
+> *Assuming that the null hypothesis is true and the study is repeated an infinite number times by drawing random samples from the same populations(s), less than 5% of these results will be more extreme than the current result.*[^1]
+
+[^1]: [Failing Grade: 89% of Introduction-to-Psychology Textbooks That Define or Explain Statistical Significance Do So Incorrectly. Advances in Methods and Practices in Psychological Science, 2515245919858072.](https://doi.org/10.1177/2515245919858072)
+
+Da hier der p-Wert sehr viel kleiner ist als 0.05 ist (`p-value < 2.2e-16`)[^ehoch], können wir von einen statistisch signifikanten Unterschied sprechen.  
+
+[^ehoch]: `2.2e-16` steht für 2.2 aber mit 16 Nullen vorweg. Das ist Rs Art zu sagen, dass der Wert sehr sehr klein ist.
+
+Standardmäßig bekommen wir einen beidseitigen Test (`"two.sided"`), wir können aber auch einen links- (`"less"`) oder rechtsseitigen (`"greater"`) Test anfordern [mehr dazu](#hypt):
+```{r}
+#| eval: false
+t.test(pend_kap7$palter~pend_kap7$zpsex,alternative = "two.sided")
+t.test(pend_kap7$palter~pend_kap7$zpsex,alternative = "less")
+t.test(pend_kap7$palter~pend_kap7$zpsex,alternative = "greater")
+```
+
+<!-- https://github.com/gergness/srvyr/ -->
+<!-- https://federicovegetti.github.io/teaching/heidelberg_2018/lab/sst_lab_day2.html -->
+<!-- http://people.ku.edu/~chkim/soc910/note/Soc910_Note_04_Weight.pdf -->
+
+
+## Korrelation {#pearson}
+
+Den Korrelationskoeffizienten können wir in R mit `cor.test()` berechnen:
+
+```{r cor1}
+cor.test(pend_kap7$palter,pend_kap7$azges1,method = "pearson")
+```
+```{r}
+#| echo: false
+c1 <- cor.test(pend_kap7$palter,pend_kap7$azges1,method = "pearson")
+```
+
+Es handelt sich mit `r sprintf("%.4f",c1$estimate)` also um einen geringen Zusammenhang. Der p-Wert gibt uns auch hier wieder Auskunft über die stat. Signifikanz: mit `r sprintf("%.5f",c1$p.value)` liegt der p-Wert deutlich unter 0,05.
+
+Für den Spearman-Rangkorrelationskoeffizienten können wir `method = "spearman"` nutzen:
+```{r spearm1}
+#| warning: false 
+cor.test(pend_kap7$palter,pend_kap7$azges1,method = "spearman")
+```
+
+### [Übung](#ttestue)
+
+## Gewichtung 
+
+
+> Bei der Datenanalyse ist man oft mit einer Stichprobe aus einer größeren Population konfrontiert und man möchte aus dieser Stichprobe Rückschlüsse auf die größere Population ziehen. Die meisten statistischen Verfahren für diese sog. „Inferenzstatistik“ beruhen dabei auf der Annahme, dass die Stichprobe eine einfache Zufallsstichprobe ist. Bei einer solchen Stichprobe gelangen alle Elemente der Grundgesamtheit mit der gleichen Wahrscheinlichkeit in die Stichprobe. In der Praxis sind solche Stichproben aber die große Ausnahme. Häufig haben bestimmte Gruppen von Personen höhere Auswahlwahrscheinlichkeiten als andere. [Kohler/Kreuter, S.81](https://doi.org/10.1515/9783110469509)
+
+Gewichte sind ein häufig verwendetes Mittel, ungleich verteilten Auswahlwahrscheinlichkeiten zu begegnen. 
+Die Gewichte für den Personendatz des PASS CampusFiles sind im Datensatz `pweights_cf_W13.dta` zu finden. Für eine Gewichtung müssen wir diesen erst an die Personendatei ranspielen - mit einem [`left_join()`](#wrang3#join)
+```{r}
+wgt_df <- haven::read_dta("./orig/pweights_cf_W13.dta")
+head(wgt_df)
+
+pend_kap7w <- pend_kap7 %>% left_join(wgt_df, by = join_by(pnr,welle))
+```
+
+
+Die einfachste Variante für eine Gewichtung ist die Option  `wt=` in `count()`:
+```{r}
+pend_kap7w %>% 
+  count(zpsex,statakt)
+pend_kap7w %>% 
+  count(zpsex,statakt,wt = wqp)
+```
+
+Für umfangreichere Anwendungen stehen in R stehen die Pakete [`{survey}`](https://stylizeddata.com/how-to-use-survey-weights-in-r/) und das darauf aufbauende [`{srvyr}`](https://cran.r-project.org/web/packages/srvyr/vignettes/srvyr-vs-survey.html) zur Verfügung.
+```{r}
+#| eval: false
+install.packages("survey")
+```
+
+
+Zunächst verwenden wir `svydesign()`, um die Gewichtung festzulegen. 
+Im weiteren stellt [`{survey}`](https://stylizeddata.com/how-to-use-survey-weights-in-r/) dann zahlreiche Funktionen zur Verfügung, die eine gewichtete Variante der basis-Befehle sind - bspw. `svymean()` und `svytable()`:
+```{r}
+#| include: false
+pend_kap7w %>% summarise(mean = weighted.mean(palter,w = wqp))
+```
+
+```{r}
+#| message: false
+#| warning: false
+library(survey)
+pend_kap7_wgt <- svydesign(id      = ~pnr,
+                           weights = ~wqp,
+                           data    = pend_kap7w)
+
+svymean(~palter, pend_kap7_wgt, na.rm = TRUE)
+mean(pend_kap7$palter, na.rm = TRUE)
+```
+Für Tabellen gibt es in `{survey}` auch eine Funktion: 
+```{r}
+svytable(~zpsex+statakt,pend_kap7_wgt)
+table(pend_kap7$zpsex,pend_kap7$statakt)
+```
+
+
+Für [Regressionsmodelle](#reg) gibt es bspw. `survey::svyglm()`
+
+<!-- Lektüre: [Kiesl, H. (2014). Gewichtung. In N. Baur & J. Blasius (Eds.), Handbuch Methoden der empirischen Sozialforschung (pp. 349–356). Springer Fachmedien Wiesbaden.](https://doi.org/10.1007/978-3-531-18939-0_24) -->
+
+### [Übung](#weight)
+
+## Übungen
+
+### Übung 1 {#ttestue}
+
+```{r}
+pend_ue7 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                            col_select = c("pnr","welle","zpsex","palter","netges")) %>% 
+  mutate(across(everything(), ~ifelse(.x < 0,NA,.x))) # missings  mit NA überschreiben
+```
+
+Testen Sie die Hypothese, dass ein signifikanter Unterschied im Alter (`palter`) zwischen Männern und Frauen besteht (`zpsex`). Die Missings beider Variablen wurden im `mutate()` der Befehle oben schon mit `NA` überschrieben - Sie können direkt los legen.
+
+Sehen Sie sich die Informationen an, welche `t.test()` erstellt: legen Sie das Ergebnis des Tests als Objekt ab (`test1 <- ...`) und sehen Sie sich die Informationen unter `test1$` an (drücken Sie die `↹` Taste).
+
+Berechnen Sie die Korrelation zwischen Alter (`palter`) und Einkommen (`netges`).
+
+
+### Übung 2 {#weight}
+
+```{r}
+wgt_df <- haven::read_dta("./orig/pweights_cf_W13.dta")
+head(wgt_df)
+
+pend_ue7 <- pend_ue7 %>% left_join(wgt_df, by = join_by(pnr,welle))
+```
+
++ Legen Sie die Gewichtung auf Basis von `wqp` an.
++ Berechnen Sie den Mittelwert für den Nettoverdienst `netges` mit und ohne Gewichtung.

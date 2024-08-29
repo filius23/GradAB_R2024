@@ -1,0 +1,15 @@
+{
+  "hash": "9b707309934e015f9c6ef0c523a99baf",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Welcome! {#index .unnumbered}\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to R for GradAB  IAB.\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](./pic/00_frontpage_iab.png){fig-align='center' width=70% height=70%}\n:::\n:::\n\n\n\n\n\n\n## Course dates {.unnumbered}\n\n::: {.g-col-12 .g-col-sm-6 .g-col-md-4}\n\n\n{{< fa calendar-alt >}} &nbsp; 11.09. & 13.09.2024\n\n{{< fa clock >}} &nbsp; 9:00 – 15:00 \n\n{{< fa location-dot >}} &nbsp; E09\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

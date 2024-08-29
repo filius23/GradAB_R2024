@@ -1,0 +1,1023 @@
+# Working with Datasets
+
+```{r setup02, include=F}
+library(rmarkdown)
+if (Sys.getenv("USERNAME") == "filse") path <- "D:/oCloud/RFS/"
+library(tidyverse)
+library(kableExtra)
+```
+
+**(Late) Foreword on R and Command Structure**
+
+::: callout-note
+#
+
+1. Everything is an object.
+2. Everything has a name.
+3. Everything we do is based on functions.
+4. Functions come from "packages"[^pkg], but we will also write our own functions.
+
+[^pkg]: In many other programming languages, these are called libraries.
+
+Points 1 and 2 are referred to as [Object-Oriented Programming (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming). In this course, we will learn object-oriented programming.
+:::
+
+Sounds good, right?
+
+- Functions are (almost) always verbs followed by parentheses, e.g., `colnames()`, where the object to be processed is specified. This can be a variable or a dataset.
+- Options may also be specified within the parentheses—for example, the command to read `.dta` files is `read_dta(datensatz.dta, n_max = 100)`.
+- Line breaks are ignored by R, meaning we can write a command over multiple lines for better readability:
+  
+  ```{r}
+  #| eval: false
+  
+  function(object_name1,
+           option1 = very_long_choice,
+           option2 = another_choice)
+  ```
+
+- If we execute a function with `function(object_name, option1 = TRUE, option2 = FALSE)`, the result is displayed in the console.
+- If the result of a calculation or operation is not only to be displayed but retained for further steps, it must be stored under `name <- ...`. The original object remains unchanged unless we explicitly overwrite it with `name <- function(name)`. Here in the script, I often omit this step to see results directly, but to work with previous operations, we need to store them in R under an object name.
+- Options within `()` can also be specified based on the order.
+- The help for a function can be accessed with `?function()`, e.g., `?colnames()`.
+
+Some general aspects where working with R differs from other programs:
+
+- ~~R does not necessarily stop at a syntax error but tries to execute the remaining commands. *However:* RStudio stops with a syntax error from version [2022.07](https://stackoverflow.com/questions/73567974/how-to-make-r-by-default-not-stopping-when-an-error-is-encountered-while-running/73641357#73641357) onwards.~~
+
+- For Stata users: no more `variable xyz already defined`. We can overwrite anything without `, replace`, or similar commands.
+
+- Due to object orientation, we can have multiple datasets open simultaneously, increasing flexibility.
+
+In the first session, we did some steps with R's calculator function. However, R's real strength lies in data processing—so let's get started.
+
+## Data Structures in R: `data.frame`
+
+In the previous chapter, we combined the student numbers of the University of Bremen (19173), University of Vechta (5333), and University of Oldenburg (15643) under `studs` and related them to the professor numbers stored in `profs`. While this works fine, it is more organized to store related values together. For this, R provides the `data.frame`. We can store the two objects in a dataset by entering them into `data.frame` and storing the new object under `dat1`. When we call `dat1`, we see that the values have been combined row by row:
+
+```{r, include=T, echo=T}
+studs <- c(19173, 5333, 15643)  # Store student numbers under "studs"
+profs <- c(322, 67, 210)        # Store professor numbers under "profs"
+dat1_orig <- data.frame(studs, profs)
+dat1_orig
+```
+
+```{r, include=T, echo=T}
+dat1 <- data.frame(studs = c(19173, 5333, 15643), 
+                   profs = c(322, 67, 210),
+                   gegr  = c(1971, 1830, 1973)) # Without intermediate objects
+dat1    # Display the entire dataset
+```
+
+In the first row, we see the values for the University of Bremen, in the second row for the University of Vechta, and so on. We can access the columns using `dataset_name$variable_name`. For example, we can display the `profs` column:
+
+```{r, include=T, echo=T}
+dat1$profs 
+```
+
+We can display the variable/column names of the dataset with `colnames()`/`names()`. Additionally, we can call the number of rows and columns using `nrow` and `ncol`:
+
+```{r, include=T, echo=T}
+colnames(dat1) ## Display variable/column names
+names(dat1) ## Display variable/column names
+ncol(dat1) ## Number of columns/variables
+nrow(dat1) ## Number of rows/cases
+```
+
+We can add new variables to the dataset by using `dataset_name$new_variable`:
+
+```{r, include=T, echo=T}
+dat1$stu_prof <- dat1$studs/dat1$profs
+## dat1 now has one more column:
+ncol(dat1) 
+dat1
+```
+
+We can also store one or more words in a variable, but letters/words must always be enclosed in `""`.
+
+```{r, include=T, echo=T}
+dat1$uni <- c("Uni Bremen", "Uni Vechta", "Uni Oldenburg")
+dat1
+```
+
+With `View(dat1)`, a new window opens where we can view the entire dataset:
+
+```{r, eval=F}
+View(dat1)
+```
+
+```{r,echo=F, out.height="35%",out.width="45%", fig.align="center"}
+knitr::include_graphics("./pic/102_View.png")
+```
+
+## Data Types in R
+
+So far, we have encountered two variable types: numeric (contains numbers) and character (contains text or numbers that are understood as text). We also learned an organization method: `data.frame`.
+
+The following variable types in R are important for us:[^vec_types]
+
+```{r}
+#| echo: false
+
+library(gt)
+data.frame(class = c("integer <br> double",
+  "character",
+  "factor",
+  "logical"
+  ),
+  Description = 
+    c("Numeric values (`numeric`)",
+      "Text (or numbers understood as text)",
+      "Text or numbers understood as text with predefined sorting and fixed value universe",
+      "`TRUE` or `FALSE`—mostly the result of a comparison (greater/less/equal)"
+    )
+  ) %>% 
+  gt() %>% 
+  fmt_markdown(columns = everything()) |>
+  tab_header(
+    title = md("Vectors")
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE)
+
+data.frame(class = c(
+  "data.frame <br> tibble",
+  "list"
+  ),
+  Description = 
+    c(
+      "Two-dimensional data structure organized in tabular form—`tibble` is an enhancement of `data.frame` in the tidyverse (more on this [later](#tidyverse))",
+      "Ordered collection of vectors of different types—can contain other value types, `data.frame`, or even other lists"
+    )
+  ) %>% 
+  gt() %>% 
+  fmt_markdown(columns = everything()) |>
+  tab_header(
+    title = md("Combined Vectors")
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE)
+```
+
+[^vec_types]: There are more, and this enumeration ignores technical details—for an [advanced introduction to vectors in R, click here](https://r4ds.had.co.nz/vectors.html).
+
+For now, we focus on character and numeric variables. We will discuss the other types when they are needed. With `class()`, we can examine the type of a variable, or with `is.numeric()` or `is.character()`, we can check whether a variable belongs to a certain type:
+
+```{r vecclass, include=T, echo=T}
+class(dat1$profs)
+class(dat1$uni)
+is.numeric(dat1$profs)
+is.character(dat1$profs)
+```
+
+We can enforce a type change with `as.character()` or `as.numeric()`:
+
+```{r, include=T, echo=T, error=TRUE}
+as.character(dat1$profs) ## The "" indicate that the variable is defined as character
+```
+
+This does not change the original variable `dat1$profs`:
+
+```{r}
+class(dat1$profs)
+```
+
+If we want to keep this conversion for `dat1$profs`, we need to overwrite the variable:
+
+```{r, include=T, echo=T, error=TRUE}
+dat1$profs <- as.character(dat1$profs)
+dat1$profs 
+class(dat1$profs)
+```
+
+We cannot perform calculations with `character` variables, even if they contain numbers:
+
+```{r, include=T, echo=T, error=TRUE}
+dat1$profs / 2 
+```
+
+However, we can convert `dat1$profs` to numeric on the fly to perform calculations:
+
+```{r, include=T, echo=T, error=TRUE}
+as.numeric(dat1$profs)
+as.numeric(dat1$profs) / 2
+```
+
+If we convert text variables to numeric, calculations result in `NA`.
+`NA` in R stands for missing values:
+
+```{r}
+as.numeric(dat1$uni)
+```
+
+R, understandably, does not know how to convert university names into numbers.
+
+::: callout-tip
+A common issue in calculations is due to incorrect variable types.
+:::
+
+## Selecting Rows & Columns
+
+A typical task when working with datasets is selecting rows ("cases") and columns ("variables").
+
+For this, R in its base version[^baseR] provides a selection method using `[]`. The basic structure is `[row_selection, column_selection]`. Leaving out the part before or after the comma selects all rows/columns. Be careful: forgetting the comma is a common source of errors in R.
+
+[^baseR]: We will see [soon](#packages) how packages can make working in R easier.
+
+```{r , eval = F, echo = T}
+dat1 # complete dataset
+dat1[1,1] # first row, first column
+dat1[1,]  # first row, all columns
+dat1[,1]  # all rows, first column (equivalent to dat1$studs)
+dat1[,"studs"] # all rows, column named studs -> note: ""
+```
+
+In these square brackets, you can also write conditions to make selections from `dat1`.
+
+```{r , include=T, echo = T}
+dat1[dat1$studs > 10000, ] # rows where studs is greater than 10000, all columns
+dat1[dat1$studs > 10000 & dat1$profs < 300, ] # & means AND
+dat1$profs[dat1$studs > 10000] # Only see the number of professors: no comma
+```
+
+### [Exercise](#data1) {#ue_1}
+
+Repetitive use of the dataset name in the `[]` makes the syntax quite long and somewhat tedious. Therefore, there is a better/more convenient solution.
+We use the `{dplyr}` package[^04_intro-1].
+
+[^04_intro-1]: It has become common in the R community to write packages with `{}` to distinguish them more clearly from functions. I follow this convention in this script.
+
+## Packages in R {#packages}
+
+Packages are extensions for R that include additional functions. <!-- We have already seen some examples in this chapter: with `{dplyr}` we have a more convenient [`filter()`](#filter) and can read and create Stata or SPSS files using the `haven` package. --> 
+Packages need to be installed once and then loaded before use in a new session (i.e., after every restart of R/RStudio). `install.packages()` performs the installation, and `library()` loads the packages:
+
+```{r, eval=F}
+install.packages("Package") # only needed once on your PC
+library(Package) # needed after every restart
+```
+
+Often, when using `install.packages()`, not only the specified package is downloaded but also a number of other packages, the so-called "dependencies". These are packages used in the background to enable the functions of the desired package. So don’t be surprised if the installation takes a bit longer.
+
+With `install.packages()` we essentially screw in the light bulb in R, with `library()` we flip the switch so we can use the functions from the package. Each restart turns the light bulb off again, and we need to turn it back on with `library()`. The advantage is that we don’t have to turn on all the light bulbs at once when starting R.
+
+```{r,echo = F, out.height="53%",out.width="53%", fig.align="center"}
+#| fig-cap: "Source: [Dianne Cook](https://twitter.com/visnut/status/1248087845589274624)"
+knitr::include_graphics("./pic/104_install-packages.jpg")
+```
+
+:::{.callout-caution}
+## `install.packages()` in the IAB Network {#fdz_install}
+
+Packages in R are typically installed from [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html). This is not possible on the servers at IAB due to isolation from the internet. This restricts package installation in R to the collection maintained by DIM under `N:/Ablagen/D01700-Allgemein/R/bin/windows/contrib/`.
+
+A central challenge in installing from local zip files is handling *dependencies*: packages that the desired package relies on. When installing from the internet, dependencies are automatically installed, but with a local installation, this is not the case.
+
+At IAB, some workarounds exist, and currently, I have a solution in progress at FDZ based on a `.Rprofile` file that provides the `fdz_install()` command, which behaves like the standard `install.packages()` command (or should, at least).
+
+The most recent version of the `.Rprofile` file can be found under `N:\Ablagen\D01700-Quickablage\Filser\R_2024\prog`.
+
+Place the `.Rprofile` file in `C:\Users\*YOUR_USERNAME*\Documents` and restart R (`CTRL + F10`), you should then see a similar message in the console:
+```{r, eval = F}
+----------------------------------------
+IAB-FDZ .Rprofile
+Version 0.5
+----------------------------------------
+- Local repository: N:/Ablagen/D01700-Allgemein/R/bin/windows/contrib/4.2
+- Working directory: N:/Ablagen/D01700-FDZ/Quickablage/AndreasF/R-Kurs
+ 
+- Default package library: C:/Users/FilserA001.IAB/AppData/Local/R/win-library/4.2
+- HOME directory: C:/Users/FilserA001.IAB/Documents
+- R_home directory: C:/PROGRA~1/R/R-4.2.1
+----------------------------------------
+```
+
+[**More about RProfile**](https://support.posit.co/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf)
+
+:::
+
+:::{.callout-tip collapse="true"}
+# Loading packages once {#pkgdoublecolon}
+
+In addition to `library()`, you can also call functions from packages using `::`:
+```{r}
+#| eval: false
+package::function()
+```
+
+This option is often used when only one function from a package is used or to clarify which package the function comes from. It can also help with issues if a command from another package has the same name—this will override the previous command (usually with a warning), which might look like:
+
+```{r}
+#| eval: false
+The following objects are masked from ‘package:dplyr’:
+
+    between, first, last
+
+The following object is masked from ‘package:purrr’:
+
+    transpose
+```
+
+This can be avoided by not fully loading certain packages but only calling the necessary functions with `::`.
+
+:::
+
+
+## `{tidyverse}` {#tidyverse}
+
+In this course, we will mainly work with packages from the [`{tidyverse}`](www.tidyverse.org/). The tidyverse is a collection of packages that share common syntax logic and thus harmonize particularly well and cover a broad range of use cases. With
+```{r,eval =FALSE}
+install.packages("tidyverse")
+fdz_install("tidyverse") # on IAB servers with .Rprofile
+```
+the following packages are installed:
+
+`r tidyverse::tidyverse_packages() %>% paste(.,collapse=", ")`
+
+We will get to know some of them during the course. The initially most important one is `{dplyr}`, which makes selecting cases and variables easier:
+
+```{r dplyrpic, echo = F, out.height="80%",out.width="80%", fig.align="center"}
+#| fig-cap: Illustration based on the [`{dplyr}` Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf) 
+knitr::include_graphics("./pic/103_dplyr_en.png")
+```
+
+But installation is only the first step; we need to load the package with `library()`:
+```{r}
+library(tidyverse) # after once using install.packages("tidyverse")
+```
+
+## Selecting Rows with `slice()`
+
+A first function from `{tidyverse}` is `slice()`, which allows us to select rows:
+
+```{r}
+#| eval: false
+slice(dat1,1) # first row
+slice(dat1,2:3) # rows 2-3
+slice(dat1,c(1,3)) # rows 1 and 3
+```
+
+## Selecting Observations with `filter()` {#filter}
+
+With `filter()`, we can select rows from `dat1` based on conditions:
+```{r}
+filter(dat1,uni == "Uni Oldenburg", studs > 1000)
+```
+
+The selection does not change the original object `dat1`:
+
+```{r}
+dat1
+```
+
+If we want to keep the result of our selection with `filter()` for further steps, we can store it in a new `data.frame` object:
+
+```{r}
+over_10k <- filter(dat1, studs > 10000)
+over_10k
+```
+
+
+### `filter()` helpers
+
+`{dplyr}` provides a number of helpers for `filter()`:
+
+-  greater/smaller than or equal to:  `<=` `>=`
+-  or: `|`
+-  one of: `%in%`
+-  within a given range:  `between()`
+
+```{r}
+#| label: "Beispiele"
+#| warning: false
+#| eval: false
+
+filter(dat1, studs >= 10000)
+filter(dat1, studs <= 10000)
+filter(dat1,studs > 10000 | profs < 200) # more than 10.000 Students *or* less than 200 professors
+filter(dat1, gegr %in% c(1971,1830)) # founded 1971 or 1830
+filter(dat1, between(gegr,1971,1830)) # founded between 1971 and 1830 (including)
+```
+
+
+## Selecting variables with `select()` {#select}
+
+`select()` allows us to select specific columns:
+```{r}
+select(dat1,uni,studs) # columns uni and studs
+```
+
+```{r}
+select(dat1, 1:3) # column 1-3
+select(dat1, !profs) # all but profs
+```
+
+We can also select columns by name or position and reorder them:
+```{r}
+select(dat1,uni,studs,profs) # columns in a specific order
+select(dat1,-studs) # all columns except for "studs"
+```
+
+The output of `select()` can be further modified by other functions:
+```{r}
+dat1 %>% 
+  select(uni,studs) %>% 
+  filter(studs > 10000)
+```
+
+### Chaining Commands with `%>%` {#pipe}
+
+In R, `dplyr` and other `{tidyverse}` packages use `%>%` (the pipe operator) to chain commands. This is a way to streamline commands and improve readability:
+```{r}
+dat1 %>%
+  filter(studs > 10000) %>%
+  select(uni,studs)
+```
+
+Here, `%>%` takes the output of one function and passes it as an input to the next function. 
+This operator allows you to read and write code that closely resembles natural language.
+
+:::{.callout-tip}
+**END**
+:::
+
+
+Wenn wir jetzt aber einige Zeilen **und** einige Spalten auswählen möchten, dann können wir `filter()` und `select()` kombinieren:
+```{r}
+select(filter(dat1,studs < 10000),uni)
+```
+Diese Befehlsschachtel können wir mit der sog. Pipe `%>%` auflösen. `%>%` steht einfach für "und dann". Die Pipe kommt aus dem Paket `{magrittr}`, welches wiederum Teil des tidyverse ist und automatisch mit `{dplyr}` geladen wird. 
+
+```{r}
+filter(dat1,studs < 10000) %>% select(uni)
+```
+
+Häufig wird die Pipe dann so verwendet, dass zu Beginn lediglich der zu bearbeitende Datensatz steht und sich dann die Schritte anschließen:
+```{r}
+dat1 %>% filter(.,studs < 10000) %>% select(.,uni)
+```
+
+
+Der Punkt `.` steht jeweils für das Ergebnis des vorherigen Schritts. Hier also:
+
+   1. Rufe `dat1` auf *und dann (`%>%`)*
+   2. Wähle nur Zeilen aus in denen `studs` < 10000 *und dann (`%>%`)*
+   3. Behalte nur die Spalte `uni`
+
+
+```{r}
+dat1 %>% filter(studs < 10000) %>% select(uni)
+```
+
+
+:::{.callout-tip}
+
+The shortcut for `%>%` is STRG+SHIFT+m (cmd+shift+m on Mac)
+
+:::
+
+If we want to select both some rows **and** some columns, we can combine `filter()` and `select()`:
+```{r}
+select(filter(dat1, studs < 10000), uni)
+```
+
+We can simplify this nested command with the so-called pipe `%>%`. `%>%` just means "and then". The pipe comes from the `{magrittr}` package, which is part of the tidyverse and is automatically loaded with `{dplyr}`.
+
+```{r}
+filter(dat1, studs < 10000) %>% select(uni)
+```
+
+Often, the pipe is used in a way that the dataset to be processed is specified at the beginning, followed by the steps to be performed:
+```{r}
+dat1 %>% filter(., studs < 10000) %>% select(., uni)
+```
+
+The dot `.` represents the result of the previous step. Here:
+
+1. Call `dat1` *and then (`%>%`)*
+2. Select only rows where `studs` < 10000 *and then (`%>%`)*
+3. Keep only the column `uni`
+
+```{r}
+dat1 %>% filter(studs < 10000) %>% select(uni)
+```
+
+:::{.callout-tip}
+
+The shortcut for `%>%` is CTRL+SHIFT+m (cmd+shift+m on Mac)
+
+:::
+
+<!-- ### Exercise {#exercise} -->
+
+<!-- Use the {dplyr} commands to extract rows where there are more than 10,000 students and less than 300 professors. Add a new variable to the dataset where each value in the `studs` column is doubled. -->
+
+## Variable type `factor` - defining custom orders
+
+Another common task in data analysis is sorting datasets. For this, we use `arrange()`:
+
+```{r}
+dat1 %>% arrange(studs)
+```
+
+This also works for `string` variables:
+```{r}
+dat1 %>% arrange(uni)
+```
+
+But what if we want to assign a specific order that doesn't follow numeric or alphabetical order? For example, if we want to order the universities as follows: 1) Uni Oldenburg, 2) Uni Bremen, and 3) Uni Vechta.
+
+This is where a third variable type comes in: `factor`.
+
+With the `levels =` argument, we can define an order:
+
+```{r}
+factor(dat1$uni, levels = c("Uni Oldenburg", "Uni Bremen", "Uni Vechta"))
+
+dat1$uni_fct <- factor(dat1$uni, 
+                       levels = c("Uni Oldenburg", "Uni Bremen", "Uni Vechta"))
+```
+
+If we now sort by `uni_fct`, the order of the `levels` is respected:
+```{r}
+class(dat1$uni_fct)
+dat1 %>% arrange(uni_fct)
+```
+
+With `desc()`, we can sort in reverse order:
+```{r}
+dat1 %>% arrange(desc(uni_fct))
+```
+
+This may seem trivial at the moment but is very useful later for ordering variables in plots or setting the reference category in regression models.
+
+Of course, we can also sort by multiple variables; we just add more to `arrange()`:
+```{r}
+dat1 %>% arrange(desc(uni_fct), gegr, studs)
+```
+(This doesn’t make much sense in this example.)
+
+### [Exercise](#data3) {#ue_3}
+
+## Setting up a project {#rproj}
+
+In general, it's worth setting up projects in RStudio. 
+Projects are `.Rproj` files ![](./pic/rproj-icon.png){width="30px"} that automatically set the working directory to where they are saved. This simplifies collaborative work: no matter who is working on a project or on which device, the project file ensures all paths are always relative to the project directory. Furthermore, version control via git, e.g., [github](www.github.com), and other functions can be set in the project file for all users. Also, the last open scripts remain open, making it easier to work on multiple projects.
+
+```{r,echo = F, out.height="55%",out.width="65%", fig.align="center"}
+knitr::include_graphics("./pic/102_Rproj.png")
+```
+
+With `getwd()`, we can check if it worked:
+
+```{r, eval= F}
+getwd()
+```
+
+```{r, echo = F}
+"D:/Courses/R-Course"
+```
+
+```{r,echo = F, out.height="70%",out.width="75%", fig.align="center"}
+knitr::include_graphics("./pic/102_Rproj2.png")
+```
+
+Alternatively, we could create an .Rproj project with the following command (here's an example of calling a package with `::`):
+```{r, eval = F, echo=T}
+rstudioapi::initializeProject(path = "D:/Courses/R-Course")
+```
+
+We can open the project with:
+```{r}
+#| eval: false
+rstudioapi::openProject(path = "D:/Courses/R-Course")
+```
+
+```{r,echo = F, out.height="55%",out.width="65%", fig.align="center"}
+# knitr::include_graphics("./pic/102_file_path_new.png")
+```
+
+## Importing datasets {#import}
+
+In most cases, we’ll use datasets that are already saved in a file and just need to be imported. There are countless ways to do this.
+
+In this seminar, we’ll work with the Campus-File of PASS, whose parts are available as Stata files.
+
+To import the dataset into R, we need to tell R the file path where the dataset is located. The file path depends on your device's folder structure; in this case, it would be "D:/Courses/R-Course/".
+
+Of course, the file path depends on where you saved the dataset:
+
+```{r,echo = F, out.height="45%",out.width="45%", fig.align="center"}
+knitr::include_graphics("./pic/102_dateipfad_datei.png")
+```
+
+We need to inform R of this file path.
+
+### The import command
+
+Now we can use the actual import command `read.table`. For the path, we can just enter the quotation marks after `file =` and press the Tab key. Then we’ll see all subdirectories and tables in the project folder.[^2]
+
+[^2]: Sometimes the dataset is not in the project's subfolder, in which case the entire path can be specified in `read_dta()`: `pend <- read_dta(file = "D:/Courses/R-Course/data/PENDDAT_cf_W13.dta")`
+
+```{r}
+library(haven)
+pend <- read_dta("./orig/PENDDAT_cf_W13.dta") 
+```
+
+The import process consists of two parts: first, we specify the object name as `pend`, under which R will store the dataset. After the `<-` is the actual `read_dta()` command, which contains several options. First, we specify the exact dataset name, including the file extension.
+
+:::{.callout-important collapse="true"}
+# R has problems with Windows-style `\` in file paths
+Unfortunately, Windows systems use `\` in file paths, which causes problems in R. Therefore, file paths must always be specified with `/` or alternatively with `\\`. RStudio can help a bit with the *CTRL + F*/Search & Replace function.
+:::
+
+The object created is a `data.frame`:
+```{r}
+class(pend)
+```
+
+Technically, it’s a `tibble`—an enhanced version of `data.frame` in the `tidyverse` that includes labels and provides additional information in its display, such as variable classes in the first row.
+
+If we were to simply type `pend` here, the entire dataset would be displayed. For an overview, we can use `head`:
+
+```{r}
+head(pend)
+```
+
+With `nrow` and `ncol`, we can check if it worked. The dataset should have `r nrow(pend)` rows and `r ncol(pend)` columns:
+
+```{r}
+nrow(pend)
+ncol(pend)
+```
+
+Of course, we can also select rows and columns from this much larger dataset as we did before. For example, we can select the data from 2006 and store it under `pend06`:
+
+```{r}
+pend06 <- pend %>% filter(pintjahr == 2006)
+```
+
+Naturally, `pend06` has significantly fewer rows than `pend`:
+
+```{r}
+nrow(pend06)
+```
+
+If we want to see the exact ages of the respondents from `pend06`, we can call up the corresponding column with `pend06$palter`:
+
+```{r}
+pend06$palter
+```
+
+As we’ve seen, there are many more variables in PASS than just `palter`, and not all have such meaningful names—like `PD0400`. To understand these variable names and the meaning of the values, we need the codebook.
+
+We can also access a variable's `attributes()`—more on labels later.
+
+### [Exercise](#data4) {#ue_4}
+
+## Exporting objects
+
+::: callout-note
+# 
+
+The term *save* can sometimes lead to misunderstandings in R: does it mean
+
+(1) saving a dataset or other object to disk as .csv, .dta, .sav for access by other programs, or 
+
+(2) simply storing the results internally in R under an object name? 
+
+I avoid the word save and instead speak of exporting (Case 1: writing to a file) or storing (Case 2: storing results/values within R in an object).
+
+:::
+
+The proprietary format in R for exporting `data.frame`s and reloading afterwards is `.RData` (comparable to `dta` in Stata):
+```{r}
+#| error: true
+#| eval: true
+saveRDS(pend06, file = "./data/pend06.RData")
+rm(pend06) # delete pend06 from memory
+
+pend06_neu <- readRDS(file = "./data/pend06.RData")
+head(pend06) # does not exist anymore -> rm()
+head(pend06_neu,n=1)
+```
+
+We can also export and restore other objects.
+However, we need to `load()` them, which will result in restoring the previous object name:
+```{r}
+#| eval: false
+#| error: true
+save(studs, file = "./data/stud_vektor.RData")
+rm(studs)
+studs
+load(file = "./data/stud_vektor.RData") # studs is back with the same object name
+studs
+```
+
+This also works for multiple Objects:
+```{r}
+#| eval: false
+#| error: true
+save(studs,profs, file = "./data/meine_vektoren.RData")
+rm(studs,profs)
+studs
+profs
+load(file = "./data/meine_vektoren.RData") # studs & profs restored with the same name
+studs
+profs
+```
+
+### [Übung](#data5) {#ue_5}
+
+
+## Overview: Importing and exporting data sets
+
+*Importing data sets*
+
+::: panel-tabset
+
+## Explanantions
+```{r,echo=F,warning=F}
+dat1_link2 <- 
+  data.frame(cmd= c("read.table()","vroom()"),
+             link = c("https://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html",
+                      "https://www.tidyverse.org/blog/2020/01/vroom-1-1-0/"))
+options(knitr.kable.NA = '')
+readxl::read_xlsx(path = "02_readin.xlsx",sheet = 1) %>% 
+  kbl(format = "html", booktabs = T,escape = F) %>% 
+  kable_material(html_font = "Roboto") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F, font_size = 12) %>% 
+  column_spec(2:3,monospace = TRUE)
+```
+
+## Code
+
+```{r, include=FALSE}
+####| column: margin
+```
+
+```{r,eval =  F}
+# csv file
+dat1 <- read.table(file = "Dateiname.csv",sep = ";")
+
+# Rdata
+dat1 <- readRDS(file = "Dateiname.Rdata")
+
+# large csv
+library(vroom)
+dat1 <- vroom(file = "Dateiname.csv",delim = ";")
+
+# Stata dta
+library(haven)
+dat1 <- read_dta(file = "Dateiname.dta")
+
+# Stata large files
+# faster than read_dta(), but without labels
+library(readstata13)
+dat1 <- read.dta13(file = "Dateiname.dta",convert.factors = F) 
+
+# SPSS sav
+dat1 <- read_sav(file = "Dateiname.sav")
+
+# Excel
+dat1 <- read_xlsx(path = "Dateiname.xlsx", sheet = "1")
+dat1 <- read_xlsx(path = "Dateiname.xlsx", sheet = "Tabellenblatt1")
+```
+:::
+
+*Exporting data sets*
+
+::: panel-tabset
+## Explanantions
+```{r,echo=F,warning=F}
+#### | column: margin
+options(knitr.kable.NA = '')
+# data.frame(Function = "`read_delim()`",
+#            Formula = "$\\leftarrow$",
+#            Break = "this continues on a new line",
+#            Link = "[Google](www.google.com)") |>
+#   kbl(format = "markdown") 
+
+link_dat1 <- 
+  data.frame(link = c("https://www.geeksforgeeks.org/how-to-use-write-table-in-r/"))
+
+readxl::read_xlsx(path = "02_readin.xlsx",sheet = 2) %>%
+  kbl(format = "html", booktabs = T,escape = F) %>% 
+  kable_material(html_font = "Roboto") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F, font_size = 12) %>% 
+  column_spec(2:3,monospace = TRUE)
+```
+
+## Code
+
+```{r, eval = F,warning=F}
+# Rdata
+saveRDS(dat1,file = "Dateiname.Rdata")
+# csv
+write.table(dat1,file = "Dateiname.csv",sep = ";",row.names = F)
+# dta
+library(haven)
+write_dta(dat1,path = "Dateiname.dta")
+# sav
+library(haven)
+write_sav(dat1,path = "Dateiname.sav")
+# xlsx
+library(xlsx)
+write.xlsx(dat1,file = "Dateiname.xlsx", sheetName = "Tabellenblatt 1")
+```
+:::
+
+
+
+## Hilfe zu Paketen und Funktionen
+
+R packages (often) come with very detailed help pages, which can either be called up directly from RStudio:
+```{r}
+#| eval: false
+# help for packages
+vignette("dplyr")
+vignette(package = "dplyr")
+vignette("rowwise")
+help("dplyr")
+help(package = "dplyr")
+
+
+# help for a specific function
+?select()
+```
+
+Alternatively, googling the package and function mostly gives you what you need [**R dplyr select()**](https://www.google.de/search?q=R+dplyr+select())
+
+Or refer to the CRAN site:
+```{r}
+#| echo: false
+#| out-height: "30%"
+#| fig-cap: "[CRAN-Seite für {dplyr}](https://cran.r-project.org/web/packages/dplyr/index.html)"
+knitr::include_graphics("./pic/102_dplyr_vignette.png")
+```
+
+
+## Übungen
+### Übung 1 {#data1}
+
+-   Erstellen Sie den Datensatz mit den Studierenden- & Prof-Zahlen wie gezeigt:
+
+```{r,eval= F}
+dat2 <- data.frame(studs = c(14954,47269 ,23659,9415 ,38079), 
+                   profs = c(250,553,438 ,150,636),
+                   prom_recht = c(FALSE,TRUE,TRUE,TRUE,FALSE),
+                   gegr  = c(1971,1870,1457,1818,1995))
+```
+
+
+
+-   Sehen Sie den `dat2` in Ihrem Environment?
+-   Lassen Sie sich `dat2` in der Console ausgeben.
+-   Fügen Sie die Namen der Unis als neue Spalte in den Datensatz ein. Diese sind in dieser Reihenfolge:
+```{r,eval= F}
+c("FH Aachen","RWTH Aachen","Uni Freiburg","Uni Bonn","FH Bonn-Rhein-Sieg")
+```
+
+-  Lassen Sie sich `dat2` anzeigen - in der Console oder mit `View()`
+-  Berechnen Sie das Verhältnis Studierende pro Professur und legen Sie die Ergebnisse in einer neuen Variable an. Sehen Sie sich das Ergebnis an.
+-  Lassen Sie sich nur die dritte Zeile von `dat2` anzeigen.
+-  Lassen Sie sich nur die dritte Spalte von `dat2` anzeigen.
+-  Lassen Sie sich nur die Unis mit unter 10000 Studierenden anzeigen.
+
+[Zurück nach oben](#ue_1)
+
+### Übung 2 {#data2}
+
+-   [Legen Sie `.Rprofile` für die Paketinstalltion](#fdz_install) in `C:\Users\*KENNUNG*\Documents`
+-   Installieren Sie die Pakete des tidyverse mit `fdz_install("tidyverse")`, nachdem Sie die `.Rprofile`-Datei in unter **PFAD** abgelegt haben.
+-   Verwenden Sie wieder den `data.frame` `dat2` aus Übung 1
+-   Nutzen Sie `filter`, um sich nur die Unis mit unter 10000 Studierenden anzeigen zu lassen. (Denken Sie daran, `{tidyverse}` zu installieren und mit `library()` zu laden)
+-   Lassen Sie sich nur die Spalte `gegr` anzeigen.
+-   Lassen Sie sich nur Zeilen der Hochschulen mit Promotionsrecht (`prom_recht`) anzeigen.
+
+[Zurück nach oben](#ue_2)
+
+
+### Übung 3 {#data3}
+
+-   Verwenden Sie weiterhin den Datensatz aus Übung 1 & 2.
+-   Lassen Sie sich nur Hochschulen anzeigen, die 1971, 1457 oder 1995 gegründet wurden - und für diese Fälle nur den Namen und das Gründungsjahr.
+-   Sortieren Sie den Datensatz entsprechend dieser Reihenfolge. (Legen Sie dazu eine `factor`-Variable an, welche die entsprechende Reihenfolge festlegt.)
+```{r,eval =F}
+c("RWTH Aachen","Uni Freiburg","Uni Bonn","FH Aachen","FH Bonn-Rhein-Sieg")
+```
+
+[Zurück nach oben](#ue_3)
+
+
+
+### Übung 4 {#data4}
+
+-   Erstellen Sie in Ihrem Verzeichnis für diesen Kurs ein [R-Projekt](#rproj)
+-   Speichern Sie die Personendaten des PASS-CampusFile (PENDDAT_cf_W13.dta) in Ihrem Verzeichnis im Unterordner *orig*.
+-   Lesen Sie den Datensatz `PENDDAT_cf_W13.dta` [wie oben gezeigt](#import) in R ein und legen Sie den Datensatz unter dem Objektnamen `pend` ab.
+-   Nutzen Sie `head()` und `View()`, um sich einen Überblick über den Datensatz zu verschaffen.
+-   Wie viele Befragte (Zeilen) enthält der Datensatz?
+-   Lassen Sie sich die Variablennamen von `pend` mit `names()` anzeigen!
+-   Wie können Sie sich die Zeilen anzeigen lassen, welche den/die Befragte\*n mit der `pnr` 1000908201 enthält?
+-   Wählen Sie alle Befragten aus, die älter als 60 (Alter: `palter`) sind legen Sie diese Auswahl unter `ue_1960` ab.
+-   Wie müssen Sie den Befehl anpassen, sodass `ue_1960` nur die Variablen `pnr`, `hnr`, `welle`, `pintjahr` und `palter` enthält?
+-   Wie viele Spalten hat `ue_1960`? Wie viele Zeilen?
+
+**Bonusübungen**: 
+
+>  - Wie alt ist der/die Befragte mit der `pnr` 1000908201 in `welle` 10 (im `pintjahr` 2016)?
+>  - Erstellen Sie eine neue Variable mit dem Geburtsjahr der Befragten (basierend auf dem Alter `palter` und dem Interviewjahr `pintjahr`).
+    
+[Zurück nach oben](#ue_4)
+
+### Übung 5 {#data5}
+
+-  Exportieren Sie den `data.frame` mit den in der vorherigen Übung erstellten kleineren Datensatz-Version (`ue_1960`) als `.Rdata`-Datei.
+-  Laden Sie die eben exportierte `.Rdata`-Datei unter einem beliebigen Namen, bspw. `ue_1960_neu`. 
+-  Hat alles geklappt? Vergleichen Sie das neu geladene mit dem ursprünglichen Objekt: `identical(ue_1960,ue_1960_neu)` - sind beide Objekte identisch?
+
+[Zurück nach oben](#ue_5)
+
+
+
+## Appendix
+
+### Alternatives to R Projects {#setwd}
+
+Besides setting up a project, you can also set the path using `setwd()` or directly specify it within `read_dta()` or other `read...()` commands. However, this approach is less portable to other machines. When someone else opens the `.Rproj` file, R automatically sets paths relative to the file's location. This is also true if the directory is moved on your device—R will automatically adjust the working directory.
+
+To set the working directory with `setwd()`, insert the folder path within the parentheses. Make sure to replace any `\` with `/`:
+
+```{r, eval= F}
+setwd("D:/Kurse/R_IAB")
+```
+
+You can check if it worked with `getwd()`:
+
+```{r, eval= F}
+getwd()
+```
+
+The path you set with `setwd()` should appear.
+
+Alternatively, you can provide the full path directly in `read_dta()`:
+
+```{r, eval= F}
+pend <- haven::read_dta("C:/Kurse/R_IAB/orig/PENDDAT_cf_W13.dta")
+```
+
+### Selecting Rows & Columns Without `{dplyr}` {#selfiltbase}
+
+Base R (without extensions like `{dplyr}`) can also filter datasets using square brackets `[]`:
+
+```{r}
+dat1[1, 1] # first row, first column
+dat1[1, ]  # first row, all columns
+dat1[, 1]  # all rows, first column (equivalent to dat1$studs)
+dat1[, "studs"] # all rows, column named studs -> note the ""
+```
+
+You can also select multiple rows or columns by using `c()`:
+
+```{r, eval = F}
+dat1[c(1, 2), ]  ## 1st & 2nd row, all columns
+dat1[, c(1, 3)]  ## all rows, 1st & 3rd column (equivalent to dat1$studs & dat1$stu_prof)
+dat1[, c("studs", "uni")] ## all rows, columns named studs and uni
+```
+
+You can also write conditions in these square brackets to make selections from `dat1`.
+
+```{r}
+dat1 # full dataset
+dat1[dat1$uni == "Uni Oldenburg", ] # Rows where uni equals "Uni Oldenburg", all columns
+dat1$studs[dat1$uni == "Uni Oldenburg"] # Just check the student count: no comma needed
+```
+
+This works as expected, and we can expand it:
+
+```{r}
+dat1[dat1$uni == "Uni Oldenburg" & dat1$studs > 10000, ] # & means AND
+```
+
+You can also use the OR operator:
+
+```{r}
+dat1[dat1$uni == "Uni Oldenburg" | dat1$studs > 10000, ]
+```
+
+### `select()` vs `$`
+
+When you use `select()` to pick a specific variable, it preserves the data structure as a `data.frame()`, whereas `dat1$variablename` extracts the column as a vector (a series of values):
+
+```{r}
+dat1$studs
+class(dat1$studs)
+dat1$studs / 20
+```
+
+`select()` keeps the values as a column in a `data.frame`:
+
+```{r}
+dat1 %>% select(studs)
+dat1 %>% select(studs) %>% class()
+dat1 %>% select(studs) / 20
+```
