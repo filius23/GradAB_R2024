@@ -1,8 +1,8 @@
 {
-  "hash": "7f581b97329b260ab5971c4abcf72d22",
+  "hash": "30f0b4d50190897ef5fe61d19a0e9367",
   "result": {
     "engine": "knitr",
-    "markdown": "# Welcome! {#index .unnumbered}\n\n\n\n\n\n\n\n\n\nIntroduction to R for GradAB and IAB people.\n\n![](./pic/00_frontpage_iab2.png){width=\"490\"}\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n\n:::\n\n\n\n\n\n## Course dates {.unnumbered}\n\n::: {.g-col-12 .g-col-sm-6 .g-col-md-4}\n\n\n{{< fa calendar-alt >}} &nbsp; 11.09. & 13.09.2024\n\n{{< fa clock >}} &nbsp; 9:00 – 15:00 \n\n{{< fa location-dot >}} &nbsp; E09\n\n:::\n",
+    "markdown": "# Welcome! {#index .unnumbered}\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to R for GradAB and IAB people.\n\n![](./pic/00_frontpage_iab2.png){width=\"490\"}\n\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](./pic/00_frontpage_iab2.png){fig-align='center' width=70% height=70%}\n:::\n\n::: {.cell-output-display}\n![](./pic/101_RStudio_Erste_Rechnung.png){fig-align='center' width=70% height=70%}\n:::\n:::\n\n\n\n\n\n\n## Course dates {.unnumbered}\n\n::: {.g-col-12 .g-col-sm-6 .g-col-md-4}\n\n\n{{< fa calendar-alt >}} &nbsp; 11.09. & 13.09.2024\n\n{{< fa clock >}} &nbsp; 9:00 – 15:00 \n\n{{< fa location-dot >}} &nbsp; E09\n\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
