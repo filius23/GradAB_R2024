@@ -4,13 +4,13 @@ Eure Zeit ist zu wertvoll, um Tabellen per Hand zu erstellen!
 
 Diese Pakete werden gebraucht, alle sind mit dem entsprechenden `install.packages("")` installierbar:
 ```{r tab01, include=F}
-if(Sys.getenv("USERNAME") == "filse" ) .libPaths("D:/R-library4") 
 library(janitor) # kreuztabellen
 library(gt)
 library(flextable)
 library(tidyverse)
 library(modelsummary)
 library(officer) # eigentlicher Word-Export
+library(emo)
 ```
 
 ```{r, message = F}
@@ -596,98 +596,7 @@ save_as_docx("Kreuztabelle" = cross_tab, path = "./results/Kreuztabelle.docx")
 ### weitere Pakete
 
 Neben `{flextable}` gibt es noch eine ganze Reihe an weiteren Paketen - allerdings sind zielen diese vor allem auf pdf und HTML-Formate. [Hier](https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/) findet sich eine gelungene Übersicht.
-Hier eine Übersicht mit meiner persönlichen Einschätzung[^gtsjoberg] 
-
-[^gtsjoberg]: Adaptiert von [D Sjoberg](https://github.com/ddsjoberg/gtsummary/blob/5c2bcbc6d96959266f99a7e88630a0a2dd2a9031/vignettes/rmarkdown.Rmd)
-
-
-```{r}
-#| code-fold: true
-#| warning: false
-# create table-table with gt
-pkg_tabl <- 
-list(
-  printer = c("gt", "flextable", "kableExtra"),
-  output = c("HTML", "PDF", "Word")
-) %>%
-  purrr::cross_df() %>%
-  dplyr::mutate(
-    rating = dplyr::case_when(
-      printer == "gt" & output == "HTML" ~ 1, # good output
-      printer == "gt" & output %in% c("Word") ~ 5, # under construction
-      printer == "gt" & output %in% c("PDF") ~ 3, # under construction
-      
-      
-      printer == "flextable" & output == "Word" ~ 1, # bester
-      printer == "flextable" & output %in% c("HTML","PDF") ~ 2, # okay
-      
-      printer == "kableExtra" & output %in% c("PDF", "HTML") ~ 1, # good output
-      printer == "kableExtra" & output %in% c("Word") ~ 4, # not supported
-      
-      
-    ) %>%
-      factor()
-  ) %>%
-  tidyr::pivot_wider(id_cols = printer, names_from = output, values_from = rating) %>%
-  dplyr::mutate(
-    link = dplyr::case_when(
-      printer == "gt" ~ 
-        "[gt](https://gt.rstudio.com/index.html)",
-      printer == "kable" ~ 
-        "[kable](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)",
-      printer == "flextable" ~
-        "[flextable](https://davidgohel.github.io/flextable/articles/overview.html)",
-      printer == "kableExtra" ~ 
-        "[kableExtra](http://haozhu233.github.io/kableExtra/)",
-      printer == "huxtable" ~
-        "[huxtable](https://hughjonesd.github.io/huxtable/)",
-      printer == "tibble" ~ 
-        "[tibble](https://tibble.tidyverse.org/)"
-    )
-  ) %>%
-  gt() %>%
-  cols_move_to_start(columns = c(link)) %>%
-  cols_hide(columns = c(printer)) %>%
-  cols_label(link = md("**Paket**"), 
-             
-             HTML = md("**HTML**"), PDF = md("**PDF**"), 
-             Word = md("**Word**")) %>%
-  fmt_markdown(columns = c(link)) %>%
-  fmt_markdown(columns = everything()) %>%
-  data_color(
-    columns = c(HTML, PDF, Word),
-    colors = scales::col_factor(
-      palette = c("#bae1ff", "#ffb3ba", "#ffdfba", "#ffffba", "#baffc9"),
-      domain = NULL,
-      reverse = TRUE
-    ),
-    alpha = 0.8
-  ) %>%
-  cols_width(c(HTML, PDF, Word) ~ px(60),
-             c(link) ~ px(110),
-             c(link) ~ px(140))
-  
-# Emoji library: https://gist.github.com/rxaviers/7360908
-
-pkg_tabl %>% 
-  text_transform(
-    locations = cells_body(columns = c(HTML, PDF,  Word)),
-    fn = function(x) {
-      dplyr::case_when(
-          x == 1 ~ as.character(emo::ji("star")),
-          x == 2 ~ as.character(emo::ji("heavy_check_mark")),
-          x == 3 ~ as.character(emo::ji("grey_question")),
-          x == 4 ~ as.character(emo::ji("o2")),
-          x == 5 ~ as.character(emo::ji("wrench")),
-          TRUE   ~ as.character(emo::ji("o2"))
-      )
-    }
-  )
-
-
-```
-
-
+Hier eine Übersicht mit meiner persönlichen Einschätzung.
 
 -   [`{kableExtra}`](https://haozhu233.github.io/kableExtra/) - mein Favorit für Tabellen in [html](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) und [pdf](https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf) Outputs.
  
@@ -695,15 +604,4 @@ pkg_tabl %>%
 
 -   [`{gtsummary}`](https://www.danieldsjoberg.com/gtsummary/) - `{gt}` speziell für Deskriptionen eines Treatment/Control Vergleich, [hier](https://www.danieldsjoberg.com/clinical-reporting-gtsummary-rmed/material.html) eine aktuelle Einführung
 
-```{r}
-#| echo: false
-tweetrmd::include_tweet("https://twitter.com/statistishdan/status/1562975951859830785?s=11&t=2WoUgCchuRUQ_4h29nMsAg")
-```
 
-Weitere Tabellenpakete:
-
--   [`{huxtable}`](https://hughjonesd.github.io/huxtable/)
-
--   [`{DT}`](https://rstudio.github.io/DT/)
-
--   [`{reactable}`](https://glin.github.io/reactable/)

@@ -141,16 +141,6 @@ m2b <- lm(var2~ var1, data = dat1 %>% filter(var2<20))
 summary(m2b)
 ```
 
-<!-- ...übrigens: wir können auch in `geom_smooth()` filtern: -->
-<!-- ```{r, fig.height=3, fig.width=3, echo=T, fig.align="center" , warning=F,message=F} -->
-<!-- ggplot(dat1, aes(x = var1, y = var2)) +  -->
-<!--   geom_smooth(method = "lm", color = "darkblue" , fill = "lightskyblue", size = .65)  + -->
-<!--   geom_smooth(data = dat1 %>% filter(var2<20), -->
-<!--     method = "lm", color = "sienna1" , fill = "sienna2", size = .65)  + -->
-<!--   geom_point(size = 2)  -->
-<!-- ``` -->
-
-
 ## Regressionstabellen
 
 Wenn wir diese verschiedenen Modelle jetzt vergleichen möchten, bietet sich eine Tabelle an. 

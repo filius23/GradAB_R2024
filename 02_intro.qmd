@@ -469,38 +469,6 @@ The shortcut for `%>%` is STRG+SHIFT+m (cmd+shift+m on Mac)
 
 :::
 
-If we want to select both some rows **and** some columns, we can combine `filter()` and `select()`:
-```{r}
-select(filter(dat1, studs < 10000), uni)
-```
-
-We can simplify this nested command with the so-called pipe `%>%`. `%>%` just means "and then". The pipe comes from the `{magrittr}` package, which is part of the tidyverse and is automatically loaded with `{dplyr}`.
-
-```{r}
-filter(dat1, studs < 10000) %>% select(uni)
-```
-
-Often, the pipe is used in a way that the dataset to be processed is specified at the beginning, followed by the steps to be performed:
-```{r}
-dat1 %>% filter(., studs < 10000) %>% select(., uni)
-```
-
-The dot `.` represents the result of the previous step. Here:
-
-1. Call `dat1` *and then (`%>%`)*
-2. Select only rows where `studs` < 10000 *and then (`%>%`)*
-3. Keep only the column `uni`
-
-```{r}
-dat1 %>% filter(studs < 10000) %>% select(uni)
-```
-
-:::{.callout-tip}
-
-The shortcut for `%>%` is CTRL+SHIFT+m (cmd+shift+m on Mac)
-
-:::
-
 <!-- ### Exercise {#exercise} -->
 
 <!-- Use the {dplyr} commands to extract rows where there are more than 10,000 students and less than 300 professors. Add a new variable to the dataset where each value in the `studs` column is doubled. -->

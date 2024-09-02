@@ -17,17 +17,17 @@ book:
     - 05_data_wrangle1_translated.qmd
     - 06_data_wrangle2_translated.qmd
     - 04_viz_translated.qmd
+    - 09_reg.qmd
+    - 14_tabellenexport.qmd
     # - 07_inferenz.qmd
-    # - 09_reg.qmd
     # - 09_reg2.qmd
     # - 10_log_reg.qmd
     # - 11_data_wrangle3.qmd
     # - 12_apply_loop.qmd
-    # - 14_tabellenexport.qmd
     # - 15_map.qmd
     # - 15_RMarkdown.qmd
     # - 17_errors.qmd
-    - references.qmd
+    - references_translated.qmd
   language: de-DE
   # downloads: [pdf]
   page-footer:

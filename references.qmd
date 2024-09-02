@@ -15,7 +15,8 @@ In diesem Kurs haben wir die Pipe ` %>%` aus `{tidyverse}` (streng genommen aus 
 Für (nahezu) alle Anwendungen, die wir kennengelernt haben, verhalten sich beide Pipes identisch - und nachdem am IAB R teilweise noch alte R-Versionen installiert sind, haben wir uns an 'alte Variante' gehalten.
 Letztlich spricht aber nichts dagegen, nach einem Update auf `|>` umzusteigen - oder einfach bei ` %>% ` zu bleiben.
 
-<img src="pic/pipe.png" height="480px" />
+
+ ![](./pic/pipe.png){width="490"}
 
 Unter anderem steht [hier mehr zu den Unterschieden](https://r4ds.hadley.nz/workflow-pipes.html#vs) zwischen beiden Pipes.
 Außerdem bietet [dieser Blogbeitrag](https://kpress.dev/blog/2022-06-19-replacing-the-magrittr-pipe-with-native-r-pipe/) einen guten Überblick zu den Fallstricken beim Umstieg von ` %>% ` auf `|>`. 
