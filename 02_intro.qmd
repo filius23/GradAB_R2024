@@ -437,19 +437,19 @@ This operator allows you to read and write code that closely resembles natural l
 
 If we want to select some rows **and** some columns, we can combine `filter()` and `select()`:
 
-```{r]
+```{r}
 select(filter(dat1, studs < 10000), uni)
 ```
 
 We can simplify this command chain using the so-called pipe `%>%`. `%>%` simply stands for "and then". The pipe comes from the `{magrittr}` package, which is part of the tidyverse and is automatically loaded with `{dplyr}`.
 
-```{r]
+```{r}
 filter(dat1, studs < 10000) %>% select(uni)
 ```
 
 The pipe is often used so that the dataset being processed is at the beginning, followed by the steps:
 
-```{r]
+```{r}
 dat1 %>% filter(., studs < 10000) %>% select(., uni)
 ```
 
@@ -459,7 +459,7 @@ The dot `.` represents the result of the previous step. Here:
 2. Select only rows where `studs` < 10000 *and then (`%>%`)*
 3. Keep only the `uni` column
 
-```{r]
+```{r}
 dat1 %>% filter(studs < 10000) %>% select(uni)
 ```
 
