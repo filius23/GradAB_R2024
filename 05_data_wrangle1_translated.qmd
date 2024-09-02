@@ -1,0 +1,237 @@
+# Data Wrangling I: Labels & factor {#wrang1}
+
+
+```{r setup05, echo = F, include=FALSE}
+if(Sys.getenv("USERNAME") == "filse" ) path <- "D:/uolCloud//RFS/"
+knitr::opts_chunk$set(collapse = F,cache = F)
+library(haven)
+library(tidyverse)
+library(Statamarkdown)
+library(flextable)
+theme_set(theme_gray() + theme(axis.text.x = element_text(size=rel(1.45))))
+```
+```{r}
+library(tidyverse)
+
+pend_kap5 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                             col_select = c("pnr","welle", "zpsex", "PSM0100","azges1","palter")) %>% 
+  filter(welle == 8, palter > 0,azges1 > 0)
+```
+
+
+## Labels from Other Programs in R
+
+In many software packages like Stata or SPSS, labels are often retained through various operations and then displayed automatically. This is not the case in R. Instead, in R, we can assign labels using the `factor` variable type. This approach might seem unusual for those who have worked extensively with Stata or SPSS, but it is quite useful in practice if you get accustomed to the workflow.
+
+For example, when we create a count summary with `count()`, the labels we assign are displayed:
+
+```{r}
+pend_kap5$gender <- factor(pend_kap5$zpsex, 
+                            levels = c(1, 2), 
+                            labels = c("Male", "Female"))
+
+# Counting occurrences and showing labels
+pend_kap5 %>% 
+  count(gender,zpsex)
+```
+
+By using `factor`, we can efficiently manage and display categorical data.
+
+```{r}
+#| eval: false
+View(pend_kap5)
+pend_kap5 %>% count(zpsex)
+```
+
+Diese sind als `attributes()` Variablen zugeordnet:
+
+```{r}
+attributes(pend_kap5$zpsex)
+```
+Wie können wir die Labels `attributes()` verwenden und so Tipparbeit sparen?
+```{r}
+#| echo: false
+#| eval: false
+#| message: false
+#| warning: false
+library(labelled)
+library(gt)
+attributes(pend_kap5$zpsex)$labels %>% 
+  enframe(name = "label") %>% 
+  relocate(value) %>% 
+  filter(value > 0) %>% 
+  flextable::flextable() %>% 
+  flextable::border_remove() %>% 
+  flextable::autofit()
+```
+
+`{haven}` enthält sich die Funktion `as_factor`[^2], mit der wir aus Labels direkt eine `factor`-Variable erstellen können:
+
+[^2]: Nicht zu verwechseln mit `as.factor()` aus base R - der `_` macht einen Unterschied!
+```{r}
+pend_kap5$zpsex_fct <- as_factor(pend_kap5$zpsex)
+
+# ansehen:
+pend_kap5 %>% select(contains("zpsex")) %>% head()
+```
+
+## `factor` selbst erstellen oder bearbeiten
+
+Alternativ können wir auch mit `factor()` sowie den Optionen `levels` und `labels` selber labeln. Die `labels` werden dann der Reihenfolge nach den Zahlen aus `levels` zugewiesen.
+```{r}
+attributes(pend_kap5$zpsex)$labels %>% enframe(name = "label")
+
+
+
+pend_kap5$zpsex_fct2 <- factor(pend_kap5$zpsex,
+                               levels = c(1,2),
+                               labels = c("Männer","Frauen"))
+
+# ansehen:
+pend_kap5 %>% select(contains("zpsex")) %>% head()
+```
+
+
+
+Außerdem wird aus allen nicht angegebenen `levels` automatisch `NA`:
+```{r}
+attributes(pend_kap5$PSM0100)
+
+pend_kap5 %>% select(PSM0100) %>% head()
+pend_kap5$PSM0100_fct <- 
+  factor(pend_kap5$PSM0100, 
+         levels = 1:2, 
+         labels = c("Nutzt soziale Netzwerke","Nutzt keine soziale Netzwerken"))
+
+# Ergebnis ansehen:
+pend_kap5 %>% select(contains("PSM0100")) %>% head()
+```
+
+Oder wir nutzen die Funktionen aus `{forcats}` zur recodierung eines `factors`.
+`{forcats}` ist Teil des `{tidyverse}`.
+Mit `fct_recode()` können wir die `levels` verändern:
+```{r}
+levels(pend_kap5$PSM0100_fct)
+
+pend_kap5$PSM0100_fct2 <- fct_recode(pend_kap5$PSM0100_fct,
+  `Ja, nutzt soziale Netzwerke` = "Nutzt soziale Netzwerke", # bei Leerzeichen `` um die Wörter
+  )
+```
+
+
+```{r}
+pend_kap5 %>% select(contains("PSM0100")) %>% head()
+```
+
+[Weitere `fct_....()` Funktionen aus `{forcats}`](#fct_cats), einen Überblick gibt das [Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf).
+
+## Übung
+
+```{r}
+pend_ue5 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                               col_select = c("pnr","welle","PD0400")) %>% 
+  filter(PD0400>0)
+```
+
+Bearbeiten Sie die *value labels* von `PD0400`: `r str_wrap(attributes(pend_ue5$PD0400)$label)`
+
+```{r}
+#| echo: false
+#| warning: false
+
+set_flextable_defaults(font.family = "Red Hat Display", font.color = "grey25", border.color = "grey25", font.size = 8, padding = .75)
+
+attributes(pend_ue5$PD0400)$labels %>% 
+  enframe(name = "label") %>% 
+  relocate(value) %>% 
+  filter(value > 0) %>% 
+  flextable() %>% 
+  border_remove() %>% 
+  padding(j = 2, padding.left = 5, padding.right = 15) %>% 
+  align(align = "left", part = "header") %>% 
+  bold(i=1,part = "header") %>% 
+  bg(i = c(2,4),bg = "grey95") %>% 
+  autofit() 
+```
+
+
++ Verschaffen Sie sich zunächst mit `head()` und einer Auszählung mit `count()` einen Überblick.
++ Wie können Sie die labels aus den `attributes()` mit `as_factor()` in eine Variable `PD0400_fct` übernehmen?
++ Erstellen Sie einen `factor()` Variable `F411_01_fct2` mit *value labels*: `1 = Überhaupt nicht`, `2 = Eher nicht`,`3 = Eher schon`,`4 = Sehr`
+
+**Bonusübung:** Verwenden Sie die gelabelte Variable für eine Balkengrafik.
+
+## Anhang
+
+### Labels löschen mit `zap_...` aus `{haven}`
+
+Häufig führen die Label-`attributes()` zu Problemen in der weiteren Verarbeitung.
+Mit `haven::zap_labels()` können wir die Value labels aus einem Datensatz löschen mit `haven::zap_label()` können wir die Variable labels entfernen.
+```{r}
+#| echo: false
+pend_kap5 <- pend_kap5 %>% select(c("pnr","welle", "zpsex", "PSM0100","azges1","palter"))
+```
+
+```{r}
+pend_kap5
+pend_kap5 %>% 
+  haven::zap_labels() # value labels raus
+```
+
+
+### Labels selbst erstellen und ranspielen
+
+Ein alternativer Weg geht über einen kleinen Label-`data.frame` und `left_join()` (mehr zu `left_join()` später.)
+
+```{r}
+tab2 <- pend_kap5 %>% count(PSM0100)
+tab2
+```
+```{r}
+lab_df <- data.frame(PSM0100=1:2)
+lab_df
+lab_df$PD0400_lab <- factor(lab_df$PSM0100,levels = 1:2,
+                           labels = c("Nutzt soziale Netzwerke",
+                                      "Nutzt keine soziale Netzwerken"))
+lab_df
+```
+
+
+```{r}
+tab2 %>% 
+  left_join(lab_df,by = "PSM0100")
+```
+
+### Labels in R erstellen und nach bspw. Stata exportieren
+Wenn wir aber beispielsweise einen Datensatz für Stata labeln wollen, hilft uns wieder `{labelled}`:
+```{r}
+library(labelled)
+```
+
+```{r}
+pend_kap5$zpsex_num2 <- as.numeric(pend_kap5$zpsex)
+attributes(pend_kap5$zpsex_num2)
+val_labels(pend_kap5$zpsex_num2) <- c("Männer"=1,"Frauen"=2)
+attributes(pend_kap5$zpsex_num2)
+pend_kap5 %>% count(zpsex_num2)
+```
+```{r}
+#| eval: false
+pend_kap5 %>% 
+  select(zpsex_num2) %>% 
+  haven::write_dta(.,path = "./data/pend_kap5.dta")
+```
+
+...in *Stata*:
+```{stata}
+use "./data/pend_kap5.dta" 
+tab zpsex_num2 
+```
+
+[Mehr zu `labels` in `{labelled}`](https://joseph.larmarange.net/intro_labelled.html).
+
+<!-- factors stellen eine strukturierte Beziehung zwischen den verschiedenen Ebenen (Werten) einer kategorialen Variable her, wie z. B. Wochentage oder Antworten auf eine Frage in einer Umfrage. Auf diese Weise lässt sich leichter erkennen, wie sich ein Element zu den anderen Elementen in einer Spalte verhält. Obwohl factors wie Zeichenvektoren aussehen (und sich oft auch so verhalten), werden sie von R als Ganzzahlvektoren behandelt. Sie müssen also sehr vorsichtig sein, wenn Sie sie als Strings behandeln. -->
+
+<!-- Einmal erstellt, können factors nur einen vordefinierten Satz von Werten enthalten, die als Ebenen bezeichnet werden. Standardmäßig sortiert R die Ebenen immer in alphabetischer Reihenfolge. Wenn Sie zum Beispiel einen Faktor mit 2 Ebenen haben: -->
+
+

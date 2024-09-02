@@ -55,7 +55,7 @@ ggplot(aes(x = palter, y = azges1)) +
   scale_color_manual(values = c("lightskyblue4","navy"))
 ```
 
-The data basis for our graph is the `pend` dataset, which contains information on working hours, as well as the gender and age of the respondents:
+Data for our graph is from the `pend` dataset, which contains information on working hours, as well as the gender and age of the respondents:
 ```{r}
 #| eval: false
 library(haven)
@@ -65,12 +65,12 @@ pend <- read_dta("./orig/PENDDAT_cf_W13.dta")
 pend %>% select(azges1,zpsex,palter) %>% head()
 ```
 
-To keep the graph manageable, we only use observations from Wave 13:
+To keep the graph manageable, we only use observations from wave 13:
 ```{r}
 pend_small <- pend %>% filter(welle==13)
 ```
 
-..and we'll overwrite all missing values with `NA`. 
+...and we'll overwrite all missing values with `NA`. 
 We'll see later in Chapter 6 how to do this more efficiently.
 ```{r}
 pend_small$palter[pend_small$palter>100] <- NA 
@@ -210,83 +210,39 @@ ggplot(data = pend_small, aes(x = palter, y = azges1,
 [Übersicht zu shapes](#shape1)
 
 
+## Visualizing distributions 
 
-<!-- Die Box enthält also die zentralen 50% des Wertebereichs. -->
-```{r, sw05_boxplot1, echo = F, out.height="45%", out.width="55%", fig.align="center", warning=F,message=F}
-#| cache: true
-ak <- readr::read_delim(paste0(path,"allbus_kumuliert.csv"), delim = ";", col_types = cols(.default = col_double()),
-                        col_select = c("hs16"))
-
-bp_ann_df <- 
-  filter(ak,hs16>0) %>% 
-  mutate_at(vars(hs16),~ifelse(.<0,NA,.)) %>% 
-  summarise(q25 = quantile(hs16,probs = .25),
-            q50 = quantile(hs16,probs = .5),
-            q75 = quantile(hs16,probs = .75),
-            whis1 = q25 - 1.5*(q75-q25) + .5 ,
-            whis2 = q75 + 1.5*(q75-q25) - .5) %>% 
-  mutate_all(~if_else(. < 0,0,.)) %>% 
-  pivot_longer(cols=everything(), values_to = "hs16") %>% 
-  mutate(xend1 = ifelse(grepl("whis",name),.015,.4),
-         name = case_when(name == "q25" ~ "1. Quartile (25%)",
-                          name == "q50" ~ "Median (50%)",
-                          name == "q75" ~ "3. Quartile (75%)",
-                          name == "whis1" ~ "Lower Whisker: q1 - 1.5*IQR",
-                          name == "whis2" ~ "Upper Whisker: q3 - 1.5*IQR"),
-         x = 1)
-
-bp_ann_ausr <- filter(ak,!between(hs16,146,197),hs16>0) %>% select(hs16) %>% mutate(name="Outlier",x=1) %>% 
-  distinct() %>% group_by(aus=hs16>146) %>% 
-  mutate(hs16m=mean(hs16) %>% if_else(.<144,140,.))
-
-  
-ggplot(filter(ak,hs16>0), aes(x = 0, y = hs16)) + 
-  geom_boxplot() + 
-  geom_label(data = bp_ann_df, aes(x = x-.45, y = hs16, label = name), hjust = 0, label.size = .0,fontface="italic", size = 5.25) +
-  geom_label(data = bp_ann_ausr, aes(x = x-.45, y = hs16m, label = name), hjust = 0, label.size = .0,fontface="italic", size = 5.25) +
-  geom_segment(data = bp_ann_df, aes(x = x-.451, xend = xend1, yend = hs16, y = hs16), color = "#172869",
-               lineend = 'butt', linejoin ='bevel',arrow = arrow(length = unit(.025,"npc"), type = "closed")) +
-  geom_segment(data = bp_ann_ausr, aes(x = x-.451, xend = .015, yend = hs16, y = hs16m), color = "#172869",
-               lineend = 'butt', linejoin ='bevel',arrow = arrow(length = unit(.01,"npc"), type = "closed")) +
-  labs(color = "", # legenden-label auf leer
-       y = "", # y-Achse labeln
-       x="")+ # x-Achse labeln
-  theme_void() + 
-  theme(axis.text.x = element_blank()) +
-  expand_limits(x = c(0,1.2))
-
-```
 ```{r}
 #| echo: false
 theme_set(new = theme_grey(base_size = 14))
 ```
 
-Mit der folgenden Syntax können wir mit `ggplot2` einen Boxplot erstellen. Da wir nur eine Variable betrachten, müssen wir lediglich `y = ` oder `x =` angeben - je nachdem ob die Box vertikal oder horizontal orientiert sein soll.
+
+With the following syntax we can create a boxplot using `ggplot2`. Since we are only considering one variable, we only need to specify `y = ` or `x =` depending on whether the box should be oriented vertically or horizontally.
 ```{r}
+#| layout-ncol: 2
 ggplot(data = pend_small, aes(y = azges1)) + geom_boxplot()
+ggplot(data = pend_small, aes(x = azges1)) + geom_boxplot()
 ```
 
-So können wir einen Boxplot erstellen, der die Werte für Männer und Frauen getrennt darstellt: 
+We can also create separate boxplots for men and women by specifying a variable for the other axis:
 ```{r}
 ggplot(data = pend_small, aes(y = azges1, x = factor(zpsex))) + geom_boxplot()
 ```
+### Histogram
 
-### Histogram 
-
-Ebenso können Verteilungen mit einem Histogramm beschrieben werden:
+We can also describe distributions using a histogram using the `geom_histogram()` function.
+If we want to change the color, `fill =` is the correct option instead of `color =`:
 ```{r}
+#| layout-ncol: 2
 ggplot(data = pend_small, aes(x = azges1)) + 
   geom_histogram()  
-```
-
-Wenn wir hier die Farbe ändern möchten, dann ist `fill =` anstelle von `color =` die richtige Option:
-```{r}
 ggplot(data = pend_small, aes(x = azges1)) + 
   geom_histogram(fill = "sienna1")  
 ```
 
-Möchten wir das Histogramm nach Geschlecht aufsplitten, können wir auch hier wieder `fill` als Aesthetic angeben. Mit `position = position_dodge()` können wir die Balken nebeneinander stellen lassen:
-```{r hist0}
+To split the histogram by gender, we can again specify `fill` as an aesthetic. With `position = position_dodge()`, we can place the bars side by side:
+```{r}
 #| cache: true
 #| layout-ncol: 2
 ggplot(data = pend_small, aes(x = azges1, fill = factor(zpsex))) + 
@@ -296,8 +252,8 @@ ggplot(data = pend_small, aes(x = azges1, fill = factor(zpsex))) +
   geom_histogram(position = position_dodge()) 
 ```
 
-Auch hier funktionieren natürlich wieder die `scale_...manual` Befehle, allerdings hier als `scale_fill_manual` anstelle `scale_color_manual` von oben:
-```{r hist1}
+The `scale_...manual` commands still work here, but as `scale_fill_manual` instead of `scale_color_manual`:
+```{r}
 #| cache: true
 ggplot(data = pend_small, aes(x = azges1, fill = factor(zpsex))) + 
   geom_histogram(position = position_dodge()) +
@@ -306,73 +262,51 @@ ggplot(data = pend_small, aes(x = azges1, fill = factor(zpsex))) +
   labs(fill = "Geschlecht")
 ```
 
+### [Exercise](#pltue2) {#ue4_02}
 
-### [Übung](#pltue2) {#ue4_02}
+## Categorical Features
 
-## Kategoriale Merkmale 
-
-Im Folgenden sehen wir uns eine Möglichkeit an, die Kontingenztabelle aus [Kapitel 2](03_desc.qmd#crosscount) zu visualisieren:
+Next, we’ll look at a way to visualize the contingency table from [Chapter 2](03_desc.qmd#crosscount):
 ```{r}
 #| label: "table041"
-pend_small$PD0400[pend_small$PD0400<0] <- NA # missings ausschließen
+pend_small$PD0400[pend_small$PD0400<0] <- NA # exclude missings
 pend_small %>% 
-  count(zpsex,PD0400) 
+  count(zpsex, PD0400) 
 ```
 
-Mit `geom_bar()` können wir Säulen darstellen, indem wir `..count..` für y die Höhe als Anzahl der Beobachtungen festlegen:
-```{r barcount}
+With `geom_bar()`, we can create bars by setting the height as the count of observations with `..count..` for y:
+```{r}
 #| cache: true
 pend_small %>% 
   filter(!is.na(PD0400)) %>% 
   ggplot(data = ., aes(x = as_factor(PD0400), fill = factor(zpsex),
                        y = ..count..)) +
-  geom_bar(position=position_dodge()) 
+  geom_bar(position = position_dodge()) 
 ```
 
-Wie kommen wir jetzt an die relativen Häufigkeiten? Wir passen unsere `aes` auf `y = (..count..)/sum(..count..)` an.
-Mit `scale_y_continuous(labels = scales::label_percent(accuracy = 1)) ` können wir außerdem auf der y-Achse die Prozentwerte anzeigen lassen:
-```{r scalepct}
+How do we get relative frequencies? We adjust our `aes` to `y = (..count..)/sum(..count..)`.
+With `scale_y_continuous(labels = scales::label_percent(accuracy = 1))`, we can also display percentages on the y-axis.
+To create a bar chart instead of a column chart, simply swap `x` and `y` and adjust the percentage labels using `scale_x_continuous`:
+```{r}
 #| cache: true
+#| layout-ncol: 2
 pend_small %>% 
   filter(!is.na(PD0400)) %>% 
   ggplot(data = ., aes(x = as_factor(PD0400), fill = factor(zpsex),
                        y = (..count..)/sum(..count..) )) +
-  geom_bar(position=position_dodge()) +
+  geom_bar(position = position_dodge()) +
   scale_y_continuous(labels = scales::label_percent(accuracy = 1)) 
-```
-Um jetzt ein Balken- statt einem Säulendiagramm zu erhalten, tauschen wir einfach `x` und `y` sowie die Prozentbeschriftung auf `scale_x_continuous`:
-```{r balkenpct}
-#| cache: true
 pend_small %>% 
   filter(!is.na(PD0400)) %>% 
   ggplot(data = ., aes(y = as_factor(PD0400), fill = factor(zpsex),
                        x = (..count..)/sum(..count..) )) +
-  geom_bar(position=position_dodge()) +
+  geom_bar(position = position_dodge()) +
   scale_x_continuous(labels = scales::label_percent(accuracy = 1)) 
 ```
 
-Auch diese Grafiken können wir dann wieder mit `scale_...` anpassen und mit `labs()` ausführlich labeln - alle Optionen sind konsistent über alle Darstellungsformen hinweg.
-Außerdem können wir die Kategorien mit `breaks =` und `labels =` auch selbst labeln, wenn uns die definierten Labels nicht gefallen:
+These charts can also be customized with `scale_...` and labeled in detail using `labs()`—all options are consistent across different types of visualizations. Additionally, we can label the categories ourselves with `breaks =` and `labels =` if we don't like the default labels:
+
 ```{r fullplot}
-#| cache: true
-#| layout-ncol: 2
-
-pend_small %>% 
-  filter(!is.na(PD0400)) %>% 
-  ggplot(data = ., aes(y = as_factor(PD0400), fill = factor(zpsex),
-                       x = (..count..)/sum(..count..) )) +
-  geom_bar(position=position_dodge()) +
-  scale_fill_manual(values = c("navajowhite","navy"),
-                    breaks = c(1,2), labels = c("Men", "Women")) +
-  scale_x_continuous(labels = scales::label_percent(accuracy = 1)) +
-  labs(title = "Religiösität nach Geschlecht",
-       subtitle = "Relative Häufigkeiten",
-       caption = "Quelle: PASS-CF 0619",
-       y = "Religiösität",
-       x = "Relative Häufigkeit",
-       fill = "Geschlecht" ) 
-
-
 pend_small %>% 
   filter(!is.na(PD0400)) %>% 
   ggplot(data = ., aes(y = PD0400, fill = factor(zpsex),
@@ -393,92 +327,82 @@ pend_small %>%
        x = "Relative Häufigkeit",
        fill = "Geschlecht" ) 
 ```
+### [Exercise](#pltue3) {#ue4_03}
 
+## Exercises
 
-### [Übung](#pltue3)  {#ue4_03}
-
-## Übungen
-Nutzen Sie für alle Aufgaben die ersten 150 Beobachtungen (`pend_small`), um den Plot einfach zu halten. Denken Sie daran die fehlenden Werte mit `filter()` auszuschließen, Sie können dazu diesen Befehl verwenden:
+For all tasks, use the first 150 observations (`pend_small`) to keep the plot simple. Remember to exclude missing values with `filter()`; you can use the following command:
 
 ```{r}
 #| eval: false
-pend <-
-  haven::read_dta("./orig/PENDDAT_cf_W13.dta",
-    col_select = c("zpsex","welle","bilzeit","PA0445","PG1270","PEO0400c")
-    )
+pend <- 
+  haven::read_dta("./orig/PENDDAT_cf_W13.dta", 
+    col_select = c("zpsex", "welle", "bilzeit", "PA0445", "PG1270", "PEO0400c")
+  )
 ```
 
-
-
-### Übung 1 {#pltue1}
+### Exercise 1 {#pltue1}
 
 ```{r}
 #| eval: false
-pend_u41 <-
+pend_u41 <- 
   pend %>% 
-  filter(welle == 13, bilzeit > 0, PA0445 >0) 
+  filter(welle == 13, bilzeit > 0, PA0445 > 0) 
 ```
 
-+ Erstellen Sie einen Scatterplot für die Variablen Dauer der gesamten Arbeitslosigkeitserfahrung in Monaten (`PA0445`, y-Achse) und Dauer der Ausbildung (`bilzeit`, x-Achse). 
-+ Legen Sie die Farbe so fest, dass Männer und Frauen unterschiedliche Farben gekennzeichnet werden (`zpsex`)
-+ Verändern Sie die Farben auf `goldenrod1` und `dodgerblue4` fest ([oder eine beliebige andere](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf))
-+ Beschriften Sie die Achsen und Legende!
++ Create a scatter plot for the variables "Duration of total unemployment experience in months" (`PA0445`, y-axis) and "Duration of education" (`bilzeit`, x-axis).
++ Set the color to differentiate between men and women (`zpsex`).
++ Change the colors to `goldenrod1` and `dodgerblue4` (or any other [from this list](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)).
++ Label the axes and legend!
 
-[Zurück nach oben](#ue4_01)
+[Back to top](#ue4_01)
 
-
-### Übung 2 {#pltue2}
+### Exercise 2 {#pltue2}
 
 ```{r}
 #| eval: false
-pend_u42 <-
+pend_u42 <- 
   pend %>% 
-  filter(welle == 9, PG1270 >0) 
+  filter(welle == 9, PG1270 > 0) 
 ```
 
-+ Erstellen Sie einen Boxplot oder Histogramm für die Verteilung der Anzahl gerauchter Zigaretten und Zigarillos pro Tag (i.d. letzten
-Woche) (`PG1270`).
-+ Passen Sie diese Grafik so an, dass die Verteilungen für Männer und Frauen getrennt dargestellt werden. 
-+ Wie können Sie auch die Farben nach dem Geschlecht getrennt anlegen? (Denken Sie an `color =` und `fill =`) 
-+ Verändern Sie die Farben der Balken mit Hilfe von `scale_fill_manual` oder `scale_fill_brewer` oder `scale_fill_viridis` (Siehe Abschnitte [Farben](#farben) und [ColorBreweR](#brewer) und [viridis](#viridis) unter "weitere Optionen")
++ Create a boxplot or histogram for the distribution of the number of cigarettes and cigarillos smoked per day (in the last week) (`PG1270`).
++ Customize this graphic so that the distributions for men and women are shown separately.
++ How can you also set the colors based on gender? (Remember `color =` and `fill =`).
++ Change the bar colors using `scale_fill_manual`, `scale_fill_brewer`, or `scale_fill_viridis` (see the sections [Colors](#farben), [ColorBrewer](#brewer), and [viridis](#viridis) under "other options").
 
-[Zurück nach oben](#ue4_02)
+[Back to top](#ue4_02)
 
-### Übung 3 {#pltue3}
+### Exercise 3 {#pltue3}
+
 ```{r}
 #| eval: false
-pend_u43 <-
+pend_u43 <- 
   pend %>% 
-  filter(welle == 11, PEO0400c >0) 
+  filter(welle == 11, PEO0400c > 0) 
 ```
 
-+ Erstellen Sie ein Säulen-Diagramm für die Antworten auf die Frage "Eine berufstätige Mutter kann ein genauso herzliches Verhältnis zu ihren Kindern haben, wie eine Mutter, die nicht erwerbstätig ist." (`PEO0400c`)
-+ Erstellen Sie ein Säulen-Diagramm für d(`PEO0400c`) getrennt nach der Variable `migration`, legen Sie also die Farbe der Säulen nach `migration` fest. Die Variable `migration` erfasst, ob die Befragten einen Migrationshintergrund haben:
-
++ Create a bar chart for the responses to the question, "A working mother can have just as close a relationship with her children as a mother who is not employed." (`PEO0400c`).
++ Create a bar chart for `PEO0400c` separated by the `migration` variable, so set the bar colors based on `migration`. The `migration` variable captures whether the respondents have a migration background:
 
 ```{r}
 #| echo: false
 library(flextable)
-set_flextable_defaults(font.family = "Red Hat Display",font.color = "grey25",border.color = "grey25",font.size = 8,padding = .75)
-c(attributes(pend$PEO0400c)$labels,
+set_flextable_defaults(font.family = "Red Hat Display", font.color = "grey25", border.color = "grey25", font.size = 8, padding = .75)
+c(attributes(pend$PEO0400c)$labels, 
   attributes(pend$migration)$labels) %>%
   enframe(name = "label") %>%
   filter(value > 0) %>%
-  mutate(Variable = c("`PEO0400c`",rep("",3),
-                      "`migration`",rep("",3)) ) %>% 
-  relocate(Variable,value) %>%
-  flextable()  %>% 
+  mutate(Variable = c("`PEO0400c`", rep("", 3), "`migration`", rep("", 3))) %>% 
+  relocate(Variable, value) %>%
+  flextable() %>% 
   border_remove() %>% 
   autofit() %>% 
-  padding(j=2,padding.left = 5,padding.right = 15) %>% 
-  align(align = "left",part = "header")
-  # gt() %>% 
-  # tab_options(table.font.size = 11) %>% 
-  # fmt_markdown(columns = "Variable")
+  padding(j = 2, padding.left = 5, padding.right = 15) %>% 
+  align(align = "left", part = "header")
 ```
 
-[Zurück nach oben](#ue4_03)
-
+[Back to top](#ue4_03)
 
 ## More options for `{ggplot2}` 
 

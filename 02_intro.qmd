@@ -232,7 +232,7 @@ dat1[,"studs"] # all rows, column named studs -> note: ""
 
 In these square brackets, you can also write conditions to make selections from `dat1`.
 
-```{r , include=T, echo = T}
+```{r , include=T, eval = F}
 dat1[dat1$studs > 10000, ] # rows where studs is greater than 10000, all columns
 dat1[dat1$studs > 10000 & dat1$profs < 300, ] # & means AND
 dat1$profs[dat1$studs > 10000] # Only see the number of professors: no comma
@@ -855,10 +855,10 @@ knitr::include_graphics("./pic/102_dplyr_vignette.png")
 ```
 
 
-## Übungen
-### Übung 1 {#data1}
+## Exercises
+### Exercise 1 {#data1}
 
--   Erstellen Sie den Datensatz mit den Studierenden- & Prof-Zahlen wie gezeigt:
+-   Create a `data.frame` object called `dat2`:
 
 ```{r,eval= F}
 dat2 <- data.frame(studs = c(14954,47269 ,23659,9415 ,38079), 
@@ -867,77 +867,78 @@ dat2 <- data.frame(studs = c(14954,47269 ,23659,9415 ,38079),
                    gegr  = c(1971,1870,1457,1818,1995))
 ```
 
-
-
--   Sehen Sie den `dat2` in Ihrem Environment?
--   Lassen Sie sich `dat2` in der Console ausgeben.
--   Fügen Sie die Namen der Unis als neue Spalte in den Datensatz ein. Diese sind in dieser Reihenfolge:
-```{r,eval= F}
+-   Do you see `dat2` in your environment?
+-   Print `dat2` in the console.
+-   Add the names of the universities as a new column to the dataset. The names are in this order:
+```{r}
 c("FH Aachen","RWTH Aachen","Uni Freiburg","Uni Bonn","FH Bonn-Rhein-Sieg")
 ```
+-   Display `dat2` - either in the console or using `View()`.
+-   Calculate the ratio of students per professor and store the results in a new variable. Check the result.
+-   Display only the third row of `dat2`.
+-   Display only the third column of `dat2`.
 
--  Lassen Sie sich `dat2` anzeigen - in der Console oder mit `View()`
--  Berechnen Sie das Verhältnis Studierende pro Professur und legen Sie die Ergebnisse in einer neuen Variable an. Sehen Sie sich das Ergebnis an.
--  Lassen Sie sich nur die dritte Zeile von `dat2` anzeigen.
--  Lassen Sie sich nur die dritte Spalte von `dat2` anzeigen.
--  Lassen Sie sich nur die Unis mit unter 10000 Studierenden anzeigen.
+*What would you do to copy `dat2` into an object called `df_unis`?*
 
-[Zurück nach oben](#ue_1)
+[Back to top](#ue_1)
 
-### Übung 2 {#data2}
+---
 
--   [Legen Sie `.Rprofile` für die Paketinstalltion](#fdz_install) in `C:\Users\*KENNUNG*\Documents`
--   Installieren Sie die Pakete des tidyverse mit `fdz_install("tidyverse")`, nachdem Sie die `.Rprofile`-Datei in unter **PFAD** abgelegt haben.
--   Verwenden Sie wieder den `data.frame` `dat2` aus Übung 1
--   Nutzen Sie `filter`, um sich nur die Unis mit unter 10000 Studierenden anzeigen zu lassen. (Denken Sie daran, `{tidyverse}` zu installieren und mit `library()` zu laden)
--   Lassen Sie sich nur die Spalte `gegr` anzeigen.
--   Lassen Sie sich nur Zeilen der Hochschulen mit Promotionsrecht (`prom_recht`) anzeigen.
+### Exercise 2 {#data2}
 
-[Zurück nach oben](#ue_2)
+-   [Create a `.Rprofile` for the package installation](#fdz_install) in `C:\Users\*USERNAME*\Documents`.
+-   Install the tidyverse packages using `fdz_install("tidyverse")` after placing the `.Rprofile` file under `C:\Users\*USERNAME*\Documents`.
+-   Use the `data.frame` `dat2` from Exercise 1.
+-   Use `filter` to display only the universities with fewer than 10,000 students. (Remember to install and load `{tidyverse}` with `library()`).
+-   Display only the `gegr` column.
+-   Display only the rows of universities with the right to award doctorates (`prom_recht`).
 
+[Back to top](#ue_2)
 
-### Übung 3 {#data3}
+---
 
--   Verwenden Sie weiterhin den Datensatz aus Übung 1 & 2.
--   Lassen Sie sich nur Hochschulen anzeigen, die 1971, 1457 oder 1995 gegründet wurden - und für diese Fälle nur den Namen und das Gründungsjahr.
--   Sortieren Sie den Datensatz entsprechend dieser Reihenfolge. (Legen Sie dazu eine `factor`-Variable an, welche die entsprechende Reihenfolge festlegt.)
-```{r,eval =F}
-c("RWTH Aachen","Uni Freiburg","Uni Bonn","FH Aachen","FH Bonn-Rhein-Sieg")
+### Exercise 3 {#data3}
+
+-   Continue using the dataset from Exercises 1 & 2.
+-   Display only the universities that were founded in 1971, 1457, or 1995, and for these cases, show only the name and founding year.
+-   Sort the dataset according to the following order. (Create a `factor` variable that defines this order.)
+```{r}
+c("RWTH Aachen", "Uni Freiburg", "Uni Bonn", "FH Aachen", "FH Bonn-Rhein-Sieg")
 ```
 
-[Zurück nach oben](#ue_3)
+[Back to top](#ue_3)
 
+---
 
+### Exercise 4 {#data4}
 
-### Übung 4 {#data4}
+-   Create an [R project](#rproj) in your directory for this course.
+-   Save the personal data from the PASS-CampusFile (`PENDDAT_cf_W13.dta`) in your directory in the subfolder *orig*.
+-   Read the dataset `PENDDAT_cf_W13.dta` [as shown above](#import) into R and assign it to the object name `pend`.
+-   Use `head()` and `View()` to get an overview of the dataset.
+-   How many respondents (rows) does the dataset contain?
+-   Display the variable names of `pend` using `names()`!
+-   How can you display the rows that contain the respondent with the `pnr` 1000908201?
+-   Select all respondents older than 60 (Age: `palter`) and save this selection as `ue_1960`.
+-   How do you need to adjust the command so that `ue_1960` contains only the variables `pnr`, `hnr`, `welle`, `pintjahr`, and `palter`?
+-   How many columns does `ue_1960` have? How many rows?
 
--   Erstellen Sie in Ihrem Verzeichnis für diesen Kurs ein [R-Projekt](#rproj)
--   Speichern Sie die Personendaten des PASS-CampusFile (PENDDAT_cf_W13.dta) in Ihrem Verzeichnis im Unterordner *orig*.
--   Lesen Sie den Datensatz `PENDDAT_cf_W13.dta` [wie oben gezeigt](#import) in R ein und legen Sie den Datensatz unter dem Objektnamen `pend` ab.
--   Nutzen Sie `head()` und `View()`, um sich einen Überblick über den Datensatz zu verschaffen.
--   Wie viele Befragte (Zeilen) enthält der Datensatz?
--   Lassen Sie sich die Variablennamen von `pend` mit `names()` anzeigen!
--   Wie können Sie sich die Zeilen anzeigen lassen, welche den/die Befragte\*n mit der `pnr` 1000908201 enthält?
--   Wählen Sie alle Befragten aus, die älter als 60 (Alter: `palter`) sind legen Sie diese Auswahl unter `ue_1960` ab.
--   Wie müssen Sie den Befehl anpassen, sodass `ue_1960` nur die Variablen `pnr`, `hnr`, `welle`, `pintjahr` und `palter` enthält?
--   Wie viele Spalten hat `ue_1960`? Wie viele Zeilen?
+**Bonus Exercises**:
 
-**Bonusübungen**: 
+>  - How old is the respondent with the `pnr` 1000908201 in `welle` 10 (in `pintjahr` 2016)?
+>  - Create a new variable with the birth year of the respondents (based on the age `palter` and the interview year `pintjahr`).
 
->  - Wie alt ist der/die Befragte mit der `pnr` 1000908201 in `welle` 10 (im `pintjahr` 2016)?
->  - Erstellen Sie eine neue Variable mit dem Geburtsjahr der Befragten (basierend auf dem Alter `palter` und dem Interviewjahr `pintjahr`).
-    
-[Zurück nach oben](#ue_4)
+[Back to top](#ue_4)
 
-### Übung 5 {#data5}
+---
 
--  Exportieren Sie den `data.frame` mit den in der vorherigen Übung erstellten kleineren Datensatz-Version (`ue_1960`) als `.Rdata`-Datei.
--  Laden Sie die eben exportierte `.Rdata`-Datei unter einem beliebigen Namen, bspw. `ue_1960_neu`. 
--  Hat alles geklappt? Vergleichen Sie das neu geladene mit dem ursprünglichen Objekt: `identical(ue_1960,ue_1960_neu)` - sind beide Objekte identisch?
+### Exercise 5 {#data5}
 
-[Zurück nach oben](#ue_5)
+-  Export the `data.frame` with the smaller dataset version (`ue_1960`) created in the previous exercise as an `.Rdata` file.
+-  Load the exported `.Rdata` file under a different name, e.g., `ue_1960_neu`.
+-  Did everything work? Compare the newly loaded object with the original one: `identical(ue_1960, ue_1960_neu)` - are both objects identical?
 
-
+[Back to top](#ue_5)
 
 ## Appendix
 

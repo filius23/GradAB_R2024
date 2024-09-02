@@ -2,8 +2,7 @@
 
 ```{r}
 #| include: false
-if(Sys.getenv("USERNAME") == "filse" ) .libPaths("D:/R-library4") 
-if(Sys.getenv("USERNAME") == "filse" ) path <- "D:/oCloud/RFS/"
+if(Sys.getenv("USERNAME") == "filse" ) path <- "D:/uolCloud//RFS/"
 windowsFonts(mono=windowsFont("Fira Code"))
 ```
 
@@ -256,18 +255,6 @@ dat3 %>%
                    list(mean = ~mean(.x), sd = ~sd(.x)),
                    .names = "{.fn}_{.col}"))
 ```
-
-
-<!-- ...eine sehr praktische Hilfsfunktion aus `{dplyr}` ist `n()` - so erhalten wir die Fallzahlen. Allerdings werden so auch ggf. Zeilen mit `NA` mitgezählt, sodass wir für die Zähler alle nicht-`NA` Zeilen eine anderen Lösung brauchen, bspw. `sum(!is.na(.x))` - also die Summe der "is not NA"==`TRUE`: -->
-
-<!-- ```{r} -->
-<!-- dat3 %>% -->
-<!--   group_by(prom_recht) %>% -->
-<!--   summarise(across(matches("studs|profs"),  -->
-<!--                    list(mean = ~mean(.x), sd = ~sd(.x), n = ~n(), notNA = ~sum(!is.na(.x))), -->
-<!--                    .names = "{.fn}_{.col}")) -->
-<!-- ``` -->
-
 
 Alle gezeigten Funktionen funktionieren natürlich auch mit `mutate()`:
 
