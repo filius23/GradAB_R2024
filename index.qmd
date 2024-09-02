@@ -20,11 +20,11 @@ knitr::include_graphics("./pic/01_frontpage_iab2.png")
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 
-
-{{< fa calendar-alt >}} &nbsp; 11.09. & 13.09.2024
-
-{{< fa clock >}} &nbsp; 9:00 – 15:00 
-
 {{< fa location-dot >}} &nbsp; E09
+
+{{< fa calendar-alt >}} &nbsp; 11.09.2024 &nbsp; {{< fa clock >}} &nbsp; 10:45 - 16:00  
+
+{{< fa calendar-alt >}} &nbsp; 13.09.2024 &nbsp; {{< fa clock >}} &nbsp;  8:30 – 15:30 
+
 
 :::

@@ -435,38 +435,33 @@ dat1 %>%
 Here, `%>%` takes the output of one function and passes it as an input to the next function. 
 This operator allows you to read and write code that closely resembles natural language.
 
-:::{.callout-tip}
-**END**
-:::
+If we want to select some rows **and** some columns, we can combine `filter()` and `select()`:
 
-
-Wenn wir jetzt aber einige Zeilen **und** einige Spalten auswählen möchten, dann können wir `filter()` und `select()` kombinieren:
-```{r}
-select(filter(dat1,studs < 10000),uni)
-```
-Diese Befehlsschachtel können wir mit der sog. Pipe `%>%` auflösen. `%>%` steht einfach für "und dann". Die Pipe kommt aus dem Paket `{magrittr}`, welches wiederum Teil des tidyverse ist und automatisch mit `{dplyr}` geladen wird. 
-
-```{r}
-filter(dat1,studs < 10000) %>% select(uni)
+```{r]
+select(filter(dat1, studs < 10000), uni)
 ```
 
-Häufig wird die Pipe dann so verwendet, dass zu Beginn lediglich der zu bearbeitende Datensatz steht und sich dann die Schritte anschließen:
-```{r}
-dat1 %>% filter(.,studs < 10000) %>% select(.,uni)
+We can simplify this command chain using the so-called pipe `%>%`. `%>%` simply stands for "and then". The pipe comes from the `{magrittr}` package, which is part of the tidyverse and is automatically loaded with `{dplyr}`.
+
+```{r]
+filter(dat1, studs < 10000) %>% select(uni)
 ```
 
+The pipe is often used so that the dataset being processed is at the beginning, followed by the steps:
 
-Der Punkt `.` steht jeweils für das Ergebnis des vorherigen Schritts. Hier also:
+```{r]
+dat1 %>% filter(., studs < 10000) %>% select(., uni)
+```
 
-   1. Rufe `dat1` auf *und dann (`%>%`)*
-   2. Wähle nur Zeilen aus in denen `studs` < 10000 *und dann (`%>%`)*
-   3. Behalte nur die Spalte `uni`
+The dot `.` represents the result of the previous step. Here:
 
+1. Call `dat1` *and then (`%>%`)*
+2. Select only rows where `studs` < 10000 *and then (`%>%`)*
+3. Keep only the `uni` column
 
-```{r}
+```{r]
 dat1 %>% filter(studs < 10000) %>% select(uni)
 ```
-
 
 :::{.callout-tip}
 
