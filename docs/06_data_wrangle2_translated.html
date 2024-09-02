@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_data_wrangle2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_data_wrangle2_translated.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_data_wrangle2.html" class="sidebar-item-text sidebar-link active">
+  <a href="./06_data_wrangle2_translated.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
   </div>
 </li>
@@ -201,11 +201,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#var" id="toc-var" class="nav-link active" data-scroll-target="#var"><span class="header-section-number">5.1</span> Variablen erstellen</a>
+  <li><a href="#var" id="toc-var" class="nav-link active" data-scroll-target="#var"><span class="header-section-number">5.1</span> Creating Variables</a>
   <ul class="collapse">
-  <li><a href="#base-r-...newvar--" id="toc-base-r-...newvar--" class="nav-link" data-scroll-target="#base-r-...newvar--"><span class="header-section-number">5.1.1</span> base R: <code>...$newvar &lt;-</code></a></li>
+  <li><a href="#base-r-...newvar--" id="toc-base-r-...newvar--" class="nav-link" data-scroll-target="#base-r-...newvar--"><span class="header-section-number">5.1.1</span> Base R: <code>...$newvar &lt;-</code></a></li>
   <li><a href="#dplyr-mutateneue_var" id="toc-dplyr-mutateneue_var" class="nav-link" data-scroll-target="#dplyr-mutateneue_var"><span class="header-section-number">5.1.2</span> {dplyr}: <code>mutate(neue_var= )</code></a></li>
-  <li><a href="#ue06_1" id="toc-ue06_1" class="nav-link" data-scroll-target="#ue06_1"><span class="header-section-number">5.1.3</span> Übung</a></li>
+  <li><a href="#ue06_1" id="toc-ue06_1" class="nav-link" data-scroll-target="#ue06_1"><span class="header-section-number">5.1.3</span> Exercise</a></li>
   </ul></li>
   <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">5.2</span> Gruppierung mit <code>group_by()</code> oder <code>.by=</code></a>
   <ul class="collapse">
@@ -265,19 +265,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Wir gehen nochmal zurück zum Uni-Datensatz vom Anfang:</p>
+<p>We return to the university dataset from the beginning:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">19173</span>,<span class="dv">5333</span>,<span class="dv">15643</span>), </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">322</span>,<span class="dv">67</span>,<span class="dv">210</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>,<span class="dv">1830</span>,<span class="dv">1973</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">prom_recht =</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>,<span class="dv">3</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"Uni Bremen"</span>,<span class="st">"Uni Vechta"</span>, <span class="st">"Uni Oldenburg"</span>))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">14954</span>,<span class="dv">47269</span> ,<span class="dv">23659</span>,<span class="dv">9415</span> ,<span class="dv">38079</span>), </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">250</span>,<span class="dv">553</span>,<span class="dv">438</span> ,<span class="dv">150</span>,<span class="dv">636</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">prom_recht =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>,<span class="dv">1870</span>,<span class="dv">1457</span>,<span class="dv">1818</span>,<span class="dv">1995</span>),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"FH Aachen"</span>,<span class="st">"RWTH Aachen"</span>,<span class="st">"Uni Freiburg"</span>,<span class="st">"Uni Bonn"</span>,<span class="st">"FH Bonn-Rhein-Sieg"</span>))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>dat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">19173</span>, <span class="dv">5333</span>, <span class="dv">15643</span>), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">322</span>, <span class="dv">67</span>, <span class="dv">210</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>, <span class="dv">1830</span>, <span class="dv">1973</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_recht =</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, <span class="dv">3</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"Uni Bremen"</span>, <span class="st">"Uni Vechta"</span>, <span class="st">"Uni Oldenburg"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">14954</span>, <span class="dv">47269</span>, <span class="dv">23659</span>, <span class="dv">9415</span>, <span class="dv">38079</span>), </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">250</span>, <span class="dv">553</span>, <span class="dv">438</span>, <span class="dv">150</span>, <span class="dv">636</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_recht =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>, <span class="dv">1870</span>, <span class="dv">1457</span>, <span class="dv">1818</span>, <span class="dv">1995</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"FH Aachen"</span>, <span class="st">"RWTH Aachen"</span>, <span class="st">"Uni Freiburg"</span>, <span class="st">"Uni Bonn"</span>, <span class="st">"FH Bonn-Rhein-Sieg"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>dat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht           uni
 1 19173   322 1971       TRUE    Uni Bremen
@@ -294,9 +300,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg</code></pre>
 </div>
 </div>
-<p>Mit <code>bind_rows()</code> aus <code>{dplyr}</code> können wir die beiden <code>data.frame</code>s zusammensetzen:</p>
+<p>With <code>bind_rows()</code> from <code>{dplyr}</code>, we can combine the two <code>data.frame</code>s:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(dat1,dat2)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(dat1, dat2)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht                uni
@@ -310,14 +316,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
 </div>
 </div>
-<p>Es gibt auch <code>bind_cols()</code> um Datensätze spaltenweise zusammenzufügen. Möglichkeiten, Datensätzen auf Basis einer oder mehrer Identifikationsvariablen zu “mergen” lernen wir auch noch <a href="#wrang3">später</a> kennen.</p>
+<p>There is also <code>bind_cols()</code> to combine datasets column-wise. We’ll learn more about merging datasets based on one or more identifier variables <a href="#wrang3">later</a>.</p>
 <section id="var" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="var"><span class="header-section-number">5.1</span> Variablen erstellen</h2>
-<p>Nun sehen wir uns die Möglichkeiten, Variablen zu erstellen, nochmal etwas genauer an. Grundsätzlich gibt es zwei Arten, Variablen in einen <code>data.frame</code> hinzuzufügen:</p>
+<h2 data-number="5.1" class="anchored" data-anchor-id="var"><span class="header-section-number">5.1</span> Creating Variables</h2>
+<p>Let’s take a closer look at creating variables in R. There are two basic ways to add variables to a <code>data.frame</code>:</p>
 <section id="base-r-...newvar--" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="base-r-...newvar--"><span class="header-section-number">5.1.1</span> base R: <code>...$newvar &lt;-</code></h3>
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="base-r-...newvar--"><span class="header-section-number">5.1.1</span> Base R: <code>...$newvar &lt;-</code></h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean  <span class="ot">&lt;-</span> dat3<span class="sc">$</span>studs <span class="sc">-</span> <span class="fu">mean</span>(dat3<span class="sc">$</span>studs)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> dat3<span class="sc">$</span>studs <span class="sc">-</span> <span class="fu">mean</span>(dat3<span class="sc">$</span>studs)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht                uni studs_to_mean
@@ -331,9 +337,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375</code></pre>
 </div>
 </div>
-<p>Mit <code>&lt;- NULL</code> können Variablen auch gelöscht werden:</p>
+<p>You can also delete variables using <code>&lt;- NULL</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean  <span class="ot">&lt;-</span>  <span class="cn">NULL</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht                uni
@@ -350,20 +356,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dplyr-mutateneue_var" class="level3" data-number="5.1.2">
 <h3 data-number="5.1.2" class="anchored" data-anchor-id="dplyr-mutateneue_var"><span class="header-section-number">5.1.2</span> {dplyr}: <code>mutate(neue_var= )</code></h3>
-<p>Eine alternative Möglichkeit, Variablen zu erstellen ist <code>mutate(neu_variable = )</code> aus <code>{dplyr}</code> (<code>{tidyverse}</code>):</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./pic/103_mutate.png" class="quarto-figure quarto-figure-center figure-img" style="width:90.0%;height:90.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<!-- Wir hatten die Variante aus `{dplyr}` (`{tidyverse}`) bereits in [Kapitel 3](03_desc.qmd#crosscount) kurz kennen gelernt.-->
-<p>Die grundsätzliche Struktur ist immer <code>datensatz %&gt;% mutate(neue_var = ....)</code>:</p>
+<p>An alternative way to create variables is using <code>mutate(neu_variable = )</code> from <code>{dplyr}</code> (<code>{tidyverse}</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">studs_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht                uni studs_to_mean
 1 19173   322 1971       TRUE         Uni Bremen     -2517.625
@@ -376,10 +371,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375</code></pre>
 </div>
 </div>
-<p>Wir können auch mehrere Variablen innerhalb eines <code>mutate()</code>-Befehls erstellen:</p>
+<p>You can also create multiple variables within a single <code>mutate()</code> command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">studs_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">profs_to_mean =</span> profs<span class="sc">-</span><span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs_to_mean =</span> profs <span class="sc">-</span> <span class="fu">mean</span>(profs)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht                uni studs_to_mean profs_to_mean
 1 19173   322 1971       TRUE         Uni Bremen     -2517.625         -6.25
@@ -392,10 +389,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375        307.75</code></pre>
 </div>
 </div>
-<p>Oder Variablen können innerhalb von <code>mutate()</code> weiterverwendet werden:</p>
+<p>Or variables can be reused within <code>mutate()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht                uni rel_to_mean above_mean
 1 19173   322 1971       TRUE         Uni Bremen   -2517.625      FALSE
@@ -408,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       TRUE</code></pre>
 </div>
 </div>
-<p>Der Ausgangsdatensatz bleibt aber unverändert:</p>
+<p>The original dataset remains unchanged:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -423,12 +422,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
 </div>
 </div>
-<p>Wenn wir die Ergebnisse behalten wollen, müssen wir das Ergebnis in einem Objekt ablegen:</p>
+<p>To keep the results, store them in an object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  dat3 <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>dat4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -449,16 +448,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Dummy-Variablen erstellen mit <code>as.numeric()</code>
+Creating Dummy Variables with <code>as.numeric()</code>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Wenn wir logische Variablen mit <code>as.numeric()</code> in numerische Variablen umformatieren erhalten wir eine Dummy-Codierung:</p>
+<p>You can convert logical variables into numeric dummy variables using <code>as.numeric()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prom_dummy =</span> <span class="fu">as.numeric</span>(prom_recht ),</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">over10k    =</span> <span class="fu">as.numeric</span>(studs <span class="sc">&gt;</span> <span class="dv">10000</span>) <span class="co"># Abgleich direkt in numeric</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_dummy =</span> <span class="fu">as.numeric</span>(prom_recht),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">over10k =</span> <span class="fu">as.numeric</span>(studs <span class="sc">&gt;</span> <span class="dv">10000</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  studs profs gegr prom_recht                uni prom_dummy over10k
 1 19173   322 1971       TRUE         Uni Bremen          1       1
@@ -475,7 +474,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
 </div>
 </section>
 <section id="ue06_1" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="ue06_1"><span class="header-section-number">5.1.3</span> <a href="#mutate1">Übung</a></h3>
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="ue06_1"><span class="header-section-number">5.1.3</span> <a href="#mutate1">Exercise</a></h3>
 </section>
 </section>
 <section id="group_by" class="level2" data-number="5.2">
@@ -679,23 +678,23 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
 <p>Dazu sehen wir uns drei Zufriedensheitsvariablen für die Befragten aus den Zeilen 12-16 an:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ltwpmhnplt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ltwpmhnplt table {
+<div id="mjqhxnbrhu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mjqhxnbrhu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ltwpmhnplt thead, #ltwpmhnplt tbody, #ltwpmhnplt tfoot, #ltwpmhnplt tr, #ltwpmhnplt td, #ltwpmhnplt th {
+#mjqhxnbrhu thead, #mjqhxnbrhu tbody, #mjqhxnbrhu tfoot, #mjqhxnbrhu tr, #mjqhxnbrhu td, #mjqhxnbrhu th {
   border-style: none;
 }
 
-#ltwpmhnplt p {
+#mjqhxnbrhu p {
   margin: 0;
   padding: 0;
 }
 
-#ltwpmhnplt .gt_table {
+#mjqhxnbrhu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -721,12 +720,12 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-left-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_caption {
+#mjqhxnbrhu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ltwpmhnplt .gt_title {
+#mjqhxnbrhu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -738,7 +737,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-width: 0;
 }
 
-#ltwpmhnplt .gt_subtitle {
+#mjqhxnbrhu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -750,7 +749,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-top-width: 0;
 }
 
-#ltwpmhnplt .gt_heading {
+#mjqhxnbrhu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -762,13 +761,13 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_bottom_border {
+#mjqhxnbrhu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_col_headings {
+#mjqhxnbrhu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -783,7 +782,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_col_heading {
+#mjqhxnbrhu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -803,7 +802,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#ltwpmhnplt .gt_column_spanner_outer {
+#mjqhxnbrhu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -815,15 +814,15 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 4px;
 }
 
-#ltwpmhnplt .gt_column_spanner_outer:first-child {
+#mjqhxnbrhu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ltwpmhnplt .gt_column_spanner_outer:last-child {
+#mjqhxnbrhu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ltwpmhnplt .gt_column_spanner {
+#mjqhxnbrhu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -835,11 +834,11 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   width: 100%;
 }
 
-#ltwpmhnplt .gt_spanner_row {
+#mjqhxnbrhu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ltwpmhnplt .gt_group_heading {
+#mjqhxnbrhu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -865,7 +864,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   text-align: left;
 }
 
-#ltwpmhnplt .gt_empty_group_heading {
+#mjqhxnbrhu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -880,15 +879,15 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   vertical-align: middle;
 }
 
-#ltwpmhnplt .gt_from_md > :first-child {
+#mjqhxnbrhu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ltwpmhnplt .gt_from_md > :last-child {
+#mjqhxnbrhu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ltwpmhnplt .gt_row {
+#mjqhxnbrhu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -907,7 +906,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#ltwpmhnplt .gt_stub {
+#mjqhxnbrhu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -920,7 +919,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ltwpmhnplt .gt_stub_row_group {
+#mjqhxnbrhu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -934,15 +933,15 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   vertical-align: top;
 }
 
-#ltwpmhnplt .gt_row_group_first td {
+#mjqhxnbrhu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ltwpmhnplt .gt_row_group_first th {
+#mjqhxnbrhu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ltwpmhnplt .gt_summary_row {
+#mjqhxnbrhu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -952,16 +951,16 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ltwpmhnplt .gt_first_summary_row {
+#mjqhxnbrhu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_first_summary_row.thick {
+#mjqhxnbrhu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ltwpmhnplt .gt_last_summary_row {
+#mjqhxnbrhu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -971,7 +970,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_grand_summary_row {
+#mjqhxnbrhu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -981,7 +980,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ltwpmhnplt .gt_first_grand_summary_row {
+#mjqhxnbrhu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -991,7 +990,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-top-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_last_grand_summary_row_top {
+#mjqhxnbrhu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1001,11 +1000,11 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_striped {
+#mjqhxnbrhu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ltwpmhnplt .gt_table_body {
+#mjqhxnbrhu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1014,7 +1013,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_footnotes {
+#mjqhxnbrhu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1028,7 +1027,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_footnote {
+#mjqhxnbrhu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1037,7 +1036,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ltwpmhnplt .gt_sourcenotes {
+#mjqhxnbrhu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1051,7 +1050,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ltwpmhnplt .gt_sourcenote {
+#mjqhxnbrhu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1059,72 +1058,72 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ltwpmhnplt .gt_left {
+#mjqhxnbrhu .gt_left {
   text-align: left;
 }
 
-#ltwpmhnplt .gt_center {
+#mjqhxnbrhu .gt_center {
   text-align: center;
 }
 
-#ltwpmhnplt .gt_right {
+#mjqhxnbrhu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ltwpmhnplt .gt_font_normal {
+#mjqhxnbrhu .gt_font_normal {
   font-weight: normal;
 }
 
-#ltwpmhnplt .gt_font_bold {
+#mjqhxnbrhu .gt_font_bold {
   font-weight: bold;
 }
 
-#ltwpmhnplt .gt_font_italic {
+#mjqhxnbrhu .gt_font_italic {
   font-style: italic;
 }
 
-#ltwpmhnplt .gt_super {
+#mjqhxnbrhu .gt_super {
   font-size: 65%;
 }
 
-#ltwpmhnplt .gt_footnote_marks {
+#mjqhxnbrhu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ltwpmhnplt .gt_asterisk {
+#mjqhxnbrhu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ltwpmhnplt .gt_indent_1 {
+#mjqhxnbrhu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ltwpmhnplt .gt_indent_2 {
+#mjqhxnbrhu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ltwpmhnplt .gt_indent_3 {
+#mjqhxnbrhu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ltwpmhnplt .gt_indent_4 {
+#mjqhxnbrhu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ltwpmhnplt .gt_indent_5 {
+#mjqhxnbrhu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ltwpmhnplt .katex-display {
+#mjqhxnbrhu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ltwpmhnplt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mjqhxnbrhu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1167,23 +1166,23 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
 </div>
 </div>
 <div class="cell-output-display">
-<div id="psqfkvqxyu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#psqfkvqxyu table {
+<div id="thkdtusgzt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#thkdtusgzt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#psqfkvqxyu thead, #psqfkvqxyu tbody, #psqfkvqxyu tfoot, #psqfkvqxyu tr, #psqfkvqxyu td, #psqfkvqxyu th {
+#thkdtusgzt thead, #thkdtusgzt tbody, #thkdtusgzt tfoot, #thkdtusgzt tr, #thkdtusgzt td, #thkdtusgzt th {
   border-style: none;
 }
 
-#psqfkvqxyu p {
+#thkdtusgzt p {
   margin: 0;
   padding: 0;
 }
 
-#psqfkvqxyu .gt_table {
+#thkdtusgzt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1209,12 +1208,12 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-left-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_caption {
+#thkdtusgzt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#psqfkvqxyu .gt_title {
+#thkdtusgzt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1226,7 +1225,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-width: 0;
 }
 
-#psqfkvqxyu .gt_subtitle {
+#thkdtusgzt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1238,7 +1237,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-top-width: 0;
 }
 
-#psqfkvqxyu .gt_heading {
+#thkdtusgzt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1250,13 +1249,13 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_bottom_border {
+#thkdtusgzt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_col_headings {
+#thkdtusgzt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1271,7 +1270,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_col_heading {
+#thkdtusgzt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1291,7 +1290,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#psqfkvqxyu .gt_column_spanner_outer {
+#thkdtusgzt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1303,15 +1302,15 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 4px;
 }
 
-#psqfkvqxyu .gt_column_spanner_outer:first-child {
+#thkdtusgzt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#psqfkvqxyu .gt_column_spanner_outer:last-child {
+#thkdtusgzt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#psqfkvqxyu .gt_column_spanner {
+#thkdtusgzt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1323,11 +1322,11 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   width: 100%;
 }
 
-#psqfkvqxyu .gt_spanner_row {
+#thkdtusgzt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#psqfkvqxyu .gt_group_heading {
+#thkdtusgzt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1353,7 +1352,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   text-align: left;
 }
 
-#psqfkvqxyu .gt_empty_group_heading {
+#thkdtusgzt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1368,15 +1367,15 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   vertical-align: middle;
 }
 
-#psqfkvqxyu .gt_from_md > :first-child {
+#thkdtusgzt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#psqfkvqxyu .gt_from_md > :last-child {
+#thkdtusgzt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#psqfkvqxyu .gt_row {
+#thkdtusgzt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1395,7 +1394,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#psqfkvqxyu .gt_stub {
+#thkdtusgzt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1408,7 +1407,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#psqfkvqxyu .gt_stub_row_group {
+#thkdtusgzt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1422,15 +1421,15 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   vertical-align: top;
 }
 
-#psqfkvqxyu .gt_row_group_first td {
+#thkdtusgzt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#psqfkvqxyu .gt_row_group_first th {
+#thkdtusgzt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#psqfkvqxyu .gt_summary_row {
+#thkdtusgzt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1440,16 +1439,16 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#psqfkvqxyu .gt_first_summary_row {
+#thkdtusgzt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_first_summary_row.thick {
+#thkdtusgzt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#psqfkvqxyu .gt_last_summary_row {
+#thkdtusgzt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1459,7 +1458,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_grand_summary_row {
+#thkdtusgzt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1469,7 +1468,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#psqfkvqxyu .gt_first_grand_summary_row {
+#thkdtusgzt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1479,7 +1478,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-top-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_last_grand_summary_row_top {
+#thkdtusgzt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1489,11 +1488,11 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_striped {
+#thkdtusgzt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#psqfkvqxyu .gt_table_body {
+#thkdtusgzt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1502,7 +1501,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_footnotes {
+#thkdtusgzt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1516,7 +1515,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_footnote {
+#thkdtusgzt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1525,7 +1524,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#psqfkvqxyu .gt_sourcenotes {
+#thkdtusgzt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1539,7 +1538,7 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#psqfkvqxyu .gt_sourcenote {
+#thkdtusgzt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1547,72 +1546,72 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#psqfkvqxyu .gt_left {
+#thkdtusgzt .gt_left {
   text-align: left;
 }
 
-#psqfkvqxyu .gt_center {
+#thkdtusgzt .gt_center {
   text-align: center;
 }
 
-#psqfkvqxyu .gt_right {
+#thkdtusgzt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#psqfkvqxyu .gt_font_normal {
+#thkdtusgzt .gt_font_normal {
   font-weight: normal;
 }
 
-#psqfkvqxyu .gt_font_bold {
+#thkdtusgzt .gt_font_bold {
   font-weight: bold;
 }
 
-#psqfkvqxyu .gt_font_italic {
+#thkdtusgzt .gt_font_italic {
   font-style: italic;
 }
 
-#psqfkvqxyu .gt_super {
+#thkdtusgzt .gt_super {
   font-size: 65%;
 }
 
-#psqfkvqxyu .gt_footnote_marks {
+#thkdtusgzt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#psqfkvqxyu .gt_asterisk {
+#thkdtusgzt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#psqfkvqxyu .gt_indent_1 {
+#thkdtusgzt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#psqfkvqxyu .gt_indent_2 {
+#thkdtusgzt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#psqfkvqxyu .gt_indent_3 {
+#thkdtusgzt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#psqfkvqxyu .gt_indent_4 {
+#thkdtusgzt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#psqfkvqxyu .gt_indent_5 {
+#thkdtusgzt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#psqfkvqxyu .katex-display {
+#thkdtusgzt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#psqfkvqxyu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#thkdtusgzt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1974,23 +1973,23 @@ $PEO0300c
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tdluwzjzra" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tdluwzjzra table {
+<div id="fizemlkgqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fizemlkgqe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tdluwzjzra thead, #tdluwzjzra tbody, #tdluwzjzra tfoot, #tdluwzjzra tr, #tdluwzjzra td, #tdluwzjzra th {
+#fizemlkgqe thead, #fizemlkgqe tbody, #fizemlkgqe tfoot, #fizemlkgqe tr, #fizemlkgqe td, #fizemlkgqe th {
   border-style: none;
 }
 
-#tdluwzjzra p {
+#fizemlkgqe p {
   margin: 0;
   padding: 0;
 }
 
-#tdluwzjzra .gt_table {
+#fizemlkgqe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2016,12 +2015,12 @@ $PEO0300c
   border-left-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_caption {
+#fizemlkgqe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tdluwzjzra .gt_title {
+#fizemlkgqe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2033,7 +2032,7 @@ $PEO0300c
   border-bottom-width: 0;
 }
 
-#tdluwzjzra .gt_subtitle {
+#fizemlkgqe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2045,7 +2044,7 @@ $PEO0300c
   border-top-width: 0;
 }
 
-#tdluwzjzra .gt_heading {
+#fizemlkgqe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2057,13 +2056,13 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_bottom_border {
+#fizemlkgqe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_col_headings {
+#fizemlkgqe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2078,7 +2077,7 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_col_heading {
+#fizemlkgqe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2098,7 +2097,7 @@ $PEO0300c
   overflow-x: hidden;
 }
 
-#tdluwzjzra .gt_column_spanner_outer {
+#fizemlkgqe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2110,15 +2109,15 @@ $PEO0300c
   padding-right: 4px;
 }
 
-#tdluwzjzra .gt_column_spanner_outer:first-child {
+#fizemlkgqe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tdluwzjzra .gt_column_spanner_outer:last-child {
+#fizemlkgqe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tdluwzjzra .gt_column_spanner {
+#fizemlkgqe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2130,11 +2129,11 @@ $PEO0300c
   width: 100%;
 }
 
-#tdluwzjzra .gt_spanner_row {
+#fizemlkgqe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tdluwzjzra .gt_group_heading {
+#fizemlkgqe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2160,7 +2159,7 @@ $PEO0300c
   text-align: left;
 }
 
-#tdluwzjzra .gt_empty_group_heading {
+#fizemlkgqe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2175,15 +2174,15 @@ $PEO0300c
   vertical-align: middle;
 }
 
-#tdluwzjzra .gt_from_md > :first-child {
+#fizemlkgqe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tdluwzjzra .gt_from_md > :last-child {
+#fizemlkgqe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tdluwzjzra .gt_row {
+#fizemlkgqe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2202,7 +2201,7 @@ $PEO0300c
   overflow-x: hidden;
 }
 
-#tdluwzjzra .gt_stub {
+#fizemlkgqe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2215,7 +2214,7 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#tdluwzjzra .gt_stub_row_group {
+#fizemlkgqe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2229,15 +2228,15 @@ $PEO0300c
   vertical-align: top;
 }
 
-#tdluwzjzra .gt_row_group_first td {
+#fizemlkgqe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tdluwzjzra .gt_row_group_first th {
+#fizemlkgqe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tdluwzjzra .gt_summary_row {
+#fizemlkgqe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2247,16 +2246,16 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#tdluwzjzra .gt_first_summary_row {
+#fizemlkgqe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_first_summary_row.thick {
+#fizemlkgqe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tdluwzjzra .gt_last_summary_row {
+#fizemlkgqe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2266,7 +2265,7 @@ $PEO0300c
   border-bottom-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_grand_summary_row {
+#fizemlkgqe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2276,7 +2275,7 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#tdluwzjzra .gt_first_grand_summary_row {
+#fizemlkgqe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2286,7 +2285,7 @@ $PEO0300c
   border-top-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_last_grand_summary_row_top {
+#fizemlkgqe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2296,11 +2295,11 @@ $PEO0300c
   border-bottom-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_striped {
+#fizemlkgqe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tdluwzjzra .gt_table_body {
+#fizemlkgqe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2309,7 +2308,7 @@ $PEO0300c
   border-bottom-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_footnotes {
+#fizemlkgqe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2323,7 +2322,7 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_footnote {
+#fizemlkgqe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2332,7 +2331,7 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#tdluwzjzra .gt_sourcenotes {
+#fizemlkgqe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2346,7 +2345,7 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#tdluwzjzra .gt_sourcenote {
+#fizemlkgqe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2354,72 +2353,72 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#tdluwzjzra .gt_left {
+#fizemlkgqe .gt_left {
   text-align: left;
 }
 
-#tdluwzjzra .gt_center {
+#fizemlkgqe .gt_center {
   text-align: center;
 }
 
-#tdluwzjzra .gt_right {
+#fizemlkgqe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tdluwzjzra .gt_font_normal {
+#fizemlkgqe .gt_font_normal {
   font-weight: normal;
 }
 
-#tdluwzjzra .gt_font_bold {
+#fizemlkgqe .gt_font_bold {
   font-weight: bold;
 }
 
-#tdluwzjzra .gt_font_italic {
+#fizemlkgqe .gt_font_italic {
   font-style: italic;
 }
 
-#tdluwzjzra .gt_super {
+#fizemlkgqe .gt_super {
   font-size: 65%;
 }
 
-#tdluwzjzra .gt_footnote_marks {
+#fizemlkgqe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tdluwzjzra .gt_asterisk {
+#fizemlkgqe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tdluwzjzra .gt_indent_1 {
+#fizemlkgqe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tdluwzjzra .gt_indent_2 {
+#fizemlkgqe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tdluwzjzra .gt_indent_3 {
+#fizemlkgqe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tdluwzjzra .gt_indent_4 {
+#fizemlkgqe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tdluwzjzra .gt_indent_5 {
+#fizemlkgqe .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tdluwzjzra .katex-display {
+#fizemlkgqe .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tdluwzjzra div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fizemlkgqe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

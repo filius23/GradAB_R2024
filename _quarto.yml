@@ -15,7 +15,7 @@ book:
     - 02_intro.qmd
     - 03_desc.qmd
     - 05_data_wrangle1_translated.qmd
-    - 06_data_wrangle2.qmd
+    - 06_data_wrangle2_translated.qmd
     - 04_viz_translated.qmd
     # - 07_inferenz.qmd
     # - 09_reg.qmd

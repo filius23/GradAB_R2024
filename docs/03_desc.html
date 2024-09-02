@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_data_wrangle2.html" class="sidebar-item-text sidebar-link">
+  <a href="./06_data_wrangle2_translated.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
   </div>
 </li>
@@ -312,7 +312,7 @@ Item fuer Fragebogenversion nicht relevant
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">table</span>(pend<span class="sc">$</span>statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>9470 respondents are employed, 5481 respondents are inactive, etc. (More on labels and working with value labels in R later.)</p>
-<p>With <code>count()</code> from <code>{dplyr}</code>, we get the labels displayed directly. Again, we use the <a href="#pipe">pipe <code>%&gt;%</code></a>:</p>
+<p>With <code>count()</code> from <code>{dplyr}</code>, we get the labels displayed directly. Again, we use the <a href="02_intro.html#pipe">pipe <code>%&gt;%</code></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1354,7 +1354,7 @@ zpsex     1     2     3
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>For non-systematic values, we can use the <code>%in%</code> operator that we already learned about in connection with <a href="#filter"><code>filter()</code></a>: <code>pend$var1[pend$var1 %in% c(-9,2,124) ]  &lt;- NA</code> (this is just an example).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>For non-systematic values, we can use the <code>%in%</code> operator that we already learned about in connection with <a href="02_intro.html#filter"><code>filter()</code></a>: <code>pend$var1[pend$var1 %in% c(-9,2,124) ]  &lt;- NA</code> (this is just an example).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
