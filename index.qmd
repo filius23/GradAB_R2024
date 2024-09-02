@@ -12,7 +12,7 @@ Introduction to R for GradAB and IAB people.
 
 
 ```{r main, echo = F, out.height="70%",out.width="70%", fig.align="center"}
-knitr::include_graphics("./pic/00_frontpage_iab2.PNG")
+knitr::include_graphics("./pic/01_frontpage_iab2.png")
 ```
 
 
