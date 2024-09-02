@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Visualization with {ggplot2} – GradAB R Intro 2024</title>
+<title>6&nbsp; Visualization with {ggplot2} – GradAB R Intro 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./06_data_wrangle2.html" rel="next">
-<link href="./05_data_wrangle1_translated.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./06_data_wrangle2.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_viz_translated.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_viz_translated.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,14 +179,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_viz_translated.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+  <a href="./06_data_wrangle2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_data_wrangle2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
+  <a href="./04_viz_translated.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -205,39 +205,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ggplot2-and-the-grammar-of-graphics" id="toc-ggplot2-and-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#ggplot2-and-the-grammar-of-graphics"><span class="header-section-number">5.1</span> ggplot2 and the Grammar of Graphics</a>
+  <li><a href="#ggplot2-and-the-grammar-of-graphics" id="toc-ggplot2-and-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#ggplot2-and-the-grammar-of-graphics"><span class="header-section-number">6.1</span> ggplot2 and the Grammar of Graphics</a>
   <ul class="collapse">
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">5.1.1</span> <code>data =</code></a></li>
-  <li><a href="#aes" id="toc-aes" class="nav-link" data-scroll-target="#aes"><span class="header-section-number">5.1.2</span> <code>aes</code></a></li>
-  <li><a href="#geom" id="toc-geom" class="nav-link" data-scroll-target="#geom"><span class="header-section-number">5.1.3</span> <code>geom</code></a></li>
-  <li><a href="#aes-part-ii" id="toc-aes-part-ii" class="nav-link" data-scroll-target="#aes-part-ii"><span class="header-section-number">5.1.4</span> <code>aes()</code> Part II</a></li>
-  <li><a href="#labels" id="toc-labels" class="nav-link" data-scroll-target="#labels"><span class="header-section-number">5.1.5</span> Labels</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">6.1.1</span> <code>data =</code></a></li>
+  <li><a href="#aes" id="toc-aes" class="nav-link" data-scroll-target="#aes"><span class="header-section-number">6.1.2</span> <code>aes</code></a></li>
+  <li><a href="#geom" id="toc-geom" class="nav-link" data-scroll-target="#geom"><span class="header-section-number">6.1.3</span> <code>geom</code></a></li>
+  <li><a href="#aes-part-ii" id="toc-aes-part-ii" class="nav-link" data-scroll-target="#aes-part-ii"><span class="header-section-number">6.1.4</span> <code>aes()</code> Part II</a></li>
+  <li><a href="#labels" id="toc-labels" class="nav-link" data-scroll-target="#labels"><span class="header-section-number">6.1.5</span> Labels</a></li>
   </ul></li>
-  <li><a href="#combination-of-all-options" id="toc-combination-of-all-options" class="nav-link" data-scroll-target="#combination-of-all-options"><span class="header-section-number">5.2</span> Combination of all options</a></li>
-  <li><a href="#visualizing-distributions" id="toc-visualizing-distributions" class="nav-link" data-scroll-target="#visualizing-distributions"><span class="header-section-number">5.3</span> Visualizing distributions</a>
+  <li><a href="#combination-of-all-options" id="toc-combination-of-all-options" class="nav-link" data-scroll-target="#combination-of-all-options"><span class="header-section-number">6.2</span> Combination of all options</a></li>
+  <li><a href="#visualizing-distributions" id="toc-visualizing-distributions" class="nav-link" data-scroll-target="#visualizing-distributions"><span class="header-section-number">6.3</span> Visualizing distributions</a>
   <ul class="collapse">
-  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"><span class="header-section-number">5.3.1</span> Histogram</a></li>
-  <li><a href="#ue4_02" id="toc-ue4_02" class="nav-link" data-scroll-target="#ue4_02"><span class="header-section-number">5.3.2</span> Exercise</a></li>
+  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"><span class="header-section-number">6.3.1</span> Histogram</a></li>
+  <li><a href="#ue4_02" id="toc-ue4_02" class="nav-link" data-scroll-target="#ue4_02"><span class="header-section-number">6.3.2</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#categorical-features" id="toc-categorical-features" class="nav-link" data-scroll-target="#categorical-features"><span class="header-section-number">5.4</span> Categorical Features</a>
+  <li><a href="#categorical-features" id="toc-categorical-features" class="nav-link" data-scroll-target="#categorical-features"><span class="header-section-number">6.4</span> Categorical Features</a>
   <ul class="collapse">
-  <li><a href="#ue4_03" id="toc-ue4_03" class="nav-link" data-scroll-target="#ue4_03"><span class="header-section-number">5.4.1</span> Exercise</a></li>
+  <li><a href="#ue4_03" id="toc-ue4_03" class="nav-link" data-scroll-target="#ue4_03"><span class="header-section-number">6.4.1</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.5</span> Exercises</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.5</span> Exercises</a>
   <ul class="collapse">
-  <li><a href="#pltue1" id="toc-pltue1" class="nav-link" data-scroll-target="#pltue1"><span class="header-section-number">5.5.1</span> Exercise 1</a></li>
-  <li><a href="#pltue2" id="toc-pltue2" class="nav-link" data-scroll-target="#pltue2"><span class="header-section-number">5.5.2</span> Exercise 2</a></li>
-  <li><a href="#pltue3" id="toc-pltue3" class="nav-link" data-scroll-target="#pltue3"><span class="header-section-number">5.5.3</span> Exercise 3</a></li>
+  <li><a href="#pltue1" id="toc-pltue1" class="nav-link" data-scroll-target="#pltue1"><span class="header-section-number">6.5.1</span> Exercise 1</a></li>
+  <li><a href="#pltue2" id="toc-pltue2" class="nav-link" data-scroll-target="#pltue2"><span class="header-section-number">6.5.2</span> Exercise 2</a></li>
+  <li><a href="#pltue3" id="toc-pltue3" class="nav-link" data-scroll-target="#pltue3"><span class="header-section-number">6.5.3</span> Exercise 3</a></li>
   </ul></li>
-  <li><a href="#more-options-for-ggplot2" id="toc-more-options-for-ggplot2" class="nav-link" data-scroll-target="#more-options-for-ggplot2"><span class="header-section-number">5.6</span> More options for <code>{ggplot2}</code></a>
+  <li><a href="#more-options-for-ggplot2" id="toc-more-options-for-ggplot2" class="nav-link" data-scroll-target="#more-options-for-ggplot2"><span class="header-section-number">6.6</span> More options for <code>{ggplot2}</code></a>
   <ul class="collapse">
-  <li><a href="#aes_list" id="toc-aes_list" class="nav-link" data-scroll-target="#aes_list"><span class="header-section-number">5.6.1</span> Aesthetics</a></li>
-  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="header-section-number">5.6.2</span> themes</a></li>
-  <li><a href="#farben" id="toc-farben" class="nav-link" data-scroll-target="#farben"><span class="header-section-number">5.6.3</span> Farben</a></li>
-  <li><a href="#shape1" id="toc-shape1" class="nav-link" data-scroll-target="#shape1"><span class="header-section-number">5.6.4</span> Shapes</a></li>
-  <li><a href="#line" id="toc-line" class="nav-link" data-scroll-target="#line"><span class="header-section-number">5.6.5</span> Linetypes</a></li>
+  <li><a href="#aes_list" id="toc-aes_list" class="nav-link" data-scroll-target="#aes_list"><span class="header-section-number">6.6.1</span> Aesthetics</a></li>
+  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="header-section-number">6.6.2</span> themes</a></li>
+  <li><a href="#farben" id="toc-farben" class="nav-link" data-scroll-target="#farben"><span class="header-section-number">6.6.3</span> Farben</a></li>
+  <li><a href="#shape1" id="toc-shape1" class="nav-link" data-scroll-target="#shape1"><span class="header-section-number">6.6.4</span> Shapes</a></li>
+  <li><a href="#line" id="toc-line" class="nav-link" data-scroll-target="#line"><span class="header-section-number">6.6.5</span> Linetypes</a></li>
   </ul></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links"><span class="header-section-number">5.7</span> Useful links</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links"><span class="header-section-number">6.7</span> Useful links</a></li>
   </ul>
 </nav>
     </div>
@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></h1>
 </div>
 
 
@@ -310,8 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pend_small<span class="sc">$</span>PAS0100[pend_small<span class="sc">$</span>PAS0100<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>pend_small<span class="sc">$</span>azges1[pend_small<span class="sc">$</span>azges1<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="ggplot2-and-the-grammar-of-graphics" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="ggplot2-and-the-grammar-of-graphics"><span class="header-section-number">5.1</span> ggplot2 and the Grammar of Graphics</h2>
+<section id="ggplot2-and-the-grammar-of-graphics" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="ggplot2-and-the-grammar-of-graphics"><span class="header-section-number">6.1</span> ggplot2 and the Grammar of Graphics</h2>
 <p><code>ggplot2</code> is the implementation of the concept of “layered grammar of graphics” in R. The idea of this visualization system is to break down data visualization into parameters: the underlying dataset, the variables to be displayed, the choice of display shapes, the coordinate system, scales, and statistical transformations. A standard command in <code>ggplot2</code> looks something like this:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset, <span class="fu">aes</span>(<span class="at">x =</span> var1, <span class="at">y =</span> var2, <span class="at">color =</span> var3)) <span class="sc">+</span></span>
@@ -328,8 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The themes <code>theme_...</code> set the design of the graphic, e.g., black and white axes and background colors with <code>theme_bw()</code>.</li>
 </ul>
 <p>Now we will work through the individual <em>layers</em> of the graphic:</p>
-<section id="data" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="data"><span class="header-section-number">5.1.1</span> <code>data =</code></h3>
+<section id="data" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="data"><span class="header-section-number">6.1.1</span> <code>data =</code></h3>
 <p>In <code>data =</code>, we specify the <code>data.frame</code> that contains the information to be visualized. We start our ggplot with:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -342,8 +342,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="aes" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="aes"><span class="header-section-number">5.1.2</span> <code>aes</code></h3>
+<section id="aes" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="aes"><span class="header-section-number">6.1.2</span> <code>aes</code></h3>
 <p>We want to visualize these values in a scatterplot, with age on the x-axis and weekly working hours on the y-axis:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> palter, <span class="at">y =</span> azges1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -356,8 +356,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="geom" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="geom"><span class="header-section-number">5.1.3</span> <code>geom</code></h3>
+<section id="geom" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="geom"><span class="header-section-number">6.1.3</span> <code>geom</code></h3>
 <p>If we only provide these details, we will get an empty coordinate system—why? Because we haven’t yet specified what <em>form</em> of display we want. For this, we must specify a <code>geom_</code>, such as <code>geom_col()</code> for bar charts, which we attach to the <code>ggplot</code> command with <code>+</code>:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> palter, <span class="at">y =</span> azges1)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -382,8 +382,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">Here</a> is an overview of all color names that are recognized, though there are many more colors—see <a href="#farben">Appendix</a>.</p>
 </section>
-<section id="aes-part-ii" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="aes-part-ii"><span class="header-section-number">5.1.4</span> <code>aes()</code> Part II</h3>
+<section id="aes-part-ii" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="aes-part-ii"><span class="header-section-number">6.1.4</span> <code>aes()</code> Part II</h3>
 <p>This already looks pretty good, but the points are not yet separated by gender. To do this, we need to include the gender information (<code>zpsex</code>) in <code>aes()</code>. In addition to the axes, <code>aes()</code> also specifies the variables for the appearance of the <code>geom_</code>s—this can include not only color but also shape, size, or transparency. <a href="#aes_list">Here’s an overview</a>.</p>
 <p>Gender should determine the color of the points, which we can specify in <code>aes</code> with <code>color</code>:</p>
 <div class="cell" data-layout-align="center">
@@ -442,8 +442,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="labels" class="level3" data-number="5.1.5">
-<h3 data-number="5.1.5" class="anchored" data-anchor-id="labels"><span class="header-section-number">5.1.5</span> Labels</h3>
+<section id="labels" class="level3" data-number="6.1.5">
+<h3 data-number="6.1.5" class="anchored" data-anchor-id="labels"><span class="header-section-number">6.1.5</span> Labels</h3>
 <p>With the <code>breaks</code> and <code>labels</code> options, we can also edit the legend labels. To do this, we first specify the levels of the gender variable in <code>breaks</code> and then the corresponding labels in the same order:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> palter, <span class="at">y =</span> azges1, <span class="at">color =</span> <span class="fu">as.factor</span>(zpsex))) <span class="sc">+</span> </span>
@@ -471,8 +471,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="combination-of-all-options" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="combination-of-all-options"><span class="header-section-number">5.2</span> Combination of all options</h2>
+<section id="combination-of-all-options" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="combination-of-all-options"><span class="header-section-number">6.2</span> Combination of all options</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> palter, <span class="at">y =</span> azges1, </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">shape =</span> <span class="fu">as.factor</span>(zpsex),</span>
@@ -502,8 +502,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><a href="#shape1">Übersicht zu shapes</a></p>
 </section>
-<section id="visualizing-distributions" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="visualizing-distributions"><span class="header-section-number">5.3</span> Visualizing distributions</h2>
+<section id="visualizing-distributions" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="visualizing-distributions"><span class="header-section-number">6.3</span> Visualizing distributions</h2>
 <p>With the following syntax we can create a boxplot using <code>ggplot2</code>. Since we are only considering one variable, we only need to specify <code>y =</code> or <code>x =</code> depending on whether the box should be oriented vertically or horizontally.</p>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">y =</span> azges1)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> azges1)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -536,8 +536,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="histogram" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="histogram"><span class="header-section-number">5.3.1</span> Histogram</h3>
+<section id="histogram" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="histogram"><span class="header-section-number">6.3.1</span> Histogram</h3>
 <p>We can also describe distributions using a histogram using the <code>geom_histogram()</code> function. If we want to change the color, <code>fill =</code> is the correct option instead of <code>color =</code>:</p>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> azges1)) <span class="sc">+</span> </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()  </span>
@@ -600,12 +600,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="ue4_02" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="ue4_02"><span class="header-section-number">5.3.2</span> <a href="#pltue2">Exercise</a></h3>
+<section id="ue4_02" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="ue4_02"><span class="header-section-number">6.3.2</span> <a href="#pltue2">Exercise</a></h3>
 </section>
 </section>
-<section id="categorical-features" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="categorical-features"><span class="header-section-number">5.4</span> Categorical Features</h2>
+<section id="categorical-features" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="categorical-features"><span class="header-section-number">6.4</span> Categorical Features</h2>
 <p>Next, we’ll look at a way to visualize the contingency table from <a href="./03_desc.html#crosscount">Chapter 2</a>:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pend_small<span class="sc">$</span>PD0400[pend_small<span class="sc">$</span>PD0400<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># exclude missings</span></span>
@@ -702,12 +702,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="ue4_03" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="ue4_03"><span class="header-section-number">5.4.1</span> <a href="#pltue3">Exercise</a></h3>
+<section id="ue4_03" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="ue4_03"><span class="header-section-number">6.4.1</span> <a href="#pltue3">Exercise</a></h3>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.5</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.5</span> Exercises</h2>
 <p>For all tasks, use the first 150 observations (<code>pend_small</code>) to keep the plot simple. Remember to exclude missing values with <code>filter()</code>; you can use the following command:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> </span>
@@ -715,8 +715,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"zpsex"</span>, <span class="st">"welle"</span>, <span class="st">"bilzeit"</span>, <span class="st">"PA0445"</span>, <span class="st">"PG1270"</span>, <span class="st">"PEO0400c"</span>)</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="pltue1" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1" class="anchored" data-anchor-id="pltue1"><span class="header-section-number">5.5.1</span> Exercise 1</h3>
+<section id="pltue1" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="pltue1"><span class="header-section-number">6.5.1</span> Exercise 1</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pend_u41 <span class="ot">&lt;-</span> </span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
@@ -730,8 +730,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><a href="#ue4_01">Back to top</a></p>
 </section>
-<section id="pltue2" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="pltue2"><span class="header-section-number">5.5.2</span> Exercise 2</h3>
+<section id="pltue2" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="pltue2"><span class="header-section-number">6.5.2</span> Exercise 2</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pend_u42 <span class="ot">&lt;-</span> </span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
@@ -745,8 +745,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><a href="#ue4_02">Back to top</a></p>
 </section>
-<section id="pltue3" class="level3" data-number="5.5.3">
-<h3 data-number="5.5.3" class="anchored" data-anchor-id="pltue3"><span class="header-section-number">5.5.3</span> Exercise 3</h3>
+<section id="pltue3" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="pltue3"><span class="header-section-number">6.5.3</span> Exercise 3</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pend_u43 <span class="ot">&lt;-</span> </span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
@@ -764,10 +764,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="#ue4_03">Back to top</a></p>
 </section>
 </section>
-<section id="more-options-for-ggplot2" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="more-options-for-ggplot2"><span class="header-section-number">5.6</span> More options for <code>{ggplot2}</code></h2>
-<section id="aes_list" class="level3" data-number="5.6.1">
-<h3 data-number="5.6.1" class="anchored" data-anchor-id="aes_list"><span class="header-section-number">5.6.1</span> Aesthetics</h3>
+<section id="more-options-for-ggplot2" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="more-options-for-ggplot2"><span class="header-section-number">6.6</span> More options for <code>{ggplot2}</code></h2>
+<section id="aes_list" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="aes_list"><span class="header-section-number">6.6.1</span> Aesthetics</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -778,8 +778,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="themes" class="level3" data-number="5.6.2">
-<h3 data-number="5.6.2" class="anchored" data-anchor-id="themes"><span class="header-section-number">5.6.2</span> themes</h3>
+<section id="themes" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="themes"><span class="header-section-number">6.6.2</span> themes</h3>
 <p>With so-called themes, we can change the layout of the graphic. Other themes include <code>theme_light()</code>, <code>theme_classic()</code>, or <code>theme_void()</code>. A full list can be found <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">here</a>. Additionally, the <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes">{ggthemes}</a> package (<code>install.packages('ggthemes')</code>) offers a wide selection.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> palter, <span class="at">y =</span> azges1, <span class="at">color =</span> <span class="fu">factor</span>(zpsex))) <span class="sc">+</span> </span>
@@ -828,8 +828,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="farben" class="level3" data-number="5.6.3">
-<h3 data-number="5.6.3" class="anchored" data-anchor-id="farben"><span class="header-section-number">5.6.3</span> Farben</h3>
+<section id="farben" class="level3" data-number="6.6.3">
+<h3 data-number="6.6.3" class="anchored" data-anchor-id="farben"><span class="header-section-number">6.6.3</span> Farben</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> palter, <span class="at">y =</span> azges1, <span class="at">color =</span> <span class="fu">factor</span>(zpsex))) <span class="sc">+</span> </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -861,8 +861,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="brewer" class="level4" data-number="5.6.3.1">
-<h4 data-number="5.6.3.1" class="anchored" data-anchor-id="brewer"><span class="header-section-number">5.6.3.1</span> ColorBreweR</h4>
+<section id="brewer" class="level4" data-number="6.6.3.1">
+<h4 data-number="6.6.3.1" class="anchored" data-anchor-id="brewer"><span class="header-section-number">6.6.3.1</span> ColorBreweR</h4>
 <p>Alternativ zur manuellen Auswahl der Farben mit <code>scale_fill_manual</code> und <code>scale_color_manual</code> können mit <code>scale_fill_brewer()</code> auch vorgegebene Farbpaletten des <em>colorbrewer</em> verwendet werden. Dazu muss lediglich <code>scale_fill_brewer()</code> anstelle von <code>scale_fill_manual</code> angeben werden und statt <code>values</code> eine der Paletten - eine Übersicht findet sich <a href="http://colorbrewer2.org/">hier</a>. Die Farbpaletten von ColorBreweR sind alle in ggplot2 integriert.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span></span>
@@ -877,8 +877,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="viridis" class="level4" data-number="5.6.3.2">
-<h4 data-number="5.6.3.2" class="anchored" data-anchor-id="viridis"><span class="header-section-number">5.6.3.2</span> viridis</h4>
+<section id="viridis" class="level4" data-number="6.6.3.2">
+<h4 data-number="6.6.3.2" class="anchored" data-anchor-id="viridis"><span class="header-section-number">6.6.3.2</span> viridis</h4>
 <p>Analog dazu gibt es auch die <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">{viridis}</a>-Paletten, welche durchgängig “colorblind-safe” und ebenfalls in {ggplot2} integriert sind. Allerdings ist hier zu beachten, dass für Farbauswahlen basierend auf einer kategorialen Variable <code>scale_color_viridis_d()</code> zu verwenden ist. Soll die Farbe entlang einer numerischen/metrischen Variable bestimmt werden, dann ist <code>scale_color_viridis_c()</code> zu verwenden. Außerdem kann mit <code>begin</code> und <code>end</code> die Breite der Farbskala angepasst werden:</p>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option=</span><span class="st">"magma"</span>,</span>
@@ -914,8 +914,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="weitere-farbpaletten" class="level4" data-number="5.6.3.3">
-<h4 data-number="5.6.3.3" class="anchored" data-anchor-id="weitere-farbpaletten"><span class="header-section-number">5.6.3.3</span> Weitere Farbpaletten</h4>
+<section id="weitere-farbpaletten" class="level4" data-number="6.6.3.3">
+<h4 data-number="6.6.3.3" class="anchored" data-anchor-id="weitere-farbpaletten"><span class="header-section-number">6.6.3.3</span> Weitere Farbpaletten</h4>
 <p>Darüber hinaus gibt es unzählige Pakete, die ebenfalls <code>scale_color_</code> und <code>scale_fill_</code>-Funktionen bieten: Hier noch zwei Beispiele mit <a href="https://github.com/thomasp85/scico">{scico}</a> und <a href="https://github.com/BlakeRMills/MetBrewer">{MetBrewer}</a>, welches Farben aus Bildern im Metropolitan Museum of Art enthält:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'scico'</span>)</span>
@@ -977,8 +977,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Check out the interactive color picker <a href="https://emilhvitfeldt.github.io/r-color-palettes/">here</a></p>
 </section>
 </section>
-<section id="shape1" class="level3" data-number="5.6.4">
-<h3 data-number="5.6.4" class="anchored" data-anchor-id="shape1"><span class="header-section-number">5.6.4</span> Shapes</h3>
+<section id="shape1" class="level3" data-number="6.6.4">
+<h3 data-number="6.6.4" class="anchored" data-anchor-id="shape1"><span class="header-section-number">6.6.4</span> Shapes</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -990,8 +990,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><a href="https://blog.albertkuo.me/post/point-shape-options-in-ggplot/"><strong>Zusätzlicher Überblick</strong></a></p>
 </section>
-<section id="line" class="level3" data-number="5.6.5">
-<h3 data-number="5.6.5" class="anchored" data-anchor-id="line"><span class="header-section-number">5.6.5</span> Linetypes</h3>
+<section id="line" class="level3" data-number="6.6.5">
+<h3 data-number="6.6.5" class="anchored" data-anchor-id="line"><span class="header-section-number">6.6.5</span> Linetypes</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1016,8 +1016,8 @@ Overview
 </div>
 </section>
 </section>
-<section id="useful-links" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="useful-links"><span class="header-section-number">5.7</span> Useful links</h2>
+<section id="useful-links" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="useful-links"><span class="header-section-number">6.7</span> Useful links</h2>
 <ul>
 <li><p>The <a href="www.cookbook-r.com/Graphs/">Graphs chapter of the R Cookbook</a> is an excellent resource for various options and a basic overview—for example, on adjusting the <a href="http://www.cookbook-r.com/Graphs/Legends_(ggplot2)">legend</a>, <a href="http://www.cookbook-r.com/Graphs/Shapes_and_line_types">line and point types</a>, or the <a href="http://www.cookbook-r.com/Graphs/Axes_(ggplot2)">axes</a>.</p></li>
 <li><p>Adjusting font size and color: <a href="https://cmdlinetips.com/2021/05/tips-to-customize-text-color-font-size-in-ggplot2-with-element_text/">This guide</a> provides a good overview of how to modify font size and color in <code>{ggplot2}</code>.</p></li>
@@ -1472,13 +1472,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./05_data_wrangle1_translated.html" class="pagination-link" aria-label="Data Wrangling I: Labels &amp; factor">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Labels &amp; factor</span></span>
+      <a href="./06_data_wrangle2.html" class="pagination-link" aria-label="Data Wrangling II">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./06_data_wrangle2.html" class="pagination-link" aria-label="Data Wrangling II">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="Links &amp; Weiterführendes">
+        <span class="nav-page-text">Links &amp; Weiterführendes</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

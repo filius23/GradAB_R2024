@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Data Wrangling II – GradAB R Intro 2024</title>
+<title>5&nbsp; Data Wrangling II – GradAB R Intro 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./04_viz_translated.html" rel="prev">
+<link href="./04_viz_translated.html" rel="next">
+<link href="./05_data_wrangle1_translated.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_data_wrangle2.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_data_wrangle2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -175,14 +175,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_viz_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+  <a href="./06_data_wrangle2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_data_wrangle2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
+  <a href="./04_viz_translated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -201,41 +201,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#var" id="toc-var" class="nav-link active" data-scroll-target="#var"><span class="header-section-number">6.1</span> Variablen erstellen</a>
+  <li><a href="#var" id="toc-var" class="nav-link active" data-scroll-target="#var"><span class="header-section-number">5.1</span> Variablen erstellen</a>
   <ul class="collapse">
-  <li><a href="#base-r-...newvar--" id="toc-base-r-...newvar--" class="nav-link" data-scroll-target="#base-r-...newvar--"><span class="header-section-number">6.1.1</span> base R: <code>...$newvar &lt;-</code></a></li>
-  <li><a href="#dplyr-mutateneue_var" id="toc-dplyr-mutateneue_var" class="nav-link" data-scroll-target="#dplyr-mutateneue_var"><span class="header-section-number">6.1.2</span> {dplyr}: <code>mutate(neue_var= )</code></a></li>
-  <li><a href="#ue06_1" id="toc-ue06_1" class="nav-link" data-scroll-target="#ue06_1"><span class="header-section-number">6.1.3</span> Übung</a></li>
+  <li><a href="#base-r-...newvar--" id="toc-base-r-...newvar--" class="nav-link" data-scroll-target="#base-r-...newvar--"><span class="header-section-number">5.1.1</span> base R: <code>...$newvar &lt;-</code></a></li>
+  <li><a href="#dplyr-mutateneue_var" id="toc-dplyr-mutateneue_var" class="nav-link" data-scroll-target="#dplyr-mutateneue_var"><span class="header-section-number">5.1.2</span> {dplyr}: <code>mutate(neue_var= )</code></a></li>
+  <li><a href="#ue06_1" id="toc-ue06_1" class="nav-link" data-scroll-target="#ue06_1"><span class="header-section-number">5.1.3</span> Übung</a></li>
   </ul></li>
-  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">6.2</span> Gruppierung mit <code>group_by()</code> oder <code>.by=</code></a>
+  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">5.2</span> Gruppierung mit <code>group_by()</code> oder <code>.by=</code></a>
   <ul class="collapse">
-  <li><a href="#ue06_2" id="toc-ue06_2" class="nav-link" data-scroll-target="#ue06_2"><span class="header-section-number">6.2.1</span> Übung</a></li>
+  <li><a href="#ue06_2" id="toc-ue06_2" class="nav-link" data-scroll-target="#ue06_2"><span class="header-section-number">5.2.1</span> Übung</a></li>
   </ul></li>
-  <li><a href="#across" id="toc-across" class="nav-link" data-scroll-target="#across"><span class="header-section-number">6.3</span> <code>across()</code>: Mehrere Variablen bearbeiten</a>
+  <li><a href="#across" id="toc-across" class="nav-link" data-scroll-target="#across"><span class="header-section-number">5.3</span> <code>across()</code>: Mehrere Variablen bearbeiten</a>
   <ul class="collapse">
-  <li><a href="#ue06_3" id="toc-ue06_3" class="nav-link" data-scroll-target="#ue06_3"><span class="header-section-number">6.3.1</span> Übung</a></li>
+  <li><a href="#ue06_3" id="toc-ue06_3" class="nav-link" data-scroll-target="#ue06_3"><span class="header-section-number">5.3.1</span> Übung</a></li>
   </ul></li>
-  <li><a href="#eigene-funktionen" id="toc-eigene-funktionen" class="nav-link" data-scroll-target="#eigene-funktionen"><span class="header-section-number">6.4</span> Eigene Funktionen</a>
+  <li><a href="#eigene-funktionen" id="toc-eigene-funktionen" class="nav-link" data-scroll-target="#eigene-funktionen"><span class="header-section-number">5.4</span> Eigene Funktionen</a>
   <ul class="collapse">
-  <li><a href="#ue06_4" id="toc-ue06_4" class="nav-link" data-scroll-target="#ue06_4"><span class="header-section-number">6.4.1</span> Übung</a></li>
+  <li><a href="#ue06_4" id="toc-ue06_4" class="nav-link" data-scroll-target="#ue06_4"><span class="header-section-number">5.4.1</span> Übung</a></li>
   </ul></li>
-  <li><a href="#hilfsfunktionen-ifelse-und-case_when" id="toc-hilfsfunktionen-ifelse-und-case_when" class="nav-link" data-scroll-target="#hilfsfunktionen-ifelse-und-case_when"><span class="header-section-number">6.5</span> Hilfsfunktionen <code>ifelse()</code> und <code>case_when()</code></a>
+  <li><a href="#hilfsfunktionen-ifelse-und-case_when" id="toc-hilfsfunktionen-ifelse-und-case_when" class="nav-link" data-scroll-target="#hilfsfunktionen-ifelse-und-case_when"><span class="header-section-number">5.5</span> Hilfsfunktionen <code>ifelse()</code> und <code>case_when()</code></a>
   <ul class="collapse">
-  <li><a href="#ue06_5" id="toc-ue06_5" class="nav-link" data-scroll-target="#ue06_5"><span class="header-section-number">6.5.1</span> Übung</a></li>
+  <li><a href="#ue06_5" id="toc-ue06_5" class="nav-link" data-scroll-target="#ue06_5"><span class="header-section-number">5.5.1</span> Übung</a></li>
   </ul></li>
-  <li><a href="#variablen-umbenennen" id="toc-variablen-umbenennen" class="nav-link" data-scroll-target="#variablen-umbenennen"><span class="header-section-number">6.6</span> Variablen umbenennen</a></li>
-  <li><a href="#übungen" id="toc-übungen" class="nav-link" data-scroll-target="#übungen"><span class="header-section-number">6.7</span> Übungen</a>
+  <li><a href="#variablen-umbenennen" id="toc-variablen-umbenennen" class="nav-link" data-scroll-target="#variablen-umbenennen"><span class="header-section-number">5.6</span> Variablen umbenennen</a></li>
+  <li><a href="#übungen" id="toc-übungen" class="nav-link" data-scroll-target="#übungen"><span class="header-section-number">5.7</span> Übungen</a>
   <ul class="collapse">
-  <li><a href="#mutate1" id="toc-mutate1" class="nav-link" data-scroll-target="#mutate1"><span class="header-section-number">6.7.1</span> Übung</a></li>
-  <li><a href="#grp_ue" id="toc-grp_ue" class="nav-link" data-scroll-target="#grp_ue"><span class="header-section-number">6.7.2</span> Übung</a></li>
-  <li><a href="#across_ue" id="toc-across_ue" class="nav-link" data-scroll-target="#across_ue"><span class="header-section-number">6.7.3</span> Übung</a></li>
-  <li><a href="#fnct" id="toc-fnct" class="nav-link" data-scroll-target="#fnct"><span class="header-section-number">6.7.4</span> Übung</a></li>
-  <li><a href="#ifcase" id="toc-ifcase" class="nav-link" data-scroll-target="#ifcase"><span class="header-section-number">6.7.5</span> Übung</a></li>
+  <li><a href="#mutate1" id="toc-mutate1" class="nav-link" data-scroll-target="#mutate1"><span class="header-section-number">5.7.1</span> Übung</a></li>
+  <li><a href="#grp_ue" id="toc-grp_ue" class="nav-link" data-scroll-target="#grp_ue"><span class="header-section-number">5.7.2</span> Übung</a></li>
+  <li><a href="#across_ue" id="toc-across_ue" class="nav-link" data-scroll-target="#across_ue"><span class="header-section-number">5.7.3</span> Übung</a></li>
+  <li><a href="#fnct" id="toc-fnct" class="nav-link" data-scroll-target="#fnct"><span class="header-section-number">5.7.4</span> Übung</a></li>
+  <li><a href="#ifcase" id="toc-ifcase" class="nav-link" data-scroll-target="#ifcase"><span class="header-section-number">5.7.5</span> Übung</a></li>
   </ul></li>
-  <li><a href="#anhang" id="toc-anhang" class="nav-link" data-scroll-target="#anhang"><span class="header-section-number">6.8</span> Anhang</a>
+  <li><a href="#anhang" id="toc-anhang" class="nav-link" data-scroll-target="#anhang"><span class="header-section-number">5.8</span> Anhang</a>
   <ul class="collapse">
-  <li><a href="#klassen-bilden-mit-cut" id="toc-klassen-bilden-mit-cut" class="nav-link" data-scroll-target="#klassen-bilden-mit-cut"><span class="header-section-number">6.8.1</span> Klassen bilden mit <code>cut()</code></a></li>
-  <li><a href="#string-funktionen-für-regex" id="toc-string-funktionen-für-regex" class="nav-link" data-scroll-target="#string-funktionen-für-regex"><span class="header-section-number">6.8.2</span> String-Funktionen für <em>regex</em></a></li>
+  <li><a href="#klassen-bilden-mit-cut" id="toc-klassen-bilden-mit-cut" class="nav-link" data-scroll-target="#klassen-bilden-mit-cut"><span class="header-section-number">5.8.1</span> Klassen bilden mit <code>cut()</code></a></li>
+  <li><a href="#string-funktionen-für-regex" id="toc-string-funktionen-für-regex" class="nav-link" data-scroll-target="#string-funktionen-für-regex"><span class="header-section-number">5.8.2</span> String-Funktionen für <em>regex</em></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="wrang2" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></h1>
+<h1 class="title"><span id="wrang2" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></h1>
 </div>
 
 
@@ -311,11 +311,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Es gibt auch <code>bind_cols()</code> um Datensätze spaltenweise zusammenzufügen. Möglichkeiten, Datensätzen auf Basis einer oder mehrer Identifikationsvariablen zu “mergen” lernen wir auch noch <a href="#wrang3">später</a> kennen.</p>
-<section id="var" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="var"><span class="header-section-number">6.1</span> Variablen erstellen</h2>
+<section id="var" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="var"><span class="header-section-number">5.1</span> Variablen erstellen</h2>
 <p>Nun sehen wir uns die Möglichkeiten, Variablen zu erstellen, nochmal etwas genauer an. Grundsätzlich gibt es zwei Arten, Variablen in einen <code>data.frame</code> hinzuzufügen:</p>
-<section id="base-r-...newvar--" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="base-r-...newvar--"><span class="header-section-number">6.1.1</span> base R: <code>...$newvar &lt;-</code></h3>
+<section id="base-r-...newvar--" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="base-r-...newvar--"><span class="header-section-number">5.1.1</span> base R: <code>...$newvar &lt;-</code></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean  <span class="ot">&lt;-</span> dat3<span class="sc">$</span>studs <span class="sc">-</span> <span class="fu">mean</span>(dat3<span class="sc">$</span>studs)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -348,8 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="dplyr-mutateneue_var" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="dplyr-mutateneue_var"><span class="header-section-number">6.1.2</span> {dplyr}: <code>mutate(neue_var= )</code></h3>
+<section id="dplyr-mutateneue_var" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="dplyr-mutateneue_var"><span class="header-section-number">5.1.2</span> {dplyr}: <code>mutate(neue_var= )</code></h3>
 <p>Eine alternative Möglichkeit, Variablen zu erstellen ist <code>mutate(neu_variable = )</code> aus <code>{dplyr}</code> (<code>{tidyverse}</code>):</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -474,12 +474,12 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
 </div>
 </div>
 </section>
-<section id="ue06_1" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="ue06_1"><span class="header-section-number">6.1.3</span> <a href="#mutate1">Übung</a></h3>
+<section id="ue06_1" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="ue06_1"><span class="header-section-number">5.1.3</span> <a href="#mutate1">Übung</a></h3>
 </section>
 </section>
-<section id="group_by" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="group_by"><span class="header-section-number">6.2</span> Gruppierung mit <code>group_by()</code> oder <code>.by=</code></h2>
+<section id="group_by" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="group_by"><span class="header-section-number">5.2</span> Gruppierung mit <code>group_by()</code> oder <code>.by=</code></h2>
 <p>Die wirkliche Stärke von <code>mutate()</code> kommt aber erst zum Tragen, wenn wir es mit weiteren <code>{dplyr}</code>-Funktionen kombinieren. Eine häufige Aufgabe in der Datenaufbereitung sind gruppierte Werte.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -571,12 +571,12 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
 2      FALSE 26516.5</code></pre>
 </div>
 </div>
-<section id="ue06_2" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="ue06_2"><span class="header-section-number">6.2.1</span> <a href="#grpue">Übung</a></h3>
+<section id="ue06_2" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="ue06_2"><span class="header-section-number">5.2.1</span> <a href="#grpue">Übung</a></h3>
 </section>
 </section>
-<section id="across" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="across"><span class="header-section-number">6.3</span> <code>across()</code>: Mehrere Variablen bearbeiten</h2>
+<section id="across" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="across"><span class="header-section-number">5.3</span> <code>across()</code>: Mehrere Variablen bearbeiten</h2>
 <p>Eine sehr vielseitige Erweiterung für <code>mutate()</code> und <code>summarise()</code> ist <code>across()</code>. Hier mit können wir eine Funktion auf mehrere Spalten gleichzeitig anwenden, ohne uns zu wiederholen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
@@ -669,12 +669,12 @@ Dummy-Variablen erstellen mit <code>as.numeric()</code>
 </div>
 </div>
 <p><a href="https://dplyr.tidyverse.org/reference/across.html">Mehr Beispiele in der Hilfe zu across</a></p>
-<section id="ue06_3" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="ue06_3"><span class="header-section-number">6.3.1</span> <a href="#across_ue">Übung</a></h3>
+<section id="ue06_3" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="ue06_3"><span class="header-section-number">5.3.1</span> <a href="#across_ue">Übung</a></h3>
 </section>
 </section>
-<section id="eigene-funktionen" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="eigene-funktionen"><span class="header-section-number">6.4</span> Eigene Funktionen</h2>
+<section id="eigene-funktionen" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="eigene-funktionen"><span class="header-section-number">5.4</span> Eigene Funktionen</h2>
 <p>Woher kommt aber die <code>~</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in <code>across()</code>? Dazu sehen wir uns einmal die Grundlagen von Funktionen in R an.</p>
 <p>Dazu sehen wir uns drei Zufriedensheitsvariablen für die Befragten aus den Zeilen 12-16 an:</p>
 <div class="cell">
@@ -1767,8 +1767,8 @@ $PEO0300c
 <!-- + Wir können Funktionen auch für andere Zwecke verwenden als Variablen zu bearbeiten. Bspw. können wir mit Funktionen eine Reihe an Datensätzen einlesen und direkt den gleichen Bearbeitungsschritten unterziehen, Modellserien oder Grafikserien erstellen usw. - etwas mehr dazu in [Kapitel ](#12_apply_loop). Weiterführende Beispiele [hier](#purrr)  -->
 <!-- + [Die 'formula syntax' Schreibweise  mit `~.x` wird zunehmend durch anonyme Funktionen `\(x) fun(x)` abgelöst - wird aber auf absehbare Zeit der Standard bleiben.](#anonymfun) -->
 <!-- ::: -->
-<section id="ue06_4" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="ue06_4"><span class="header-section-number">6.4.1</span> <a href="#fnct">Übung</a></h3>
+<section id="ue06_4" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="ue06_4"><span class="header-section-number">5.4.1</span> <a href="#fnct">Übung</a></h3>
 <!-- ```{r} -->
 <!-- mode <- function(x) { -->
 <!--   names(which.max(table(x)))  -->
@@ -1777,8 +1777,8 @@ $PEO0300c
 <!-- ``` -->
 </section>
 </section>
-<section id="hilfsfunktionen-ifelse-und-case_when" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="hilfsfunktionen-ifelse-und-case_when"><span class="header-section-number">6.5</span> Hilfsfunktionen <code>ifelse()</code> und <code>case_when()</code></h2>
+<section id="hilfsfunktionen-ifelse-und-case_when" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="hilfsfunktionen-ifelse-und-case_when"><span class="header-section-number">5.5</span> Hilfsfunktionen <code>ifelse()</code> und <code>case_when()</code></h2>
 <p><code>ifelse()</code> ist eine große Hilfe für alle Umcodierungen: wir formulieren darin eine Bedingung und wenn diese zutrifft wird der erste Wert eingesetzt, wenn nicht wird der zweite Wert eingesetzt. Hier fragen wir also ab, ob <code>studs-mean(studs)</code> größer <code>0</code> ist - dann wird <code>darüber</code> eingesetzt, ansonsten eine <code>darunter</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
@@ -1857,12 +1857,12 @@ $PEO0300c
 <!--           dat3$gegr < 1900 & dat3$prom_recht == F ~ "alte Hochschule", -->
 <!--           dat3$gegr > 1900 & dat3$prom_recht == F ~ "junge Hochschule") -->
 <!-- ``` -->
-<section id="ue06_5" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="ue06_5"><span class="header-section-number">6.5.1</span> <a href="#ifcase">Übung</a></h3>
+<section id="ue06_5" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="ue06_5"><span class="header-section-number">5.5.1</span> <a href="#ifcase">Übung</a></h3>
 </section>
 </section>
-<section id="variablen-umbenennen" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="variablen-umbenennen"><span class="header-section-number">6.6</span> Variablen umbenennen</h2>
+<section id="variablen-umbenennen" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="variablen-umbenennen"><span class="header-section-number">5.6</span> Variablen umbenennen</h2>
 <p>Um Variablen umzubenennen gibt es <code>rename(neuer_name = alter_name)</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">neuername =</span>PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1923,10 +1923,10 @@ $PEO0300c
 <!-- ## across & select -->
 <!-- https://gist.github.com/AlbertRapp/043c7941d0fa6478cbea55f45525befe -->
 </section>
-<section id="übungen" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="übungen"><span class="header-section-number">6.7</span> Übungen</h2>
-<section id="mutate1" class="level3" data-number="6.7.1">
-<h3 data-number="6.7.1" class="anchored" data-anchor-id="mutate1"><span class="header-section-number">6.7.1</span> Übung</h3>
+<section id="übungen" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="übungen"><span class="header-section-number">5.7</span> Übungen</h2>
+<section id="mutate1" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="mutate1"><span class="header-section-number">5.7.1</span> Übung</h3>
 <ul>
 <li>Erstellen Sie <code>dat3</code> wie <a href="#var">oben gezeigt</a> aus <code>dat1</code> und <code>dat2</code></li>
 <li>Berechnen Sie das Betreuungsverhältnis (Studierende pro Professur <code>studs/profs</code>) an den Hochschulen relativ zum Mittelwert des Betreuungsverhältnisses (<code>rel_studprofs</code>).</li>
@@ -1945,8 +1945,8 @@ $PEO0300c
 </div>
 <p><a href="#ue06_1">Zurück nach oben</a></p>
 </section>
-<section id="grp_ue" class="level3" data-number="6.7.2">
-<h3 data-number="6.7.2" class="anchored" data-anchor-id="grp_ue"><span class="header-section-number">6.7.2</span> Übung</h3>
+<section id="grp_ue" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="grp_ue"><span class="header-section-number">5.7.2</span> Übung</h3>
 <ul>
 <li>Verwenden Sie weiterhin den Uni-Datensatz.</li>
 <li>Berechnen Sie das Betreuungsverhältnis (<code>studprofs</code>) relativ zum Mittelwert getrennt für Hochschulen/Unis mit und ohne Promotionsrecht und fügen Sie dieses als neue Spalte ein.</li>
@@ -1957,8 +1957,8 @@ $PEO0300c
 <!-- + studs/profs berechnen -> über oder unter dem Schnitt LABELN -->
 <!-- + gruppiert nach `prom_recht` -->
 </section>
-<section id="across_ue" class="level3" data-number="6.7.3">
-<h3 data-number="6.7.3" class="anchored" data-anchor-id="across_ue"><span class="header-section-number">6.7.3</span> Übung</h3>
+<section id="across_ue" class="level3" data-number="5.7.3">
+<h3 data-number="5.7.3" class="anchored" data-anchor-id="across_ue"><span class="header-section-number">5.7.3</span> Übung</h3>
 <ul>
 <li>Verwenden Sie den <code>pend_small</code>-Datensatz:</li>
 </ul>
@@ -2483,8 +2483,8 @@ $PEO0300c
 </ul>
 <p><a href="#ue06_3">Zurück nach oben</a></p>
 </section>
-<section id="fnct" class="level3" data-number="6.7.4">
-<h3 data-number="6.7.4" class="anchored" data-anchor-id="fnct"><span class="header-section-number">6.7.4</span> Übung</h3>
+<section id="fnct" class="level3" data-number="5.7.4">
+<h3 data-number="5.7.4" class="anchored" data-anchor-id="fnct"><span class="header-section-number">5.7.4</span> Übung</h3>
 <p>Verwenden Sie weiterhin <code>pend_small</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>pend_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2522,8 +2522,8 @@ $PEO0300c
 </ul>
 <p><a href="#ue06_4">Zurück nach oben</a></p>
 </section>
-<section id="ifcase" class="level3" data-number="6.7.5">
-<h3 data-number="6.7.5" class="anchored" data-anchor-id="ifcase"><span class="header-section-number">6.7.5</span> Übung</h3>
+<section id="ifcase" class="level3" data-number="5.7.5">
+<h3 data-number="5.7.5" class="anchored" data-anchor-id="ifcase"><span class="header-section-number">5.7.5</span> Übung</h3>
 <ul>
 <li>Bearbeiten Sie <code>pend_small2</code>:</li>
 </ul>
@@ -2565,10 +2565,10 @@ $PEO0300c
 <p><a href="#ue06_5">Zurück nach oben</a></p>
 </section>
 </section>
-<section id="anhang" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="anhang"><span class="header-section-number">6.8</span> Anhang</h2>
-<section id="klassen-bilden-mit-cut" class="level3" data-number="6.8.1">
-<h3 data-number="6.8.1" class="anchored" data-anchor-id="klassen-bilden-mit-cut"><span class="header-section-number">6.8.1</span> Klassen bilden mit <code>cut()</code></h3>
+<section id="anhang" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="anhang"><span class="header-section-number">5.8</span> Anhang</h2>
+<section id="klassen-bilden-mit-cut" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="klassen-bilden-mit-cut"><span class="header-section-number">5.8.1</span> Klassen bilden mit <code>cut()</code></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2667,8 +2667,8 @@ Levels: 90er 00er</code></pre>
 </div>
 </div>
 </section>
-<section id="string-funktionen-für-regex" class="level3" data-number="6.8.2">
-<h3 data-number="6.8.2" class="anchored" data-anchor-id="string-funktionen-für-regex"><span class="header-section-number">6.8.2</span> String-Funktionen für <em>regex</em></h3>
+<section id="string-funktionen-für-regex" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="string-funktionen-für-regex"><span class="header-section-number">5.8.2</span> String-Funktionen für <em>regex</em></h3>
 <p><a href="https://stringr.tidyverse.org/">{stringr}</a> stellt eine ganze Reihe an sehr hilfreichen String-Funktionen mit <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf">Regular Expressions</a> zur Verfügung, einen Überblick bietet das <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf">Cheatsheet</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">uni_fh =</span> <span class="fu">str_detect</span>(uni,<span class="st">"Uni"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3148,13 +3148,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./04_viz_translated.html" class="pagination-link" aria-label="Visualization with `{ggplot2}`">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span>
+      <a href="./05_data_wrangle1_translated.html" class="pagination-link" aria-label="Data Wrangling I: Labels &amp; factor">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Labels &amp; factor</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="Links &amp; Weiterführendes">
-        <span class="nav-page-text">Links &amp; Weiterführendes</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04_viz_translated.html" class="pagination-link" aria-label="Visualization with `{ggplot2}`">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
