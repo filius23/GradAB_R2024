@@ -52,3 +52,5 @@ format:
 
 execute:
   freeze: auto
+
+mainfont: Red Hat Display
