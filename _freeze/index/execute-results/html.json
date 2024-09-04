@@ -1,9 +1,11 @@
 {
-  "hash": "c3f63bc159aa363d43c375fe98456a84",
+  "hash": "ea9eebcaa52068249dd0973c698d363b",
   "result": {
     "engine": "knitr",
-    "markdown": "# Welcome! {#index .unnumbered}\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to R for GradAB and IAB people.\n\n<!-- ![](./pic/00_frontpage_iab2.png){width=\"490\"} -->\n\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](./pic/01_frontpage_iab2.png){fig-align='center' width=70% height=70%}\n:::\n:::\n\n\n\n\n\n\n## Course dates {.unnumbered}\n\n::: {.g-col-12 .g-col-sm-6 .g-col-md-4}\n\n{{< fa location-dot >}} &nbsp; E09\n\n{{< fa calendar-alt >}} &nbsp; 11.09.2024 &nbsp; {{< fa clock >}} &nbsp; 10:45 - 16:00  \n\n{{< fa calendar-alt >}} &nbsp; 13.09.2024 &nbsp; {{< fa clock >}} &nbsp;  8:30 – 15:30 \n\n\n:::\n",
-    "supporting": [],
+    "markdown": "# Welcome! {#index .unnumbered}\n\n\n\n\n\n\n\n\n\nIntroduction to R for GradAB and IAB people.\n\n<!-- ![](./pic/00_frontpage_iab2.png){width=\"490\"} -->\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](./pic/01_frontpage_iab2.png){fig-align='center' width=70% height=70%}\n:::\n:::\n\n\n\n\n\n## Course dates {.unnumbered}\n\n::: {.g-col-12 .g-col-sm-6 .g-col-md-4}\n\n{{< fa location-dot >}} &nbsp; E09\n\n{{< fa calendar-alt >}} &nbsp; 11.09.2024 &nbsp; {{< fa clock >}} &nbsp; 10:45 – 16:00  \n\n{{< fa calendar-alt >}} &nbsp; 13.09.2024 &nbsp; {{< fa clock >}} &nbsp;  8:30 – 15:30 \n\n\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
