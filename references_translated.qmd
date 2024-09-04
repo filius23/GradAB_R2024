@@ -133,9 +133,7 @@ Also, [The R Graph Gallery](https://r-graph-gallery.com/) provides an excellent 
 
 + [Session on more intuitive graphics by Cara Thompson](https://www.youtube.com/watch?v=_indbXPXUw8).
 
-## Advanced use of `lapply()`/`map()` with custom functions {#
-
-purrr}
+## Advanced use of `lapply()`/`map()` with custom functions {#purrr}
 
 + Comprehensive introduction to loops with `map()` and other functions from `{purrr}` [Hendrik van Broekhuizen](https://hendrikvanb.gitlab.io/slides/purrr_beyond_map.html#1).
 + Model series: [Blog by Tim Tiefenbach](https://tim-tiefenbach.de/post/2023-dplyr-many-models/) on elegant possibilities.
