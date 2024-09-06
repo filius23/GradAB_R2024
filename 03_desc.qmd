@@ -13,7 +13,7 @@ library(Statamarkdown)
 After importing datasets, we want to get an overview. Every statistical analysis starts with a description of the variables. In this session, we will see how to use tables to get an overview of the information in a dataset. We will also work with the PASS Campus File in this session. Let's start by loading the data:
 ```{r}
 #| eval: false
-install.packages("haven") # if not already installed 
+fdz_install("haven") # if not already installed 
 ```
 
 ```{r W04_1, eval=F, echo = T}

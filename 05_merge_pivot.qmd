@@ -1,0 +1,205 @@
+# Merging & reshaping {#wrang2}
+
+```{r setup}
+#| include: false
+#| cache: false
+if(Sys.getenv("USERNAME") == "filse" ) .libPaths("D:/R-library4") 
+# library(extrafont)
+# font_import(pattern = "Roboto",prompt = F)
+# fonts()
+knitr::opts_chunk$set(
+  collapse = F,
+  comment = "#>",
+  echo = T,
+  cache = F,
+  warning = FALSE,
+  message = FALSE
+)
+library(systemfonts)
+# system_fonts() %>% filter(grepl("Roboto",name)) %>% select(family,1:3)
+
+windowsFonts(mono=windowsFont("FiraMono"))
+windowsFonts(Roboto=windowsFont("Roboto"))
+```
+
+
+## Joining/merging data sets {#join}
+
+> A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other.  
+[R for Data Science: Mutating joins](http://r4ds.had.co.nz/relational-data.html#mutating-joins)
+
+
+A quick illustration:[^tdyref]
+
+[^tdyref]: Using [tidyexplain](https://github.com/gadenbuie/tidyexplain)
+
+```{r intial-dfs}
+#| echo: false
+#| out-width: "40%"
+#| fig-align: "center"
+source("./tidyexplain/00_base_join.R")
+df_names <- tibble(
+  .x = c(1.5, 4.5), .y = 0.25,
+  value = c("dat1", "dat2"),
+  size = 20,
+  color = "black"
+)
+
+dat1 <- x
+dat2 <- y
+
+
+g <- plot_data(initial_join_dfs) +
+  geom_text(data = df_names, family = "Roboto", size = 24) 
+g
+```
+
+<!-- <img src="pic/static/png/original-dfs.png" width="480px" /> -->
+
+```{r inner-join}
+#| echo: false
+# source("tidyexplain/inner_join.R")
+```
+```{r left-join}
+#| echo: false
+# source("tidyexplain/left_join.R")
+```
+```{r left-join-extra}
+#| echo: false
+# source("tidyexplain/left_join_extra.R")
+```
+```{r right-join}
+#| echo: false
+# source("tidyexplain/right_join.R")
+```
+```{r full-join}
+#| echo: false
+# source("tidyexplain/full_join.R")
+```
+
+
+::: {layout-ncol=3}
+![](pic/inner-join.gif)
+
+![](pic/left-join-extra.gif)
+
+![](pic/full-join.gif) 
+:::
+
+Es gibt natürlich auch [`right_join()`](https://dplyr.tidyverse.org/reference/mutate-joins.html)  oder [`anti_join()`](https://dplyr.tidyverse.org/reference/filter-joins.html). 
+Für eine tiefergehende Einführung lohnt sich das Kapitel [Relational Data](https://r4ds.had.co.nz/relational-data.html#relational-data) aus [R for Data Science](https://r4ds.had.co.nz/).
+
+
+Eine sehr hilfreiche Option in den `..._join()` ist die Verbindung unterschiedlicher Variablen.
+Bspw. haben wir hier einige Fälle aus der ETB18 und 
+
+```{r exmap1}
+#| code-fold: true
+#| cache: false
+ids_df <-  data.frame(pnr = sample(1:9,4),
+                       Bula = c(2,1,14,15))
+
+set.seed(90459)
+alo_bula <- data.frame(bundesland = seq(1:8),
+                       Werte = sample(letters,size = 8) # mit sample() kann eine zufällige Auswahl getroffen werden 
+                       )
+```
+
+```{r join_by}
+ids_df
+alo_bula
+ids_df %>% left_join(alo_bula,by = c("Bula"="bundesland"))
+```
+
+Ein sehr hilfreiche Checkmöglichkeit, die ich häufig verwende:
+```{r tabx_in}
+table(ids_df$Bula %in% alo_bula$bundesland)
+```
+
+
+### [Übung](#join_ue)
+
+## Reshape: `pivot_longer()` & `pivot_wider()`
+
+```{r pvt1}
+bsp_df <- 
+  data.frame(
+    bula    = c("NRW","NDS"),
+    alo2018 = c(2,2),
+    alo2017 = c(1,1)
+    )
+
+bsp_df
+```
+
+Mit `pivot_longer()` können wir aus einem wide shape `data.frame` einen long shape machen:
+
+```{r pvt2}
+bsp_df %>% pivot_longer(cols = c("alo2018","alo2017"),names_to = "year",values_to = "alo")
+```
+
+Mit `names_prefix = "alo"` können wir das `alo` direkt löschen lassen:
+
+```{r pvt3}
+bsp_df %>% pivot_longer(cols = c("alo2018","alo2017"),names_to = "year",values_to = "alo",names_prefix = "alo")
+```
+
+Mit `pivot_wider()` können wir den umgekehrten Weg gehen:
+```{r pvt4}
+bsp_df2 <- 
+  data.frame(land = c("NRW","NDS","NRW","NDS"),
+             alo = c(2.1,1.8,2.4,2.2),
+             alter = c("age_1825","age_1825","age_2630","age_2630"))
+bsp_df2
+```
+
+```{r pvt5}
+bsp_df2 %>% pivot_wider(names_from = alter,values_from = alo)
+```
+
+
+## Übungen
+
+### Übung 1 {#join_ue}
+Verknüpfen Sie die ausgewählten Beobachtungen des PASS CF mit der Haushalts-Information, in welcher Region (`region`) die Befragten wohnen.
+Mergen Sie dazu  die `region` aus `HHENDDAT_cf_W13.dta` basierend auf der `hnr` und `welle`.
+
+```{r jnue}
+pend_ue11 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                             col_select = c("pnr","welle")) %>%
+  slice(1:10)
+
+pend_ue11
+
+hh_dat <- haven::read_dta("./orig/HHENDDAT_cf_W13.dta", col_select = c("hnr","welle","region"))
+```
+
+
+
+
+### Übung 2 {#pivot_ue}
+
+```{r}
+pend_ue11b <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                             col_select = c("pnr","welle","famstand")) %>%
+  slice(200:210) %>% 
+  filter(welle %in% 2:3)
+
+
+pend_ue11b
+```
+
+Bringen Sie `pend_ue11b` in das long shape:
+
+```{r}
+#| echo: false
+pend_ue11b %>% pivot_wider(names_from = welle, values_from = famstand)
+```
+
+Tipp: mit `,names_prefix = "wave"` in `pivot_wider()` können wir ein Präfix angeben:
+```{r}
+#| echo: false
+pend_ue11b %>% pivot_wider(names_from = welle, values_from = famstand,names_prefix = "wave")
+```
+
+

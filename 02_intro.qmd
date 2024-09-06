@@ -135,7 +135,7 @@ data.frame(class = c("integer <br> double",
   gt() %>% 
   fmt_markdown(columns = everything()) |>
   tab_header(
-    title = md("Vectors")
+    title = md("Vectors (Variables)")
   ) %>% 
   tab_options(column_labels.hidden = TRUE)
 
@@ -416,14 +416,7 @@ select(dat1,uni,studs,profs) # columns in a specific order
 select(dat1,-studs) # all columns except for "studs"
 ```
 
-The output of `select()` can be further modified by other functions:
-```{r}
-dat1 %>% 
-  select(uni,studs) %>% 
-  filter(studs > 10000)
-```
-
-### Chaining Commands with `%>%` {#pipe}
+## Chaining Commands with `%>%` {#pipe}
 
 In R, `dplyr` and other `{tidyverse}` packages use `%>%` (the pipe operator) to chain commands. This is a way to streamline commands and improve readability:
 ```{r}
@@ -436,7 +429,6 @@ Here, `%>%` takes the output of one function and passes it as an input to the ne
 This operator allows you to read and write code that closely resembles natural language.
 
 If we want to select some rows **and** some columns, we can combine `filter()` and `select()`:
-
 ```{r}
 select(filter(dat1, studs < 10000), uni)
 ```
@@ -444,24 +436,14 @@ select(filter(dat1, studs < 10000), uni)
 We can simplify this command chain using the so-called pipe `%>%`. `%>%` simply stands for "and then". The pipe comes from the `{magrittr}` package, which is part of the tidyverse and is automatically loaded with `{dplyr}`.
 
 ```{r}
-filter(dat1, studs < 10000) %>% select(uni)
+dat1 %>% filter(.,studs < 10000) %>% select(.,uni) # the dot represents the result of the previous step
+dat1 %>% filter(studs < 10000) %>% select(uni)
 ```
-
-The pipe is often used so that the dataset being processed is at the beginning, followed by the steps:
-
-```{r}
-dat1 %>% filter(., studs < 10000) %>% select(., uni)
-```
-
-The dot `.` represents the result of the previous step. Here:
 
 1. Call `dat1` *and then (`%>%`)*
 2. Select only rows where `studs` < 10000 *and then (`%>%`)*
 3. Keep only the `uni` column
 
-```{r}
-dat1 %>% filter(studs < 10000) %>% select(uni)
-```
 
 :::{.callout-tip}
 
@@ -469,11 +451,8 @@ The shortcut for `%>%` is STRG+SHIFT+m (cmd+shift+m on Mac)
 
 :::
 
-<!-- ### Exercise {#exercise} -->
 
-<!-- Use the {dplyr} commands to extract rows where there are more than 10,000 students and less than 300 professors. Add a new variable to the dataset where each value in the `studs` column is doubled. -->
-
-## Variable type `factor` - defining custom orders
+## Variable type `factor`
 
 Another common task in data analysis is sorting datasets. For this, we use `arrange()`:
 

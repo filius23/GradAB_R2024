@@ -14,15 +14,15 @@ book:
     - 01_intro.qmd
     - 02_intro.qmd
     - 03_desc.qmd
-    - 05_data_wrangle1_translated.qmd
-    - 06_data_wrangle2_translated.qmd
-    - 04_viz_translated.qmd
+    - 04_data_wrangle.qmd
+    - 05_merge_pivot.qmd
+    - 06_labels_factor.qmd
+    - 06_viz_translated.qmd
     - 09_reg.qmd
     - 14_tabellenexport.qmd
     # - 07_inferenz.qmd
     # - 09_reg2.qmd
     # - 10_log_reg.qmd
-    # - 11_data_wrangle3.qmd
     # - 12_apply_loop.qmd
     # - 15_map.qmd
     # - 15_RMarkdown.qmd

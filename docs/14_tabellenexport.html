@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Tabellenexport – GradAB R Intro 2024</title>
+<title>9&nbsp; Tabellenexport – GradAB R Intro 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14_tabellenexport.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tabellenexport</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14_tabellenexport.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -173,32 +173,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_data_wrangle1_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Labels &amp; factor</span></span></a>
+  <a href="./04_data_wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Creating Variables</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_data_wrangle2_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
+  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_viz_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_viz_translated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14_tabellenexport.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -217,34 +223,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#flextable" id="toc-flextable" class="nav-link active" data-scroll-target="#flextable"><span class="header-section-number">8.1</span> <code>{flextable}</code></a></li>
-  <li><a href="#deskription" id="toc-deskription" class="nav-link" data-scroll-target="#deskription"><span class="header-section-number">8.2</span> Deskription</a>
+  <li><a href="#flextable" id="toc-flextable" class="nav-link active" data-scroll-target="#flextable"><span class="header-section-number">9.1</span> <code>{flextable}</code></a></li>
+  <li><a href="#deskription" id="toc-deskription" class="nav-link" data-scroll-target="#deskription"><span class="header-section-number">9.2</span> Deskription</a>
   <ul class="collapse">
-  <li><a href="#verteilungstabellen-für-metrische-variablen" id="toc-verteilungstabellen-für-metrische-variablen" class="nav-link" data-scroll-target="#verteilungstabellen-für-metrische-variablen"><span class="header-section-number">8.2.1</span> Verteilungstabellen für metrische Variablen</a></li>
-  <li><a href="#häufigkeitsauszählungen" id="toc-häufigkeitsauszählungen" class="nav-link" data-scroll-target="#häufigkeitsauszählungen"><span class="header-section-number">8.2.2</span> Häufigkeitsauszählungen</a></li>
-  <li><a href="#übung" id="toc-übung" class="nav-link" data-scroll-target="#übung"><span class="header-section-number">8.2.3</span> Übung</a></li>
+  <li><a href="#verteilungstabellen-für-metrische-variablen" id="toc-verteilungstabellen-für-metrische-variablen" class="nav-link" data-scroll-target="#verteilungstabellen-für-metrische-variablen"><span class="header-section-number">9.2.1</span> Verteilungstabellen für metrische Variablen</a></li>
+  <li><a href="#häufigkeitsauszählungen" id="toc-häufigkeitsauszählungen" class="nav-link" data-scroll-target="#häufigkeitsauszählungen"><span class="header-section-number">9.2.2</span> Häufigkeitsauszählungen</a></li>
+  <li><a href="#übung" id="toc-übung" class="nav-link" data-scroll-target="#übung"><span class="header-section-number">9.2.3</span> Übung</a></li>
   </ul></li>
-  <li><a href="#regressionstabellen" id="toc-regressionstabellen" class="nav-link" data-scroll-target="#regressionstabellen"><span class="header-section-number">8.3</span> Regressionstabellen</a>
+  <li><a href="#regressionstabellen" id="toc-regressionstabellen" class="nav-link" data-scroll-target="#regressionstabellen"><span class="header-section-number">9.3</span> Regressionstabellen</a>
   <ul class="collapse">
-  <li><a href="#refcats" id="toc-refcats" class="nav-link" data-scroll-target="#refcats"><span class="header-section-number">8.3.1</span> Referenzkategorien einfügen</a></li>
+  <li><a href="#refcats" id="toc-refcats" class="nav-link" data-scroll-target="#refcats"><span class="header-section-number">9.3.1</span> Referenzkategorien einfügen</a></li>
   </ul></li>
-  <li><a href="#alle-tabellen-in-eine-datei-mit-officer" id="toc-alle-tabellen-in-eine-datei-mit-officer" class="nav-link" data-scroll-target="#alle-tabellen-in-eine-datei-mit-officer"><span class="header-section-number">8.4</span> Alle Tabellen in eine Datei mit <code>{officer}</code></a></li>
-  <li><a href="#übung-1" id="toc-übung-1" class="nav-link" data-scroll-target="#übung-1"><span class="header-section-number">8.5</span> Übung</a>
+  <li><a href="#alle-tabellen-in-eine-datei-mit-officer" id="toc-alle-tabellen-in-eine-datei-mit-officer" class="nav-link" data-scroll-target="#alle-tabellen-in-eine-datei-mit-officer"><span class="header-section-number">9.4</span> Alle Tabellen in eine Datei mit <code>{officer}</code></a></li>
+  <li><a href="#übung-1" id="toc-übung-1" class="nav-link" data-scroll-target="#übung-1"><span class="header-section-number">9.5</span> Übung</a>
   <ul class="collapse">
-  <li><a href="#tabue1" id="toc-tabue1" class="nav-link" data-scroll-target="#tabue1"><span class="header-section-number">8.5.1</span> Übung</a></li>
-  <li><a href="#regtabue" id="toc-regtabue" class="nav-link" data-scroll-target="#regtabue"><span class="header-section-number">8.5.2</span> Übung</a></li>
+  <li><a href="#tabue1" id="toc-tabue1" class="nav-link" data-scroll-target="#tabue1"><span class="header-section-number">9.5.1</span> Übung</a></li>
+  <li><a href="#regtabue" id="toc-regtabue" class="nav-link" data-scroll-target="#regtabue"><span class="header-section-number">9.5.2</span> Übung</a></li>
   </ul></li>
-  <li><a href="#latex" id="toc-latex" class="nav-link" data-scroll-target="#latex"><span class="header-section-number">8.6</span> Latex</a>
+  <li><a href="#latex" id="toc-latex" class="nav-link" data-scroll-target="#latex"><span class="header-section-number">9.6</span> Latex</a>
   <ul class="collapse">
-  <li><a href="#verteilungstabellen-für-metrische-variablen-1" id="toc-verteilungstabellen-für-metrische-variablen-1" class="nav-link" data-scroll-target="#verteilungstabellen-für-metrische-variablen-1"><span class="header-section-number">8.6.1</span> Verteilungstabellen für metrische Variablen</a></li>
-  <li><a href="#häufigkeitsauszählungen-1" id="toc-häufigkeitsauszählungen-1" class="nav-link" data-scroll-target="#häufigkeitsauszählungen-1"><span class="header-section-number">8.6.2</span> Häufigkeitsauszählungen</a></li>
-  <li><a href="#regressionstabelle-mit-modelsummary" id="toc-regressionstabelle-mit-modelsummary" class="nav-link" data-scroll-target="#regressionstabelle-mit-modelsummary"><span class="header-section-number">8.6.3</span> Regressionstabelle mit <code>{modelsummary}</code></a></li>
+  <li><a href="#verteilungstabellen-für-metrische-variablen-1" id="toc-verteilungstabellen-für-metrische-variablen-1" class="nav-link" data-scroll-target="#verteilungstabellen-für-metrische-variablen-1"><span class="header-section-number">9.6.1</span> Verteilungstabellen für metrische Variablen</a></li>
+  <li><a href="#häufigkeitsauszählungen-1" id="toc-häufigkeitsauszählungen-1" class="nav-link" data-scroll-target="#häufigkeitsauszählungen-1"><span class="header-section-number">9.6.2</span> Häufigkeitsauszählungen</a></li>
+  <li><a href="#regressionstabelle-mit-modelsummary" id="toc-regressionstabelle-mit-modelsummary" class="nav-link" data-scroll-target="#regressionstabelle-mit-modelsummary"><span class="header-section-number">9.6.3</span> Regressionstabelle mit <code>{modelsummary}</code></a></li>
   </ul></li>
-  <li><a href="#anhang" id="toc-anhang" class="nav-link" data-scroll-target="#anhang"><span class="header-section-number">8.7</span> Anhang</a>
+  <li><a href="#anhang" id="toc-anhang" class="nav-link" data-scroll-target="#anhang"><span class="header-section-number">9.7</span> Anhang</a>
   <ul class="collapse">
-  <li><a href="#kreuztabellen" id="toc-kreuztabellen" class="nav-link" data-scroll-target="#kreuztabellen"><span class="header-section-number">8.7.1</span> Kreuztabellen</a></li>
-  <li><a href="#layout-tipps-für-tabellen" id="toc-layout-tipps-für-tabellen" class="nav-link" data-scroll-target="#layout-tipps-für-tabellen"><span class="header-section-number">8.7.2</span> Layout-Tipps für Tabellen</a></li>
-  <li><a href="#weitere-pakete" id="toc-weitere-pakete" class="nav-link" data-scroll-target="#weitere-pakete"><span class="header-section-number">8.7.3</span> weitere Pakete</a></li>
+  <li><a href="#kreuztabellen" id="toc-kreuztabellen" class="nav-link" data-scroll-target="#kreuztabellen"><span class="header-section-number">9.7.1</span> Kreuztabellen</a></li>
+  <li><a href="#layout-tipps-für-tabellen" id="toc-layout-tipps-für-tabellen" class="nav-link" data-scroll-target="#layout-tipps-für-tabellen"><span class="header-section-number">9.7.2</span> Layout-Tipps für Tabellen</a></li>
+  <li><a href="#weitere-pakete" id="toc-weitere-pakete" class="nav-link" data-scroll-target="#weitere-pakete"><span class="header-section-number">9.7.3</span> weitere Pakete</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -254,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tabellenexport</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></h1>
 </div>
 
 
@@ -770,8 +776,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(),<span class="sc">~</span><span class="fu">ifelse</span>(.x<span class="sc">&lt;</span><span class="dv">0</span>, <span class="cn">NA</span>, .x))) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="co"># alle Zeilen mit (mind.) 1 NA löschen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="flextable" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="flextable"><span class="header-section-number">8.1</span> <code>{flextable}</code></h2>
+<section id="flextable" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="flextable"><span class="header-section-number">9.1</span> <code>{flextable}</code></h2>
 <p>Mit dem Paket <code>{flextable}</code> können wir <code>data.frame</code>s als Tabelle in eine Word-Datei exportieren, <code>{officer}</code> erweiteret diese Funktionen speziell für den Export in Word:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"flextable"</span>)</span>
@@ -803,10 +809,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><a href="https://ardata-fr.github.io/flextable-book/">Hier</a> finden sich weitere Infos zu <code>flextable</code>, u.a. können bspw. die Trennlinien dünner gemacht werden oder eine andere Farbe angegeben werden. <a href="https://davidgohel.github.io/flextable/reference/index.html">Hier</a> finden sich alle vefügbaren Funktionen.</p>
 </section>
-<section id="deskription" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="deskription"><span class="header-section-number">8.2</span> Deskription</h2>
-<section id="verteilungstabellen-für-metrische-variablen" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="verteilungstabellen-für-metrische-variablen"><span class="header-section-number">8.2.1</span> Verteilungstabellen für metrische Variablen</h3>
+<section id="deskription" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="deskription"><span class="header-section-number">9.2</span> Deskription</h2>
+<section id="verteilungstabellen-für-metrische-variablen" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="verteilungstabellen-für-metrische-variablen"><span class="header-section-number">9.2.1</span> Verteilungstabellen für metrische Variablen</h3>
 <p>Für die metrischen Merkmale kennen wir ja das <code>summary()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend14<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -917,8 +923,8 @@ Aussagekräftigere Variablenbeschriftung mit <code>rename()</code> &amp; Nachkom
 </div>
 </div>
 </section>
-<section id="häufigkeitsauszählungen" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="häufigkeitsauszählungen"><span class="header-section-number">8.2.2</span> Häufigkeitsauszählungen</h3>
+<section id="häufigkeitsauszählungen" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="häufigkeitsauszählungen"><span class="header-section-number">9.2.2</span> Häufigkeitsauszählungen</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pend14 <span class="sc">%&gt;%</span>  </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">schul2_fct =</span> <span class="fu">factor</span>(schul2,<span class="at">levels =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"ohne"</span>,<span class="st">"Förderschule"</span>,<span class="st">"Hauptschule"</span>,<span class="st">"Mittlere Reife"</span>,<span class="st">"FOS/BOS"</span>,<span class="st">"Abi"</span>)),</span>
@@ -976,12 +982,12 @@ Aussagekräftigere Variablenbeschriftung mit <code>rename()</code> &amp; Nachkom
 </div>
 </div>
 </section>
-<section id="übung" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="übung"><span class="header-section-number">8.2.3</span> <a href="#tabue1">Übung</a></h3>
+<section id="übung" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="übung"><span class="header-section-number">9.2.3</span> <a href="#tabue1">Übung</a></h3>
 </section>
 </section>
-<section id="regressionstabellen" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="regressionstabellen"><span class="header-section-number">8.3</span> Regressionstabellen</h2>
+<section id="regressionstabellen" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="regressionstabellen"><span class="header-section-number">9.3</span> Regressionstabellen</h2>
 <p>Für Regressionstabellen können wir mit <code>{modelsummary}</code> eine <code>{flextable}</code>-Tabelle erstellen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pend14_reg_df <span class="ot">&lt;-</span> </span>
@@ -1007,8 +1013,8 @@ Aussagekräftigere Variablenbeschriftung mit <code>rename()</code> &amp; Nachkom
 <div class="tabwid"><style>.cl-31aaa822{}.cl-31a17f90{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-31a54a12{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-31a56330{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a5633a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a5633b{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a56344{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a56345{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-31aaa822"><thead><tr style="overflow-wrap:break-word;"><th class="cl-31a56330"><p class="cl-31a54a12"><span class="cl-31a17f90"> </span></p></th><th class="cl-31a56330"><p class="cl-31a54a12"><span class="cl-31a17f90">Modell 1</span></p></th><th class="cl-31a56330"><p class="cl-31a54a12"><span class="cl-31a17f90">Modell 2</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Intercept</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">2787.36***</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">1768.49+</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(620.11)</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(928.63)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Arbeitszeit (h)</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">-12.12</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">-12.03</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(15.37)</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(15.46)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Frauen</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">-1000.25**</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">-1055.03**</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(315.07)</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(321.29)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Förderschulabschluss</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">30.12</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(2634.95)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Hauptschulabschluss</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">627.13</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(800.21)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Mittlere Reife</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">870.98</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(761.35)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Fachhochschulreife</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">1368.66</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(876.52)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">Abitur</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">1473.44+</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90"></span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">(759.53)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633b"><p class="cl-31a54a12"><span class="cl-31a17f90">Num.Obs.</span></p></td><td class="cl-31a5633b"><p class="cl-31a54a12"><span class="cl-31a17f90">625</span></p></td><td class="cl-31a5633b"><p class="cl-31a54a12"><span class="cl-31a17f90">625</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">R2</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">0.017</span></p></td><td class="cl-31a5633a"><p class="cl-31a54a12"><span class="cl-31a17f90">0.029</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a56344"><p class="cl-31a54a12"><span class="cl-31a17f90">R2 Adj.</span></p></td><td class="cl-31a56344"><p class="cl-31a54a12"><span class="cl-31a17f90">0.013</span></p></td><td class="cl-31a56344"><p class="cl-31a54a12"><span class="cl-31a17f90">0.018</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="3" class="cl-31a56345"><p class="cl-31a54a12"><span class="cl-31a17f90">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</span></p></td></tr></tfoot></table></div>
 </div>
 </div>
-<section id="refcats" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="refcats"><span class="header-section-number">8.3.1</span> Referenzkategorien einfügen</h3>
+<section id="refcats" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="refcats"><span class="header-section-number">9.3.1</span> Referenzkategorien einfügen</h3>
 <p>Um die Referenzkategorie für kategoriale Variablen kenntlich zu machen, können wir den Hinweis <em>ref.</em> mitaufanzeigen.</p>
 <p>Dazu können wir mit Hilfe des Arguments <code>add_rows</code> eine zusätzliche Zeile für die Referenzkategorie der Variable <code>zpsex</code> einfügen. Zunächst erstellen wir einen <code>data.frame</code>, welcher neben den Modellnamen die Koeffizientennamen sowie die einzufügenden Werte enthält. Mit <code>tribble</code> aus dem Paket <code>tibble</code> lässt sich das einfach bewerkstelligen: wir können die Zeilen und Spalten gleich so aufschreiben, wie wir sie haben möchten:</p>
 <div class="cell">
@@ -1134,8 +1140,8 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 </div>
 </section>
 </section>
-<section id="alle-tabellen-in-eine-datei-mit-officer" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="alle-tabellen-in-eine-datei-mit-officer"><span class="header-section-number">8.4</span> Alle Tabellen in eine Datei mit <code>{officer}</code></h2>
+<section id="alle-tabellen-in-eine-datei-mit-officer" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="alle-tabellen-in-eine-datei-mit-officer"><span class="header-section-number">9.4</span> Alle Tabellen in eine Datei mit <code>{officer}</code></h2>
 <p>Um die Tabellen in Dokument gemeinsames Dokument zu exportieren, ist das Paket <code>officer</code> eine große Hilfe. Mehr Infos <a href="https://ardata-fr.github.io/officeverse/officer-for-word.html">hier</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(officer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1162,10 +1168,10 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 </div>
 </div>
 </section>
-<section id="übung-1" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="übung-1"><span class="header-section-number">8.5</span> Übung</h2>
-<section id="tabue1" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="tabue1"><span class="header-section-number">8.5.1</span> Übung</h3>
+<section id="übung-1" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="übung-1"><span class="header-section-number">9.5</span> Übung</h2>
+<section id="tabue1" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="tabue1"><span class="header-section-number">9.5.1</span> Übung</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pend_ue14 <span class="ot">&lt;-</span> </span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,<span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"famstand"</span>,<span class="st">"azges1"</span>,<span class="st">"palter"</span>,<span class="st">"schul2"</span>))<span class="sc">%&gt;%</span> </span>
@@ -1186,8 +1192,8 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 </ul></li>
 </ul>
 </section>
-<section id="regtabue" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="regtabue"><span class="header-section-number">8.5.2</span> Übung</h3>
+<section id="regtabue" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="regtabue"><span class="header-section-number">9.5.2</span> Übung</h3>
 <ul>
 <li>Erstellen sie folgende Regressionsmodelle und erstellen Sie mit <code>{modelsummary}</code> eine Regressiontabelle:</li>
 </ul>
@@ -1197,11 +1203,11 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 </div>
 </section>
 </section>
-<section id="latex" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="latex"><span class="header-section-number">8.6</span> Latex</h2>
+<section id="latex" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="latex"><span class="header-section-number">9.6</span> Latex</h2>
 <p><a href="https://haozhu233.github.io/kableExtra/"><code>{kableExtra}</code></a> ist mein Favorit für Tabellen in <a href="https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf">pdf</a> Outputs.</p>
-<section id="verteilungstabellen-für-metrische-variablen-1" class="level3" data-number="8.6.1">
-<h3 data-number="8.6.1" class="anchored" data-anchor-id="verteilungstabellen-für-metrische-variablen-1"><span class="header-section-number">8.6.1</span> Verteilungstabellen für metrische Variablen</h3>
+<section id="verteilungstabellen-für-metrische-variablen-1" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="verteilungstabellen-für-metrische-variablen-1"><span class="header-section-number">9.6.1</span> Verteilungstabellen für metrische Variablen</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1219,8 +1225,8 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(met_kbl,<span class="at">file =</span> <span class="st">"./results/desc1.tex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="häufigkeitsauszählungen-1" class="level3" data-number="8.6.2">
-<h3 data-number="8.6.2" class="anchored" data-anchor-id="häufigkeitsauszählungen-1"><span class="header-section-number">8.6.2</span> Häufigkeitsauszählungen</h3>
+<section id="häufigkeitsauszählungen-1" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="häufigkeitsauszählungen-1"><span class="header-section-number">9.6.2</span> Häufigkeitsauszählungen</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>kat_kbl <span class="ot">&lt;-</span> </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  pend14 <span class="sc">%&gt;%</span>  </span>
@@ -1235,8 +1241,8 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 <span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(kat_kbl,<span class="at">file =</span> <span class="st">"./results/crosstab1.tex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="regressionstabelle-mit-modelsummary" class="level3" data-number="8.6.3">
-<h3 data-number="8.6.3" class="anchored" data-anchor-id="regressionstabelle-mit-modelsummary"><span class="header-section-number">8.6.3</span> Regressionstabelle mit <code>{modelsummary}</code></h3>
+<section id="regressionstabelle-mit-modelsummary" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="regressionstabelle-mit-modelsummary"><span class="header-section-number">9.6.3</span> Regressionstabelle mit <code>{modelsummary}</code></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(netges <span class="sc">~</span> azges1 <span class="sc">+</span> zpsex_fct, <span class="at">data =</span> pend14_reg_df)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(netges <span class="sc">~</span> azges1 <span class="sc">+</span> zpsex_fct <span class="sc">+</span> schul2_fct, <span class="at">data =</span> pend14_reg_df)</span>
@@ -1265,10 +1271,10 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 </div>
 </section>
 </section>
-<section id="anhang" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="anhang"><span class="header-section-number">8.7</span> Anhang</h2>
-<section id="kreuztabellen" class="level3" data-number="8.7.1">
-<h3 data-number="8.7.1" class="anchored" data-anchor-id="kreuztabellen"><span class="header-section-number">8.7.1</span> Kreuztabellen</h3>
+<section id="anhang" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="anhang"><span class="header-section-number">9.7</span> Anhang</h2>
+<section id="kreuztabellen" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="kreuztabellen"><span class="header-section-number">9.7.1</span> Kreuztabellen</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="tabwid"><style>.cl-33e2363c{}.cl-33d7d0a2{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-33dc63f6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-33dc6400{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-33dc83e0{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-33dc83ea{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-33dc83eb{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-33dc83f4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-33dc83f5{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-33dc83fe{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-33e2363c"><thead><tr style="overflow-wrap:break-word;"><th class="cl-33dc83e0"><p class="cl-33dc63f6"><span class="cl-33d7d0a2"></span></p></th><th colspan="2" class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2">Geschlecht</span></p></th><th class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2"></span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-33dc83e0"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">Ausbildung</span></p></th><th class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2">Männer</span></p></th><th class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2">Frauen</span></p></th><th class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2">Total</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-33dc83eb"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">ohne</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">21</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">4</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">25</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-33dc83eb"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">Förderschule</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">2</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">0</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-33dc83eb"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">Hauptschule</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">60</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">41</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">101</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-33dc83eb"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">Mittlere Reife</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">96</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">134</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">230</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-33dc83eb"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">FOS/BOS</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">26</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">25</span></p></td><td class="cl-33dc83f4"><p class="cl-33dc6400"><span class="cl-33d7d0a2">51</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-33dc83e0"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">Abi</span></p></td><td class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2">112</span></p></td><td class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2">104</span></p></td><td class="cl-33dc83ea"><p class="cl-33dc6400"><span class="cl-33d7d0a2">216</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-33dc83f5"><p class="cl-33dc63f6"><span class="cl-33d7d0a2">Total</span></p></td><td class="cl-33dc83fe"><p class="cl-33dc6400"><span class="cl-33d7d0a2">317</span></p></td><td class="cl-33dc83fe"><p class="cl-33dc6400"><span class="cl-33d7d0a2">308</span></p></td><td class="cl-33dc83fe"><p class="cl-33dc6400"><span class="cl-33d7d0a2">625</span></p></td></tr></tbody></table></div>
@@ -1367,8 +1373,8 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_as_docx</span>(<span class="st">"Kreuztabelle"</span> <span class="ot">=</span> cross_tab, <span class="at">path =</span> <span class="st">"./results/Kreuztabelle.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="layout-tipps-für-tabellen" class="level3" data-number="8.7.2">
-<h3 data-number="8.7.2" class="anchored" data-anchor-id="layout-tipps-für-tabellen"><span class="header-section-number">8.7.2</span> Layout-Tipps für Tabellen</h3>
+<section id="layout-tipps-für-tabellen" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="layout-tipps-für-tabellen"><span class="header-section-number">9.7.2</span> Layout-Tipps für Tabellen</h3>
 <p><a href="https://clauswilke.com/dataviz/figure-titles-captions.html#tables">Hier</a> finden sich einige Hinweise von Claus Wilke für ein gelungenes Tabellen-Layout:</p>
 <ul>
 <li>Do not use vertical lines.</li>
@@ -1379,8 +1385,8 @@ Tipparbeit beim Umbenennen sparen mit <code>coef_rename =</code>
 <li>The header fields are aligned with their data, i.e., the heading for a text column will be left aligned and the heading for a number column will be right aligned.</li>
 </ul>
 </section>
-<section id="weitere-pakete" class="level3" data-number="8.7.3">
-<h3 data-number="8.7.3" class="anchored" data-anchor-id="weitere-pakete"><span class="header-section-number">8.7.3</span> weitere Pakete</h3>
+<section id="weitere-pakete" class="level3" data-number="9.7.3">
+<h3 data-number="9.7.3" class="anchored" data-anchor-id="weitere-pakete"><span class="header-section-number">9.7.3</span> weitere Pakete</h3>
 <p>Neben <code>{flextable}</code> gibt es noch eine ganze Reihe an weiteren Paketen - allerdings sind zielen diese vor allem auf pdf und HTML-Formate. <a href="https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/">Hier</a> findet sich eine gelungene Übersicht. Hier eine Übersicht mit meiner persönlichen Einschätzung.</p>
 <ul>
 <li><p><a href="https://haozhu233.github.io/kableExtra/"><code>{kableExtra}</code></a> - mein Favorit für Tabellen in <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">html</a> und <a href="https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf">pdf</a> Outputs.</p></li>
@@ -1816,7 +1822,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./09_reg.html" class="pagination-link" aria-label="Regressionsmodelle">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

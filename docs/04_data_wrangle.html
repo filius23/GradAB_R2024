@@ -1,0 +1,3161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Data Wrangling I: Creating Variables – GradAB R Intro 2024</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_merge_pivot.html" rel="next">
+<link href="./03_desc.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_data_wrangle.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Creating Variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">GradAB R Intro 2024</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Working with Datasets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_desc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting an Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_data_wrangle.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Creating Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_viz_translated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14_tabellenexport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references_translated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Links &amp; Further Reading</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#var" id="toc-var" class="nav-link active" data-scroll-target="#var"><span class="header-section-number">4.1</span> Creating Variables</a>
+  <ul class="collapse">
+  <li><a href="#base-r-...newvar--" id="toc-base-r-...newvar--" class="nav-link" data-scroll-target="#base-r-...newvar--"><span class="header-section-number">4.1.1</span> Base R: <code>...$newvar &lt;-</code></a></li>
+  <li><a href="#dplyr-mutatenew_var" id="toc-dplyr-mutatenew_var" class="nav-link" data-scroll-target="#dplyr-mutatenew_var"><span class="header-section-number">4.1.2</span> {dplyr}: <code>mutate(new_var= )</code></a></li>
+  <li><a href="#ue06_1" id="toc-ue06_1" class="nav-link" data-scroll-target="#ue06_1"><span class="header-section-number">4.1.3</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">4.2</span> Grouping with <code>.by=</code></a>
+  <ul class="collapse">
+  <li><a href="#ue06_2" id="toc-ue06_2" class="nav-link" data-scroll-target="#ue06_2"><span class="header-section-number">4.2.1</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#across" id="toc-across" class="nav-link" data-scroll-target="#across"><span class="header-section-number">4.3</span> <code>across()</code>: Processing Multiple Variables</a>
+  <ul class="collapse">
+  <li><a href="#ue06_3" id="toc-ue06_3" class="nav-link" data-scroll-target="#ue06_3"><span class="header-section-number">4.3.1</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#custom-functions" id="toc-custom-functions" class="nav-link" data-scroll-target="#custom-functions"><span class="header-section-number">4.4</span> Custom Functions</a>
+  <ul class="collapse">
+  <li><a href="#ue06_4" id="toc-ue06_4" class="nav-link" data-scroll-target="#ue06_4"><span class="header-section-number">4.4.1</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#helper-functions-ifelse-and-case_when" id="toc-helper-functions-ifelse-and-case_when" class="nav-link" data-scroll-target="#helper-functions-ifelse-and-case_when"><span class="header-section-number">4.5</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></a>
+  <ul class="collapse">
+  <li><a href="#ue06_5" id="toc-ue06_5" class="nav-link" data-scroll-target="#ue06_5"><span class="header-section-number">4.5.1</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.6</span> Exercises</a>
+  <ul class="collapse">
+  <li><a href="#mutate1" id="toc-mutate1" class="nav-link" data-scroll-target="#mutate1"><span class="header-section-number">4.6.1</span> Exercise</a></li>
+  <li><a href="#grp_ue" id="toc-grp_ue" class="nav-link" data-scroll-target="#grp_ue"><span class="header-section-number">4.6.2</span> Exercise</a></li>
+  <li><a href="#across_ue" id="toc-across_ue" class="nav-link" data-scroll-target="#across_ue"><span class="header-section-number">4.6.3</span> Exercise</a></li>
+  <li><a href="#fnct" id="toc-fnct" class="nav-link" data-scroll-target="#fnct"><span class="header-section-number">4.6.4</span> Exercise</a></li>
+  <li><a href="#ifcase" id="toc-ifcase" class="nav-link" data-scroll-target="#ifcase"><span class="header-section-number">4.6.5</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">4.7</span> Appendix</a>
+  <ul class="collapse">
+  <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables"><span class="header-section-number">4.7.1</span> Renaming variables</a></li>
+  <li><a href="#creating-classes-with-cut" id="toc-creating-classes-with-cut" class="nav-link" data-scroll-target="#creating-classes-with-cut"><span class="header-section-number">4.7.2</span> Creating Classes with <code>cut()</code></a></li>
+  <li><a href="#string-functions-for-regex" id="toc-string-functions-for-regex" class="nav-link" data-scroll-target="#string-functions-for-regex"><span class="header-section-number">4.7.3</span> String Functions for <em>regex</em></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="wrang1" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Creating Variables</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We return to the university dataset from the beginning:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">19173</span>, <span class="dv">5333</span>, <span class="dv">15643</span>), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">322</span>, <span class="dv">67</span>, <span class="dv">210</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>, <span class="dv">1830</span>, <span class="dv">1973</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_recht =</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, <span class="dv">3</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"Uni Bremen"</span>, <span class="st">"Uni Vechta"</span>, <span class="st">"Uni Oldenburg"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">14954</span>, <span class="dv">47269</span>, <span class="dv">23659</span>, <span class="dv">9415</span>, <span class="dv">38079</span>), </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">250</span>, <span class="dv">553</span>, <span class="dv">438</span>, <span class="dv">150</span>, <span class="dv">636</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_recht =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>, <span class="dv">1870</span>, <span class="dv">1457</span>, <span class="dv">1818</span>, <span class="dv">1995</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"FH Aachen"</span>, <span class="st">"RWTH Aachen"</span>, <span class="st">"Uni Freiburg"</span>, <span class="st">"Uni Bonn"</span>, <span class="st">"FH Bonn-Rhein-Sieg"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>dat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht           uni
+1 19173   322 1971       TRUE    Uni Bremen
+2  5333    67 1830       TRUE    Uni Vechta
+3 15643   210 1973       TRUE Uni Oldenburg</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dat2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs prom_recht gegr                uni
+1 14954   250      FALSE 1971          FH Aachen
+2 47269   553       TRUE 1870        RWTH Aachen
+3 23659   438       TRUE 1457       Uni Freiburg
+4  9415   150       TRUE 1818           Uni Bonn
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg</code></pre>
+</div>
+</div>
+<p>With <code>bind_rows()</code> from <code>{dplyr}</code>, we can combine the two <code>data.frame</code>s:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(dat1, dat2)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni
+1 19173   322 1971       TRUE         Uni Bremen
+2  5333    67 1830       TRUE         Uni Vechta
+3 15643   210 1973       TRUE      Uni Oldenburg
+4 14954   250 1971      FALSE          FH Aachen
+5 47269   553 1870       TRUE        RWTH Aachen
+6 23659   438 1457       TRUE       Uni Freiburg
+7  9415   150 1818       TRUE           Uni Bonn
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
+</div>
+</div>
+<p>There is also <code>bind_cols()</code> to combine datasets column-wise. We’ll learn more about merging datasets based on one or more identifier variables <a href="#wrang3">later</a>.</p>
+<section id="var" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="var"><span class="header-section-number">4.1</span> Creating Variables</h2>
+<p>Let’s take a closer look at creating variables in R. There are two basic ways to add variables to a <code>data.frame</code>:</p>
+<ol type="1">
+<li><p>Base R: <code>...$newvar &lt;-</code></p></li>
+<li><p><code>{dplyr}</code>: <code>mutate(new_var= )</code></p></li>
+</ol>
+<section id="base-r-...newvar--" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="base-r-...newvar--"><span class="header-section-number">4.1.1</span> Base R: <code>...$newvar &lt;-</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> dat3<span class="sc">$</span>studs <span class="sc">-</span> <span class="fu">mean</span>(dat3<span class="sc">$</span>studs)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni studs_to_mean
+1 19173   322 1971       TRUE         Uni Bremen     -2517.625
+2  5333    67 1830       TRUE         Uni Vechta    -16357.625
+3 15643   210 1973       TRUE      Uni Oldenburg     -6047.625
+4 14954   250 1971      FALSE          FH Aachen     -6736.625
+5 47269   553 1870       TRUE        RWTH Aachen     25578.375
+6 23659   438 1457       TRUE       Uni Freiburg      1968.375
+7  9415   150 1818       TRUE           Uni Bonn    -12275.625
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375</code></pre>
+</div>
+</div>
+<p>You can also delete variables using <code>&lt;- NULL</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni
+1 19173   322 1971       TRUE         Uni Bremen
+2  5333    67 1830       TRUE         Uni Vechta
+3 15643   210 1973       TRUE      Uni Oldenburg
+4 14954   250 1971      FALSE          FH Aachen
+5 47269   553 1870       TRUE        RWTH Aachen
+6 23659   438 1457       TRUE       Uni Freiburg
+7  9415   150 1818       TRUE           Uni Bonn
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
+</div>
+</div>
+</section>
+<section id="dplyr-mutatenew_var" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="dplyr-mutatenew_var"><span class="header-section-number">4.1.2</span> {dplyr}: <code>mutate(new_var= )</code></h3>
+<p>An alternative way to create variables is using <code>mutate(new_variable = )</code> from <code>{dplyr}</code> (<code>{tidyverse}</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni studs_to_mean
+1 19173   322 1971       TRUE         Uni Bremen     -2517.625
+2  5333    67 1830       TRUE         Uni Vechta    -16357.625
+3 15643   210 1973       TRUE      Uni Oldenburg     -6047.625
+4 14954   250 1971      FALSE          FH Aachen     -6736.625
+5 47269   553 1870       TRUE        RWTH Aachen     25578.375
+6 23659   438 1457       TRUE       Uni Freiburg      1968.375
+7  9415   150 1818       TRUE           Uni Bonn    -12275.625
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375</code></pre>
+</div>
+</div>
+<p>You can also create multiple variables within a single <code>mutate()</code> command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs_to_mean =</span> profs <span class="sc">-</span> <span class="fu">mean</span>(profs)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni studs_to_mean profs_to_mean
+1 19173   322 1971       TRUE         Uni Bremen     -2517.625         -6.25
+2  5333    67 1830       TRUE         Uni Vechta    -16357.625       -261.25
+3 15643   210 1973       TRUE      Uni Oldenburg     -6047.625       -118.25
+4 14954   250 1971      FALSE          FH Aachen     -6736.625        -78.25
+5 47269   553 1870       TRUE        RWTH Aachen     25578.375        224.75
+6 23659   438 1457       TRUE       Uni Freiburg      1968.375        109.75
+7  9415   150 1818       TRUE           Uni Bonn    -12275.625       -178.25
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375        307.75</code></pre>
+</div>
+</div>
+<p>Or variables can be reused within <code>mutate()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni rel_to_mean above_mean
+1 19173   322 1971       TRUE         Uni Bremen   -2517.625      FALSE
+2  5333    67 1830       TRUE         Uni Vechta  -16357.625      FALSE
+3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625      FALSE
+4 14954   250 1971      FALSE          FH Aachen   -6736.625      FALSE
+5 47269   553 1870       TRUE        RWTH Aachen   25578.375       TRUE
+6 23659   438 1457       TRUE       Uni Freiburg    1968.375       TRUE
+7  9415   150 1818       TRUE           Uni Bonn  -12275.625      FALSE
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       TRUE</code></pre>
+</div>
+</div>
+<p>The original dataset remains unchanged:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni
+1 19173   322 1971       TRUE         Uni Bremen
+2  5333    67 1830       TRUE         Uni Vechta
+3 15643   210 1973       TRUE      Uni Oldenburg
+4 14954   250 1971      FALSE          FH Aachen
+5 47269   553 1870       TRUE        RWTH Aachen
+6 23659   438 1457       TRUE       Uni Freiburg
+7  9415   150 1818       TRUE           Uni Bonn
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
+</div>
+</div>
+<p>To keep the results, store them in an object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>dat4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni rel_to_mean above_mean
+1 19173   322 1971       TRUE         Uni Bremen   -2517.625      FALSE
+2  5333    67 1830       TRUE         Uni Vechta  -16357.625      FALSE
+3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625      FALSE
+4 14954   250 1971      FALSE          FH Aachen   -6736.625      FALSE
+5 47269   553 1870       TRUE        RWTH Aachen   25578.375       TRUE
+6 23659   438 1457       TRUE       Uni Freiburg    1968.375       TRUE
+7  9415   150 1818       TRUE           Uni Bonn  -12275.625      FALSE
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       TRUE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Creating Dummy Variables with <code>as.numeric()</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can convert logical variables into numeric dummy variables (0/1) using <code>as.numeric()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_dummy =</span> <span class="fu">as.numeric</span>(prom_recht),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">over10k =</span> <span class="fu">as.numeric</span>(studs <span class="sc">&gt;</span> <span class="dv">10000</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni prom_dummy over10k
+1 19173   322 1971       TRUE         Uni Bremen          1       1
+2  5333    67 1830       TRUE         Uni Vechta          1       0
+3 15643   210 1973       TRUE      Uni Oldenburg          1       1
+4 14954   250 1971      FALSE          FH Aachen          0       1
+5 47269   553 1870       TRUE        RWTH Aachen          1       1
+6 23659   438 1457       TRUE       Uni Freiburg          1       1
+7  9415   150 1818       TRUE           Uni Bonn          1       0
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg          0       1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ue06_1" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="ue06_1"><span class="header-section-number">4.1.3</span> <a href="#mutate1">Exercise</a></h3>
+</section>
+</section>
+<section id="group_by" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="group_by"><span class="header-section-number">4.2</span> Grouping with <code>.by=</code></h2>
+<p>The true power of <code>mutate()</code> becomes apparent when combined with other <code>{dplyr}</code> functions. A common task in data preparation involves grouped values.</p>
+<p>We’ll make our example dataset a bit smaller:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="ot">&lt;-</span> dat3 <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>uni,<span class="sc">-</span>gegr) <span class="co"># to ensure everything is visible</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Since <code>{dplyr}</code> version 1.1.1, we can specify a grouping directly in <code>mutate()</code> using the <code>.by=</code> argument. This <code>.by=</code> grouping is applied only to the immediate calculations within <code>mutate()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">.by =</span> prom_recht) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs prom_recht  m_studs m_profs m_studs2 m_profs2
+1 19173   322       TRUE 21690.62  328.25  20082.0   328.25
+2  5333    67       TRUE 21690.62  328.25  20082.0   328.25
+3 15643   210       TRUE 21690.62  328.25  20082.0   328.25
+4 14954   250      FALSE 21690.62  328.25  26516.5   328.25
+5 47269   553       TRUE 21690.62  328.25  20082.0   328.25
+6 23659   438       TRUE 21690.62  328.25  20082.0   328.25
+7  9415   150       TRUE 21690.62  328.25  20082.0   328.25
+8 38079   636      FALSE 21690.62  328.25  26516.5   328.25</code></pre>
+</div>
+</div>
+<p>Using <code>summarise()</code> instead of <code>mutate()</code> provides an overview:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),<span class="at">.by =</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  prom_recht m_studs
+1       TRUE 20082.0
+2      FALSE 26516.5</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>group_by()</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Before <code>{dplyr}</code> 1.1.1, grouping a dataset relied on <code>group_by()</code>. After setting <code>group_by()</code> along the values of a variable, all subsequent <code>mutate()</code> calculations are performed only within those groups:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prom_recht) <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 7
+# Groups:   prom_recht [2]
+  studs profs prom_recht m_studs m_profs m_studs2 m_profs2
+  &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 19173   322 TRUE        21691.    328.   20082       290
+2  5333    67 TRUE        21691.    328.   20082       290
+3 15643   210 TRUE        21691.    328.   20082       290
+4 14954   250 FALSE       21691.    328.   26516.      443
+5 47269   553 TRUE        21691.    328.   20082       290
+6 23659   438 TRUE        21691.    328.   20082       290
+7  9415   150 TRUE        21691.    328.   20082       290
+8 38079   636 FALSE       21691.    328.   26516.      443</code></pre>
+</div>
+</div>
+<p>After using <code>group_by()</code>, it’s good practice to remove the grouping with <code>ungroup()</code> once it’s no longer needed:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prom_recht) <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 7
+  studs profs prom_recht m_studs m_profs m_studs2 m_profs2
+  &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 19173   322 TRUE        21691.    328.   20082      328.
+2  5333    67 TRUE        21691.    328.   20082      328.
+3 15643   210 TRUE        21691.    328.   20082      328.
+4 14954   250 FALSE       21691.    328.   26516.     328.
+5 47269   553 TRUE        21691.    328.   20082      328.
+6 23659   438 TRUE        21691.    328.   20082      328.
+7  9415   150 TRUE        21691.    328.   20082      328.
+8 38079   636 FALSE       21691.    328.   26516.     328.</code></pre>
+</div>
+</div>
+<!-- :heart: -->
+</div>
+</div>
+</div>
+<section id="ue06_2" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="ue06_2"><span class="header-section-number">4.2.1</span> <a href="#grpue">Exercise</a></h3>
+</section>
+</section>
+<section id="across" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="across"><span class="header-section-number">4.3</span> <code>across()</code>: Processing Multiple Variables</h2>
+<p>A highly versatile addition to <code>mutate()</code> and <code>summarise()</code> is <code>across()</code>. This allows us to apply a function to multiple columns simultaneously, without repeating code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">profs =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     studs  profs
+1 21690.62 328.25</code></pre>
+</div>
+</div>
+<p>Here, <code>across()</code> offers a much shorter syntax for variable selection, and we can use <a href="./02_intro.html#selecthelpers"><code>?select_helpers</code></a> like <code>matches()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">matches</span>(<span class="st">"studs|profs"</span>),<span class="at">.fns =</span> <span class="sc">~</span><span class="fu">mean</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     studs  profs
+1 21690.62 328.25</code></pre>
+</div>
+</div>
+<p>This is also compatible with <code>.by=</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), <span class="sc">~</span><span class="fu">mean</span>(.x)), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  prom_recht   studs profs
+1       TRUE 20082.0   290
+2      FALSE 26516.5   443</code></pre>
+</div>
+</div>
+<p>We can apply multiple functions by placing them in a <code>list()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x), <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x))), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  prom_recht studs_mean studs_sd profs_mean profs_sd
+1       TRUE    20082.0 14857.84        290 183.2081
+2      FALSE    26516.5 16351.84        443 272.9432</code></pre>
+</div>
+</div>
+<p>You can define this <code>list()</code> in advance and use it later:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>wert_liste <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">MEAN =</span> <span class="sc">~</span><span class="fu">mean</span>(.x), <span class="at">SD =</span> <span class="sc">~</span><span class="fu">sd</span>(.x))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), wert_liste), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  prom_recht studs_MEAN studs_SD profs_MEAN profs_SD
+1       TRUE    20082.0 14857.84        290 183.2081
+2      FALSE    26516.5 16351.84        443 272.9432</code></pre>
+</div>
+</div>
+<p>The <code>.names()</code> argument allows us to control the naming of columns. <code>{.fn}</code> stands for the function being applied, and <code>{.col}</code> represents the name of the variable being processed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                   wert_liste,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.names =</span> <span class="st">"{.fn}_{.col}"</span>),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  prom_recht MEAN_studs SD_studs MEAN_profs SD_profs
+1       TRUE    20082.0 14857.84        290 183.2081
+2      FALSE    26516.5 16351.84        443 272.9432</code></pre>
+</div>
+</div>
+<p>All these functions also work with <code>mutate()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                wert_liste, </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.names =</span> <span class="st">"{.col}XX{.fn}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni studsXXMEAN studsXXSD
+1 19173   322 1971       TRUE         Uni Bremen    21690.62  14309.16
+2  5333    67 1830       TRUE         Uni Vechta    21690.62  14309.16
+3 15643   210 1973       TRUE      Uni Oldenburg    21690.62  14309.16
+4 14954   250 1971      FALSE          FH Aachen    21690.62  14309.16
+5 47269   553 1870       TRUE        RWTH Aachen    21690.62  14309.16
+6 23659   438 1457       TRUE       Uni Freiburg    21690.62  14309.16
+7  9415   150 1818       TRUE           Uni Bonn    21690.62  14309.16
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg    21690.62  14309.16
+  profsXXMEAN profsXXSD
+1      328.25  199.0827
+2      328.25  199.0827
+3      328.25  199.0827
+4      328.25  199.0827
+5      328.25  199.0827
+6      328.25  199.0827
+7      328.25  199.0827
+8      328.25  199.0827</code></pre>
+</div>
+</div>
+<p><a href="https://dplyr.tidyverse.org/reference/across.html">More examples in the across() documentation</a></p>
+<section id="ue06_3" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="ue06_3"><span class="header-section-number">4.3.1</span> <a href="#across_ue">Exercise</a></h3>
+</section>
+</section>
+<section id="custom-functions" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="custom-functions"><span class="header-section-number">4.4</span> Custom Functions</h2>
+<p>What’s with the <code>~</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in <code>across()</code>? Let’s take a look at the basics of functions in R to understand.</p>
+<p>To do so, let’s examine three satisfaction variables for respondents in rows 12-16:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="ovotuzgnad" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ovotuzgnad table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ovotuzgnad thead, #ovotuzgnad tbody, #ovotuzgnad tfoot, #ovotuzgnad tr, #ovotuzgnad td, #ovotuzgnad th {
+  border-style: none;
+}
+
+#ovotuzgnad p {
+  margin: 0;
+  padding: 0;
+}
+
+#ovotuzgnad .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ovotuzgnad .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ovotuzgnad .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ovotuzgnad .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ovotuzgnad .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ovotuzgnad .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ovotuzgnad .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ovotuzgnad .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ovotuzgnad .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ovotuzgnad .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ovotuzgnad .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ovotuzgnad .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ovotuzgnad .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ovotuzgnad .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ovotuzgnad .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ovotuzgnad .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ovotuzgnad .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ovotuzgnad .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ovotuzgnad .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ovotuzgnad .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ovotuzgnad .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ovotuzgnad .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ovotuzgnad .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ovotuzgnad .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ovotuzgnad .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ovotuzgnad .gt_left {
+  text-align: left;
+}
+
+#ovotuzgnad .gt_center {
+  text-align: center;
+}
+
+#ovotuzgnad .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ovotuzgnad .gt_font_normal {
+  font-weight: normal;
+}
+
+#ovotuzgnad .gt_font_bold {
+  font-weight: bold;
+}
+
+#ovotuzgnad .gt_font_italic {
+  font-style: italic;
+}
+
+#ovotuzgnad .gt_super {
+  font-size: 65%;
+}
+
+#ovotuzgnad .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ovotuzgnad .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ovotuzgnad .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ovotuzgnad .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ovotuzgnad .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ovotuzgnad .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ovotuzgnad .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ovotuzgnad .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ovotuzgnad div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header gt_col_headings">
+<th id="variable" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">variable</th>
+<th id="Important regarding job" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Important regarding job</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="variable" style="font-family: Roboto"><p><code>PEO0300a</code></p></td>
+<td class="gt_row gt_left" headers="Important regarding job">To earn a lot of money</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="variable" style="font-family: Roboto"><p><code>PEO0300b</code></p></td>
+<td class="gt_row gt_left" headers="Important regarding job">A job, that is fun</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="variable" style="font-family: Roboto"><p><code>PEO0300c</code></p></td>
+<td class="gt_row gt_left" headers="Important regarding job">Good career opportunities</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="variable" style="font-family: Roboto"><p><code>PEO0300d</code></p></td>
+<td class="gt_row gt_left" headers="Important regarding job">Job security</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="variable" style="font-family: Roboto"><p><code>PEO0300e</code></p></td>
+<td class="gt_row gt_left" headers="Important regarding job">Job where you can show off your abilities</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output-display">
+<div id="qnimcxcmcb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qnimcxcmcb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qnimcxcmcb thead, #qnimcxcmcb tbody, #qnimcxcmcb tfoot, #qnimcxcmcb tr, #qnimcxcmcb td, #qnimcxcmcb th {
+  border-style: none;
+}
+
+#qnimcxcmcb p {
+  margin: 0;
+  padding: 0;
+}
+
+#qnimcxcmcb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 11px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qnimcxcmcb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qnimcxcmcb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qnimcxcmcb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qnimcxcmcb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qnimcxcmcb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qnimcxcmcb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qnimcxcmcb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qnimcxcmcb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qnimcxcmcb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qnimcxcmcb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qnimcxcmcb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qnimcxcmcb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qnimcxcmcb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qnimcxcmcb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qnimcxcmcb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qnimcxcmcb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qnimcxcmcb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qnimcxcmcb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qnimcxcmcb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qnimcxcmcb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qnimcxcmcb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qnimcxcmcb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qnimcxcmcb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qnimcxcmcb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qnimcxcmcb .gt_left {
+  text-align: left;
+}
+
+#qnimcxcmcb .gt_center {
+  text-align: center;
+}
+
+#qnimcxcmcb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qnimcxcmcb .gt_font_normal {
+  font-weight: normal;
+}
+
+#qnimcxcmcb .gt_font_bold {
+  font-weight: bold;
+}
+
+#qnimcxcmcb .gt_font_italic {
+  font-style: italic;
+}
+
+#qnimcxcmcb .gt_super {
+  font-size: 65%;
+}
+
+#qnimcxcmcb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qnimcxcmcb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qnimcxcmcb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qnimcxcmcb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qnimcxcmcb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qnimcxcmcb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qnimcxcmcb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qnimcxcmcb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qnimcxcmcb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="-10 bis -1" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">-10 bis -1</th>
+<th id="1" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">1</th>
+<th id="2" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">2</th>
+<th id="3" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">3</th>
+<th id="4" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">4</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="-10 bis -1">t.n.z./k.A.</td>
+<td class="gt_row gt_left" headers="1">Very important</td>
+<td class="gt_row gt_left" headers="2">Rather important</td>
+<td class="gt_row gt_left" headers="3">Rather not important</td>
+<td class="gt_row gt_left" headers="4">Not important at all</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>sat_small <span class="ot">&lt;-</span> </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">"PEO0300(a|b|c)"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">12</span><span class="sc">:</span><span class="dv">16</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    haven<span class="sc">::</span><span class="fu">zap_labels</span>() <span class="sc">%&gt;%</span> haven<span class="sc">::</span><span class="fu">zap_label</span>() <span class="co"># remove labels</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>sat_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  PEO0300a PEO0300b PEO0300c
+     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1        2        3        2
+2        1        1        3
+3        1        1        3
+4        2        1        1
+5        1        1        2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="ot">&lt;-</span> sat_small <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(),<span class="sc">~</span><span class="fu">as.numeric</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Sometimes we want to process multiple variables in the same way. Above, we saw how to handle this with <a href="#across"><code>across()</code></a> for existing functions. But what if we want to perform a calculation that isn’t as simple as applying <code>mean()</code>, <code>sd()</code>, etc.?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dmean_PEO0300a =</span> PEO0300a <span class="sc">-</span> <span class="fu">mean</span>(PEO0300a,<span class="at">na.rm =</span> T),</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">dmean_PEO0300c =</span> PEO0300c <span class="sc">-</span> <span class="fu">mean</span>(PEO0300c,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  PEO0300a PEO0300b PEO0300c dmean_PEO0300a dmean_PEO0300c
+     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1        2        3        2            0.6         -0.200
+2        1        1        3           -0.4          0.8  
+3        1        1        3           -0.4          0.8  
+4        2        1        1            0.6         -1.2  
+5        1        1        2           -0.4         -0.200</code></pre>
+</div>
+</div>
+<p>…and now what about <code>F1450_06</code>? Typing this out three times would violate the “DRY” principle<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, especially considering the PASS CampusFile contains 5 columns of similar satisfaction variables. Copying and pasting is not a practical option.</p>
+<p>Custom functions allow us to adhere to the DRY principle in R. We’ll make our calculation steps part of a <code>function()</code> and apply it to the desired variables. A function takes an input, defined as a placeholder within the <code>()</code>. This placeholder is used within the function, and we return the result with <code>return()</code>. Only one output can be returned:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>dtomean <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  d_x <span class="ot">&lt;-</span> x <span class="sc">-</span> <span class="fu">mean</span>(x,<span class="at">na.rm =</span> T)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(d_x)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How can we now apply our function <code>dtomean()</code> to the variables from our <code>sat_small</code>?<br>
+In principle, we saw <a href="#02_intro">at the beginning</a> that a <code>data.frame</code> is simply a combined collection of vectors (the variables).<br>
+Accordingly, we can now apply our <code>dtomean()</code> to a variable (a vector) by calling it with <code>data.frame$variablename</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dtomean</span>(sat_small<span class="sc">$</span>PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.6 -0.4 -0.4  0.6 -0.4</code></pre>
+</div>
+</div>
+<p>To apply our function to each variable of a <code>data.frame</code>, we can use <code>lapply()</code> - the output will then be a list, with elements named after the variable names:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(sat_small,<span class="at">FUN =</span> dtomean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$PEO0300a
+[1]  0.6 -0.4 -0.4  0.6 -0.4
+
+$PEO0300b
+[1]  1.6 -0.4 -0.4 -0.4 -0.4
+
+$PEO0300c
+[1] -0.2  0.8  0.8 -1.2 -0.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sat_small,<span class="at">FUN =</span> dtomean)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+</div>
+<p><code>map()</code> from <code>{purrr}</code> is an alternative to <code>lapply</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="sc">~</span><span class="fu">dtomean</span>(.x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$PEO0300a
+[1]  0.6 -0.4 -0.4  0.6 -0.4
+
+$PEO0300b
+[1]  1.6 -0.4 -0.4 -0.4 -0.4
+
+$PEO0300c
+[1] -0.2  0.8  0.8 -1.2 -0.2</code></pre>
+</div>
+</div>
+<p>This <em>formula syntax</em> can also be found in <code>across()</code> - additionally, with <code>.names =</code> we have the option to modify the variable names for the results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"PEO0300"</span>),<span class="sc">~</span><span class="fu">dtomean</span>(.x),<span class="at">.names =</span> <span class="st">"dmean_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 6
+  PEO0300a PEO0300b PEO0300c dmean_PEO0300a dmean_PEO0300b dmean_PEO0300c
+     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1        2        3        2            0.6            1.6         -0.200
+2        1        1        3           -0.4           -0.4          0.8  
+3        1        1        3           -0.4           -0.4          0.8  
+4        2        1        1            0.6           -0.4         -1.2  
+5        1        1        2           -0.4           -0.4         -0.200</code></pre>
+</div>
+</div>
+<section id="ue06_4" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="ue06_4"><span class="header-section-number">4.4.1</span> <a href="#fnct">Exercise</a></h3>
+</section>
+</section>
+<section id="helper-functions-ifelse-and-case_when" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="helper-functions-ifelse-and-case_when"><span class="header-section-number">4.5</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></h2>
+<p><code>ifelse()</code> is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether <code>studs-mean(studs)</code> is greater than <code>0</code> - if so, <code>above</code> is used, otherwise <code>below</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ab_mean_lab =</span> <span class="fu">ifelse</span>(rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span>,<span class="st">"above"</span>,<span class="st">"below"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni rel_to_mean ab_mean_lab
+1 19173   322 1971       TRUE         Uni Bremen   -2517.625       below
+2  5333    67 1830       TRUE         Uni Vechta  -16357.625       below
+3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625       below
+4 14954   250 1971      FALSE          FH Aachen   -6736.625       below
+5 47269   553 1870       TRUE        RWTH Aachen   25578.375       above
+6 23659   438 1457       TRUE       Uni Freiburg    1968.375       above
+7  9415   150 1818       TRUE           Uni Bonn  -12275.625       below
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       above</code></pre>
+</div>
+</div>
+<p><code>case_when()</code> (<code>{dplyr}</code>) extends this principle, allowing us to specify more than two options.<br>
+The syntax is slightly different: first, we specify the condition, then after a <code>~</code> the values to be used:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni      age
+1 19173   322 1971       TRUE         Uni Bremen     &lt;NA&gt;
+2  5333    67 1830       TRUE         Uni Vechta      old
+3 15643   210 1973       TRUE      Uni Oldenburg     &lt;NA&gt;
+4 14954   250 1971      FALSE          FH Aachen     &lt;NA&gt;
+5 47269   553 1870       TRUE        RWTH Aachen      old
+6 23659   438 1457       TRUE       Uni Freiburg very old
+7  9415   150 1818       TRUE           Uni Bonn      old
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>With <code>TRUE</code>, we can address all cases that have not met any conditions so far:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>,</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"relatively new"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni            age
+1 19173   322 1971       TRUE         Uni Bremen relatively new
+2  5333    67 1830       TRUE         Uni Vechta            old
+3 15643   210 1973       TRUE      Uni Oldenburg relatively new
+4 14954   250 1971      FALSE          FH Aachen relatively new
+5 47269   553 1870       TRUE        RWTH Aachen            old
+6 23659   438 1457       TRUE       Uni Freiburg       very old
+7  9415   150 1818       TRUE           Uni Bonn            old
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg relatively new</code></pre>
+</div>
+</div>
+<p>This doesn’t have to be limited to one variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"very old university"</span>,</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"old university"</span>,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"young university"</span>,</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"old college"</span>,</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"young college"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni                 age
+1 19173   322 1971       TRUE         Uni Bremen    young university
+2  5333    67 1830       TRUE         Uni Vechta      old university
+3 15643   210 1973       TRUE      Uni Oldenburg    young university
+4 14954   250 1971      FALSE          FH Aachen       young college
+5 47269   553 1870       TRUE        RWTH Aachen      old university
+6 23659   438 1457       TRUE       Uni Freiburg very old university
+7  9415   150 1818       TRUE           Uni Bonn      old university
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg       young college</code></pre>
+</div>
+</div>
+<section id="ue06_5" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="ue06_5"><span class="header-section-number">4.5.1</span> <a href="#ifcase">Exercise</a></h3>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.6</span> Exercises</h2>
+<section id="mutate1" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="mutate1"><span class="header-section-number">4.6.1</span> Exercise</h3>
+<ul>
+<li>Create <code>dat3</code> as <a href="#var">shown above</a> from <code>dat1</code> and <code>dat2</code>.</li>
+<li>Calculate the student-to-professor ratio (students per professor <code>studs/profs</code>) at the universities relative to the mean of the ratio (<code>rel_studprofs</code>).</li>
+<li>Is the ratio above or below the mean? How can you adjust the command so that the variable <code>rel_studprofs</code> only contains <code>TRUE</code> or <code>FALSE</code> instead of numeric values?</li>
+<li>Convert <code>rel_studprofs</code> into a dummy variable with 0/1 values instead of <code>TRUE</code>/<code>FALSE</code>.</li>
+</ul>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>A rule of thumb to decide whether <code>mutate()</code> or <code>...$newvar &lt;-</code> is more suitable: Whenever it’s just about quickly creating/deleting a variable, <code>...$newvar &lt;-</code> is the simpler choice. When it goes beyond that, <code>mutate()</code> offers significant advantages (<a href="#group_by">next section</a>).</p>
+</div>
+</div>
+</div>
+<p><a href="#ue06_1">Back to top</a></p>
+</section>
+<section id="grp_ue" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="grp_ue"><span class="header-section-number">4.6.2</span> Exercise</h3>
+<ul>
+<li>Continue using the university dataset.</li>
+<li>Calculate the student-to-professor ratio (<code>studprofs</code>) relative to the mean, separated by universities with and without the right to award doctorates, and add this as a new column.</li>
+<li>Test both the <code>group_by()</code> and <code>.by =</code> variants.</li>
+</ul>
+<p><a href="#ue06_2">Back to top</a></p>
+</section>
+<section id="across_ue" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="across_ue"><span class="header-section-number">4.6.3</span> Exercise</h3>
+<ul>
+<li>Use the <code>pend_small</code> dataset:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"welle"</span>,<span class="st">"zpsex"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"PEO0400d"</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>                               ) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Calculate the mean for the variables <code>PEO0400a</code>, <code>PEO0400b</code>, <code>PEO0400c</code>, and <code>PEO0400d</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="smabzctnqh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#smabzctnqh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#smabzctnqh thead, #smabzctnqh tbody, #smabzctnqh tfoot, #smabzctnqh tr, #smabzctnqh td, #smabzctnqh th {
+  border-style: none;
+}
+
+#smabzctnqh p {
+  margin: 0;
+  padding: 0;
+}
+
+#smabzctnqh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#smabzctnqh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#smabzctnqh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#smabzctnqh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#smabzctnqh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#smabzctnqh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#smabzctnqh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#smabzctnqh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#smabzctnqh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#smabzctnqh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#smabzctnqh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#smabzctnqh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#smabzctnqh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#smabzctnqh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#smabzctnqh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smabzctnqh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#smabzctnqh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#smabzctnqh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#smabzctnqh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smabzctnqh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#smabzctnqh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smabzctnqh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#smabzctnqh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smabzctnqh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#smabzctnqh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smabzctnqh .gt_left {
+  text-align: left;
+}
+
+#smabzctnqh .gt_center {
+  text-align: center;
+}
+
+#smabzctnqh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#smabzctnqh .gt_font_normal {
+  font-weight: normal;
+}
+
+#smabzctnqh .gt_font_bold {
+  font-weight: bold;
+}
+
+#smabzctnqh .gt_font_italic {
+  font-style: italic;
+}
+
+#smabzctnqh .gt_super {
+  font-size: 65%;
+}
+
+#smabzctnqh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#smabzctnqh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#smabzctnqh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#smabzctnqh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#smabzctnqh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#smabzctnqh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#smabzctnqh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#smabzctnqh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#smabzctnqh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header gt_col_headings">
+<th id="var" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">var</th>
+<th id="lab" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">lab</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="var"><p><code>PEO0400a</code></p></td>
+<td class="gt_row gt_left" headers="lab">Family/job: Woman should be willing to reduce her working hours for family</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="var"><p><code>PEO0400b</code></p></td>
+<td class="gt_row gt_left" headers="lab">Family/job: What women really want is a home and children</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="var"><p><code>PEO0400c</code></p></td>
+<td class="gt_row gt_left" headers="lab">Family/job: Working mother can have an equally warm relationship with her childr</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="var"><p><code>PEO0400d</code></p></td>
+<td class="gt_row gt_left" headers="lab">Family/job: Responsibility of husband: To earn money; responsibility of wife: Ho</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   welle zpsex PEO0400a PEO0400b PEO0400c PEO0400d
+1      2     2        1        1        4        1
+2      2     1        2        1        3        2
+3      2     2        1        3        1        4
+4      2     2        1        1        4        1
+5      2     2        1        1        1        1
+6      2     1        1        1        1        1
+7      2     1        1        2        1        4
+8      2     1        3        2        3        2
+9      2     2        3        3        3        3
+10     2     1        2        3        2        2
+11     2     1        4        3        2        3
+12     2     2        2        3        2        3
+13     2     1        2        3        2        3
+14     2     1        1        2        1        1
+15     2     1        1        1        1        2</code></pre>
+</div>
+</div>
+<ul>
+<li>Use <code>across()</code> to calculate the means for all four variables.</li>
+<li>Calculate the means separately by gender (<code>zpsex</code>) using <code>.by =</code>.</li>
+<li>Also add the variance (<code>var()</code>), and use <code>.names=</code> to name the columns following the pattern <code>metric.variable</code>.</li>
+</ul>
+<p><a href="#ue06_3">Back to top</a></p>
+</section>
+<section id="fnct" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="fnct"><span class="header-section-number">4.6.4</span> Exercise</h3>
+<p>Continue using <code>pend_small</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>pend_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   welle zpsex PEO0400a PEO0400b PEO0400c PEO0400d
+1      2     2        1        1        4        1
+2      2     1        2        1        3        2
+3      2     2        1        3        1        4
+4      2     2        1        1        4        1
+5      2     2        1        1        1        1
+6      2     1        1        1        1        1
+7      2     1        1        2        1        4
+8      2     1        3        2        3        2
+9      2     2        3        3        3        3
+10     2     1        2        3        2        2
+11     2     1        4        3        2        3
+12     2     2        2        3        2        3
+13     2     1        2        3        2        3
+14     2     1        1        2        1        1
+15     2     1        1        1        1        2</code></pre>
+</div>
+</div>
+<ul>
+<li>Standardize the variables <code>PEO0400a</code> - <code>PEO0400d</code> from <code>pend_small</code> using the following pattern:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">std_PEO0400b =</span> (PEO0400b <span class="sc">-</span> <span class="fu">mean</span>(PEO0400b,<span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(PEO0400b,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Use a function so that you don’t have to repeatedly enter the same steps.</li>
+<li>Additionally, use <code>across()</code> to apply the function to the desired variables.</li>
+</ul>
+<p><a href="#ue06_4">Back to top</a></p>
+</section>
+<section id="ifcase" class="level3" data-number="4.6.5">
+<h3 data-number="4.6.5" class="anchored" data-anchor-id="ifcase"><span class="header-section-number">4.6.5</span> Exercise</h3>
+<ul>
+<li>Work on <code>pend_small2</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"palter"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"statakt"</span>)) </span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> pend_small2 <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">5624</span><span class="sc">:</span><span class="dv">5640</span>)</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>pend_small2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 5
+   palter    PEO0400a                       PEO0400b          PEO0400c statakt  
+   &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;                      &lt;dbl+lbl&gt;         &lt;dbl+lb&gt; &lt;dbl+lbl&gt;
+ 1 77         1 [Completely agree]           3 [Rather not a…  3 [Rat… -10 [Ite…
+ 2 78        -9 [Item not surveyed in wave] -9 [Item not sur… -9 [Ite… -10 [Ite…
+ 3 51         2 [Rather agree]               4 [Do not agree…  1 [Com…  -9 [Ite…
+ 4 23         3 [Rather not agree]           3 [Rather not a…  2 [Rat…  -9 [Ite…
+ 5 17         3 [Rather not agree]           2 [Rather agree]  1 [Com…  -9 [Ite…
+ 6 47         3 [Rather not agree]           2 [Rather agree]  2 [Rat…  -9 [Ite…
+ 7 24         3 [Rather not agree]           4 [Do not agree…  1 [Com…   1 [In …
+ 8 52         2 [Rather agree]               3 [Rather not a…  1 [Com…   1 [In …
+ 9 19         2 [Rather agree]               3 [Rather not a…  2 [Rat…   3 [Pup…
+10 48         2 [Rather agree]               3 [Rather not a…  1 [Com…   1 [In …
+11 49        -9 [Item not surveyed in wave] -9 [Item not sur… -9 [Ite…  -5 [Can…
+12 47         2 [Rather agree]               3 [Rather not a…  1 [Com…  -9 [Ite…
+13 48         2 [Rather agree]               3 [Rather not a…  1 [Com…   1 [In …
+14 49        -9 [Item not surveyed in wave] -9 [Item not sur… -9 [Ite…   1 [In …
+15 39         4 [Do not agree at all]        3 [Rather not a…  1 [Com…  -9 [Ite…
+16 37         3 [Rather not agree]           4 [Do not agree…  1 [Com…  -9 [Ite…
+17 38         3 [Rather not agree]           3 [Rather not a…  1 [Com…   1 [In …</code></pre>
+</div>
+</div>
+<ul>
+<li>Use <code>ifelse()</code> to label people 50 years and older as “ü50” - for those under 50, label them as “u50”.</li>
+<li>Create a three-way division: people under 40 are labeled “u40”, people under 50 “u50”, and people 50 and older as “ü50”. How would you approach this with <code>case_when()</code>?</li>
+<li>Use <code>ifelse()</code> to overwrite values &lt; 0 in the variables <code>PEO0400a</code>, <code>PEO0400b</code>, <code>PEO0400c</code>, and <code>statakt</code> in <code>pend_small2</code> with <code>NA</code>.</li>
+<li>First, write an <code>ifelse()</code> function that overwrites all values &lt; 0 in <code>PEO0400a</code> with <code>NA</code> and otherwise keeps the original value <code>PEO0400a</code>.</li>
+<li>How would the function look if you applied it to <code>PEO0400a</code>, <code>PEO0400b</code>, <code>PEO0400c</code>, and <code>statakt</code> at the same time using <code>across()</code>?</li>
+</ul>
+<p><a href="#ue06_5">Back to top</a></p>
+</section>
+</section>
+<section id="appendix" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="appendix"><span class="header-section-number">4.7</span> Appendix</h2>
+<section id="renaming-variables" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="renaming-variables"><span class="header-section-number">4.7.1</span> Renaming variables</h3>
+<p>To rename variables, use <code>rename(new_name = old_name)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">newname =</span> PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  newname PEO0300b PEO0300c
+    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1       2        3        2
+2       1        1        3
+3       1        1        3
+4       2        1        1
+5       1        1        2</code></pre>
+</div>
+</div>
+<p>For advanced transformations, it’s worth looking into <code>rename_with()</code>. This allows us to use <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf">Regular Expressions</a>, for example from <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf">{stringr}</a>. Here’s just an example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">tolower</span>(.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  peo0300a peo0300b peo0300c
+     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1        2        3        2
+2        1        1        3
+3        1        1        3
+4        2        1        1
+5        1        1        2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_remove</span>(.x,<span class="st">"PEO0300"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+      a     b     c
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     2     3     2
+2     1     1     3
+3     1     1     3
+4     2     1     1
+5     1     1     2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(.x,<span class="st">"PEO0300"</span>,<span class="st">"Occupation_"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  Occupation_a Occupation_b Occupation_c
+         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+1            2            3            2
+2            1            1            3
+3            1            1            3
+4            2            1            1
+5            1            1            2</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-classes-with-cut" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="creating-classes-with-cut"><span class="header-section-number">4.7.2</span> Creating Classes with <code>cut()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni
+1 19173   322 1971       TRUE         Uni Bremen
+2  5333    67 1830       TRUE         Uni Vechta
+3 15643   210 1973       TRUE      Uni Oldenburg
+4 14954   250 1971      FALSE          FH Aachen
+5 47269   553 1870       TRUE        RWTH Aachen
+6 23659   438 1457       TRUE       Uni Freiburg
+7  9415   150 1818       TRUE           Uni Bonn
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
+</div>
+</div>
+<p>A common task in data preparation is classifying a continuous variable, such as the number of professors. We want to group <code>profs</code> in steps of 150. To create these classes, we use <code>cut()</code> and specify the class boundaries with <code>breaks</code>. We can use <code>seq()</code> to generate the breakpoints. In <code>seq()</code>, we specify the lower and upper limits along with the step size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">350</span>, <span class="dv">500</span>, <span class="dv">650</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] (200,350] (50,200]  (200,350] (200,350] (500,650] (350,500] (50,200] 
+[8] (500,650]
+Levels: (50,200] (200,350] (350,500] (500,650]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">650</span>,<span class="dv">150</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] (200,350] (50,200]  (200,350] (200,350] (500,650] (350,500] (50,200] 
+[8] (500,650]
+Levels: (50,200] (200,350] (350,500] (500,650]</code></pre>
+</div>
+</div>
+<p>We store these values in a new variable in the <code>dat3</code> dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>prof_class <span class="ot">&lt;-</span> <span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">650</span>,<span class="dv">150</span>))</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni prof_class
+1 19173   322 1971       TRUE         Uni Bremen  (200,350]
+2  5333    67 1830       TRUE         Uni Vechta   (50,200]
+3 15643   210 1973       TRUE      Uni Oldenburg  (200,350]
+4 14954   250 1971      FALSE          FH Aachen  (200,350]
+5 47269   553 1870       TRUE        RWTH Aachen  (500,650]
+6 23659   438 1457       TRUE       Uni Freiburg  (350,500]
+7  9415   150 1818       TRUE           Uni Bonn   (50,200]
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg  (500,650]</code></pre>
+</div>
+</div>
+<p>For this new variable, we can request a frequency table using <code>count()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">count</span>(prof_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  prof_class n
+1   (50,200] 2
+2  (200,350] 3
+3  (350,500] 1
+4  (500,650] 2</code></pre>
+</div>
+</div>
+<p>The parentheses <code>(</code> indicate exclusion, while the brackets <code>]</code> indicate inclusion. There are 3 universities in the dataset that have more than 200 and up to 350 professors.</p>
+<p>For the following examples, we delete the <code>prof_class</code> variable again:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>prof_class <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Some useful options for <code>cut()</code> in the appendix</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>bsp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">1998</span>,<span class="dv">2001</span>,<span class="dv">2009</span>)</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>bsp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1990 1998 2001 2009</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &lt;NA&gt;             (1.99e+03,2e+03] (2e+03,2.01e+03] (2e+03,2.01e+03]
+Levels: (1.99e+03,2e+03] (2e+03,2.01e+03]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the number of digits in the labels</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">dig.lab =</span> <span class="dv">4</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &lt;NA&gt;        (1990,2000] (2000,2010] (2000,2010]
+Levels: (1990,2000] (2000,2010]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Include the lower boundary</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">dig.lab =</span> <span class="dv">4</span>,<span class="at">include.lowest =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] [1990,2000] [1990,2000] (2000,2010] (2000,2010]
+Levels: [1990,2000] (2000,2010]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number the categories instead of labels:</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">labels =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA  1  2  2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify your own labels:</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"90s"</span>,<span class="st">"00s"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &lt;NA&gt; 90s  00s  00s 
+Levels: 90s 00s</code></pre>
+</div>
+</div>
+</section>
+<section id="string-functions-for-regex" class="level3" data-number="4.7.3">
+<h3 data-number="4.7.3" class="anchored" data-anchor-id="string-functions-for-regex"><span class="header-section-number">4.7.3</span> String Functions for <em>regex</em></h3>
+<p><a href="https://stringr.tidyverse.org/">{stringr}</a> provides a series of very useful string functions with <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf">regular expressions</a>. You can get an overview from this <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf">cheatsheet</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">uni_fh =</span> <span class="fu">str_detect</span>(uni,<span class="st">"Uni"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni uni_fh
+1 19173   322 1971       TRUE         Uni Bremen   TRUE
+2  5333    67 1830       TRUE         Uni Vechta   TRUE
+3 15643   210 1973       TRUE      Uni Oldenburg   TRUE
+4 14954   250 1971      FALSE          FH Aachen  FALSE
+5 47269   553 1870       TRUE        RWTH Aachen  FALSE
+6 23659   438 1457       TRUE       Uni Freiburg   TRUE
+7  9415   150 1818       TRUE           Uni Bonn   TRUE
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg  FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">bula =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(uni,<span class="st">"Bremen"</span>)<span class="sc">~</span> <span class="st">"HB"</span>,</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Oldenb|Vechta"</span>)<span class="sc">~</span> <span class="st">"NDS"</span>,</span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Bonn|Aachen"</span>)<span class="sc">~</span> <span class="st">"NRW"</span>,</span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Freiburg"</span>)<span class="sc">~</span> <span class="st">"BW"</span></span>
+<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>                                 ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni bula
+1 19173   322 1971       TRUE         Uni Bremen   HB
+2  5333    67 1830       TRUE         Uni Vechta  NDS
+3 15643   210 1973       TRUE      Uni Oldenburg  NDS
+4 14954   250 1971      FALSE          FH Aachen  NRW
+5 47269   553 1870       TRUE        RWTH Aachen  NRW
+6 23659   438 1457       TRUE       Uni Freiburg   BW
+7  9415   150 1818       TRUE           Uni Bonn  NRW
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg  NRW</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ort =</span> <span class="fu">str_remove</span>(uni,<span class="st">"Uni |FH |RWTH "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni             ort
+1 19173   322 1971       TRUE         Uni Bremen          Bremen
+2  5333    67 1830       TRUE         Uni Vechta          Vechta
+3 15643   210 1973       TRUE      Uni Oldenburg       Oldenburg
+4 14954   250 1971      FALSE          FH Aachen          Aachen
+5 47269   553 1870       TRUE        RWTH Aachen          Aachen
+6 23659   438 1457       TRUE       Uni Freiburg        Freiburg
+7  9415   150 1818       TRUE           Uni Bonn            Bonn
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg Bonn-Rhein-Sieg</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>“tilde”: <br> <strong>Windows</strong>: Press <code>Alt Gr</code> + <code>*</code> (The asterisk is on the same key as the plus sign). <br> <strong>macOS</strong>: Press <code>Alt</code> (Option) + <code>N</code>, then press the space bar to insert the tilde.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Do not repeat yourself, see <a href="https://r4ds.had.co.nz/functions.html">Wickham et al</a>: “You should consider writing a function whenever you’ve copied and pasted a block of code more than twice (i.e.&nbsp;you now have three copies of the same code).”<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_desc.html" class="pagination-link" aria-label="Getting an Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting an Overview</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_merge_pivot.html" class="pagination-link" aria-label="Merging &amp; reshaping">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>All content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2024 by <a href="https://afilser.netlify.app/">Andreas Filser</a><br> <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC Lizenz mit Namensnennung <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i></a><br> Created using <i class="fa-brands fa-r-project" aria-label="r-project"></i>, Code <a href="https://github.com/filius23/GradAB_R2024">can be viewed here <i class="fa-brands fa-github" aria-label="github"></i></a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

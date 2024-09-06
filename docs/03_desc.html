@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./05_data_wrangle1_translated.html" rel="next">
+<link href="./04_data_wrangle.html" rel="next">
 <link href="./02_intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -169,32 +169,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_data_wrangle1_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Labels &amp; factor</span></span></a>
+  <a href="./04_data_wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Creating Variables</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_data_wrangle2_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Wrangling II</span></span></a>
+  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_viz_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_viz_translated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14_tabellenexport.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -268,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>After importing datasets, we want to get an overview. Every statistical analysis starts with a description of the variables. In this session, we will see how to use tables to get an overview of the information in a dataset. We will also work with the PASS Campus File in this session. Let’s start by loading the data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"haven"</span>) <span class="co"># if not already installed </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fdz_install</span>(<span class="st">"haven"</span>) <span class="co"># if not already installed </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="co"># data import for Stata datasets</span></span>
@@ -790,23 +796,23 @@ Multiple Metrics in One Table
 <p>Wir interessieren uns für die Variable <code>famstand</code>, welche den Familienstand der Befragten enthält:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kzokanyywq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kzokanyywq table {
+<div id="ygbybakaea" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ygbybakaea table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kzokanyywq thead, #kzokanyywq tbody, #kzokanyywq tfoot, #kzokanyywq tr, #kzokanyywq td, #kzokanyywq th {
+#ygbybakaea thead, #ygbybakaea tbody, #ygbybakaea tfoot, #ygbybakaea tr, #ygbybakaea td, #ygbybakaea th {
   border-style: none;
 }
 
-#kzokanyywq p {
+#ygbybakaea p {
   margin: 0;
   padding: 0;
 }
 
-#kzokanyywq .gt_table {
+#ygbybakaea .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -832,12 +838,12 @@ Multiple Metrics in One Table
   border-left-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_caption {
+#ygbybakaea .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kzokanyywq .gt_title {
+#ygbybakaea .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -849,7 +855,7 @@ Multiple Metrics in One Table
   border-bottom-width: 0;
 }
 
-#kzokanyywq .gt_subtitle {
+#ygbybakaea .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -861,7 +867,7 @@ Multiple Metrics in One Table
   border-top-width: 0;
 }
 
-#kzokanyywq .gt_heading {
+#ygbybakaea .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -873,13 +879,13 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_bottom_border {
+#ygbybakaea .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_col_headings {
+#ygbybakaea .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -894,7 +900,7 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_col_heading {
+#ygbybakaea .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -914,7 +920,7 @@ Multiple Metrics in One Table
   overflow-x: hidden;
 }
 
-#kzokanyywq .gt_column_spanner_outer {
+#ygbybakaea .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -926,15 +932,15 @@ Multiple Metrics in One Table
   padding-right: 4px;
 }
 
-#kzokanyywq .gt_column_spanner_outer:first-child {
+#ygbybakaea .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kzokanyywq .gt_column_spanner_outer:last-child {
+#ygbybakaea .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kzokanyywq .gt_column_spanner {
+#ygbybakaea .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -946,11 +952,11 @@ Multiple Metrics in One Table
   width: 100%;
 }
 
-#kzokanyywq .gt_spanner_row {
+#ygbybakaea .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kzokanyywq .gt_group_heading {
+#ygbybakaea .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -976,7 +982,7 @@ Multiple Metrics in One Table
   text-align: left;
 }
 
-#kzokanyywq .gt_empty_group_heading {
+#ygbybakaea .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -991,15 +997,15 @@ Multiple Metrics in One Table
   vertical-align: middle;
 }
 
-#kzokanyywq .gt_from_md > :first-child {
+#ygbybakaea .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kzokanyywq .gt_from_md > :last-child {
+#ygbybakaea .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kzokanyywq .gt_row {
+#ygbybakaea .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1018,7 +1024,7 @@ Multiple Metrics in One Table
   overflow-x: hidden;
 }
 
-#kzokanyywq .gt_stub {
+#ygbybakaea .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1031,7 +1037,7 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#kzokanyywq .gt_stub_row_group {
+#ygbybakaea .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1045,15 +1051,15 @@ Multiple Metrics in One Table
   vertical-align: top;
 }
 
-#kzokanyywq .gt_row_group_first td {
+#ygbybakaea .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kzokanyywq .gt_row_group_first th {
+#ygbybakaea .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kzokanyywq .gt_summary_row {
+#ygbybakaea .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1063,16 +1069,16 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#kzokanyywq .gt_first_summary_row {
+#ygbybakaea .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_first_summary_row.thick {
+#ygbybakaea .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kzokanyywq .gt_last_summary_row {
+#ygbybakaea .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1082,7 +1088,7 @@ Multiple Metrics in One Table
   border-bottom-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_grand_summary_row {
+#ygbybakaea .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1092,7 +1098,7 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#kzokanyywq .gt_first_grand_summary_row {
+#ygbybakaea .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1102,7 +1108,7 @@ Multiple Metrics in One Table
   border-top-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_last_grand_summary_row_top {
+#ygbybakaea .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1112,11 +1118,11 @@ Multiple Metrics in One Table
   border-bottom-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_striped {
+#ygbybakaea .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kzokanyywq .gt_table_body {
+#ygbybakaea .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1125,7 +1131,7 @@ Multiple Metrics in One Table
   border-bottom-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_footnotes {
+#ygbybakaea .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1139,7 +1145,7 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_footnote {
+#ygbybakaea .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1148,7 +1154,7 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#kzokanyywq .gt_sourcenotes {
+#ygbybakaea .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1162,7 +1168,7 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#kzokanyywq .gt_sourcenote {
+#ygbybakaea .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1170,72 +1176,72 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#kzokanyywq .gt_left {
+#ygbybakaea .gt_left {
   text-align: left;
 }
 
-#kzokanyywq .gt_center {
+#ygbybakaea .gt_center {
   text-align: center;
 }
 
-#kzokanyywq .gt_right {
+#ygbybakaea .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kzokanyywq .gt_font_normal {
+#ygbybakaea .gt_font_normal {
   font-weight: normal;
 }
 
-#kzokanyywq .gt_font_bold {
+#ygbybakaea .gt_font_bold {
   font-weight: bold;
 }
 
-#kzokanyywq .gt_font_italic {
+#ygbybakaea .gt_font_italic {
   font-style: italic;
 }
 
-#kzokanyywq .gt_super {
+#ygbybakaea .gt_super {
   font-size: 65%;
 }
 
-#kzokanyywq .gt_footnote_marks {
+#ygbybakaea .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kzokanyywq .gt_asterisk {
+#ygbybakaea .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kzokanyywq .gt_indent_1 {
+#ygbybakaea .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kzokanyywq .gt_indent_2 {
+#ygbybakaea .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kzokanyywq .gt_indent_3 {
+#ygbybakaea .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kzokanyywq .gt_indent_4 {
+#ygbybakaea .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kzokanyywq .gt_indent_5 {
+#ygbybakaea .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kzokanyywq .katex-display {
+#ygbybakaea .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kzokanyywq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ygbybakaea div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1798,8 +1804,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05_data_wrangle1_translated.html" class="pagination-link" aria-label="Data Wrangling I: Labels &amp; factor">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Labels &amp; factor</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04_data_wrangle.html" class="pagination-link" aria-label="Data Wrangling I: Creating Variables">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Creating Variables</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

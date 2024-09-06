@@ -1,0 +1,229 @@
+# Labels & factors {#lab_fct}
+
+
+```{r setup05, echo = F, include=FALSE}
+if(Sys.getenv("USERNAME") == "filse" ) path <- "D:/uolCloud//RFS/"
+knitr::opts_chunk$set(collapse = F,cache = F)
+library(haven)
+library(tidyverse)
+library(Statamarkdown)
+library(flextable)
+theme_set(theme_gray() + theme(axis.text.x = element_text(size=rel(1.45))))
+```
+```{r}
+library(tidyverse)
+
+pend_kap5 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                             col_select = c("pnr","welle", "zpsex", "PSM0100","azges1","palter")) %>% 
+  filter(welle == 8, palter > 0,azges1 > 0)
+```
+
+
+## Labels from Other Programs in R
+
+In many software packages like Stata or SPSS, labels are often retained through various operations and then displayed automatically. 
+This is not the case in R. 
+Instead, in R, we can assign labels using the `factor` variable type. 
+This approach might seem unusual for those who have worked extensively with Stata or SPSS, but it is quite useful in practice if you get accustomed to the workflow.
+
+
+Generally, you *can* use value labels from other software packages in are. 
+For example, when we create a count summary with `count()`, the labels from the `.dta`-file are displayed:
+
+```{r}
+# Counting occurrences and showing labels
+pend_kap5 %>% 
+  count(PSM0100)
+```
+These are assigned as `attributes()` variables:
+
+```{r}
+attributes(pend_kap5$PSM0100)
+```
+
+`enframe()` from the `{tibble}` (part of the `{tidyverse}`) package helps to get data.frame with an overview of all value labels stored in an attribute:
+```{r}
+attributes(pend_kap5$PSM0100)$labels %>% enframe(value = "variable_value",name = "label")
+```
+
+
+However, managing attributes() is tedious and sometimes causes problems when working with the labelled variables.
+
+R's native way to work with labels are `factor` variables.
+As mentioned in chapter 2, `factor` variables are strings with a predefined universe and ordering.  
+How can we use the `attributes()`-labels as `factor` to save typing?
+
+`{haven}` includes the function `as_factor`[^2], which allows us to directly create a `factor` variable from labels:
+
+[^2]: Not to be confused with `as.factor()` from base R – the `_` makes a difference!
+```{r}
+pend_kap5$PSM0100_fct <- as_factor(pend_kap5$PSM0100) # create factor variable from attributes and values
+
+# view:
+pend_kap5 %>% select(contains("PSM0100")) %>% head()
+```
+
+## Creating or editing `factor` manually
+
+Alternatively, we can also label with `factor()` using the `levels` and `labels` options ourselves. The `labels` are assigned in order to the numbers from `levels`.
+Additionally, all unspecified `levels` automatically become `NA`:
+
+```{r}
+pend_kap5$PSM0100_fct2 <- factor(pend_kap5$PSM0100,
+                               levels = c(1,2),
+                               labels = c("Yes","No"))
+
+# view:
+pend_kap5 %>% select(contains("PSM0100")) %>% head()
+
+```
+
+Or we can use the functions from `{forcats}` to recode a `factor`. `{forcats}` is part of the `{tidyverse}`. With `fct_recode()`, we can change the `levels`:
+
+```{r}
+levels(pend_kap5$PSM0100_fct)
+
+pend_kap5$PSM0100_fct3 <- fct_recode(pend_kap5$PSM0100_fct,
+  `Uses social networks` =  "Ja", # use `` around words with spaces
+  )
+levels(pend_kap5$PSM0100_fct3)
+```
+
+```{r}
+pend_kap5 %>% select(contains("PSM0100")) %>% head()
+```
+
+More `fct_....()` functions from `{forcats}` can be found in this [Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf).
+
+## Creating label `data.frame` and merging with data
+
+An alternative approach involves creating a small label `data.frame` and `left_join()` (more on `left_join()` later.)
+
+```{r}
+tab2 <- pend_kap5 %>% count(PSM0100)
+tab2
+```
+```{r}
+lab_df <- data.frame(PSM0100=1:2)
+lab_df
+lab_df$PD0400_lab <- factor(lab_df$PSM0100,
+                            levels = 1:2,
+                            labels = c("Uses social networks",
+                                       "Does not use social networks"))
+lab_df
+```
+
+```{r}
+tab2 %>% 
+  left_join(lab_df,by = "PSM0100")
+```
+
+...or if you have multiple variables, create an Excel sheet and merge it:
+
+```{r}
+  pend_kap5 %>% 
+    select(zpsex,PSM0100) %>% 
+    distinct() %>%  
+    pivot_longer(cols = everything()) %>% 
+    distinct() %>% 
+    arrange(name,value) %>% 
+  data.frame() %>% 
+  xlsx::write.xlsx(file = "./data/label.xlsx",row.names = F)
+
+  
+lab_df2 <- 
+  xlsx::read.xlsx(file = "./data/label_read.xlsx",sheetIndex = 1)
+
+
+pend_kap5 %>% 
+    count(zpsex,PSM0100) 
+
+
+lab_df2 %>% pivot_wider(names_from = name)
+```
+
+
+
+
+## Exercise
+
+```{r}
+pend_ue5 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                               col_select = c("pnr","welle","PD0400")) %>% 
+  filter(PD0400>0)
+```
+
+Edit the *value labels* of `PD0400`: `r str_wrap(attributes(pend_ue5$PD0400)$label)`
+
+```{r}
+#| echo: false
+#| warning: false
+
+set_flextable_defaults(font.family = "Red Hat Display", font.color = "grey25", border.color = "grey25", font.size = 8, padding = .75)
+
+attributes(pend_ue5$PD0400)$labels %>% 
+  enframe(name = "label") %>% 
+  relocate(value) %>% 
+  filter(value > 0) %>% 
+  flextable() %>% 
+  border_remove() %>% 
+  padding(j = 2, padding.left = 5, padding.right = 15) %>% 
+  align(align = "left", part = "header") %>% 
+  bold(i=1,part = "header") %>% 
+  bg(i = c(2,4),bg = "grey95") %>% 
+  autofit() 
+```
+
++ First, use `head()` and a count with `count()` to get an overview.
++ How can you use the labels from the `attributes()` with `as_factor()` to create a variable `PD0400_fct`?
++ Create a `factor()` variable `F411_01_fct2` with *value labels*: `1 = Not at all`, `2 = Rather not`, `3 = Rather yes`, `4 = Very much`
+
+**Bonus exercise:** Use the labeled variable for a bar chart.
+
+## Appendix
+
+### Remove labels with `zap_...` from `{haven}`
+
+The label `attributes()` often cause problems in further processing. With `haven::zap_labels()`, we can remove value labels from a dataset, and with `haven::zap_label()`, we can remove variable labels.
+
+```{r}
+#| echo: false
+pend_kap5 <- pend_kap5 %>% select(c("pnr","welle", "zpsex", "PSM0100","azges1","palter"))
+```
+
+```{r}
+pend_kap5
+pend_kap5 %>% 
+  haven::zap_labels() # remove value labels
+```
+
+
+### Creating labels in R and exporting to Stata
+
+If we want to label a dataset for Stata, for example, `{labelled}` comes in handy again:
+
+```{r}
+library(labelled)
+```
+
+```{r}
+pend_kap5$zpsex_num2 <- as.numeric(pend_kap5$zpsex)
+attributes(pend_kap5$zpsex_num2)
+val_labels(pend_kap5$zpsex_num2) <- c("Men"=1,"Women"=2)
+attributes(pend_kap5$zpsex_num2)
+pend_kap5 %>% count(zpsex_num2)
+```
+```{r}
+#| eval: false
+pend_kap5 %>% 
+  select(zpsex_num2) %>% 
+  haven::write_dta(.,path = "./data/pend_kap5.dta")
+```
+
+...in *Stata*:
+```{stata}
+use "./data/pend_kap5.dta" 
+tab zpsex_num2 
+```
+
+[More on `labels` in `{labelled}`](https://joseph.larmarange.net/intro_labelled.html).

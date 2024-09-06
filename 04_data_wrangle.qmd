@@ -1,0 +1,641 @@
+# Data Wrangling I: Creating Variables {#wrang1}
+
+```{r}
+#| include: false
+if(Sys.getenv("USERNAME") == "filse" ) path <- "D:/uolCloud//RFS/"
+windowsFonts(mono=windowsFont("Fira Code"))
+```
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+```
+
+We return to the university dataset from the beginning:
+
+```{r}
+dat1 <- data.frame(
+  studs = c(19173, 5333, 15643), 
+  profs = c(322, 67, 210),
+  gegr  = c(1971, 1830, 1973),
+  prom_recht = rep(TRUE, 3),
+  uni = c("Uni Bremen", "Uni Vechta", "Uni Oldenburg")
+)
+
+dat2 <- data.frame(
+  studs = c(14954, 47269, 23659, 9415, 38079), 
+  profs = c(250, 553, 438, 150, 636),
+  prom_recht = c(FALSE, TRUE, TRUE, TRUE, FALSE),
+  gegr  = c(1971, 1870, 1457, 1818, 1995),
+  uni = c("FH Aachen", "RWTH Aachen", "Uni Freiburg", "Uni Bonn", "FH Bonn-Rhein-Sieg")
+)
+
+dat1
+dat2
+```
+
+With `bind_rows()` from `{dplyr}`, we can combine the two `data.frame`s:
+
+```{r}
+dat3 <- bind_rows(dat1, dat2)
+dat3
+```
+
+There is also `bind_cols()` to combine datasets column-wise. We'll learn more about merging datasets based on one or more identifier variables [later](#wrang3).
+
+## Creating Variables {#var}
+
+Let's take a closer look at creating variables in R. There are two basic ways to add variables to a `data.frame`:
+
+1. Base R: `...$newvar <-`   
+
+2. `{dplyr}`: `mutate(new_var= )`
+
+### Base R: `...$newvar <-`
+
+```{r}
+dat3$studs_to_mean <- dat3$studs - mean(dat3$studs)
+dat3
+```
+
+You can also delete variables using `<- NULL`:
+
+```{r}
+dat3$studs_to_mean <- NULL
+dat3
+```
+
+### {dplyr}: `mutate(new_var= )`
+
+An alternative way to create variables is using `mutate(new_variable = )` from `{dplyr}` (`{tidyverse}`):
+
+```{r}
+dat3 %>% mutate(studs_to_mean = studs - mean(studs))
+```
+
+You can also create multiple variables within a single `mutate()` command:
+
+```{r}
+dat3 %>% mutate(
+  studs_to_mean = studs - mean(studs),
+  profs_to_mean = profs - mean(profs)
+)
+```
+
+Or variables can be reused within `mutate()`:
+
+```{r}
+dat3 %>% mutate(
+  rel_to_mean = studs - mean(studs),
+  above_mean = rel_to_mean > 0
+)
+```
+
+The original dataset remains unchanged:
+
+```{r}
+dat3
+```
+
+To keep the results, store them in an object:
+
+```{r}
+dat4 <- dat3 %>% mutate(
+  rel_to_mean = studs - mean(studs),
+  above_mean = rel_to_mean > 0
+)
+
+dat4
+```
+
+::: {.callout-tip collapse="true"}
+# Creating Dummy Variables with `as.numeric()`
+
+You can convert logical variables into numeric dummy variables (0/1) using `as.numeric()`:
+
+```{r}
+dat3 %>% mutate(
+  prom_dummy = as.numeric(prom_recht),
+  over10k = as.numeric(studs > 10000)
+)
+```
+:::
+
+### [Exercise](#mutate1) {#ue06_1}
+
+## Grouping with `.by=` {#group_by}
+
+The true power of `mutate()` becomes apparent when combined with other `{dplyr}` functions. A common task in data preparation involves grouped values.
+
+We’ll make our example dataset a bit smaller:
+```{r}
+dat5 <- dat3 %>% 
+  select(-uni,-gegr) # to ensure everything is visible
+```
+
+Since `{dplyr}` version 1.1.1, we can specify a grouping directly in `mutate()` using the `.by=` argument. This `.by=` grouping is applied only to the immediate calculations within `mutate()`:
+
+```{r}
+dat5 %>%
+  mutate(m_studs = mean(studs),
+         m_profs = mean(profs)) %>% 
+  mutate(m_studs2 = mean(studs),
+         .by = prom_recht) %>% 
+  mutate(m_profs2 = mean(profs))
+```
+
+Using `summarise()` instead of `mutate()` provides an overview:
+```{r}
+dat5 %>%
+  summarise(m_studs = mean(studs),.by = prom_recht)
+```
+
+
+::: {.callout-tip collapse="true"}
+
+## `group_by()`
+
+Before `{dplyr}` 1.1.1, grouping a dataset relied on `group_by()`.
+After setting `group_by()` along the values of a variable, all subsequent `mutate()` calculations are performed only within those groups:
+
+```{r}
+dat5 %>%
+  mutate(m_studs = mean(studs),
+         m_profs = mean(profs)) %>% 
+  group_by(prom_recht) %>%
+  mutate(m_studs2 = mean(studs),
+         m_profs2 = mean(profs))
+```
+
+After using `group_by()`, it's good practice to remove the grouping with `ungroup()` once it's no longer needed:
+```{r}
+#| label: demo
+dat5 %>%
+  mutate(m_studs = mean(studs),
+         m_profs = mean(profs)) %>% 
+  group_by(prom_recht) %>%
+  mutate(m_studs2 = mean(studs)) %>% 
+  ungroup() %>% 
+  mutate(m_profs2 = mean(profs))
+```
+
+<!-- :heart: -->
+
+:::
+
+
+### [Exercise](#grpue) {#ue06_2}
+
+## `across()`: Processing Multiple Variables {#across}
+
+A highly versatile addition to `mutate()` and `summarise()` is `across()`. This allows us to apply a function to multiple columns simultaneously, without repeating code:
+
+```{r}
+dat3 %>%
+  summarise(studs = mean(studs),
+            profs = mean(profs))
+```
+
+Here, `across()` offers a much shorter syntax for variable selection, and we can use [`?select_helpers`](02_intro.qmd#selecthelpers) like `matches()`:
+
+```{r}
+dat3 %>%
+  summarise(across(.cols = matches("studs|profs"),.fns = ~mean(.x)))
+```
+
+This is also compatible with `.by=`:
+```{r}
+dat3 %>%
+  summarise(across(matches("studs|profs"), ~mean(.x)), .by= prom_recht)
+```
+
+We can apply multiple functions by placing them in a `list()`:
+```{r}
+dat3 %>%
+  summarise(across(matches("studs|profs"), list(mean = ~mean(.x), sd = ~sd(.x))), .by= prom_recht)
+```
+
+You can define this `list()` in advance and use it later:
+```{r}
+wert_liste <- list(MEAN = ~mean(.x), SD = ~sd(.x))
+
+dat3 %>%
+  summarise(across(matches("studs|profs"), wert_liste), .by= prom_recht)
+```
+
+The `.names()` argument allows us to control the naming of columns. `{.fn}` stands for the function being applied, and `{.col}` represents the name of the variable being processed.
+
+```{r}
+dat3 %>%
+  summarise(across(matches("studs|profs"), 
+                   wert_liste,
+                   .names = "{.fn}_{.col}"),
+            .by= prom_recht)
+```
+
+All these functions also work with `mutate()`:
+
+```{r}
+dat3 %>%
+  mutate(across(matches("studs|profs"),
+                wert_liste, 
+                .names = "{.col}XX{.fn}"))
+```
+
+[More examples in the across() documentation](https://dplyr.tidyverse.org/reference/across.html)
+
+### [Exercise](#across_ue) {#ue06_3}
+
+## Custom Functions
+
+What’s with the `~`[^tilde] in `across()`? Let's take a look at the basics of functions in R to understand.
+
+[^tilde]: "tilde": <br> **Windows**: Press `Alt Gr` + `*` (The asterisk is on the same key as the plus sign). <br> **macOS**: Press `Alt` (Option) + `N`, then press the space bar to insert the tilde.
+
+To do so, let’s examine three satisfaction variables for respondents in rows 12-16:
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(gt)
+
+  etb_worksat <- 
+    haven::read_dta("./orig/PENDDAT_cf_W13.dta",n_max = 1) %>% 
+    select(contains("PEO0300"))
+  
+
+  
+
+etb_worksat %>%
+  map_dfr(.,~attributes(.x)$label) %>%
+  pivot_longer(cols = everything(),names_to = "variable") %>% 
+  mutate(variable = glue::glue("`{variable}`"),
+         value = str_remove(value, "Important regarding job\\:")) %>% 
+  rename(`Important regarding job` = value) %>% 
+  gt() %>% 
+  tab_options(  table.font.size = 12) %>% 
+  tab_style(style = cell_text(font = "Roboto"),locations = cells_body(variable)) %>% 
+  fmt_markdown(columns = 1)
+
+
+    etb_worksat %>% 
+    map_dfr(.,~attributes(.x)$labels,.id = "var") %>% 
+    pivot_longer(-var) %>% 
+    pivot_wider(names_from = value,values_from = name) %>% 
+    select(matches("^1|^2|^3|^4|-10")) %>% 
+    rename(`-10 bis -1`=`-10`) %>% 
+    mutate(`-10 bis -1` = "t.n.z./k.A.") %>% 
+    distinct() %>% 
+    gt() %>% 
+    tab_options(  table.font.size = 11)
+```
+
+```{r}
+pend <- haven::read_dta("./orig/PENDDAT_cf_W13.dta")
+
+sat_small <- 
+  pend %>% 
+    filter(welle == 1) %>% 
+    select(matches("PEO0300(a|b|c)")) %>% 
+    slice(12:16) %>% 
+    haven::zap_labels() %>% haven::zap_label() # remove labels
+sat_small
+```
+```{r}
+#| echo: true
+sat_small <- sat_small %>% mutate(across(everything(),~as.numeric(.x)))
+```
+
+Sometimes we want to process multiple variables in the same way. Above, we saw how to handle this with [`across()`](#across) for existing functions. But what if we want to perform a calculation that isn't as simple as applying `mean()`, `sd()`, etc.?
+
+```{r}
+sat_small %>% 
+  mutate(dmean_PEO0300a = PEO0300a - mean(PEO0300a,na.rm = T),
+         dmean_PEO0300c = PEO0300c - mean(PEO0300c,na.rm = T))
+```
+
+...and now what about `F1450_06`? Typing this out three times would violate the "DRY" principle[^dry], especially considering the PASS CampusFile contains `r pend %>% select(matches("PEO0300")) %>% ncol()` columns of similar satisfaction variables. Copying and pasting is not a practical option.
+
+[^dry]: Do not repeat yourself, see [Wickham et al](https://r4ds.had.co.nz/functions.html): "You should consider writing a function whenever you’ve copied and pasted a block of code more than twice (i.e. you now have three copies of the same code)."
+
+Custom functions allow us to adhere to the DRY principle in R. We'll make our calculation steps part of a `function()` and apply it to the desired variables. A function takes an input, defined as a placeholder within the `()`. This placeholder is used within the function, and we return the result with `return()`. Only one output can be returned:
+
+```{r}
+dtomean <- function(x){
+  d_x <- x - mean(x,na.rm = T)
+  return(d_x)
+}
+```
+How can we now apply our function `dtomean()` to the variables from our `sat_small`?  
+In principle, we saw [at the beginning](#02_intro) that a `data.frame` is simply a combined collection of vectors (the variables).  
+Accordingly, we can now apply our `dtomean()` to a variable (a vector) by calling it with `data.frame$variablename`:
+```{r}
+dtomean(sat_small$PEO0300a)
+```
+
+To apply our function to each variable of a `data.frame`, we can use `lapply()` - the output will then be a list, with elements named after the variable names:
+```{r}
+lapply(sat_small,FUN = dtomean)
+res <- lapply(sat_small,FUN = dtomean)
+class(res)
+```
+
+`map()` from `{purrr}` is an alternative to `lapply`:
+```{r}
+sat_small %>% map(~dtomean(.x))
+```
+This *formula syntax* can also be found in `across()` - additionally, with `.names =` we have the option to modify the variable names for the results:
+```{r}
+sat_small %>% 
+  mutate(across(matches("PEO0300"),~dtomean(.x),.names = "dmean_{.col}"))
+```
+
+
+### [Exercise](#fnct) {#ue06_4}
+
+## Helper functions `ifelse()` and `case_when()`
+
+`ifelse()` is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether `studs-mean(studs)` is greater than `0` - if so, `above` is used, otherwise `below`:
+
+```{r}
+dat3 %>% mutate(rel_to_mean = studs-mean(studs),
+                ab_mean_lab = ifelse(rel_to_mean > 0,"above","below"))
+```
+
+`case_when()` (`{dplyr}`) extends this principle, allowing us to specify more than two options.  
+The syntax is slightly different: first, we specify the condition, then after a `~` the values to be used: 
+
+```{r}
+dat3 %>% mutate(age = case_when(gegr < 1500 ~ "very old",
+                                gegr < 1900 ~ "old"))
+```
+
+With `TRUE`, we can address all cases that have not met any conditions so far:
+```{r}
+dat3 %>% mutate(age = case_when(gegr < 1500 ~ "very old",
+                                gegr < 1900 ~ "old",
+                                TRUE ~ "relatively new"))
+```
+
+This doesn't have to be limited to one variable:
+
+```{r}
+dat3 %>% mutate(age = case_when(gegr < 1500 & prom_recht  == T ~ "very old university",
+                                gegr < 1900 & prom_recht  == T ~ "old university",
+                                gegr > 1900 & prom_recht  == T ~ "young university",
+                                gegr < 1900 & prom_recht  == F ~ "old college",
+                                gegr > 1900 & prom_recht  == F ~ "young college"))
+```
+
+### [Exercise](#ifcase) {#ue06_5}
+
+## Exercises
+
+### Exercise {#mutate1}
+
++ Create `dat3` as [shown above](#var) from `dat1` and `dat2`.
++ Calculate the student-to-professor ratio (students per professor `studs/profs`) at the universities relative to the mean of the ratio (`rel_studprofs`).
++ Is the ratio above or below the mean? How can you adjust the command so that the variable `rel_studprofs` only contains `TRUE` or `FALSE` instead of numeric values?
++ Convert `rel_studprofs` into a dummy variable with 0/1 values instead of `TRUE`/`FALSE`.
+
+::: callout-tip
+
+A rule of thumb to decide whether `mutate()` or `...$newvar <-` is more suitable: Whenever it's just about quickly creating/deleting a variable, `...$newvar <-` is the simpler choice. When it goes beyond that, `mutate()` offers significant advantages ([next section](#group_by)).
+
+:::
+
+[Back to top](#ue06_1)
+
+
+### Exercise {#grp_ue}
+
++ Continue using the university dataset.
++ Calculate the student-to-professor ratio (`studprofs`) relative to the mean, separated by universities with and without the right to award doctorates, and add this as a new column.
++ Test both the `group_by()` and `.by =` variants.
+
+[Back to top](#ue06_2)
+
+### Exercise {#across_ue}
+
++ Use the `pend_small` dataset:
+
+```{r}
+#| include: false
+haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                               col_select = c("welle","PEO0400a","PEO0400b","PEO0400c","PEO0400d")
+                               ) %>%  
+  filter(welle == 2) %>% 
+  mutate(id = floor(as.numeric(rownames(.))/10),
+         across(matches("PE"),~.x<0)) %>% 
+  mutate(na = rowSums(select(., matches("PE") )) ) %>% 
+  summarise(sum_na = sum(na),.by = id) %>% 
+  arrange(sum_na) %>% 
+  filter(id %in% 13:15)
+```
+
+
+```{r}
+pend_small <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                               col_select = c("welle","zpsex","PEO0400a","PEO0400b","PEO0400c","PEO0400d")
+                               ) %>% 
+  filter(welle == 2) %>% 
+  slice(1:15)
+```
+
++ Calculate the mean for the variables `PEO0400a`, `PEO0400b`, `PEO0400c`, and `PEO0400d`:
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(gt)
+etb18_smallx <-  haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                               col_select = c("PEO0400a","PEO0400b","PEO0400c","PEO0400d"),
+                               n_max = 1)
+
+etb18_smallx %>% select(starts_with("PEO0400")) %>% 
+  map_dfr(.,~attributes(.x)$label) %>% 
+      t(.) %>% data.frame(lab = .) %>% 
+      rownames_to_column(.,var = "var") %>% 
+  mutate(lab = str_remove(lab,"Familie/Beruf\\: "),
+         var = glue::glue("`{var}`")) %>% 
+  gt() %>% 
+  tab_options(  table.font.size = 12) %>% 
+  fmt_markdown(columns = var)
+
+
+data.frame(pend_small)
+```
+
++ Use `across()` to calculate the means for all four variables.
++ Calculate the means separately by gender (`zpsex`) using `.by =`.
++ Also add the variance (`var()`), and use `.names=` to name the columns following the pattern `metric.variable`.
+
+[Back to top](#ue06_3)
+
+
+### Exercise {#fnct}
+
+Continue using `pend_small`:
+```{r}
+#| eval: false
+pend_small
+```
+
+```{r}
+#| echo: false
+data.frame(pend_small)
+```
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+library(gt)
+   
+haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                       col_select = c("PEO0400a","PEO0400b","PEO0400c","PEO0400d"),n_max = 2)  %>% 
+  select(starts_with("PEO0400")) %>% 
+  map_dfr(.,~attributes(.x)$label) %>% 
+      t(.) %>% data.frame(lab = .) %>% 
+      rownames_to_column(.,var = "var") %>% 
+  mutate(lab = str_remove(lab,"Familie/Beruf\\: "),
+         var = glue::glue("`{var}`")) %>% 
+  gt() %>% 
+  tab_options(  table.font.size = 12) %>% 
+  fmt_markdown(columns = var)
+
+
+haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                col_select = c("PEO0400a","PEO0400b","PEO0400c","PEO0400d"),n_max = 1) %>% 
+  map_dfr(.,~attributes(.x)$labels,.id = "var") %>% 
+  pivot_longer(-var) %>%
+  pivot_wider(names_from = value,values_from = name) %>%
+  select(matches("^1|^2|^3|^4|-10")) %>%
+  rename(`-10 to -1`=`-10`) %>%
+  mutate(`-10 to -1` = "n.z./n.a.") %>%
+  distinct()
+
+
+```
+
+
+
++ Standardize the variables `PEO0400a` - `PEO0400d` from `pend_small` using the following pattern:
+```{r}
+#| eval: false
+pend_small %>% 
+  mutate(std_PEO0400b = (PEO0400b - mean(PEO0400b,na.rm = T))/sd(PEO0400b,na.rm = T))
+```
++ Use a function so that you don't have to repeatedly enter the same steps.
++ Additionally, use `across()` to apply the function to the desired variables.
+
+[Back to top](#ue06_4)
+
+
+### Exercise {#ifcase}
+
++ Work on `pend_small2`:
+```{r}
+pend_small2 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                         col_select = c("palter","PEO0400a","PEO0400b","PEO0400c","statakt")) 
+pend_small2 <- pend_small2 %>% slice(5624:5640)
+pend_small2
+```
+
+
++ Use `ifelse()` to label people 50 years and older as "ü50" - for those under 50, label them as "u50".
++ Create a three-way division: people under 40 are labeled "u40", people under 50 "u50", and people 50 and older as "ü50". How would you approach this with `case_when()`?
++ Use `ifelse()` to overwrite values < 0 in the variables `PEO0400a`, `PEO0400b`, `PEO0400c`, and `statakt` in `pend_small2` with `NA`.
++ First, write an `ifelse()` function that overwrites all values < 0 in `PEO0400a` with `NA` and otherwise keeps the original value `PEO0400a`.
++ How would the function look if you applied it to `PEO0400a`, `PEO0400b`, `PEO0400c`, and `statakt` at the same time using `across()`?
+
+[Back to top](#ue06_5)
+
+
+## Appendix
+
+### Renaming variables
+
+
+To rename variables, use `rename(new_name = old_name)`
+
+```{r}
+sat_small %>% rename(newname = PEO0300a)
+```
+
+For advanced transformations, it's worth looking into `rename_with()`. This allows us to use [Regular Expressions](https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf), for example from [{stringr}](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf). Here’s just an example:
+
+```{r}
+sat_small %>% rename_with(~tolower(.))
+sat_small %>% rename_with(~str_remove(.x,"PEO0300"))
+sat_small %>% rename_with(~str_replace(.x,"PEO0300","Occupation_"))
+```
+### Creating Classes with `cut()`
+
+```{r}
+dat3
+```
+
+A common task in data preparation is classifying a continuous variable, such as the number of professors. We want to group `profs` in steps of 150. To create these classes, we use `cut()` and specify the class boundaries with `breaks`. We can use `seq()` to generate the breakpoints. In `seq()`, we specify the lower and upper limits along with the step size.
+
+```{r}
+cut(dat3$profs,breaks = c(50, 200, 350, 500, 650))
+cut(dat3$profs,breaks = seq(50,650,150))
+```
+
+We store these values in a new variable in the `dat3` dataset:
+
+```{r}
+dat3$prof_class <- cut(dat3$profs,breaks = seq(50,650,150))
+dat3
+```
+
+For this new variable, we can request a frequency table using `count()`:
+
+```{r}
+dat3 %>% count(prof_class)
+```
+
+```{r}
+#| echo: false
+n200_350 <-  dat3 %>% count(prof_class) %>% filter(grepl("\\(20",prof_class)) %>% pull(n)
+```
+
+The parentheses `(` indicate exclusion, while the brackets `]` indicate inclusion. There are `r n200_350` universities in the dataset that have more than 200 and up to 350 professors.
+
+For the following examples, we delete the `prof_class` variable again:
+
+```{r}
+dat3$prof_class <- NULL
+```
+
+**Some useful options for `cut()` in the appendix**
+
+```{r}
+bsp <- c(1990,1998,2001,2009)
+bsp
+cut(bsp,breaks = c(1990,2000,2010)) 
+# Specify the number of digits in the labels
+cut(bsp,breaks = c(1990,2000,2010),dig.lab = 4) 
+# Include the lower boundary
+cut(bsp,breaks = c(1990,2000,2010),dig.lab = 4,include.lowest = T) 
+# Number the categories instead of labels:
+cut(bsp,breaks = c(1990,2000,2010),labels = FALSE)
+# Specify your own labels:
+cut(bsp,breaks = c(1990,2000,2010),labels = c("90s","00s"))
+```
+
+### String Functions for *regex*
+
+[{stringr}](https://stringr.tidyverse.org/) provides a series of very useful string functions with [regular expressions](https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf). You can get an overview from this [cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf).
+
+```{r}
+dat3 %>% mutate(uni_fh = str_detect(uni,"Uni"))
+dat3 %>% mutate(bula = case_when(str_detect(uni,"Bremen")~ "HB",
+                                 str_detect(uni,"Oldenb|Vechta")~ "NDS",
+                                 str_detect(uni,"Bonn|Aachen")~ "NRW",
+                                 str_detect(uni,"Freiburg")~ "BW"
+                                 ))
+dat3 %>% mutate(ort = str_remove(uni,"Uni |FH |RWTH "))
+```
