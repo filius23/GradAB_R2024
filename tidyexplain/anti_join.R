@@ -1,4 +1,5 @@
-source(here::here("R/00_base_join.R"))
+source(here::here("tidyexplain/00_base_join.R"))
+# source(here::here("R/00_base_join.R"))
 
 initial_join_dfs <- initial_join_dfs %>%
   arrange(.x, .y) %>%
@@ -9,7 +10,7 @@ aj_step2 <- initial_join_dfs %>%
   mutate(frame = 2,
          .x = ifelse(.id == "y", 2.5, .x + 1.5),
          alpha = case_when(
-           .x > 3 && .id == "x" ~ 0.5,
+           .x > 3 & .id == "x" ~ 0.5,
            .y > -2.5 ~ 0.25,
            TRUE ~ 1
          ))
@@ -38,7 +39,7 @@ aj <- bind_rows(
                state_length = c(1, 0, 0, 1))
 
 aj <- animate(aj)
-anim_save(here::here("images", "anti-join.gif"), aj)
+anim_save(here::here("pic", "anti-join.gif"), aj)
 
 aj_g <- anti_join(x, y, by = "id") %>%
   proc_data() %>%

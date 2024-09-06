@@ -187,20 +187,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_viz_translated.html" class="sidebar-item-text sidebar-link">
+  <a href="./07_viz_translated.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14_tabellenexport.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -227,25 +215,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#other-table-values" id="toc-other-table-values" class="nav-link" data-scroll-target="#other-table-values"><span class="header-section-number">3.3</span> Other Table Values</a>
   <ul class="collapse">
   <li><a href="#creating-a-contingency-table" id="toc-creating-a-contingency-table" class="nav-link" data-scroll-target="#creating-a-contingency-table"><span class="header-section-number">3.3.1</span> Creating a Contingency Table</a></li>
-  <li><a href="#working-with-count-from-dplyr" id="toc-working-with-count-from-dplyr" class="nav-link" data-scroll-target="#working-with-count-from-dplyr"><span class="header-section-number">3.3.2</span> Working with <code>count()</code> from <code>{dplyr}</code></a></li>
   </ul></li>
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">3.4</span> Summary Statistics</a>
   <ul class="collapse">
-  <li><a href="#handling-missing-data" id="toc-handling-missing-data" class="nav-link" data-scroll-target="#handling-missing-data"><span class="header-section-number">3.4.1</span> Handling Missing Data</a></li>
-  <li><a href="#calculating-specific-statistics" id="toc-calculating-specific-statistics" class="nav-link" data-scroll-target="#calculating-specific-statistics"><span class="header-section-number">3.4.2</span> Calculating Specific Statistics</a></li>
-  <li><a href="#custom-summary-with-summarise" id="toc-custom-summary-with-summarise" class="nav-link" data-scroll-target="#custom-summary-with-summarise"><span class="header-section-number">3.4.3</span> Custom Summary with <code>summarise()</code></a></li>
-  <li><a href="#comparing-across-groups" id="toc-comparing-across-groups" class="nav-link" data-scroll-target="#comparing-across-groups"><span class="header-section-number">3.4.4</span> Comparing Across Groups</a></li>
-  <li><a href="#ue3_3" id="toc-ue3_3" class="nav-link" data-scroll-target="#ue3_3"><span class="header-section-number">3.4.5</span> Exercise</a></li>
+  <li><a href="#calculating-specific-statistics" id="toc-calculating-specific-statistics" class="nav-link" data-scroll-target="#calculating-specific-statistics"><span class="header-section-number">3.4.1</span> Calculating Specific Statistics</a></li>
+  <li><a href="#custom-summary-with-summarise" id="toc-custom-summary-with-summarise" class="nav-link" data-scroll-target="#custom-summary-with-summarise"><span class="header-section-number">3.4.2</span> Custom Summary with <code>summarise()</code></a></li>
+  <li><a href="#comparing-across-groups" id="toc-comparing-across-groups" class="nav-link" data-scroll-target="#comparing-across-groups"><span class="header-section-number">3.4.3</span> Comparing Across Groups</a></li>
+  <li><a href="#ue3_3" id="toc-ue3_3" class="nav-link" data-scroll-target="#ue3_3"><span class="header-section-number">3.4.4</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#übungen" id="toc-übungen" class="nav-link" data-scroll-target="#übungen"><span class="header-section-number">3.5</span> Übungen</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.5</span> Exercises</a>
   <ul class="collapse">
-  <li><a href="#descue1" id="toc-descue1" class="nav-link" data-scroll-target="#descue1"><span class="header-section-number">3.5.1</span> Übung 1</a></li>
-  <li><a href="#descue2" id="toc-descue2" class="nav-link" data-scroll-target="#descue2"><span class="header-section-number">3.5.2</span> Übung 2</a></li>
-  <li><a href="#descue3" id="toc-descue3" class="nav-link" data-scroll-target="#descue3"><span class="header-section-number">3.5.3</span> Übung 3</a></li>
+  <li><a href="#descue1" id="toc-descue1" class="nav-link" data-scroll-target="#descue1"><span class="header-section-number">3.5.1</span> Exercise 1</a></li>
+  <li><a href="#descue2" id="toc-descue2" class="nav-link" data-scroll-target="#descue2"><span class="header-section-number">3.5.2</span> Exercise 2</a></li>
+  <li><a href="#descue3" id="toc-descue3" class="nav-link" data-scroll-target="#descue3"><span class="header-section-number">3.5.3</span> Exercise 3</a></li>
   </ul></li>
-  <li><a href="#hinweise" id="toc-hinweise" class="nav-link" data-scroll-target="#hinweise"><span class="header-section-number">3.6</span> Hinweise</a>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes"><span class="header-section-number">3.6</span> Notes</a>
   <ul class="collapse">
-  <li><a href="#round" id="toc-round" class="nav-link" data-scroll-target="#round"><span class="header-section-number">3.6.1</span> Runden mit <code>round()</code></a></li>
+  <li><a href="#round" id="toc-round" class="nav-link" data-scroll-target="#round"><span class="header-section-number">3.6.1</span> Rounding with <code>round()</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -300,63 +286,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Here, we see the absolute frequencies displayed. The first row lists the different values, and the second row shows the frequencies.</p>
 <p>However, the labels are ignored in the output of <code>table()</code>. A look into the PASS data report or using <code>attributes()</code> reveals the value labels:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pend<span class="sc">$</span>statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pend<span class="sc">$</span>statakt)<span class="sc">$</span>labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$label
-[1] "Aktueller Hauptstatus, generiert (ab Welle 2)"
-
-$format.stata
-[1] "%46.0g"
-
-$class
-[1] "haven_labelled" "vctrs_vctr"     "double"        
-
-$labels
-Item fuer Fragebogenversion nicht relevant 
-                                       -10 
-               Item in Welle nicht erhoben 
-                                        -9 
-   Generierung nicht mgl. (fehlende Werte) 
-                                        -5 
-                             Erwerbstaetig 
-                                         1 
-        Arbeitslos (Gemeldet und sonstige) 
-                                         2 
-                                   Inaktiv 
-                                         3 </code></pre>
+<pre><code>    Item not surveyed in questionnaire version 
+                                           -10 
+                     Item not surveyed in wave 
+                                            -9 
+          Cannot be generated (missing values) 
+                                            -5 
+In occupation with earnings &gt;400 EUR per month 
+                                             1 
+                        Unemployed, registered 
+                                             2 
+                        Pupil/student (school) 
+                                             3 
+                       Apprenticeship/Studying 
+                                             4 
+                  Military or civilian service 
+                                             5 
+                  Carrying out domestic duties 
+                                             6 
+           Maternity protection/parental leave 
+                                             7 
+                    Pensioner/early retirement 
+                                             8 
+                                         Other 
+                                             9 
+         Unemployed, not registered (since W4) 
+                                            10 
+                Ill/unfit to work/unemployable 
+                                            11 
+                   Self-employed/family worker 
+                                            12 </code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">table</span>(pend<span class="sc">$</span>statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>9470 respondents are employed, 5481 respondents are inactive, etc. (More on labels and working with value labels in R later.)</p>
 <p>With <code>count()</code> from <code>{dplyr}</code>, we get the labels displayed directly. Again, we use the <a href="02_intro.html#pipe">pipe <code>%&gt;%</code></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
-  statakt                                              n
-  &lt;dbl+lbl&gt;                                        &lt;int&gt;
-1 -10 [Item fuer Fragebogenversion nicht relevant]  3765
-2  -9 [Item in Welle nicht erhoben]                 3289
-3  -5 [Generierung nicht mgl. (fehlende Werte)]      280
-4   1 [Erwerbstaetig]                               9470
-5   2 [Arbeitslos (Gemeldet und sonstige)]          6139
-6   3 [Inaktiv]                                     5481</code></pre>
+  statakt                                                  n
+  &lt;dbl+lbl&gt;                                            &lt;int&gt;
+1 -10 [Item not surveyed in questionnaire version]      3765
+2  -9 [Item not surveyed in wave]                       3289
+3  -5 [Cannot be generated (missing values)]             280
+4   1 [In occupation with earnings &gt;400 EUR per month]  9470
+5   2 [Unemployed, registered]                          6139
+6   3 [Pupil/student (school)]                          5481</code></pre>
 </div>
 </div>
 <p>We can also store tables under a freely chosen name and call them up later:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">table</span>(pend<span class="sc">$</span>statakt)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">table</span>(pend<span class="sc">$</span>statakt)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We see here that the table with <code>table()</code> creates a new object form, a table. With <code>count()</code>, however, a <code>data.frame</code> is created.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "table"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
@@ -367,9 +358,9 @@ Item fuer Fragebogenversion nicht relevant
 <p>Negative values are a bit annoying.</p>
 <p>To mark the values like <code>-5</code> as missing data in R, we need to set them to <code>NA</code> in <code>pend</code>. To do this, we call <code>pend$statakt</code> and filter with <code>[]</code> only the values for <code>statakt</code> equal to <code>-1</code>. In the previous chapter, we learned how to call specific values this way:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">5</span>] <span class="co"># only call statakt = -5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">5</span>] <span class="co"># only call statakt = -5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;labelled&lt;double&gt;[280]&gt;: Aktueller Hauptstatus, generiert (ab Welle 2)
+<pre><code>&lt;labelled&lt;double&gt;[280]&gt;: Current main occupation, gen. (since W2)
   [1] -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5
  [26] -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5
  [51] -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5
@@ -384,290 +375,151 @@ Item fuer Fragebogenversion nicht relevant
 [276] -5 -5 -5 -5 -5
 
 Labels:
- value                                      label
-   -10 Item fuer Fragebogenversion nicht relevant
-    -9                Item in Welle nicht erhoben
-    -5    Generierung nicht mgl. (fehlende Werte)
-     1                              Erwerbstaetig
-     2         Arbeitslos (Gemeldet und sonstige)
-     3                                    Inaktiv</code></pre>
+ value                                          label
+   -10     Item not surveyed in questionnaire version
+    -9                      Item not surveyed in wave
+    -5           Cannot be generated (missing values)
+     1 In occupation with earnings &gt;400 EUR per month
+     2                         Unemployed, registered
+     3                         Pupil/student (school)
+     4                        Apprenticeship/Studying
+     5                   Military or civilian service
+     6                   Carrying out domestic duties
+     7            Maternity protection/parental leave
+     8                     Pensioner/early retirement
+     9                                          Other
+    10          Unemployed, not registered (since W4)
+    11                 Ill/unfit to work/unemployable
+    12                    Self-employed/family worker</code></pre>
 </div>
 </div>
 <p>(Here, we get the labels again, which is somewhat suboptimal for clarity.)</p>
 <p>If we then assign a new value with <code>&lt;-</code>, the called values will be overwritten - here, we overwrite all values for <code>statakt == -1</code> with <code>NA</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">5</span>]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>NA</code> is the code for missing data in R, and they will not be listed in <code>table()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
- -10   -9    1    2    3 
-3765 3289 9470 6139 5481 </code></pre>
-</div>
-</div>
-<p>But we can explicitly request the count of <code>NA</code> with the option <code>exclude = NULL</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>statakt,<span class="at">exclude =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
- -10   -9    1    2    3 &lt;NA&gt; 
-3765 3289 9470 6139 5481  280 </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">5</span>]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, we have not yet overwritten all the negative values; <code>-10</code> and <code>-9</code> are still missing. Of course, it would be possible this way, but it’s a bit cumbersome:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">9</span> ]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">10</span>]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">9</span> ]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">==</span> <span class="sc">-</span><span class="dv">10</span>]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For the PASS data, it’s shorter to use <code>&lt; 0</code>, because all missing codes are less than 0:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">&lt;</span> <span class="dv">0</span> ]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now we are done with <code>statakt</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-   1    2    3 
-9470 6139 5481 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>statakt,<span class="at">exclude =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-   1    2    3 &lt;NA&gt; 
-9470 6139 5481 7334 </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>statakt[pend<span class="sc">$</span>statakt <span class="sc">&lt;</span> <span class="dv">0</span> ]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In <code>count()</code>, <code>NA</code> is also counted:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
-  statakt                                     n
-  &lt;dbl+lbl&gt;                               &lt;int&gt;
-1  1 [Erwerbstaetig]                       9470
-2  2 [Arbeitslos (Gemeldet und sonstige)]  6139
-3  3 [Inaktiv]                             5481
-4 NA                                       7334</code></pre>
+  statakt                                                 n
+  &lt;dbl+lbl&gt;                                           &lt;int&gt;
+1  1 [In occupation with earnings &gt;400 EUR per month]  9470
+2  2 [Unemployed, registered]                          6139
+3  3 [Pupil/student (school)]                          5481
+4 NA                                                   7334</code></pre>
 </div>
 </div>
 <p>If we want to avoid this, we use <code>filter()</code> again - with <code>is.na()</code>, we can identify <code>NA</code>. By prefixing with <code>!</code>, we can request that all non-<code>NA</code> values be retained with <code>TRUE</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(statakt)) <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(statakt)) <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
-  statakt                                    n
-  &lt;dbl+lbl&gt;                              &lt;int&gt;
-1 1 [Erwerbstaetig]                       9470
-2 2 [Arbeitslos (Gemeldet und sonstige)]  6139
-3 3 [Inaktiv]                             5481</code></pre>
+  statakt                                                n
+  &lt;dbl+lbl&gt;                                          &lt;int&gt;
+1 1 [In occupation with earnings &gt;400 EUR per month]  9470
+2 2 [Unemployed, registered]                          6139
+3 3 [Pupil/student (school)]                          5481</code></pre>
 </div>
 </div>
-<p>More about missing values can be found, for example, in <a href="https://tmb.njtierney.com/"><strong>The missing book</strong></a> by Nicholas Tierney &amp; Allison Horst.</p>
 <section id="ue3_1" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="ue3_1"><span class="header-section-number">3.2.1</span> <a href="#descue1">Exercise</a></h3>
 </section>
 </section>
 <section id="other-table-values" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="other-table-values"><span class="header-section-number">3.3</span> Other Table Values</h2>
-<p>With the help of additional functions, we can customize the frequency tables:</p>
+<p>With the help of additional functions, we can customize the frequency table to match the Stata with <code>tab statakt</code>:</p>
+<div class="cell" data-collectcode="false">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Current main occupation, gen. (since |
+                                    W2) |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
+                 Unemployed, registered |      6,139       29.11       74.01
+                 Pupil/student (school) |      5,481       25.99      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     21,090      100.00</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> pend <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(statakt)) <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li><code>prop.table()</code>: relative values/percentages</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>statakt) <span class="sc">%&gt;%</span> <span class="fu">prop.table</span>(.) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>pct <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab1<span class="sc">$</span>n) </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>tab1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-        1         2         3 
-0.4490280 0.2910858 0.2598862 </code></pre>
+<pre><code># A tibble: 3 × 3
+  statakt                                                n   pct
+  &lt;dbl+lbl&gt;                                          &lt;int&gt; &lt;dbl&gt;
+1 1 [In occupation with earnings &gt;400 EUR per month]  9470 0.449
+2 2 [Unemployed, registered]                          6139 0.291
+3 3 [Pupil/student (school)]                          5481 0.260</code></pre>
 </div>
 </div>
 <p>29.109% of respondents are unemployed.</p>
 <ul>
-<li><code>cumsum()</code>: cumulative values</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>statakt) <span class="sc">%&gt;%</span> <span class="fu">cumsum</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    1     2     3 
- 9470 15609 21090 </code></pre>
-</div>
-</div>
-<p>15609 respondents are employed or unemployed.</p>
-<ul>
 <li><code>prop.table()</code> with <code>cumsum()</code>: cumulative relative frequencies</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>statakt) <span class="sc">%&gt;%</span> <span class="fu">prop.table</span>() <span class="sc">%&gt;%</span> <span class="fu">cumsum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>cum <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab1<span class="sc">$</span>n) <span class="sc">%&gt;%</span> <span class="fu">cumsum</span>()</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>tab1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        1         2         3 
-0.4490280 0.7401138 1.0000000 </code></pre>
+<pre><code># A tibble: 3 × 4
+  statakt                                                n   pct   cum
+  &lt;dbl+lbl&gt;                                          &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 1 [In occupation with earnings &gt;400 EUR per month]  9470 0.449 0.449
+2 2 [Unemployed, registered]                          6139 0.291 0.740
+3 3 [Pupil/student (school)]                          5481 0.260 1    </code></pre>
 </div>
 </div>
 <p>74.011% of respondents are employed or unemployed (and not inactive).</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Multiple Metrics in One Table
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Many are probably familiar with the following view from Stata with <code>tab statakt</code>:</p>
-<div class="cell" data-collectcode="false">
-<div class="cell-output cell-output-stdout">
-<pre><code>   Aktueller Hauptstatus, generiert (ab |
-                               Welle 2) |      Freq.     Percent        Cum.
-----------------------------------------+-----------------------------------
-                          Erwerbstaetig |      9,470       33.32       33.32
-     Arbeitslos (Gemeldet und sonstige) |      6,139       21.60       54.91
-                                Inaktiv |      5,481       19.28       74.20
-                                      . |      7,334       25.80      100.00
-----------------------------------------+-----------------------------------
-                                  Total |     28,424      100.00</code></pre>
-</div>
-</div>
-<p>By default, <code>table()</code> or <code>count()</code> only provide one type of metric. However, since we get the counts as a <code>data.frame()</code> with <code>count()</code>, we can simply add the relative and cumulative frequencies as new variables.</p>
-<p>We use <code>dat1$var &lt;- ....</code>, which we learned in the previous chapter. To add a new column <code>pct</code> to our <code>data.frame</code> with the counts, we proceed as follows: + First, we create a <code>data.frame</code> with the count using <code>count()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>tab_statakt <span class="ot">&lt;-</span> pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt) <span class="co"># base command</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>tab_statakt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  statakt                                     n
-  &lt;dbl+lbl&gt;                               &lt;int&gt;
-1  1 [Erwerbstaetig]                       9470
-2  2 [Arbeitslos (Gemeldet und sonstige)]  6139
-3  3 [Inaktiv]                             5481
-4 NA                                       7334</code></pre>
-</div>
-</div>
-<ul>
-<li>Then we add a new column for the relative frequencies, calculated with <code>prop.table()</code>:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>tab_statakt<span class="sc">$</span>pct <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab_statakt<span class="sc">$</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If we now want to create cumulative frequencies, we can apply <code>cumsum()</code> to <code>pct</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>tab_statakt<span class="sc">$</span>Cum <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(tab_statakt<span class="sc">$</span>pct)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>tab_statakt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 4
-  statakt                                     n   pct   Cum
-  &lt;dbl+lbl&gt;                               &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-1  1 [Erwerbstaetig]                       9470 0.333 0.333
-2  2 [Arbeitslos (Gemeldet und sonstige)]  6139 0.216 0.549
-3  3 [Inaktiv]                             5481 0.193 0.742
-4 NA                                       7334 0.258 1    </code></pre>
-</div>
-</div>
-<p>The <code>NA</code> is still somewhat annoying as it represents missing data and should not be included. We can exclude it simply with <code>!is.na()</code> in <code>filter()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>tab_statakt2 <span class="ot">&lt;-</span> pend <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(statakt)) <span class="sc">%&gt;%</span> <span class="fu">count</span>(statakt) </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>tab_statakt2<span class="sc">$</span>pct <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab_statakt2<span class="sc">$</span>n)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>tab_statakt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  statakt                                    n   pct
-  &lt;dbl+lbl&gt;                              &lt;int&gt; &lt;dbl&gt;
-1 1 [Erwerbstaetig]                       9470 0.449
-2 2 [Arbeitslos (Gemeldet und sonstige)]  6139 0.291
-3 3 [Inaktiv]                             5481 0.260</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>tab_statakt2<span class="sc">$</span>cum <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(tab_statakt2<span class="sc">$</span>pct)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>tab_statakt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 4
-  statakt                                    n   pct   cum
-  &lt;dbl+lbl&gt;                              &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 1 [Erwerbstaetig]                       9470 0.449 0.449
-2 2 [Arbeitslos (Gemeldet und sonstige)]  6139 0.291 0.740
-3 3 [Inaktiv]                             5481 0.260 1    </code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
 <section id="creating-a-contingency-table" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="creating-a-contingency-table"><span class="header-section-number">3.3.1</span> Creating a Contingency Table</h3>
 <p>Contingency tables allow us to explore how frequently combinations of different variables occur together. Let’s look at two ways to create contingency tables in R.</p>
-<p>Using the <code>table()</code> function, we create a contingency table by inserting two variables. For instance, if we want to see the frequencies of employment status (<code>statakt</code>) by gender (<code>zpsex</code>), we can use the following command:</p>
+<p>Using <code>count()</code> from the <code>{dplyr}</code> package, we create a contingency table by inserting two variables. For instance, if we want to see the frequencies of employment status (<code>statakt</code>) by gender (<code>zpsex</code>), we can use the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>zpsex, pend<span class="sc">$</span>statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   
-       1    2    3
-  1 4685 3240 2047
-  2 4785 2899 3434</code></pre>
-</div>
-</div>
-<p>This table shows the counts of respondents by gender and employment status. For example, if <code>zpsex=2</code> represents females and <code>statakt=3</code> represents inactivity, the table displays how many female respondents are inactive.</p>
-<p>To add row and column totals, use the <code>addmargins()</code> function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>zpsex, pend<span class="sc">$</span>statakt) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     
-          1     2     3   Sum
-  1    4685  3240  2047  9972
-  2    4785  2899  3434 11118
-  Sum  9470  6139  5481 21090</code></pre>
-</div>
-</div>
-<p>If you want to compute the relative frequencies instead of absolute counts, use the <code>prop.table()</code> function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>zpsex, pend<span class="sc">$</span>statakt) <span class="sc">%&gt;%</span> <span class="fu">prop.table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   
-             1          2          3
-  1 0.22214320 0.15362731 0.09706022
-  2 0.22688478 0.13745851 0.16282598</code></pre>
-</div>
-</div>
-<p>For row-wise percentages (within each gender, how many fall into each employment status), use:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>zpsex, pend<span class="sc">$</span>statakt) <span class="sc">%&gt;%</span> <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   
-            1         2         3
-  1 0.4698155 0.3249097 0.2052748
-  2 0.4303832 0.2607483 0.3088685</code></pre>
-</div>
-</div>
-<p>For column-wise percentages (within each employment status, how many are male or female), use:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pend<span class="sc">$</span>zpsex, pend<span class="sc">$</span>statakt) <span class="sc">%&gt;%</span> <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   
-            1         2         3
-  1 0.4947202 0.5277733 0.3734720
-  2 0.5052798 0.4722267 0.6265280</code></pre>
-</div>
-</div>
-</section>
-<section id="working-with-count-from-dplyr" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="working-with-count-from-dplyr"><span class="header-section-number">3.3.2</span> Working with <code>count()</code> from <code>{dplyr}</code></h3>
-<p>Another approach to generate frequency tables is using <code>count()</code> from the <code>{dplyr}</code> package. It provides a more readable output with labeled variables:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(zpsex, statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(zpsex, statakt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 3
-  zpsex         statakt                                     n
-  &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt;                               &lt;int&gt;
-1 1 [Maennlich]  1 [Erwerbstaetig]                       4685
-2 1 [Maennlich]  2 [Arbeitslos (Gemeldet und sonstige)]  3240
-3 1 [Maennlich]  3 [Inaktiv]                             2047
-4 1 [Maennlich] NA                                       3555
-5 2 [Weiblich]   1 [Erwerbstaetig]                       4785
-6 2 [Weiblich]   2 [Arbeitslos (Gemeldet und sonstige)]  2899
-7 2 [Weiblich]   3 [Inaktiv]                             3434
-8 2 [Weiblich]  NA                                       3779</code></pre>
+  zpsex      statakt                                                 n
+  &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt;                                           &lt;int&gt;
+1 1 [Male]    1 [In occupation with earnings &gt;400 EUR per month]  4685
+2 1 [Male]    2 [Unemployed, registered]                          3240
+3 1 [Male]    3 [Pupil/student (school)]                          2047
+4 1 [Male]   NA                                                   3555
+5 2 [Female]  1 [In occupation with earnings &gt;400 EUR per month]  4785
+6 2 [Female]  2 [Unemployed, registered]                          2899
+7 2 [Female]  3 [Pupil/student (school)]                          3434
+8 2 [Female] NA                                                   3779</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>tab2 <span class="ot">&lt;-</span> pend <span class="sc">%&gt;%</span> <span class="fu">count</span>(zpsex, statakt)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>tab2<span class="sc">$</span>pct <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab2<span class="sc">$</span>n)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>tab2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 4
+  zpsex      statakt                                                 n    pct
+  &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt;                                           &lt;int&gt;  &lt;dbl&gt;
+1 1 [Male]    1 [In occupation with earnings &gt;400 EUR per month]  4685 0.165 
+2 1 [Male]    2 [Unemployed, registered]                          3240 0.114 
+3 1 [Male]    3 [Pupil/student (school)]                          2047 0.0720
+4 1 [Male]   NA                                                   3555 0.125 
+5 2 [Female]  1 [In occupation with earnings &gt;400 EUR per month]  4785 0.168 
+6 2 [Female]  2 [Unemployed, registered]                          2899 0.102 
+7 2 [Female]  3 [Pupil/student (school)]                          3434 0.121 
+8 2 [Female] NA                                                   3779 0.133 </code></pre>
 </div>
 </div>
 </section>
@@ -676,21 +528,20 @@ Multiple Metrics in One Table
 <h2 data-number="3.4" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">3.4</span> Summary Statistics</h2>
 <p>For numerical variables, such as income (<code>netges</code>), we often compute summary statistics like the mean, median, or quantiles. To get a quick overview, use <code>summary()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
     -5.0     -3.0     -3.0    567.9    990.0 111419.0 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>netges[pend<span class="sc">$</span>netges <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># Handling Missing Data</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+      0     880    1320    1562    1890  111419   18056 </code></pre>
 </div>
-<section id="handling-missing-data" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="handling-missing-data"><span class="header-section-number">3.4.1</span> Handling Missing Data</h3>
-<p>Negative values in the data (like -5 for <code>netges</code>) typically represent missing data. We can convert these to <code>NA</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>netges[pend<span class="sc">$</span>netges <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="calculating-specific-statistics" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="calculating-specific-statistics"><span class="header-section-number">3.4.2</span> Calculating Specific Statistics</h3>
+<section id="calculating-specific-statistics" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="calculating-specific-statistics"><span class="header-section-number">3.4.1</span> Calculating Specific Statistics</h3>
 <p>To calculate specific statistics, we can use:</p>
 <ul>
 <li>Minimum: <code>min()</code></li>
@@ -701,24 +552,29 @@ Multiple Metrics in One Table
 <li>Variance: <code>var()</code></li>
 <li>Standard Deviation: <code>sd()</code></li>
 </ul>
-<p>For instance, the mean of income ignoring missing values:</p>
+<p>For instance, the mean of income. Setting <code>na.rm = TRUE</code> forces R to ignore missing values:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pend<span class="sc">$</span>netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pend<span class="sc">$</span>netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1562.3</code></pre>
 </div>
 </div>
 </section>
-<section id="custom-summary-with-summarise" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="custom-summary-with-summarise"><span class="header-section-number">3.4.3</span> Custom Summary with <code>summarise()</code></h3>
+<section id="custom-summary-with-summarise" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="custom-summary-with-summarise"><span class="header-section-number">3.4.2</span> Custom Summary with <code>summarise()</code></h3>
 <p>You can use <code>summarise()</code> from <code>{dplyr}</code> to create custom summary tables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
   Minimum   Median  Mean Maximum  
@@ -727,92 +583,93 @@ Multiple Metrics in One Table
 </div>
 </div>
 </section>
-<section id="comparing-across-groups" class="level3" data-number="3.4.4">
-<h3 data-number="3.4.4" class="anchored" data-anchor-id="comparing-across-groups"><span class="header-section-number">3.4.4</span> Comparing Across Groups</h3>
+<section id="comparing-across-groups" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="comparing-across-groups"><span class="header-section-number">3.4.3</span> Comparing Across Groups</h3>
 <p>To compare statistics across groups, use <code>.by</code> in <code>summarise()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">.by =</span> welle</span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(welle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(welle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 5
-   welle                    Minimum   Median  Mean Maximum  
-   &lt;dbl+lbl&gt;                &lt;dbl+lbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl+lbl&gt;
- 1  1 [Welle 1 (2006/2007)] 1          1200  1525. 111419   
- 2  2 [Welle 2 (2007/2008)] 0          1320  1529.   7200   
- 3  3 [Welle 3 (2008/2009)] 0          1298. 1498.  12000   
- 4  4 [Welle 4 (2010)]      0          1210  1447.  10800   
- 5  5 [Welle 5 (2011)]      0          1250  1494.  33363   
- 6  6 [Welle 6 (2012)]      0          1215  1459.  15950   
- 7  7 [Welle 7 (2013)]      0          1250  1539.  87835   
- 8  8 [Welle 8 (2014)]      0          1255  1456.   9000   
- 9  9 [Welle 9 (2015)]      0          1280  1613. 110451   
-10 10 [Welle 10 (2016)]     0          1375  1541.   6300   
-11 11 [Welle 11 (2017)]     0          1500  1748.  44440   
-12 12 [Welle 12 (2018)]     0          1500  1667.   7150   
-13 13 [Welle 13 (2019)]     0          1550  1816.  88453   </code></pre>
+   welle                   Minimum   Median  Mean Maximum  
+   &lt;dbl+lbl&gt;               &lt;dbl+lbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl+lbl&gt;
+ 1  1 [Wave 1 (2006/2007)] 1          1200  1525. 111419   
+ 2  2 [Wave 2 (2007/2008)] 0          1320  1529.   7200   
+ 3  3 [Wave 3 (2008/2009)] 0          1298. 1498.  12000   
+ 4  4 [Wave 4 (2010)]      0          1210  1447.  10800   
+ 5  5 [Wave 5 (2011)]      0          1250  1494.  33363   
+ 6  6 [Wave 6 (2012)]      0          1215  1459.  15950   
+ 7  7 [Wave 7 (2013)]      0          1250  1539.  87835   
+ 8  8 [Wave 8 (2014)]      0          1255  1456.   9000   
+ 9  9 [Wave 9 (2015)]      0          1280  1613. 110451   
+10 10 [Wave 10 (2016)]     0          1375  1541.   6300   
+11 11 [Wave 11 (2017)]     0          1500  1748.  44440   
+12 12 [Wave 12 (2018)]     0          1500  1667.   7150   
+13 13 [Wave 13 (2019)]     0          1550  1816.  88453   </code></pre>
 </div>
 </div>
 <p>You can also filter for specific waves if needed:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> </span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
-<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
-  welle                    Minimum   Median  Mean Maximum  
-  &lt;dbl+lbl&gt;                &lt;dbl+lbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl+lbl&gt;
-1  1 [Welle 1 (2006/2007)] 1           1200 1525. 111419   
-2 10 [Welle 10 (2016)]     0           1375 1541.   6300   </code></pre>
+  welle                   Minimum   Median  Mean Maximum  
+  &lt;dbl+lbl&gt;               &lt;dbl+lbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl+lbl&gt;
+1  1 [Wave 1 (2006/2007)] 1           1200 1525. 111419   
+2 10 [Wave 10 (2016)]     0           1375 1541.   6300   </code></pre>
 </div>
 </div>
 <p>These methods allow for thorough analysis of both categorical and numerical data in R.</p>
 </section>
-<section id="ue3_3" class="level3" data-number="3.4.5">
-<h3 data-number="3.4.5" class="anchored" data-anchor-id="ue3_3"><span class="header-section-number">3.4.5</span> <a href="#descue3">Exercise</a></h3>
+<section id="ue3_3" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="ue3_3"><span class="header-section-number">3.4.4</span> <a href="#descue3">Exercise</a></h3>
 </section>
 </section>
-<section id="übungen" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="übungen"><span class="header-section-number">3.5</span> Übungen</h2>
+<section id="exercises" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.5</span> Exercises</h2>
 <!-- {{< include _03_0_ueb.qmd >}} -->
-<p>Alle Übungen beziehen sich auf das PASS CampusFile <code>PENDDAT_cf_W13.dta</code>:</p>
+<p>Use the PASS CampusFile <code>PENDDAT_cf_W13.dta</code> for all exercises:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong><a href="./02_intro.html#import">Zur Erinnerung: hier geht’s zur Übersicht der Einlesebefehle</a></strong></p>
+<p><strong><a href="./02_intro.html#import">As a reminder: you can find an overview of the data import commands here</a></strong></p>
 <section id="descue1" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="descue1"><span class="header-section-number">3.5.1</span> Übung 1</h3>
-<p>Wir interessieren uns für die Variable <code>famstand</code>, welche den Familienstand der Befragten enthält:</p>
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="descue1"><span class="header-section-number">3.5.1</span> Exercise 1</h3>
+<p>We are interested in the variable <code>famstand</code>, which contains the marital status of the respondents:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ygbybakaea" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ygbybakaea table {
+<div id="vipaugirnk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vipaugirnk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ygbybakaea thead, #ygbybakaea tbody, #ygbybakaea tfoot, #ygbybakaea tr, #ygbybakaea td, #ygbybakaea th {
+#vipaugirnk thead, #vipaugirnk tbody, #vipaugirnk tfoot, #vipaugirnk tr, #vipaugirnk td, #vipaugirnk th {
   border-style: none;
 }
 
-#ygbybakaea p {
+#vipaugirnk p {
   margin: 0;
   padding: 0;
 }
 
-#ygbybakaea .gt_table {
+#vipaugirnk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -838,12 +695,12 @@ Multiple Metrics in One Table
   border-left-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_caption {
+#vipaugirnk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ygbybakaea .gt_title {
+#vipaugirnk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -855,7 +712,7 @@ Multiple Metrics in One Table
   border-bottom-width: 0;
 }
 
-#ygbybakaea .gt_subtitle {
+#vipaugirnk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -867,7 +724,7 @@ Multiple Metrics in One Table
   border-top-width: 0;
 }
 
-#ygbybakaea .gt_heading {
+#vipaugirnk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -879,13 +736,13 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_bottom_border {
+#vipaugirnk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_col_headings {
+#vipaugirnk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -900,7 +757,7 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_col_heading {
+#vipaugirnk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -920,7 +777,7 @@ Multiple Metrics in One Table
   overflow-x: hidden;
 }
 
-#ygbybakaea .gt_column_spanner_outer {
+#vipaugirnk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,15 +789,15 @@ Multiple Metrics in One Table
   padding-right: 4px;
 }
 
-#ygbybakaea .gt_column_spanner_outer:first-child {
+#vipaugirnk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ygbybakaea .gt_column_spanner_outer:last-child {
+#vipaugirnk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ygbybakaea .gt_column_spanner {
+#vipaugirnk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -952,11 +809,11 @@ Multiple Metrics in One Table
   width: 100%;
 }
 
-#ygbybakaea .gt_spanner_row {
+#vipaugirnk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ygbybakaea .gt_group_heading {
+#vipaugirnk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -982,7 +839,7 @@ Multiple Metrics in One Table
   text-align: left;
 }
 
-#ygbybakaea .gt_empty_group_heading {
+#vipaugirnk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -997,15 +854,15 @@ Multiple Metrics in One Table
   vertical-align: middle;
 }
 
-#ygbybakaea .gt_from_md > :first-child {
+#vipaugirnk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ygbybakaea .gt_from_md > :last-child {
+#vipaugirnk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ygbybakaea .gt_row {
+#vipaugirnk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1024,7 +881,7 @@ Multiple Metrics in One Table
   overflow-x: hidden;
 }
 
-#ygbybakaea .gt_stub {
+#vipaugirnk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1037,7 +894,7 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#ygbybakaea .gt_stub_row_group {
+#vipaugirnk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1051,15 +908,15 @@ Multiple Metrics in One Table
   vertical-align: top;
 }
 
-#ygbybakaea .gt_row_group_first td {
+#vipaugirnk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ygbybakaea .gt_row_group_first th {
+#vipaugirnk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ygbybakaea .gt_summary_row {
+#vipaugirnk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1069,16 +926,16 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#ygbybakaea .gt_first_summary_row {
+#vipaugirnk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_first_summary_row.thick {
+#vipaugirnk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ygbybakaea .gt_last_summary_row {
+#vipaugirnk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,7 +945,7 @@ Multiple Metrics in One Table
   border-bottom-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_grand_summary_row {
+#vipaugirnk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1098,7 +955,7 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#ygbybakaea .gt_first_grand_summary_row {
+#vipaugirnk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1108,7 +965,7 @@ Multiple Metrics in One Table
   border-top-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_last_grand_summary_row_top {
+#vipaugirnk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1118,11 +975,11 @@ Multiple Metrics in One Table
   border-bottom-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_striped {
+#vipaugirnk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ygbybakaea .gt_table_body {
+#vipaugirnk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1131,7 +988,7 @@ Multiple Metrics in One Table
   border-bottom-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_footnotes {
+#vipaugirnk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1145,7 +1002,7 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_footnote {
+#vipaugirnk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1154,7 +1011,7 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#ygbybakaea .gt_sourcenotes {
+#vipaugirnk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1168,7 +1025,7 @@ Multiple Metrics in One Table
   border-right-color: #D3D3D3;
 }
 
-#ygbybakaea .gt_sourcenote {
+#vipaugirnk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1176,72 +1033,72 @@ Multiple Metrics in One Table
   padding-right: 5px;
 }
 
-#ygbybakaea .gt_left {
+#vipaugirnk .gt_left {
   text-align: left;
 }
 
-#ygbybakaea .gt_center {
+#vipaugirnk .gt_center {
   text-align: center;
 }
 
-#ygbybakaea .gt_right {
+#vipaugirnk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ygbybakaea .gt_font_normal {
+#vipaugirnk .gt_font_normal {
   font-weight: normal;
 }
 
-#ygbybakaea .gt_font_bold {
+#vipaugirnk .gt_font_bold {
   font-weight: bold;
 }
 
-#ygbybakaea .gt_font_italic {
+#vipaugirnk .gt_font_italic {
   font-style: italic;
 }
 
-#ygbybakaea .gt_super {
+#vipaugirnk .gt_super {
   font-size: 65%;
 }
 
-#ygbybakaea .gt_footnote_marks {
+#vipaugirnk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ygbybakaea .gt_asterisk {
+#vipaugirnk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ygbybakaea .gt_indent_1 {
+#vipaugirnk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ygbybakaea .gt_indent_2 {
+#vipaugirnk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ygbybakaea .gt_indent_3 {
+#vipaugirnk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ygbybakaea .gt_indent_4 {
+#vipaugirnk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ygbybakaea .gt_indent_5 {
+#vipaugirnk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ygbybakaea .katex-display {
+#vipaugirnk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ygbybakaea div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vipaugirnk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1249,46 +1106,46 @@ Multiple Metrics in One Table
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_col_headings">
-<th id="Familienstand, generiert" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Familienstand, generiert</th>
-<th id="Familienstand, generiert" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Familienstand, generiert</th>
+<th id="Marital status, gen." class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Marital status, gen.</th>
+<th id="Marital status, gen." class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Marital status, gen.</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_center" headers="famstand">-8</td>
-<td class="gt_row gt_center" headers="label">Unplausibler Wert</td>
+<td class="gt_row gt_center" headers="label">Implausible value</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="famstand">-4</td>
-<td class="gt_row gt_center" headers="label">Frage irrtuemlich nicht gestellt</td>
+<td class="gt_row gt_center" headers="label">Question mistakenly not asked</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="famstand">-3</td>
-<td class="gt_row gt_center" headers="label">Trifft nicht zu (Filter)</td>
+<td class="gt_row gt_center" headers="label">Not applicable (filter)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="famstand">-2</td>
-<td class="gt_row gt_center" headers="label">Keine Antwort</td>
+<td class="gt_row gt_center" headers="label">No answer</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="famstand">1</td>
-<td class="gt_row gt_center" headers="label">Ledig</td>
+<td class="gt_row gt_center" headers="label">Single</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="famstand">2</td>
-<td class="gt_row gt_center" headers="label">Verheiratet/eing. Lebensp., zus. lebd.</td>
+<td class="gt_row gt_center" headers="label">Married/civil partnership, living together</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="famstand">3</td>
-<td class="gt_row gt_center" headers="label">Verheiratet/eing. Lebensp., getr. lebd.</td>
+<td class="gt_row gt_center" headers="label">Married/civil partnership, not living together</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="famstand">4</td>
-<td class="gt_row gt_center" headers="label">Geschieden</td>
+<td class="gt_row gt_center" headers="label">Divorced</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="famstand">5</td>
-<td class="gt_row gt_center" headers="label">Verwitwet</td>
+<td class="gt_row gt_center" headers="label">Widowed</td>
 </tr>
 </tbody>
 </table>
@@ -1297,67 +1154,63 @@ Multiple Metrics in One Table
 </div>
 </div>
 <ul>
-<li>Lassen Sie sich eine Tabelle mit den absoluten Häufigkeiten anzeigen, nutzen Sie dafür sowohl <code>table()</code> als auch <code>count()</code> (Denken Sie daran, <code>{tidyverse}</code> zu laden für <code>count()</code>).</li>
-<li>Überschreiben Sie Missing-Codes mit <code>NA</code>.</li>
-<li>Hat das Überschreiben der Missings mit NA geklappt? Erstellen Sie die Tabelle erneut.</li>
-<li>Lassen Sie sich der relativen Häufigkeiten (Anteile) ausgeben. Verwenden Sie <code>prop.table()</code> auf Basis des <code>table()</code>.</li>
-<li>Erstellen Sie eine Kontingenztabelle, indem Sie neben <code>famstand</code> auch das Geschlecht <code>zpsex</code> (2 = Frauen, 1 = Männer) mit einbeziehen</li>
+<li>Display a table with absolute frequencies of <code>famstand</code> using both <code>table()</code> and <code>count()</code> (Remember to load <code>{tidyverse}</code> for <code>count()</code>).</li>
+<li>Overwrite missing codes with <code>NA</code>.</li>
+<li>Did the replacement of missing values with NA work? Create the table again.</li>
+<li>Display the relative frequencies (proportions). Use <code>prop.table()</code></li>
 </ul>
-<p><a href="#ue3_1">Zurück nach oben</a></p>
+<p><a href="#ue3_1">Back to top</a></p>
 </section>
 <section id="descue2" class="level3" data-number="3.5.2">
-<h3 data-number="3.5.2" class="anchored" data-anchor-id="descue2"><span class="header-section-number">3.5.2</span> Übung 2</h3>
-<!-- + Erstellen Sie mit Hilfe von `count()` eine Tabelle mit absoluten, relativen und kumulierten relativen Häufigkeiten für `famstand`. Erstellen Sie zunächst eine Auszählung mit `count()` und fügen Sie dann die relativen und kumulierten relativen Häufigkeiten hinzu. -->
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="descue2"><span class="header-section-number">3.5.2</span> Exercise 2</h3>
 <ul>
-<li>Erstellen Sie eine Kontingenztabelle für <code>famstand</code> und <code>zpsex</code></li>
-<li>Wie viel Prozent der Befragten sind geschiedene Frauen?</li>
-<li>Wie viel Prozent der befragten Frauen sind geschieden? Nutzen Sie die <code>margin =</code>-Option</li>
-<li>Wie viel Prozent der befragten Geschiedenen sind Frauen? Nutzen Sie die <code>margin =</code>-Option</li>
+<li>Create a contingency table for <code>famstand</code> and <code>zpsex</code> using <code>count()</code>.</li>
+<li>What percentage of the respondents are divorced women? Use <code>prop.table()</code></li>
 </ul>
-<p><a href="#ue3_2">Zurück nach oben</a></p>
+<p><a href="#ue3_2">Back to top</a></p>
 </section>
 <section id="descue3" class="level3" data-number="3.5.3">
-<h3 data-number="3.5.3" class="anchored" data-anchor-id="descue3"><span class="header-section-number">3.5.3</span> Übung 3</h3>
-<p>Beschreiben Sie das Alter der Befragten (<code>palter</code>) mit <code>summary</code> und erstellen Sie selbst einen Überblick mit Hilfe von <code>summarise()</code>, der einen Vergleich des Befragtenalters nach Familienstand erlaubt.</p>
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="descue3"><span class="header-section-number">3.5.3</span> Exercise 3</h3>
+<p>Describe the age of respondents (<code>palter</code>) using <code>summary</code> and create your own overview using <code>summarise()</code> to compare respondent age by marital status.</p>
 <ul>
-<li>Überschreiben Sie zunächst die Missings mit <code>NA</code>:</li>
+<li>First, overwrite missing values with <code>NA</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>palter[pend<span class="sc">$</span>palter<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>famstand[pend<span class="sc">$</span>famstand<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>palter[pend<span class="sc">$</span>palter<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>famstand[pend<span class="sc">$</span>famstand<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Erstellen Sie einen Überblick mit <code>summary()</code></li>
-<li>Erstellen Sie einen Überblick mit dem Minimum, Median, arith. Mittel, Varianz und Maximum der Alterswerte mit Hilfe von <code>summarise()</code></li>
-<li>Erweitern Sie diesen Überblick dann so, dass sie einen Vergleich der Kennzahlen für die verschiedenen <code>famstand</code>-Kategorien ausgegeben bekommen.</li>
+<li>Create an overview using <code>summary()</code>.</li>
+<li>Create an overview with the minimum, median, mean, variance, and maximum age values using <code>summarise()</code>.</li>
+<li>Extend this overview to display the summary statistics for the different <code>famstand</code> categories.</li>
 </ul>
-<p><a href="#ue3_3">Zurück nach oben</a></p>
+<p><a href="#ue3_3">Back to top</a></p>
 </section>
 </section>
-<section id="hinweise" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="hinweise"><span class="header-section-number">3.6</span> Hinweise</h2>
+<section id="notes" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="notes"><span class="header-section-number">3.6</span> Notes</h2>
 <section id="round" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="round"><span class="header-section-number">3.6.1</span> Runden mit <code>round()</code></h3>
-<p>Erläuterung: Sie können mit <code>round(x , 3)</code> Werte auf eine gewisse Zahl von Ziffern runden. Die zweite Zahl in der Klammer (nach dem Komma) gibt an, wieviele Dezimalstellen wir möchten:</p>
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="round"><span class="header-section-number">3.6.1</span> Rounding with <code>round()</code></h3>
+<p>Explanation: You can round values to a certain number of digits using <code>round(x , 3)</code>. The second number in the parentheses (after the comma) specifies how many decimal places you want:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 21.121</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 21.12121</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 21</code></pre>
 </div>
 </div>
-<p>Wir können also die relativen Häufigkeiten runden und so die Tabelle von oben übersichtlicher machen:</p>
+<p>We can round the relative frequencies to make the table above more readable:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>zpsex<span class="sc">+</span>statakt, <span class="at">data =</span> pend) <span class="sc">%&gt;%</span> </span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(.,<span class="at">margin =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(.,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>zpsex<span class="sc">+</span>statakt, <span class="at">data =</span> pend) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(.,<span class="at">margin =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(.,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     statakt
 zpsex     1     2     3

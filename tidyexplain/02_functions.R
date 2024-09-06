@@ -98,7 +98,7 @@ plot_data <- function(x, title = "") {
     ggtitle(title) +
     theme_void() +
     theme(
-      plot.title = element_text(family = "Roboto", hjust = 0.5, size = 28),
+      plot.title = element_text(family = "Roboto", hjust = 0.5, size = 21),
       plot.background = element_rect(fill = "white", color = "white")
     ) +
     guides(fill = "none")

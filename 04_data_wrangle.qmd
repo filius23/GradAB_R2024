@@ -354,41 +354,6 @@ sat_small %>%
 
 ### [Exercise](#fnct) {#ue06_4}
 
-## Helper functions `ifelse()` and `case_when()`
-
-`ifelse()` is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether `studs-mean(studs)` is greater than `0` - if so, `above` is used, otherwise `below`:
-
-```{r}
-dat3 %>% mutate(rel_to_mean = studs-mean(studs),
-                ab_mean_lab = ifelse(rel_to_mean > 0,"above","below"))
-```
-
-`case_when()` (`{dplyr}`) extends this principle, allowing us to specify more than two options.  
-The syntax is slightly different: first, we specify the condition, then after a `~` the values to be used: 
-
-```{r}
-dat3 %>% mutate(age = case_when(gegr < 1500 ~ "very old",
-                                gegr < 1900 ~ "old"))
-```
-
-With `TRUE`, we can address all cases that have not met any conditions so far:
-```{r}
-dat3 %>% mutate(age = case_when(gegr < 1500 ~ "very old",
-                                gegr < 1900 ~ "old",
-                                TRUE ~ "relatively new"))
-```
-
-This doesn't have to be limited to one variable:
-
-```{r}
-dat3 %>% mutate(age = case_when(gegr < 1500 & prom_recht  == T ~ "very old university",
-                                gegr < 1900 & prom_recht  == T ~ "old university",
-                                gegr > 1900 & prom_recht  == T ~ "young university",
-                                gegr < 1900 & prom_recht  == F ~ "old college",
-                                gegr > 1900 & prom_recht  == F ~ "young college"))
-```
-
-### [Exercise](#ifcase) {#ue06_5}
 
 ## Exercises
 
@@ -412,7 +377,6 @@ A rule of thumb to decide whether `mutate()` or `...$newvar <-` is more suitable
 
 + Continue using the university dataset.
 + Calculate the student-to-professor ratio (`studprofs`) relative to the mean, separated by universities with and without the right to award doctorates, and add this as a new column.
-+ Test both the `group_by()` and `.by =` variants.
 
 [Back to top](#ue06_2)
 
@@ -554,6 +518,43 @@ pend_small2
 
 
 ## Appendix
+
+### Helper functions `ifelse()` and `case_when()`
+
+`ifelse()` is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether `studs-mean(studs)` is greater than `0` - if so, `above` is used, otherwise `below`:
+
+```{r}
+dat3 %>% mutate(rel_to_mean = studs-mean(studs),
+                ab_mean_lab = ifelse(rel_to_mean > 0,"above","below"))
+```
+
+`case_when()` (`{dplyr}`) extends this principle, allowing us to specify more than two options.  
+The syntax is slightly different: first, we specify the condition, then after a `~` the values to be used: 
+
+```{r}
+dat3 %>% mutate(age = case_when(gegr < 1500 ~ "very old",
+                                gegr < 1900 ~ "old"))
+```
+
+With `TRUE`, we can address all cases that have not met any conditions so far:
+```{r}
+dat3 %>% mutate(age = case_when(gegr < 1500 ~ "very old",
+                                gegr < 1900 ~ "old",
+                                TRUE ~ "relatively new"))
+```
+
+This doesn't have to be limited to one variable:
+
+```{r}
+dat3 %>% mutate(age = case_when(gegr < 1500 & prom_recht  == T ~ "very old university",
+                                gegr < 1900 & prom_recht  == T ~ "old university",
+                                gegr > 1900 & prom_recht  == T ~ "young university",
+                                gegr < 1900 & prom_recht  == F ~ "old college",
+                                gegr > 1900 & prom_recht  == F ~ "young college"))
+```
+
+### [Exercise](#ifcase) {#ue06_5}
+
 
 ### Renaming variables
 

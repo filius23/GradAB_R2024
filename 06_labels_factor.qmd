@@ -71,7 +71,7 @@ Additionally, all unspecified `levels` automatically become `NA`:
 ```{r}
 pend_kap5$PSM0100_fct2 <- factor(pend_kap5$PSM0100,
                                levels = c(1,2),
-                               labels = c("Yes","No"))
+                               labels = c("Yes!","No :-("))
 
 # view:
 pend_kap5 %>% select(contains("PSM0100")) %>% head()
@@ -84,7 +84,7 @@ Or we can use the functions from `{forcats}` to recode a `factor`. `{forcats}` i
 levels(pend_kap5$PSM0100_fct)
 
 pend_kap5$PSM0100_fct3 <- fct_recode(pend_kap5$PSM0100_fct,
-  `Uses social networks` =  "Ja", # use `` around words with spaces
+  `Uses social networks` =  "Yes", # use `` around words with spaces
   )
 levels(pend_kap5$PSM0100_fct3)
 ```

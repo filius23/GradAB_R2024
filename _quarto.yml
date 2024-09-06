@@ -17,9 +17,9 @@ book:
     - 04_data_wrangle.qmd
     - 05_merge_pivot.qmd
     - 06_labels_factor.qmd
-    - 06_viz_translated.qmd
-    - 09_reg.qmd
-    - 14_tabellenexport.qmd
+    - 07_viz_translated.qmd
+    # - 09_reg.qmd
+    # - 14_tabellenexport.qmd
     # - 07_inferenz.qmd
     # - 09_reg2.qmd
     # - 10_log_reg.qmd
@@ -52,5 +52,5 @@ format:
 
 execute:
   freeze: auto
-
+from: markdown+emoji
 mainfont: Red Hat Display

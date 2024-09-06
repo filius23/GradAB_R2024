@@ -187,20 +187,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_viz_translated.html" class="sidebar-item-text sidebar-link">
+  <a href="./07_viz_translated.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14_tabellenexport.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -237,23 +225,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#ue06_4" id="toc-ue06_4" class="nav-link" data-scroll-target="#ue06_4"><span class="header-section-number">4.4.1</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#helper-functions-ifelse-and-case_when" id="toc-helper-functions-ifelse-and-case_when" class="nav-link" data-scroll-target="#helper-functions-ifelse-and-case_when"><span class="header-section-number">4.5</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.5</span> Exercises</a>
   <ul class="collapse">
-  <li><a href="#ue06_5" id="toc-ue06_5" class="nav-link" data-scroll-target="#ue06_5"><span class="header-section-number">4.5.1</span> Exercise</a></li>
+  <li><a href="#mutate1" id="toc-mutate1" class="nav-link" data-scroll-target="#mutate1"><span class="header-section-number">4.5.1</span> Exercise</a></li>
+  <li><a href="#grp_ue" id="toc-grp_ue" class="nav-link" data-scroll-target="#grp_ue"><span class="header-section-number">4.5.2</span> Exercise</a></li>
+  <li><a href="#across_ue" id="toc-across_ue" class="nav-link" data-scroll-target="#across_ue"><span class="header-section-number">4.5.3</span> Exercise</a></li>
+  <li><a href="#fnct" id="toc-fnct" class="nav-link" data-scroll-target="#fnct"><span class="header-section-number">4.5.4</span> Exercise</a></li>
+  <li><a href="#ifcase" id="toc-ifcase" class="nav-link" data-scroll-target="#ifcase"><span class="header-section-number">4.5.5</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.6</span> Exercises</a>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">4.6</span> Appendix</a>
   <ul class="collapse">
-  <li><a href="#mutate1" id="toc-mutate1" class="nav-link" data-scroll-target="#mutate1"><span class="header-section-number">4.6.1</span> Exercise</a></li>
-  <li><a href="#grp_ue" id="toc-grp_ue" class="nav-link" data-scroll-target="#grp_ue"><span class="header-section-number">4.6.2</span> Exercise</a></li>
-  <li><a href="#across_ue" id="toc-across_ue" class="nav-link" data-scroll-target="#across_ue"><span class="header-section-number">4.6.3</span> Exercise</a></li>
-  <li><a href="#fnct" id="toc-fnct" class="nav-link" data-scroll-target="#fnct"><span class="header-section-number">4.6.4</span> Exercise</a></li>
-  <li><a href="#ifcase" id="toc-ifcase" class="nav-link" data-scroll-target="#ifcase"><span class="header-section-number">4.6.5</span> Exercise</a></li>
-  </ul></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">4.7</span> Appendix</a>
-  <ul class="collapse">
-  <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables"><span class="header-section-number">4.7.1</span> Renaming variables</a></li>
-  <li><a href="#creating-classes-with-cut" id="toc-creating-classes-with-cut" class="nav-link" data-scroll-target="#creating-classes-with-cut"><span class="header-section-number">4.7.2</span> Creating Classes with <code>cut()</code></a></li>
-  <li><a href="#string-functions-for-regex" id="toc-string-functions-for-regex" class="nav-link" data-scroll-target="#string-functions-for-regex"><span class="header-section-number">4.7.3</span> String Functions for <em>regex</em></a></li>
+  <li><a href="#helper-functions-ifelse-and-case_when" id="toc-helper-functions-ifelse-and-case_when" class="nav-link" data-scroll-target="#helper-functions-ifelse-and-case_when"><span class="header-section-number">4.6.1</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></a></li>
+  <li><a href="#ue06_5" id="toc-ue06_5" class="nav-link" data-scroll-target="#ue06_5"><span class="header-section-number">4.6.2</span> Exercise</a></li>
+  <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables"><span class="header-section-number">4.6.3</span> Renaming variables</a></li>
+  <li><a href="#creating-classes-with-cut" id="toc-creating-classes-with-cut" class="nav-link" data-scroll-target="#creating-classes-with-cut"><span class="header-section-number">4.6.4</span> Creating Classes with <code>cut()</code></a></li>
+  <li><a href="#string-functions-for-regex" id="toc-string-functions-for-regex" class="nav-link" data-scroll-target="#string-functions-for-regex"><span class="header-section-number">4.6.5</span> String Functions for <em>regex</em></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -710,23 +696,23 @@ Creating Dummy Variables with <code>as.numeric()</code>
 <p>To do so, let’s examine three satisfaction variables for respondents in rows 12-16:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ovotuzgnad" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ovotuzgnad table {
+<div id="bfjqabzyrn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bfjqabzyrn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ovotuzgnad thead, #ovotuzgnad tbody, #ovotuzgnad tfoot, #ovotuzgnad tr, #ovotuzgnad td, #ovotuzgnad th {
+#bfjqabzyrn thead, #bfjqabzyrn tbody, #bfjqabzyrn tfoot, #bfjqabzyrn tr, #bfjqabzyrn td, #bfjqabzyrn th {
   border-style: none;
 }
 
-#ovotuzgnad p {
+#bfjqabzyrn p {
   margin: 0;
   padding: 0;
 }
 
-#ovotuzgnad .gt_table {
+#bfjqabzyrn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -752,12 +738,12 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-left-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_caption {
+#bfjqabzyrn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ovotuzgnad .gt_title {
+#bfjqabzyrn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -769,7 +755,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-width: 0;
 }
 
-#ovotuzgnad .gt_subtitle {
+#bfjqabzyrn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -781,7 +767,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-width: 0;
 }
 
-#ovotuzgnad .gt_heading {
+#bfjqabzyrn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -793,13 +779,13 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_bottom_border {
+#bfjqabzyrn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_col_headings {
+#bfjqabzyrn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -814,7 +800,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_col_heading {
+#bfjqabzyrn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -834,7 +820,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#ovotuzgnad .gt_column_spanner_outer {
+#bfjqabzyrn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -846,15 +832,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 4px;
 }
 
-#ovotuzgnad .gt_column_spanner_outer:first-child {
+#bfjqabzyrn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ovotuzgnad .gt_column_spanner_outer:last-child {
+#bfjqabzyrn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ovotuzgnad .gt_column_spanner {
+#bfjqabzyrn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -866,11 +852,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   width: 100%;
 }
 
-#ovotuzgnad .gt_spanner_row {
+#bfjqabzyrn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ovotuzgnad .gt_group_heading {
+#bfjqabzyrn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -896,7 +882,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   text-align: left;
 }
 
-#ovotuzgnad .gt_empty_group_heading {
+#bfjqabzyrn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -911,15 +897,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: middle;
 }
 
-#ovotuzgnad .gt_from_md > :first-child {
+#bfjqabzyrn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ovotuzgnad .gt_from_md > :last-child {
+#bfjqabzyrn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ovotuzgnad .gt_row {
+#bfjqabzyrn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -938,7 +924,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#ovotuzgnad .gt_stub {
+#bfjqabzyrn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -951,7 +937,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ovotuzgnad .gt_stub_row_group {
+#bfjqabzyrn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -965,15 +951,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: top;
 }
 
-#ovotuzgnad .gt_row_group_first td {
+#bfjqabzyrn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ovotuzgnad .gt_row_group_first th {
+#bfjqabzyrn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ovotuzgnad .gt_summary_row {
+#bfjqabzyrn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -983,16 +969,16 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ovotuzgnad .gt_first_summary_row {
+#bfjqabzyrn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_first_summary_row.thick {
+#bfjqabzyrn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ovotuzgnad .gt_last_summary_row {
+#bfjqabzyrn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1002,7 +988,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_grand_summary_row {
+#bfjqabzyrn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1012,7 +998,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ovotuzgnad .gt_first_grand_summary_row {
+#bfjqabzyrn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1022,7 +1008,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_last_grand_summary_row_top {
+#bfjqabzyrn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1032,11 +1018,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_striped {
+#bfjqabzyrn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ovotuzgnad .gt_table_body {
+#bfjqabzyrn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1045,7 +1031,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_footnotes {
+#bfjqabzyrn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1059,7 +1045,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_footnote {
+#bfjqabzyrn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1068,7 +1054,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ovotuzgnad .gt_sourcenotes {
+#bfjqabzyrn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1082,7 +1068,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#ovotuzgnad .gt_sourcenote {
+#bfjqabzyrn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1090,72 +1076,72 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#ovotuzgnad .gt_left {
+#bfjqabzyrn .gt_left {
   text-align: left;
 }
 
-#ovotuzgnad .gt_center {
+#bfjqabzyrn .gt_center {
   text-align: center;
 }
 
-#ovotuzgnad .gt_right {
+#bfjqabzyrn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ovotuzgnad .gt_font_normal {
+#bfjqabzyrn .gt_font_normal {
   font-weight: normal;
 }
 
-#ovotuzgnad .gt_font_bold {
+#bfjqabzyrn .gt_font_bold {
   font-weight: bold;
 }
 
-#ovotuzgnad .gt_font_italic {
+#bfjqabzyrn .gt_font_italic {
   font-style: italic;
 }
 
-#ovotuzgnad .gt_super {
+#bfjqabzyrn .gt_super {
   font-size: 65%;
 }
 
-#ovotuzgnad .gt_footnote_marks {
+#bfjqabzyrn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ovotuzgnad .gt_asterisk {
+#bfjqabzyrn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ovotuzgnad .gt_indent_1 {
+#bfjqabzyrn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ovotuzgnad .gt_indent_2 {
+#bfjqabzyrn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ovotuzgnad .gt_indent_3 {
+#bfjqabzyrn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ovotuzgnad .gt_indent_4 {
+#bfjqabzyrn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ovotuzgnad .gt_indent_5 {
+#bfjqabzyrn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ovotuzgnad .katex-display {
+#bfjqabzyrn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ovotuzgnad div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bfjqabzyrn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1198,23 +1184,23 @@ Creating Dummy Variables with <code>as.numeric()</code>
 </div>
 </div>
 <div class="cell-output-display">
-<div id="qnimcxcmcb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qnimcxcmcb table {
+<div id="wenitdabwk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wenitdabwk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qnimcxcmcb thead, #qnimcxcmcb tbody, #qnimcxcmcb tfoot, #qnimcxcmcb tr, #qnimcxcmcb td, #qnimcxcmcb th {
+#wenitdabwk thead, #wenitdabwk tbody, #wenitdabwk tfoot, #wenitdabwk tr, #wenitdabwk td, #wenitdabwk th {
   border-style: none;
 }
 
-#qnimcxcmcb p {
+#wenitdabwk p {
   margin: 0;
   padding: 0;
 }
 
-#qnimcxcmcb .gt_table {
+#wenitdabwk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1240,12 +1226,12 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-left-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_caption {
+#wenitdabwk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qnimcxcmcb .gt_title {
+#wenitdabwk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1257,7 +1243,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-width: 0;
 }
 
-#qnimcxcmcb .gt_subtitle {
+#wenitdabwk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1269,7 +1255,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-width: 0;
 }
 
-#qnimcxcmcb .gt_heading {
+#wenitdabwk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1281,13 +1267,13 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_bottom_border {
+#wenitdabwk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_col_headings {
+#wenitdabwk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1302,7 +1288,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_col_heading {
+#wenitdabwk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1322,7 +1308,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#qnimcxcmcb .gt_column_spanner_outer {
+#wenitdabwk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1334,15 +1320,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 4px;
 }
 
-#qnimcxcmcb .gt_column_spanner_outer:first-child {
+#wenitdabwk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qnimcxcmcb .gt_column_spanner_outer:last-child {
+#wenitdabwk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qnimcxcmcb .gt_column_spanner {
+#wenitdabwk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1354,11 +1340,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   width: 100%;
 }
 
-#qnimcxcmcb .gt_spanner_row {
+#wenitdabwk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qnimcxcmcb .gt_group_heading {
+#wenitdabwk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1384,7 +1370,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   text-align: left;
 }
 
-#qnimcxcmcb .gt_empty_group_heading {
+#wenitdabwk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1399,15 +1385,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: middle;
 }
 
-#qnimcxcmcb .gt_from_md > :first-child {
+#wenitdabwk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qnimcxcmcb .gt_from_md > :last-child {
+#wenitdabwk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qnimcxcmcb .gt_row {
+#wenitdabwk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1426,7 +1412,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#qnimcxcmcb .gt_stub {
+#wenitdabwk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1439,7 +1425,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#qnimcxcmcb .gt_stub_row_group {
+#wenitdabwk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1453,15 +1439,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: top;
 }
 
-#qnimcxcmcb .gt_row_group_first td {
+#wenitdabwk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qnimcxcmcb .gt_row_group_first th {
+#wenitdabwk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qnimcxcmcb .gt_summary_row {
+#wenitdabwk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1471,16 +1457,16 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#qnimcxcmcb .gt_first_summary_row {
+#wenitdabwk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_first_summary_row.thick {
+#wenitdabwk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qnimcxcmcb .gt_last_summary_row {
+#wenitdabwk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1490,7 +1476,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_grand_summary_row {
+#wenitdabwk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1500,7 +1486,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#qnimcxcmcb .gt_first_grand_summary_row {
+#wenitdabwk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1510,7 +1496,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_last_grand_summary_row_top {
+#wenitdabwk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1520,11 +1506,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_striped {
+#wenitdabwk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qnimcxcmcb .gt_table_body {
+#wenitdabwk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1533,7 +1519,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_footnotes {
+#wenitdabwk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1547,7 +1533,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_footnote {
+#wenitdabwk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1556,7 +1542,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#qnimcxcmcb .gt_sourcenotes {
+#wenitdabwk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1570,7 +1556,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#qnimcxcmcb .gt_sourcenote {
+#wenitdabwk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1578,72 +1564,72 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#qnimcxcmcb .gt_left {
+#wenitdabwk .gt_left {
   text-align: left;
 }
 
-#qnimcxcmcb .gt_center {
+#wenitdabwk .gt_center {
   text-align: center;
 }
 
-#qnimcxcmcb .gt_right {
+#wenitdabwk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qnimcxcmcb .gt_font_normal {
+#wenitdabwk .gt_font_normal {
   font-weight: normal;
 }
 
-#qnimcxcmcb .gt_font_bold {
+#wenitdabwk .gt_font_bold {
   font-weight: bold;
 }
 
-#qnimcxcmcb .gt_font_italic {
+#wenitdabwk .gt_font_italic {
   font-style: italic;
 }
 
-#qnimcxcmcb .gt_super {
+#wenitdabwk .gt_super {
   font-size: 65%;
 }
 
-#qnimcxcmcb .gt_footnote_marks {
+#wenitdabwk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qnimcxcmcb .gt_asterisk {
+#wenitdabwk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qnimcxcmcb .gt_indent_1 {
+#wenitdabwk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qnimcxcmcb .gt_indent_2 {
+#wenitdabwk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qnimcxcmcb .gt_indent_3 {
+#wenitdabwk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qnimcxcmcb .gt_indent_4 {
+#wenitdabwk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qnimcxcmcb .gt_indent_5 {
+#wenitdabwk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qnimcxcmcb .katex-display {
+#wenitdabwk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qnimcxcmcb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wenitdabwk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1781,85 +1767,10 @@ $PEO0300c
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="ue06_4"><span class="header-section-number">4.4.1</span> <a href="#fnct">Exercise</a></h3>
 </section>
 </section>
-<section id="helper-functions-ifelse-and-case_when" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="helper-functions-ifelse-and-case_when"><span class="header-section-number">4.5</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></h2>
-<p><code>ifelse()</code> is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether <code>studs-mean(studs)</code> is greater than <code>0</code> - if so, <code>above</code> is used, otherwise <code>below</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ab_mean_lab =</span> <span class="fu">ifelse</span>(rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span>,<span class="st">"above"</span>,<span class="st">"below"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni rel_to_mean ab_mean_lab
-1 19173   322 1971       TRUE         Uni Bremen   -2517.625       below
-2  5333    67 1830       TRUE         Uni Vechta  -16357.625       below
-3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625       below
-4 14954   250 1971      FALSE          FH Aachen   -6736.625       below
-5 47269   553 1870       TRUE        RWTH Aachen   25578.375       above
-6 23659   438 1457       TRUE       Uni Freiburg    1968.375       above
-7  9415   150 1818       TRUE           Uni Bonn  -12275.625       below
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       above</code></pre>
-</div>
-</div>
-<p><code>case_when()</code> (<code>{dplyr}</code>) extends this principle, allowing us to specify more than two options.<br>
-The syntax is slightly different: first, we specify the condition, then after a <code>~</code> the values to be used:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni      age
-1 19173   322 1971       TRUE         Uni Bremen     &lt;NA&gt;
-2  5333    67 1830       TRUE         Uni Vechta      old
-3 15643   210 1973       TRUE      Uni Oldenburg     &lt;NA&gt;
-4 14954   250 1971      FALSE          FH Aachen     &lt;NA&gt;
-5 47269   553 1870       TRUE        RWTH Aachen      old
-6 23659   438 1457       TRUE       Uni Freiburg very old
-7  9415   150 1818       TRUE           Uni Bonn      old
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     &lt;NA&gt;</code></pre>
-</div>
-</div>
-<p>With <code>TRUE</code>, we can address all cases that have not met any conditions so far:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>,</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"relatively new"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni            age
-1 19173   322 1971       TRUE         Uni Bremen relatively new
-2  5333    67 1830       TRUE         Uni Vechta            old
-3 15643   210 1973       TRUE      Uni Oldenburg relatively new
-4 14954   250 1971      FALSE          FH Aachen relatively new
-5 47269   553 1870       TRUE        RWTH Aachen            old
-6 23659   438 1457       TRUE       Uni Freiburg       very old
-7  9415   150 1818       TRUE           Uni Bonn            old
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg relatively new</code></pre>
-</div>
-</div>
-<p>This doesn’t have to be limited to one variable:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"very old university"</span>,</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"old university"</span>,</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"young university"</span>,</span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"old college"</span>,</span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"young college"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni                 age
-1 19173   322 1971       TRUE         Uni Bremen    young university
-2  5333    67 1830       TRUE         Uni Vechta      old university
-3 15643   210 1973       TRUE      Uni Oldenburg    young university
-4 14954   250 1971      FALSE          FH Aachen       young college
-5 47269   553 1870       TRUE        RWTH Aachen      old university
-6 23659   438 1457       TRUE       Uni Freiburg very old university
-7  9415   150 1818       TRUE           Uni Bonn      old university
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg       young college</code></pre>
-</div>
-</div>
-<section id="ue06_5" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="ue06_5"><span class="header-section-number">4.5.1</span> <a href="#ifcase">Exercise</a></h3>
-</section>
-</section>
-<section id="exercises" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.6</span> Exercises</h2>
-<section id="mutate1" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="mutate1"><span class="header-section-number">4.6.1</span> Exercise</h3>
+<section id="exercises" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.5</span> Exercises</h2>
+<section id="mutate1" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="mutate1"><span class="header-section-number">4.5.1</span> Exercise</h3>
 <ul>
 <li>Create <code>dat3</code> as <a href="#var">shown above</a> from <code>dat1</code> and <code>dat2</code>.</li>
 <li>Calculate the student-to-professor ratio (students per professor <code>studs/profs</code>) at the universities relative to the mean of the ratio (<code>rel_studprofs</code>).</li>
@@ -1878,49 +1789,48 @@ The syntax is slightly different: first, we specify the condition, then after a 
 </div>
 <p><a href="#ue06_1">Back to top</a></p>
 </section>
-<section id="grp_ue" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="grp_ue"><span class="header-section-number">4.6.2</span> Exercise</h3>
+<section id="grp_ue" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="grp_ue"><span class="header-section-number">4.5.2</span> Exercise</h3>
 <ul>
 <li>Continue using the university dataset.</li>
 <li>Calculate the student-to-professor ratio (<code>studprofs</code>) relative to the mean, separated by universities with and without the right to award doctorates, and add this as a new column.</li>
-<li>Test both the <code>group_by()</code> and <code>.by =</code> variants.</li>
 </ul>
 <p><a href="#ue06_2">Back to top</a></p>
 </section>
-<section id="across_ue" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="across_ue"><span class="header-section-number">4.6.3</span> Exercise</h3>
+<section id="across_ue" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="across_ue"><span class="header-section-number">4.5.3</span> Exercise</h3>
 <ul>
 <li>Use the <code>pend_small</code> dataset:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"welle"</span>,<span class="st">"zpsex"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"PEO0400d"</span>)</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>                               ) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"welle"</span>,<span class="st">"zpsex"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"PEO0400d"</span>)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>                               ) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Calculate the mean for the variables <code>PEO0400a</code>, <code>PEO0400b</code>, <code>PEO0400c</code>, and <code>PEO0400d</code>:</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div id="smabzctnqh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#smabzctnqh table {
+<div id="mzfqqzxaqx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mzfqqzxaqx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#smabzctnqh thead, #smabzctnqh tbody, #smabzctnqh tfoot, #smabzctnqh tr, #smabzctnqh td, #smabzctnqh th {
+#mzfqqzxaqx thead, #mzfqqzxaqx tbody, #mzfqqzxaqx tfoot, #mzfqqzxaqx tr, #mzfqqzxaqx td, #mzfqqzxaqx th {
   border-style: none;
 }
 
-#smabzctnqh p {
+#mzfqqzxaqx p {
   margin: 0;
   padding: 0;
 }
 
-#smabzctnqh .gt_table {
+#mzfqqzxaqx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1946,12 +1856,12 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-left-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_caption {
+#mzfqqzxaqx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#smabzctnqh .gt_title {
+#mzfqqzxaqx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1963,7 +1873,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-bottom-width: 0;
 }
 
-#smabzctnqh .gt_subtitle {
+#mzfqqzxaqx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1975,7 +1885,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-top-width: 0;
 }
 
-#smabzctnqh .gt_heading {
+#mzfqqzxaqx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1987,13 +1897,13 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-right-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_bottom_border {
+#mzfqqzxaqx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_col_headings {
+#mzfqqzxaqx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2008,7 +1918,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-right-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_col_heading {
+#mzfqqzxaqx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2028,7 +1938,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   overflow-x: hidden;
 }
 
-#smabzctnqh .gt_column_spanner_outer {
+#mzfqqzxaqx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2040,15 +1950,15 @@ The syntax is slightly different: first, we specify the condition, then after a 
   padding-right: 4px;
 }
 
-#smabzctnqh .gt_column_spanner_outer:first-child {
+#mzfqqzxaqx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#smabzctnqh .gt_column_spanner_outer:last-child {
+#mzfqqzxaqx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#smabzctnqh .gt_column_spanner {
+#mzfqqzxaqx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2060,11 +1970,11 @@ The syntax is slightly different: first, we specify the condition, then after a 
   width: 100%;
 }
 
-#smabzctnqh .gt_spanner_row {
+#mzfqqzxaqx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#smabzctnqh .gt_group_heading {
+#mzfqqzxaqx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2090,7 +2000,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   text-align: left;
 }
 
-#smabzctnqh .gt_empty_group_heading {
+#mzfqqzxaqx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2105,15 +2015,15 @@ The syntax is slightly different: first, we specify the condition, then after a 
   vertical-align: middle;
 }
 
-#smabzctnqh .gt_from_md > :first-child {
+#mzfqqzxaqx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#smabzctnqh .gt_from_md > :last-child {
+#mzfqqzxaqx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#smabzctnqh .gt_row {
+#mzfqqzxaqx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2132,7 +2042,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   overflow-x: hidden;
 }
 
-#smabzctnqh .gt_stub {
+#mzfqqzxaqx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2145,7 +2055,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   padding-right: 5px;
 }
 
-#smabzctnqh .gt_stub_row_group {
+#mzfqqzxaqx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2159,15 +2069,15 @@ The syntax is slightly different: first, we specify the condition, then after a 
   vertical-align: top;
 }
 
-#smabzctnqh .gt_row_group_first td {
+#mzfqqzxaqx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#smabzctnqh .gt_row_group_first th {
+#mzfqqzxaqx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#smabzctnqh .gt_summary_row {
+#mzfqqzxaqx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2177,16 +2087,16 @@ The syntax is slightly different: first, we specify the condition, then after a 
   padding-right: 5px;
 }
 
-#smabzctnqh .gt_first_summary_row {
+#mzfqqzxaqx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_first_summary_row.thick {
+#mzfqqzxaqx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#smabzctnqh .gt_last_summary_row {
+#mzfqqzxaqx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2196,7 +2106,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-bottom-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_grand_summary_row {
+#mzfqqzxaqx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2206,7 +2116,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   padding-right: 5px;
 }
 
-#smabzctnqh .gt_first_grand_summary_row {
+#mzfqqzxaqx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2216,7 +2126,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-top-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_last_grand_summary_row_top {
+#mzfqqzxaqx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2226,11 +2136,11 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-bottom-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_striped {
+#mzfqqzxaqx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#smabzctnqh .gt_table_body {
+#mzfqqzxaqx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2239,7 +2149,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-bottom-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_footnotes {
+#mzfqqzxaqx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2253,7 +2163,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-right-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_footnote {
+#mzfqqzxaqx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2262,7 +2172,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   padding-right: 5px;
 }
 
-#smabzctnqh .gt_sourcenotes {
+#mzfqqzxaqx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2276,7 +2186,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
   border-right-color: #D3D3D3;
 }
 
-#smabzctnqh .gt_sourcenote {
+#mzfqqzxaqx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2284,72 +2194,72 @@ The syntax is slightly different: first, we specify the condition, then after a 
   padding-right: 5px;
 }
 
-#smabzctnqh .gt_left {
+#mzfqqzxaqx .gt_left {
   text-align: left;
 }
 
-#smabzctnqh .gt_center {
+#mzfqqzxaqx .gt_center {
   text-align: center;
 }
 
-#smabzctnqh .gt_right {
+#mzfqqzxaqx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#smabzctnqh .gt_font_normal {
+#mzfqqzxaqx .gt_font_normal {
   font-weight: normal;
 }
 
-#smabzctnqh .gt_font_bold {
+#mzfqqzxaqx .gt_font_bold {
   font-weight: bold;
 }
 
-#smabzctnqh .gt_font_italic {
+#mzfqqzxaqx .gt_font_italic {
   font-style: italic;
 }
 
-#smabzctnqh .gt_super {
+#mzfqqzxaqx .gt_super {
   font-size: 65%;
 }
 
-#smabzctnqh .gt_footnote_marks {
+#mzfqqzxaqx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#smabzctnqh .gt_asterisk {
+#mzfqqzxaqx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#smabzctnqh .gt_indent_1 {
+#mzfqqzxaqx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#smabzctnqh .gt_indent_2 {
+#mzfqqzxaqx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#smabzctnqh .gt_indent_3 {
+#mzfqqzxaqx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#smabzctnqh .gt_indent_4 {
+#mzfqqzxaqx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#smabzctnqh .gt_indent_5 {
+#mzfqqzxaqx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#smabzctnqh .katex-display {
+#mzfqqzxaqx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#smabzctnqh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mzfqqzxaqx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2413,11 +2323,11 @@ The syntax is slightly different: first, we specify the condition, then after a 
 </ul>
 <p><a href="#ue06_3">Back to top</a></p>
 </section>
-<section id="fnct" class="level3" data-number="4.6.4">
-<h3 data-number="4.6.4" class="anchored" data-anchor-id="fnct"><span class="header-section-number">4.6.4</span> Exercise</h3>
+<section id="fnct" class="level3" data-number="4.5.4">
+<h3 data-number="4.5.4" class="anchored" data-anchor-id="fnct"><span class="header-section-number">4.5.4</span> Exercise</h3>
 <p>Continue using <code>pend_small</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>pend_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>pend_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -2443,8 +2353,8 @@ The syntax is slightly different: first, we specify the condition, then after a 
 <li>Standardize the variables <code>PEO0400a</code> - <code>PEO0400d</code> from <code>pend_small</code> using the following pattern:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">std_PEO0400b =</span> (PEO0400b <span class="sc">-</span> <span class="fu">mean</span>(PEO0400b,<span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(PEO0400b,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">std_PEO0400b =</span> (PEO0400b <span class="sc">-</span> <span class="fu">mean</span>(PEO0400b,<span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(PEO0400b,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Use a function so that you don’t have to repeatedly enter the same steps.</li>
@@ -2452,16 +2362,16 @@ The syntax is slightly different: first, we specify the condition, then after a 
 </ul>
 <p><a href="#ue06_4">Back to top</a></p>
 </section>
-<section id="ifcase" class="level3" data-number="4.6.5">
-<h3 data-number="4.6.5" class="anchored" data-anchor-id="ifcase"><span class="header-section-number">4.6.5</span> Exercise</h3>
+<section id="ifcase" class="level3" data-number="4.5.5">
+<h3 data-number="4.5.5" class="anchored" data-anchor-id="ifcase"><span class="header-section-number">4.5.5</span> Exercise</h3>
 <ul>
 <li>Work on <code>pend_small2</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"palter"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"statakt"</span>)) </span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> pend_small2 <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">5624</span><span class="sc">:</span><span class="dv">5640</span>)</span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>pend_small2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"palter"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"statakt"</span>)) </span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> pend_small2 <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">5624</span><span class="sc">:</span><span class="dv">5640</span>)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>pend_small2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 17 × 5
    palter    PEO0400a                       PEO0400b          PEO0400c statakt  
@@ -2495,10 +2405,85 @@ The syntax is slightly different: first, we specify the condition, then after a 
 <p><a href="#ue06_5">Back to top</a></p>
 </section>
 </section>
-<section id="appendix" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="appendix"><span class="header-section-number">4.7</span> Appendix</h2>
-<section id="renaming-variables" class="level3" data-number="4.7.1">
-<h3 data-number="4.7.1" class="anchored" data-anchor-id="renaming-variables"><span class="header-section-number">4.7.1</span> Renaming variables</h3>
+<section id="appendix" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="appendix"><span class="header-section-number">4.6</span> Appendix</h2>
+<section id="helper-functions-ifelse-and-case_when" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="helper-functions-ifelse-and-case_when"><span class="header-section-number">4.6.1</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></h3>
+<p><code>ifelse()</code> is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether <code>studs-mean(studs)</code> is greater than <code>0</code> - if so, <code>above</code> is used, otherwise <code>below</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ab_mean_lab =</span> <span class="fu">ifelse</span>(rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span>,<span class="st">"above"</span>,<span class="st">"below"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni rel_to_mean ab_mean_lab
+1 19173   322 1971       TRUE         Uni Bremen   -2517.625       below
+2  5333    67 1830       TRUE         Uni Vechta  -16357.625       below
+3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625       below
+4 14954   250 1971      FALSE          FH Aachen   -6736.625       below
+5 47269   553 1870       TRUE        RWTH Aachen   25578.375       above
+6 23659   438 1457       TRUE       Uni Freiburg    1968.375       above
+7  9415   150 1818       TRUE           Uni Bonn  -12275.625       below
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       above</code></pre>
+</div>
+</div>
+<p><code>case_when()</code> (<code>{dplyr}</code>) extends this principle, allowing us to specify more than two options.<br>
+The syntax is slightly different: first, we specify the condition, then after a <code>~</code> the values to be used:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni      age
+1 19173   322 1971       TRUE         Uni Bremen     &lt;NA&gt;
+2  5333    67 1830       TRUE         Uni Vechta      old
+3 15643   210 1973       TRUE      Uni Oldenburg     &lt;NA&gt;
+4 14954   250 1971      FALSE          FH Aachen     &lt;NA&gt;
+5 47269   553 1870       TRUE        RWTH Aachen      old
+6 23659   438 1457       TRUE       Uni Freiburg very old
+7  9415   150 1818       TRUE           Uni Bonn      old
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>With <code>TRUE</code>, we can address all cases that have not met any conditions so far:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>,</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"relatively new"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni            age
+1 19173   322 1971       TRUE         Uni Bremen relatively new
+2  5333    67 1830       TRUE         Uni Vechta            old
+3 15643   210 1973       TRUE      Uni Oldenburg relatively new
+4 14954   250 1971      FALSE          FH Aachen relatively new
+5 47269   553 1870       TRUE        RWTH Aachen            old
+6 23659   438 1457       TRUE       Uni Freiburg       very old
+7  9415   150 1818       TRUE           Uni Bonn            old
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg relatively new</code></pre>
+</div>
+</div>
+<p>This doesn’t have to be limited to one variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"very old university"</span>,</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"old university"</span>,</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"young university"</span>,</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"old college"</span>,</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"young college"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs gegr prom_recht                uni                 age
+1 19173   322 1971       TRUE         Uni Bremen    young university
+2  5333    67 1830       TRUE         Uni Vechta      old university
+3 15643   210 1973       TRUE      Uni Oldenburg    young university
+4 14954   250 1971      FALSE          FH Aachen       young college
+5 47269   553 1870       TRUE        RWTH Aachen      old university
+6 23659   438 1457       TRUE       Uni Freiburg very old university
+7  9415   150 1818       TRUE           Uni Bonn      old university
+8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg       young college</code></pre>
+</div>
+</div>
+</section>
+<section id="ue06_5" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="ue06_5"><span class="header-section-number">4.6.2</span> <a href="#ifcase">Exercise</a></h3>
+</section>
+<section id="renaming-variables" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="renaming-variables"><span class="header-section-number">4.6.3</span> Renaming variables</h3>
 <p>To rename variables, use <code>rename(new_name = old_name)</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">newname =</span> PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2550,8 +2535,8 @@ The syntax is slightly different: first, we specify the condition, then after a 
 </div>
 </div>
 </section>
-<section id="creating-classes-with-cut" class="level3" data-number="4.7.2">
-<h3 data-number="4.7.2" class="anchored" data-anchor-id="creating-classes-with-cut"><span class="header-section-number">4.7.2</span> Creating Classes with <code>cut()</code></h3>
+<section id="creating-classes-with-cut" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="creating-classes-with-cut"><span class="header-section-number">4.6.4</span> Creating Classes with <code>cut()</code></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2650,8 +2635,8 @@ Levels: 90s 00s</code></pre>
 </div>
 </div>
 </section>
-<section id="string-functions-for-regex" class="level3" data-number="4.7.3">
-<h3 data-number="4.7.3" class="anchored" data-anchor-id="string-functions-for-regex"><span class="header-section-number">4.7.3</span> String Functions for <em>regex</em></h3>
+<section id="string-functions-for-regex" class="level3" data-number="4.6.5">
+<h3 data-number="4.6.5" class="anchored" data-anchor-id="string-functions-for-regex"><span class="header-section-number">4.6.5</span> String Functions for <em>regex</em></h3>
 <p><a href="https://stringr.tidyverse.org/">{stringr}</a> provides a series of very useful string functions with <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf">regular expressions</a>. You can get an overview from this <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf">cheatsheet</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">uni_fh =</span> <span class="fu">str_detect</span>(uni,<span class="st">"Uni"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

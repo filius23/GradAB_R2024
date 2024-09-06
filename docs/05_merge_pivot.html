@@ -187,20 +187,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_viz_translated.html" class="sidebar-item-text sidebar-link">
+  <a href="./07_viz_translated.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regressionsmodelle</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14_tabellenexport.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tabellenexport</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -221,13 +209,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#join" id="toc-join" class="nav-link active" data-scroll-target="#join"><span class="header-section-number">5.1</span> Joining/merging data sets</a>
   <ul class="collapse">
-  <li><a href="#übung" id="toc-übung" class="nav-link" data-scroll-target="#übung"><span class="header-section-number">5.1.1</span> Übung</a></li>
+  <li><a href="#uejoin" id="toc-uejoin" class="nav-link" data-scroll-target="#uejoin"><span class="header-section-number">5.1.1</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#reshape-pivot_longer-pivot_wider" id="toc-reshape-pivot_longer-pivot_wider" class="nav-link" data-scroll-target="#reshape-pivot_longer-pivot_wider"><span class="header-section-number">5.2</span> Reshape: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></a></li>
-  <li><a href="#übungen" id="toc-übungen" class="nav-link" data-scroll-target="#übungen"><span class="header-section-number">5.3</span> Übungen</a>
+  <li><a href="#reshaping-data-pivot_longer-pivot_wider" id="toc-reshaping-data-pivot_longer-pivot_wider" class="nav-link" data-scroll-target="#reshaping-data-pivot_longer-pivot_wider"><span class="header-section-number">5.2</span> Reshaping Data: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></a>
   <ul class="collapse">
-  <li><a href="#join_ue" id="toc-join_ue" class="nav-link" data-scroll-target="#join_ue"><span class="header-section-number">5.3.1</span> Übung 1</a></li>
-  <li><a href="#pivot_ue" id="toc-pivot_ue" class="nav-link" data-scroll-target="#pivot_ue"><span class="header-section-number">5.3.2</span> Übung 2</a></li>
+  <li><a href="#wide-to-long" id="toc-wide-to-long" class="nav-link" data-scroll-target="#wide-to-long"><span class="header-section-number">5.2.1</span> Wide to Long</a></li>
+  <li><a href="#long-to-wide" id="toc-long-to-wide" class="nav-link" data-scroll-target="#long-to-wide"><span class="header-section-number">5.2.2</span> Long to Wide</a></li>
+  <li><a href="#uepivot" id="toc-uepivot" class="nav-link" data-scroll-target="#uepivot"><span class="header-section-number">5.2.3</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.3</span> Exercises</a>
+  <ul class="collapse">
+  <li><a href="#join_ue" id="toc-join_ue" class="nav-link" data-scroll-target="#join_ue"><span class="header-section-number">5.3.1</span> Exercise 1: Joining</a></li>
+  <li><a href="#pivot_ue" id="toc-pivot_ue" class="nav-link" data-scroll-target="#pivot_ue"><span class="header-section-number">5.3.2</span> Exercise 2: Reshaping</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -256,10 +249,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="join" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="join"><span class="header-section-number">5.1</span> Joining/merging data sets</h2>
-<blockquote class="blockquote">
-<p>A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other.<br>
+<p>A mutating join allows you to combine variables from two data.frames. It first matches observations by their keys, then copies across variables from one table to the other.<br>
 <a href="http://r4ds.had.co.nz/relational-data.html#mutating-joins">R for Data Science: Mutating joins</a></p>
-</blockquote>
 <p>A quick illustration:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -271,24 +262,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <!-- <img src="pic/static/png/original-dfs.png" width="480px" /> -->
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="3">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="pic/inner-join.gif" class="img-fluid"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="pic/left-join-extra.gif" class="img-fluid"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="pic/full-join.gif" class="img-fluid"></p>
-</div>
-</div>
-</div>
-<p>Es gibt natürlich auch <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html"><code>right_join()</code></a> oder <a href="https://dplyr.tidyverse.org/reference/filter-joins.html"><code>anti_join()</code></a>. Für eine tiefergehende Einführung lohnt sich das Kapitel <a href="https://r4ds.had.co.nz/relational-data.html#relational-data">Relational Data</a> aus <a href="https://r4ds.had.co.nz/">R for Data Science</a>.</p>
-<p>Eine sehr hilfreiche Option in den <code>..._join()</code> ist die Verbindung unterschiedlicher Variablen. Bspw. haben wir hier einige Fälle aus der ETB18 und</p>
+<p><img src="pic/inner-join.gif" class="img-fluid" alt="inner_join"> <img src="pic/left-join-extra.gif" class="img-fluid" alt="left_join"> <img src="pic/full-join.gif" class="img-fluid" alt="full_join"></p>
+<!-- ![](pic/anti-join.gif) -->
+<!-- ![](pic/right-join.gif) -->
+<p>There are also <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html"><code>right_join()</code></a> and <a href="https://dplyr.tidyverse.org/reference/filter-joins.html"><code>anti_join()</code></a>. For a more in-depth introduction, the chapter on <a href="https://r4ds.had.co.nz/relational-data.html#relational-data">Relational Data</a> in <a href="https://r4ds.had.co.nz/">R for Data Science</a> is highly recommended.</p>
+<p>A very helpful option in the <code>..._join()</code> functions is the ability to join different variables. For example, here we have some cases from <code>ids_df</code>, for which the (fictional) unemployment figures from <code>alo_bula</code> should be used. However, in <code>ids_df</code>, the variable <code>Bula</code> contains the state information, while in <code>alo_bula</code>, it is the variable <code>bundesland</code>:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -305,9 +283,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ids_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula
-#&gt; 1   6    2
+#&gt; 1   8    2
 #&gt; 2   4    1
-#&gt; 3   8   14
+#&gt; 3   9   14
 #&gt; 4   7   15</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>alo_bula</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -325,13 +303,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ids_df <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(alo_bula,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Bula"</span><span class="ot">=</span><span class="st">"bundesland"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula Werte
-#&gt; 1   6    2     m
+#&gt; 1   8    2     m
 #&gt; 2   4    1     g
-#&gt; 3   8   14  &lt;NA&gt;
+#&gt; 3   9   14  &lt;NA&gt;
 #&gt; 4   7   15  &lt;NA&gt;</code></pre>
 </div>
 </div>
-<p>Ein sehr hilfreiche Checkmöglichkeit, die ich häufig verwende:</p>
+<p>A quick check for the matching cases can be done using:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ids_df<span class="sc">$</span>Bula <span class="sc">%in%</span> alo_bula<span class="sc">$</span>bundesland)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -340,30 +318,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     2     2</code></pre>
 </div>
 </div>
-<section id="übung" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="übung"><span class="header-section-number">5.1.1</span> <a href="#join_ue">Übung</a></h3>
-</section>
-</section>
-<section id="reshape-pivot_longer-pivot_wider" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="reshape-pivot_longer-pivot_wider"><span class="header-section-number">5.2</span> Reshape: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></h2>
+<p><code>anti_join()</code> allows for checking which key variables are not present in the other data.frame:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bsp_df <span class="ot">&lt;-</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">bula    =</span> <span class="fu">c</span>(<span class="st">"NRW"</span>,<span class="st">"NDS"</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">alo2018 =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">alo2017 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>bsp_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ids_df <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(alo_bula,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Bula"</span><span class="ot">=</span><span class="st">"bundesland"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;   pnr Bula
+#&gt; 1   9   14
+#&gt; 2   7   15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alo_bula <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(ids_df,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"bundesland"</span><span class="ot">=</span><span class="st">"Bula"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;   bundesland Werte
+#&gt; 1          3     n
+#&gt; 2          4     z
+#&gt; 3          5     w
+#&gt; 4          6     r
+#&gt; 5          7     t
+#&gt; 6          8     h</code></pre>
+</div>
+</div>
+<section id="uejoin" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="uejoin"><span class="header-section-number">5.1.1</span> <a href="#join_ue">Exercise</a></h3>
+</section>
+</section>
+<section id="reshaping-data-pivot_longer-pivot_wider" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="reshaping-data-pivot_longer-pivot_wider"><span class="header-section-number">5.2</span> Reshaping Data: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></h2>
+<section id="wide-to-long" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="wide-to-long"><span class="header-section-number">5.2.1</span> Wide to Long</h3>
+<p>Reshaping data from wide to long format is useful when you want to store multiple observations per row. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bsp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">bula =</span> <span class="fu">c</span>(<span class="st">"NRW"</span>, <span class="st">"NDS"</span>), <span class="at">alo2018 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">alo2017 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>bsp_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   bula alo2018 alo2017
 #&gt; 1  NRW       2       1
 #&gt; 2  NDS       2       1</code></pre>
 </div>
 </div>
-<p>Mit <code>pivot_longer()</code> können wir aus einem wide shape <code>data.frame</code> einen long shape machen:</p>
+<p>We can use <code>pivot_longer()</code> to convert this wide format to long:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bsp_df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"alo2018"</span>,<span class="st">"alo2017"</span>),<span class="at">names_to =</span> <span class="st">"year"</span>,<span class="at">values_to =</span> <span class="st">"alo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bsp_df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(alo2018, alo2017), <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"alo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 4 × 3
 #&gt;   bula  year      alo
@@ -374,9 +368,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 4 NDS   alo2017     1</code></pre>
 </div>
 </div>
-<p>Mit <code>names_prefix = "alo"</code> können wir das <code>alo</code> direkt löschen lassen:</p>
+<p>To remove a prefix from the column names:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bsp_df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"alo2018"</span>,<span class="st">"alo2017"</span>),<span class="at">names_to =</span> <span class="st">"year"</span>,<span class="at">values_to =</span> <span class="st">"alo"</span>,<span class="at">names_prefix =</span> <span class="st">"alo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bsp_df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(alo2018, alo2017), <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"alo"</span>, <span class="at">names_prefix =</span> <span class="st">"alo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 4 × 3
 #&gt;   bula  year    alo
@@ -387,13 +381,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 4 NDS   2017      1</code></pre>
 </div>
 </div>
-<p>Mit <code>pivot_wider()</code> können wir den umgekehrten Weg gehen:</p>
+</section>
+<section id="long-to-wide" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="long-to-wide"><span class="header-section-number">5.2.2</span> Long to Wide</h3>
+<p>To convert from long format back to wide:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bsp_df2 <span class="ot">&lt;-</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">land =</span> <span class="fu">c</span>(<span class="st">"NRW"</span>,<span class="st">"NDS"</span>,<span class="st">"NRW"</span>,<span class="st">"NDS"</span>),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">alo =</span> <span class="fu">c</span>(<span class="fl">2.1</span>,<span class="fl">1.8</span>,<span class="fl">2.4</span>,<span class="fl">2.2</span>),</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">alter =</span> <span class="fu">c</span>(<span class="st">"age_1825"</span>,<span class="st">"age_1825"</span>,<span class="st">"age_2630"</span>,<span class="st">"age_2630"</span>))</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>bsp_df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bsp_df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">land =</span> <span class="fu">c</span>(<span class="st">"NRW"</span>, <span class="st">"NDS"</span>, <span class="st">"NRW"</span>, <span class="st">"NDS"</span>), <span class="at">alo =</span> <span class="fu">c</span>(<span class="fl">2.1</span>, <span class="fl">1.8</span>, <span class="fl">2.4</span>, <span class="fl">2.2</span>), <span class="at">alter =</span> <span class="fu">c</span>(<span class="st">"age_1825"</span>, <span class="st">"age_1825"</span>, <span class="st">"age_2630"</span>, <span class="st">"age_2630"</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bsp_df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   land alo    alter
 #&gt; 1  NRW 2.1 age_1825
@@ -403,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bsp_df2 <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> alter,<span class="at">values_from =</span> alo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bsp_df2 <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> alter, <span class="at">values_from =</span> alo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 2 × 3
 #&gt;   land  age_1825 age_2630
@@ -413,59 +407,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="übungen" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="übungen"><span class="header-section-number">5.3</span> Übungen</h2>
+<section id="uepivot" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="uepivot"><span class="header-section-number">5.2.3</span> <a href="#pivot_ue">Exercise</a></h3>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.3</span> Exercises</h2>
 <section id="join_ue" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="join_ue"><span class="header-section-number">5.3.1</span> Übung 1</h3>
-<p>Verknüpfen Sie die ausgewählten Beobachtungen des PASS CF mit der Haushalts-Information, in welcher Region (<code>region</code>) die Befragten wohnen. Mergen Sie dazu die <code>region</code> aus <code>HHENDDAT_cf_W13.dta</code> basierend auf der <code>hnr</code> und <code>welle</code>.</p>
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="join_ue"><span class="header-section-number">5.3.1</span> Exercise 1: Joining</h3>
+<p>Join the selected observations from <code>PENDDAT_cf_W13.dta</code> with the household data to include the <code>region</code> where the respondents live, using <code>hnr</code> and <code>welle</code> as keys.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pend_ue11 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>,<span class="st">"welle"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>pend_ue11</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pend_ue11 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>, <span class="st">"welle"</span>)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>hh_dat <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/HHENDDAT_cf_W13.dta"</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"hnr"</span>, <span class="st">"welle"</span>, <span class="st">"region"</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>pend_ue11 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(hh_dat, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"welle"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 10 × 2
-#&gt;           pnr welle                 
-#&gt;         &lt;dbl&gt; &lt;dbl+lbl&gt;             
-#&gt;  1 1000001901 1 [Wave 1 (2006/2007)]
-#&gt;  2 1000001902 1 [Wave 1 (2006/2007)]
-#&gt;  3 1000001901 3 [Wave 3 (2008/2009)]
-#&gt;  4 1000002001 1 [Wave 1 (2006/2007)]
-#&gt;  5 1000002002 1 [Wave 1 (2006/2007)]
-#&gt;  6 1000002002 2 [Wave 2 (2007/2008)]
-#&gt;  7 1000002001 2 [Wave 2 (2007/2008)]
-#&gt;  8 1000002002 3 [Wave 3 (2008/2009)]
-#&gt;  9 1000002001 3 [Wave 3 (2008/2009)]
-#&gt; 10 1000002001 4 [Wave 4 (2010)]</code></pre>
+<pre><code>#&gt; # A tibble: 18,466 × 4
+#&gt;           pnr welle                       hnr region   
+#&gt;         &lt;dbl&gt; &lt;dbl+lbl&gt;                 &lt;dbl&gt; &lt;dbl+lbl&gt;
+#&gt;  1 1000001901 1 [Wave 1 (2006/2007)] 10000019 4 [West] 
+#&gt;  2 1000001901 1 [Wave 1 (2006/2007)] 10000020 4 [West] 
+#&gt;  3 1000001901 1 [Wave 1 (2006/2007)] 10000023 4 [West] 
+#&gt;  4 1000001901 1 [Wave 1 (2006/2007)] 10000026 4 [West] 
+#&gt;  5 1000001901 1 [Wave 1 (2006/2007)] 10000031 4 [West] 
+#&gt;  6 1000001901 1 [Wave 1 (2006/2007)] 10000032 4 [West] 
+#&gt;  7 1000001901 1 [Wave 1 (2006/2007)] 10000035 4 [West] 
+#&gt;  8 1000001901 1 [Wave 1 (2006/2007)] 10000040 4 [West] 
+#&gt;  9 1000001901 1 [Wave 1 (2006/2007)] 10000043 4 [West] 
+#&gt; 10 1000001901 1 [Wave 1 (2006/2007)] 10000055 3 [Süd]  
+#&gt; # ℹ 18,456 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>hh_dat <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/HHENDDAT_cf_W13.dta"</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"hnr"</span>,<span class="st">"welle"</span>,<span class="st">"region"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><a href="#uejoin">Back to top</a></p>
 </section>
 <section id="pivot_ue" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="pivot_ue"><span class="header-section-number">5.3.2</span> Übung 2</h3>
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="pivot_ue"><span class="header-section-number">5.3.2</span> Exercise 2: Reshaping</h3>
+<p>Bring the following data into long format:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pend_ue11b <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>,<span class="st">"welle"</span>,<span class="st">"famstand"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">200</span><span class="sc">:</span><span class="dv">210</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>pend_ue11b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 6 × 3
-#&gt;          pnr welle                  famstand                                    
-#&gt;        &lt;dbl&gt; &lt;dbl+lbl&gt;              &lt;dbl+lbl&gt;                                   
-#&gt; 1 1000014501 2 [Wave 2 (2007/2008)] -4 [Question mistakenly not asked]          
-#&gt; 2 1000014501 3 [Wave 3 (2008/2009)]  3 [Married/civil partnership, not living t…
-#&gt; 3 1000014701 2 [Wave 2 (2007/2008)]  2 [Married/civil partnership, living toget…
-#&gt; 4 1000014702 2 [Wave 2 (2007/2008)]  2 [Married/civil partnership, living toget…
-#&gt; 5 1000014702 3 [Wave 3 (2008/2009)]  2 [Married/civil partnership, living toget…
-#&gt; 6 1000014701 3 [Wave 3 (2008/2009)]  2 [Married/civil partnership, living toget…</code></pre>
-</div>
-</div>
-<p>Bringen Sie <code>pend_ue11b</code> in das long shape:</p>
-<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pend_ue11b <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>, <span class="st">"welle"</span>, <span class="st">"famstand"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">200</span><span class="sc">:</span><span class="dv">210</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>pend_ue11b <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> welle, <span class="at">values_from =</span> famstand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 3 × 3
 #&gt;          pnr `2`                                             `3`                
@@ -475,8 +459,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 3 1000014702  2 [Married/civil partnership, living together] 2 [Married/civil p…</code></pre>
 </div>
 </div>
-<p>Tipp: mit <code>,names_prefix = "wave"</code> in <code>pivot_wider()</code> können wir ein Präfix angeben:</p>
+<p>Using <code>names_prefix = "wave"</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pend_ue11b <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> welle, <span class="at">values_from =</span> famstand, <span class="at">names_prefix =</span> <span class="st">"wave"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 3 × 3
 #&gt;          pnr wave2                                           wave3              
@@ -486,6 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 3 1000014702  2 [Married/civil partnership, living together] 2 [Married/civil p…</code></pre>
 </div>
 </div>
+<p><a href="#uepivot">Back to top</a></p>
 
 
 </section>
