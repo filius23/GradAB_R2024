@@ -1,15 +1,12 @@
-# Regressionsmodelle: Erweiterungen
+# Regression Models: Extensions
 
 ```{r setup, include=FALSE}
-if(Sys.getenv("USERNAME") == "filse" ) .libPaths("D:/R-library4") 
 knitr::opts_chunk$set(echo = TRUE, cache = F, dpi=500)
 # purrr::map(c("tidyverse", "fixest", "marginaleffects",
 #                "modelsummary", "kableExtra"),library)
 
-
-
 mark_color <- "grey25"
-color1x =  "#00519E" # uol farbe
+color1x = "#00519E" # UOL color
 colorhex <- "#FCFCFC" #"#FCF9F0FF"7
 colorhex <- NA #"#FCF9F0FF"7
 library(extrafont)
@@ -20,13 +17,13 @@ library(modelsummary)
 windowsFonts(Nunito=windowsFont("Nunito Sans"))
 
 theme_x <- 
-  theme_minimal(base_family = "Nunito",base_size = 10) +
+  theme_minimal(base_family = "Nunito", base_size = 10) +
   theme(
     plot.background = element_rect(fill = colorhex, linetype = 1, colour = NA),
     rect = element_rect(fill = colorhex, linetype = 1, colour = NA),
-    axis.text =  element_text(color = mark_color,face = "plain", size = rel(.75), angle = 0), 
-    axis.title = element_text(color = mark_color,face = "plain", size = rel(1), angle = 0), 
-    axis.title.y = element_text(color = mark_color,face = "plain", angle = 0,vjust = .5), 
+    axis.text = element_text(color = mark_color, face = "plain", size = rel(.75), angle = 0), 
+    axis.title = element_text(color = mark_color, face = "plain", size = rel(1), angle = 0), 
+    axis.title.y = element_text(color = mark_color, face = "plain", angle = 0, vjust = .5), 
     axis.ticks = element_blank(),
     axis.line = element_line(size = .1), 
     panel.grid = element_line(colour = "grey81", linetype = 1, size = .15), 
@@ -39,61 +36,54 @@ theme_x <-
 theme_set(theme_x)
 ```
 
-Nach den basics für Regressionsmodelle sehen wir uns in diesem Kapitel einige hilfreiche Erweiterungen von Regressionsmodellen in R an.
+After covering the basics of regression models, this chapter explores some useful extensions of regression models in R.
 
 ```{r}
 library(tidyverse)
 
-dat1 <- data.frame(id   = 1:8,
-                   var1 = c(2,1,2,5,7, 8, 9,5),
-                   var2 = c(2,2,1,9,7, 4,25,3),
-                   educ = c(3,1,2,2,1, 3, 2,-1),
+dat1 <- data.frame(id = 1:8,
+                   var1 = c(2,1,2,5,7,8,9,5),
+                   var2 = c(2,2,1,9,7,4,25,3),
+                   educ = c(3,1,2,2,1,3,2,-1),
                    gend = c(2,1,1,2,1,2,1,2),
-                   x    = c(2,1,2,4,1,NA,NA,NA) )
+                   x = c(2,1,2,4,1,NA,NA,NA))
 dat1$ed_fct <- factor(dat1$educ, levels = 1:3,
                         labels = c("basic","medium","high"))
 dat1
 ```
 
++ [Complete rows with `complete.cases()`](#complcses) -> `e(sample)` in Stata
++ [Interactions](#inter) -> `c.var1##c.var2` in Stata
++ [Quadratic Terms](#quad) -> `c.var1##c.var1` in Stata
++ [Applying Weights](#gew) 
++ [Robust Standard Errors](#rbst)
++ [Fixed Effects Models](#fe)
++ [Multilevel Models](#mlvl)
 
-+ [vollständige Zeilen mit `complete.cases()`](#complcses) -> `e(sample)` in Stata
-+ [Interaktionen](#inter) -> `c.var1##c.var2` in Stata
-+ [Quadratische Terme](#quad) -> `c.var1##c.var1` in Stata
-+ [Gewichte anwenden](#gew) 
-+ [Robuste Standardfehler](#rbst)
-+ [Fixed Effects Modelle](#fe)
-+ [Mehrebenenmodelle](#mlvl)
+## Keeping Only Complete Rows {#complcses}
 
-## Nur vollständige Zeilen behalten {#complcses}
-
-Wenn wir die beiden Modelle `m1` und `m3` vergleichen, sehen wir unterschiedliche Fallzahlen:
+When we compare models `m1` and `m3`, we see different sample sizes:
 
 ```{r}
-m1 <- lm(var2~ var1, data = dat1)  
-m4 <- lm(var2 ~ ed_fct  + var1, dat1)
-modelsummary(list("m1"=m1,"m4"=m4),gof_omit = "IC|RM|Log|F",output = "flextable")
+m1 <- lm(var2 ~ var1, data = dat1)  
+m4 <- lm(var2 ~ ed_fct + var1, data = dat1)
+modelsummary(list("m1"=m1,"m4"=m4), gof_omit = "IC|RM|Log|F", output = "flextable")
 ```
 
+It appears that in model `m4`, one case is lost with `ed_fct`. Why is that? It’s worth taking a look at the data:
 
-Es zeigt sich, dass in Modell `m4` mit `edu_fct` 1 Fall verloren geht. Woran liegt das?
-Dazu lohnt sich ein Blick in die Daten:
 ```{r}
 dat1
 ```
 
-Die Angabe für `ed_fct` fehlt in für `id` = 8.
+The value for `ed_fct` is missing for `id` = 8.
 
-Um die Modelle zu vergleichen sollten wir also nur die Zeilen verwenden, für die auch die Werte für `ed_fct` vorliegen.
-Hier können wir diese Zeilen per Hand auswählen (und `id`=8 ausschließen), in größeren Datensätzen ist das aber mühsam.
+To compare the models, we should use only the rows where `ed_fct` values are available. We can manually select these rows (excluding `id`=8), but this can be cumbersome with larger datasets.
 
 ### `complete.cases()`
 
-Hier hilft uns `complete.cases()`.
-Diese Funktion erstellt eine logische Variable, welche ein `TRUE` für alle vollständigen Fälle (also ohne ein `NA`). 
-Unvollständige Fälle werden mit einem `FALSE` versehen. 
-Dazu geben wir an, welche Variablen jeweils für diese Betrachtung berücksichtigt werden sollen und legen die Variable einfach im Datensatz als neue Spalte an. 
-Für Modell 1 ist ein Fall `complete`, wenn `var2` und `var1` vorliegen. 
-Wir wählen also mit `select()` die relevanten Variablen aus und wenden `complete.cases` auf diese Auswahl an:
+Here, `complete.cases()` is helpful. This function creates a logical variable that is `TRUE` for all complete cases (i.e., without `NA`). Incomplete cases are marked as `FALSE`. We specify which variables to consider for this check and add the variable to the dataset as a new column. For model 1, a case is considered `complete` if both `var2` and `var1` are present. So, we select the relevant variables with `select()` and apply `complete.cases` to this selection:
+
 ```{r}
 #| echo: false
 #| message: false
@@ -102,13 +92,13 @@ library(dplyr)
 ```
 
 ```{r, message = F}
-dat1 %>% select(var1,var2) %>% complete.cases(.) 
-dat1$compl_m1 <- dat1 %>% select(var1,var2) %>% complete.cases(.) 
+dat1 %>% select(var1, var2) %>% complete.cases(.) 
+dat1$compl_m1 <- dat1 %>% select(var1, var2) %>% complete.cases(.) 
 dat1
 ```
 ::: {.callout-warning collapse="true"}
-# `complete.cases()` alleine sucht in allen Variablen nach `NA`
-Achtung: wenn wir keine Variablen angeben, werden `NA` aus allen Variablen berücksichtigt, hier also auch die `NA` aus `x` - die uns hier nicht interessieren:
+# `complete.cases()` alone searches for `NA` in all variables
+Note: if we do not specify variables, `NA` will be considered from all variables, including `x`, which we are not interested in here:
 ```{r, message = F}
 dat1 %>% complete.cases(.) 
 dat1$compl <- dat1 %>% complete.cases(.) 
@@ -122,51 +112,57 @@ dat1$compl <- NULL
 
 :::
 
-...das gleiche machen wir für Modell `m4`, welches neben `var2` und `var1` ja auch noch `ed_fct` enthält:
+We do the same for model `m4`, which includes `ed_fct` in addition to `var2` and `var1`:
+
 ```{r}
-dat1$compl_m4 <- dat1 %>% select(var1,var2,ed_fct) %>% complete.cases(.)
+dat1$compl_m4 <- dat1 %>% select(var1, var2, ed_fct) %>% complete.cases(.)
 ```
 
-So sieht das dann im Datensatz aus:
+Here’s how it looks in the dataset:
+
 ```{r}
 dat1
 ```
 
+### Finding Cases with Missing Values
 
+Now, we can filter by these variables and examine these cases more closely. We filter for cases that are included in `m1` (i.e., `compl_m1` = `TRUE`) but not in `m4` (`compl_m4` = `FALSE`):
 
-
-### Fälle mit missings finden
-Jetzt können wir nach diesen Variablen filtern und uns diese Fälle genauer ansehen. Dazu filtern wir nach den Fällen, die zwar in `m1` enthalten (also `compl_m1` = `TRUE`) sind, aber nicht in `m4` (`compl_m4` = `FALSE`):
 ```{r}
 dat1 %>% filter(compl_m1 == T & compl_m4 == F) 
 ```
 
-### Modelle nur mit vollständigen Fällen berechnen
-Außerdem können wir jetzt auch das Modell `m1` so erstellen, dass wir nur die Fälle miteinbeziehen, die auch in Modell2 berücksichtigt werden:
+### Calculating Models with Only Complete Cases
+
+We can now create model `m1` to include only cases that are also considered in model `m4`:
+
 ```{r}
-m1_m4vars <- lm(var2 ~ var1     , data = filter(dat1,compl_m4 == T))
-modelsummary(list("m1"=m1,"m1 mit m4vars"=m1_m4vars,"m4"=m4),gof_omit = "IC|RM|Log|F",output = "flextable")
+m1_m4vars <- lm(var2 ~ var1, data = filter(dat1, compl_m4 == T))
+modelsummary(list("m1"=m1,"m1 with m4vars"=m1_m4vars,"m4"=m4), gof_omit = "IC|RM|Log|F", output = "flextable")
 ```
 
-Jetzt haben wir also in `m1 mit m4vars` und `m4` die gleiche Fallzahl und können so die Ergebnisse direkt miteinander vergleichen.
+Now, both `m1 with m4vars` and `m4` have the same number of cases, allowing for a direct comparison of the results.
 
-## Interaktionen {#inter}
+## Interactions {#inter}
 
-Interaktionen zwischen zwei Variablen können wir mit `*` berechnen:
+Interactions between two variables can be calculated using `*`:
 
 ```{r}
-dat1$g_fct <- factor(dat1$gend,levels = 1:2,
+dat1$g_fct <- factor(dat1$gend, levels = 1:2,
                      labels = c("women","men"))
-m5 <- lm(var2 ~ var1 * g_fct, dat1)
+m5 <- lm(var2 ~ var1 * g_fct, data = dat1)
 summary(m5)
 ```
-Interaktionen sollten immer visualisiert werden.
-Dafür ist [`{ggeffects}`](https://strengejacke.github.io/ggeffects/index.html) eine große Hilfe:
+`avg_slopes()` from `{marginaleffects}` helps to calculate the marginal effects/slopes of a one-unit increase in `var1` for each subgroup of `g_fct`:
 
 ```{r}
-#| eval: false
-fdz_install("ggeffects")
+avg_slopes(m5,
+           variables = "var1",
+           by = "g_fct")
 ```
+
+Interactions should always be visualized. `plot_predictions()` from `{marginaleffects}` is a very helpful function to plot the predicted values :
+
 ```{r}
 #| include: false
 theme_set(theme_grey(base_size = 15))  
@@ -175,52 +171,117 @@ theme_set(theme_grey(base_size = 15))
 ```{r}
 #| out-width: "80%"
 #| out-height: "60%"
-library(ggeffects)
-ggpredict(m5, terms = c("var1","g_fct[women,men]")) %>% plot()
-# oder nebeneinander:
-ggpredict(m5, terms = c("var1","g_fct[women,men]")) %>% plot(facet=TRUE)
+plot_predictions(m5, condition = c("var1", "g_fct"))
 ```
 
-Wir können diese Darstellung mit den bekannten `{ggplot2}`-Befehlen verändern:
+We can modify this plot using familiar `{ggplot2}` commands:
 
 ```{r}
 #| out-width: "60%"
 #| out-height: "60%"
-ggpredict(m5, terms = c("var1","g_fct[women,men]")) %>% plot() + 
-  scale_color_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Frauen","Männer")) +
-  scale_fill_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Frauen","Männer")) +
-  labs(title = "Vorhergesagte Werte für var2",
-       color = "Gender",
-       x = "Werte für var1",
-       y = "Vorhergesagte Werte für var1")
+plot_predictions(m5, condition = c("var1", "g_fct")) + 
+  scale_color_manual(values = c("orange","lightskyblue3"), breaks = c("women","men"), labels=c("Women","Men")) +
+  scale_fill_manual(values = c("orange","lightskyblue3"), breaks = c("women","men"), labels=c("Women","Men")) +
+  labs(title = "Predicted Values for var2",
+       color = "Gender", fill = "Gender",
+       x = "Values for var1",
+       y = "Predicted Values for var1")
 ```
-**[Alternativ können wir den "marginsplot" auch Schritt für Schritt selber erstellen](#marginsplot)**
+**[Alternatively, we can create the "marginsplot" step by step ourselves](#marginsplot)**
 
-
-## Quadratische Terme & Polynome {#quad}
+## Quadratic Terms & Polynomials {#quad}
 
 ```{r}
 #| include: false
 dat1 %>% filter(id != 7) %>% 
   ggplot(aes(x = var1, y = var2)) + 
-  geom_smooth(method = "lm", color = "darkblue" ,formula = "y~x+I(x^2)", se=F, size = .65) +
+  geom_smooth(method = "lm", color = "darkblue" , formula = "y~x+I(x^2)", se=F, size = .65) +
   geom_point()
-
 ```
 
 ```{r}
-m6 <- lm(var2 ~ var1 + I(var1^2), dat1 %>% filter(id != 7))
+m6 <- lm(var2 ~ var1 + I(var1^2), data = dat1 %>% filter(id != 7))
 summary(m6)
 ```
 
-Auch hier hilft `ggpredict()` bei der Visualisierung:
+Again, `{marginaleffects}` provides a helpful function to visualize the shape of predicted values:
+
 ```{r}
 #| out-width: "60%"
 #| out-height: "60%"
-ggpredict(m6, terms = c("var1")) %>% plot()
+plot_predictions(m6, condition = "var1") # conditional adjusted predictions 
+plot_slopes(m6, variables = "var1", condition = "var1") # conditional marginal effects
 ```
 
-## Gewichtetes Regressionsmodell {#gew}
+## Logistic regression model
+```{r}
+#| include: false
+pend10_lab <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",n_max = 1,col_select = "PSM0100")
+```
+
+For binary dependent variables, logistic regression models are a widely used tool. 
+We can fit logistic regression models in R using `glm()` - for an example, we turn to `PSM0100` (`r attributes(pend10_lab$PSM0100)$label` yes = 2, no = 1) :
+
+\begin{equation*}
+\widehat{Logit(soc\_med=1)} = \widehat{ln\left(\frac{P(soc\_med=1)}{1-P(soc\_med=1)}\right)} = \hat\beta0 + \hat{\beta1}\times \texttt{palter}
+\end{equation*}
+
+```{r}
+pend10 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                          col_select = c("palter","PSM0100")) %>% 
+  filter(PSM0100>0) %>% 
+  mutate(soc_med = 2- PSM0100)  
+
+pend10 %>% count(soc_med,PSM0100)
+```
+
+```{r}
+m2 <- glm(soc_med ~ palter, family = "binomial", data = pend10)
+summary(m2)
+```
+
+
+The interpretation of the $\beta$ coefficients from a logistic regression model pertains to the logits (the logarithms of the odds):
+*There is a statistically significant relationship at the 0.001 level between age and the likelihood of using social media. With each additional year of age, there is a decrease of `r sprintf("%2.6f",abs(m2$coefficients[2]))` in the *logits* of the respondents using social media.*
+
+
+### average marginal effects
+Logits are quite cumbersome—so how does the *probability* of $\texttt{soc\_med} = 1$ change with `palter`? Here, we face the challenge that the derivative of the "inverse function" is not as straightforward as in the case of OLS. If we modify the [regression equation from above[^2]](#logmod) with `exp()` and $p=\frac{Odds}{1+Odds}$, we get:
+
+\begin{equation*}
+\widehat{P(soc\_med=1)} = \frac{e^{\hat\beta0+\hat\beta1 \times \texttt{palter}}}{1+e^{\hat\beta0+\hat{\beta1}\times \texttt{palter}}}
+\end{equation*}
+
+[^2]: $\widehat{Logit(soc\_med=1)} = \widehat{ln\left(\frac{P(soc\_med=1)}{1-P(soc\_med=1)}\right)} = \hat\beta0 + \hat{\beta1}\times \texttt{palter}$
+
+We would need to differentiate this expression with respect to `palter` to determine how the predicted probability of $\texttt{soc\_med} = 1$ changes with each additional year of respondent age. Given that `palter` appears in both the exponent of the `e` function and both the numerator and denominator ("top and bottom"), the differentiation becomes significantly more complex than in the previous `lm()` models.
+
+For our purposes, it is crucial to note that to compute changes in the predicted probabilities, we need the so-called marginal effects from the `{marginaleffects}` package. This package includes the `avg_slopes()` function, which allows us to calculate a $\beta$ representing the change in the  _probability_ of $\texttt{soc\_med} = 1$ in relation to `palter`. This is known as the *average marginal effect*, as it provides the *average* marginal change in the dependent variable for a one-unit increase in the independent variable.
+
+```{r,eval=F}
+fdz_install("marginaleffects") # nur einmal nötig
+library(marginaleffects)
+```
+
+```{r ame1}
+avg_slopes(m2)
+```
+    
+```{r ameInline,echo=F }
+mx <- avg_slopes(m2, by = TRUE) %>% data.frame() %>% pull(estimate)
+```
+
+*With each additional year of age, there is on average a decrease of `r sprintf("%2.5f",abs(mx))` (`r sprintf("%2.3f",abs(mx*100))` percentage points) in the probability of using social media.*
+
+
+## Weighted Regression Model {#gew}
+
+The `{survey}` package allows including weights when fitting regression model:
+```{r}
+#| eval: false
+fdz_install("survey")
+```
+
 ```{r}
 #| message: false
 #| warning: false
@@ -230,38 +291,33 @@ pend <- haven::read_dta("./orig/PENDDAT_cf_W13.dta") %>% filter(netges > 0 , pal
 wgt_df <- haven::read_dta("./orig/pweights_cf_W13.dta")
 pend_wgt <- pend %>% left_join(wgt_df, by = join_by(pnr,welle))
 
-
 modx <- lm(netges ~ palter + I(palter^2),data=pend)
 
 pend_weighted <- svydesign(id      = ~pnr,
                            weights = ~wqp,
                            data    = pend_wgt)
 
-# family = gaussian() bekommen wir ein lineares Regressionsmodell, wie bei lm() - mit gewichtet
+# family = gaussian() provides a linear regression model, like lm() - but weighted
 survey_modx <- svyglm(netges ~ palter + I(palter^2), 
                     family = gaussian(), data = etb18,design = pend_weighted)
 
 modelsummary(list("lm()"=modx,"svyglm()"= survey_modx),gof_omit = "RM|IC|Log",output = "flextable")
 ```
 
-## "Robuste" Standardfehler {#rbst}
+## "Robust" Standard Errors {#rbst}
 
+Often, standard errors need to be adjusted for violations of general assumptions (homoscedasticity, etc.).
 
-Häufig müssen die Standardfehler an Verstöße gegen die allgemeinen Annahmen (Homoskedastizität usw.) angepasst werden.
+The good news is that R offers several ways to correct standard errors, including with [{sandwich}](http://sandwich.r-forge.r-project.org/articles/sandwich.html) or [{estimatr}](https://declaredesign.org/r/estimatr/articles/getting-started.html).
 
-Die gute Nachricht ist, dass R eine ganze Reihe an Möglichkeiten bietet, Standard-Fehler zu korrigieren.
-Unter anderem mit [{sandwich}](http://sandwich.r-forge.r-project.org/articles/sandwich.html) oder [{estimatr}](https://declaredesign.org/r/estimatr/articles/getting-started.html).
+A very simple option is the correction of standard errors in `{modelsummary}`, which we will look at in more detail:
 
-Eine sehr einfache Variante ist die Korrektur von Standardfehlern in `{modelsummary}`, die wir uns etwas genauer ansehen:
+We can request *heteroskedasticity-consistent* (HC) "robust" standard errors with the `vcov` option `HC` in `modelsummary()`. 
+The help page for `{modelsummary}` provides a [list of all options](https://vincentarelbundock.github.io/modelsummary/articles/modelsummary.html#vcov).
 
+One option is also `stata`, to replicate results from Stata’s `, robust`. [More here](https://declaredesign.org/r/estimatr/articles/stata-wls-hat.html) about the background and differences.
 
-Wir können sog. *heteroskedasticity-consistent* (HC) "robuste" Standardfehler mit der `vcov`-Option `HC` in `modelsummary()` anfordern. 
-Die Hilfe-Seite für `{modelsummary}` bietet eine [Liste mit allen Optionen](https://vincentarelbundock.github.io/modelsummary/articles/modelsummary.html#vcov).
-
-Eine Option ist auch `stata`, um Ergebnisse aus Statas `, robust` zu replizieren. 
-[Hier mehr](https://declaredesign.org/r/estimatr/articles/stata-wls-hat.html) zu den Hintergründen und Unterschieden.
-
-Basierend auf [den oben eingelesenen Daten](#gew) können wir folgendes Modell schätzen:
+Based on [the data read above](#gew), we can estimate the following model:
 ```{r}
 mod1 <- lm(netges ~ palter + I(palter^2),data=pend) 
 
@@ -269,25 +325,25 @@ library(modelsummary)
 modelsummary(list(mod1,mod1,mod1,mod1),vcov = c("classical","HC","HC2","stata"),gof_omit = "RM|IC|Log",output = "flextable")
 ```
 
-Für geclusterste SE geben wir `~clustervariable` an;
+For clustered SEs, we specify `~clustervariable`:
 ```{r}
 modelsummary(mod1, vcov = c("classical",~pnr), stars = T,gof_omit = "RM|IC|Log|F",output = "flextable")
 ```
 
-## Fixed effects Modelle mit `{fixest}` {#fe}
+## Fixed Effects Models with `{fixest}` {#fe}
 
 ```{r}
 #| eval: false
 fdz_install("fixest")
 ```
 
-[`{fixest}`](https://lrberge.github.io/fixest)) bietet eine große Auswahl an Möglichkeiten: [logistische FE-Modelle](#10_log_reg.qmd##feglm), mehr-dimensionale Fixed Effects, Multiway clustering, ...
-Und es ist sehr schnell, [bspw. schneller](https://lrberge.github.io/fixest/#benchmarking) als Statas `reghdfe`. 
-Für mehr Details empfiehlt sich die [Vignette](https://lrberge.github.io/fixest/articles/fixest_walkthrough.html).
+[`{fixest}`](https://lrberge.github.io/fixest)) offers a wide range of options: [logistic FE models](#10_log_reg.qmd##feglm), multi-dimensional fixed effects, multiway clustering, etc. 
+And it is very fast, [e.g., faster](https://lrberge.github.io/fixest/#benchmarking) than Stata’s `reghdfe`. 
+For more details, the [vignette](https://lrberge.github.io/fixest/articles/fixest_walkthrough.html) is recommended.
 
-Die zentrale Funktion zur Schätzung linearer FE-Regressionsmodelle ist `feols()` - sie funktioniert ganz ähnlich zu `lm()`. 
-Auch hier geben wir wieder eine Formel nach dem Schema `abhängige Variabe ~ unabhängige Variable(n)` an. 
-Wir fügen lediglich mit `|` die Variable hinzu, welche die FEs festlegt:
+The central function for estimating linear FE regression models is `feols()` - it works very similarly to `lm()`. 
+We provide a formula following the pattern `dependent variable ~ independent variable(s)`. 
+We simply add the variable that specifies the FEs with `|`:
 
 ```{r ols_fe, message=FALSE}
 library(fixest)
@@ -295,22 +351,21 @@ fe_mod1 <- feols(netges ~ palter + I(palter^2) | pnr, data = pend)
 fe_mod1
 ```
 
-`{fixest}` clustert automatisch die Standardfehler entlang der FE-Variable (hier also `pnr`).
-Wenn wir das mal nicht möchten, können wir mit der `se`-Option `= "standard"` ungeclusterte SE anfordern:
+`{fixest}` automatically clusters the standard errors along the FE variable (here `pnr`).
+If we don’t want that, we can request unclustered SEs with the `se` option `= "standard"`:
 ```{r ols_fe_standard_et, message=FALSE}
 summary(fe_mod1, se = 'standard')
 summary(fe_mod1, cluster = ~pnr)
 ```
 
-`{modelsummary}` zeigt die geclusterten SE:
+`{modelsummary}` shows the clustered SEs:
 ```{r, message=FALSE}
 modelsummary(fe_mod1,gof_omit = "R|IC|Log|F",stars = T,output = "flextable")
 ```
 
-## Mehrebenenmodelle mit `{lme4}` {#mlvl}
+## Multilevel Models with `{lme4}` {#mlvl}
 
-
-Mit `lmer()` können wir ein Random Intercept Modell berechnen, indem wir mit `( 1 | pnr)` angeben, dass für `pnr` jeweils ein eigenes Random Intercept berechnet werden soll:
+With `lmer()`, we can estimate a random intercept model by specifying `( 1 | pnr)`, which indicates that a separate random intercept should be calculated for each `pnr`:
 ```{r}
 library(lme4)
 ml_m3 <- lmer(netges ~ palter + I(palter^2) + ( 1 | pnr), data=pend)
@@ -318,49 +373,48 @@ ml_m3 <- lmer(netges ~ palter + I(palter^2) + ( 1 | pnr), data=pend)
 modelsummary(list(ml_m3),gof_omit = "R|IC|Log|F",output = "flextable")
 ```
 
-Mehr zu Mehrebenenmodellen und `{lme4}` in Blogposts von [Rense Nieuwenhuis ](http://www.rensenieuwenhuis.nl/r-sessions-16-multilevel-model-specification-lme4/) und [Tristan Mahr](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/).
+More about multilevel models and `{lme4}` in blog posts by [Rense Nieuwenhuis](http://www.rensenieuwenhuis.nl/r-sessions-16-multilevel-model-specification-lme4/) and [Tristan Mahr](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/).
 
+<!-- ## Final Remarks -->
 
-<!-- ## Abschließende Bemerkungen -->
+<!-- In summary, `{fixest}` and `{modelsummary}` allow us to adjust standard errors after the actual model estimation by using the `se` or `cluster` options.  -->
 
-<!-- Zusammengefasst lassen uns `{fixest}` und `{modelsummary}` Standardfehler nach der eigentlichen Modellschätzung anpassen, indem wir die  `se` or `cluster` Optionen verwenden.  -->
+<!-- A [blog post by Grant Mcdermott](https://grantmcdermott.com/better-way-adjust-SEs/) argues in more detail why post-estimation calculation of standard errors (instead of a complete re-estimation of the model) is a good idea - even though it is a very unusual approach for Stata users. -->
 
-<!-- Ein [Blog Post von Grant Mcdermott](https://grantmcdermott.com/better-way-adjust-SEs/) argumentiert noch etwas ausführlicher, warum die nachträgliche Berechnung der Standardfehler (anstelle einer kompletten Neuschätzung des Modells) eine gute Idee ist - auch wenn es für Stata-Nutzende ein sehr ungewöhnliches Vorgehen ist. -->
+<!-- Exact replication of standard errors from other programs (e.g., Stata) is often more difficult than it initially seems.  -->
+<!-- See also the discussion [here](https://github.com/sgaure/lfe/issues/1#issuecomment-530643808)  -->
+<!-- [Detailed vignette](https://lrberge.github.io/fixest/articles/standard_errors.html) on how SEs from other programs can be replicated. -->
+<!-- [Detailed paper](http://sandwich.r-forge.r-project.org/articles/jss_2020.html) by the authors of `{sandwich}` on this topic. -->
 
-<!-- Die exakte Replikation von Standardfehlern aus anderen Programmen (bspw, Stata) ist oft schwieriger als es zunächst scheint.  -->
-<!-- Siehe auch die Diskussion [hier](https://github.com/sgaure/lfe/issues/1#issuecomment-530643808)  -->
-<!-- [Detaillierte vignette](https://lrberge.github.io/fixest/articles/standard_errors.html) `{fixest}` wie SEs aus anderen Programmen repliziert werden können. -->
-<!-- [Detailliertes Paper](http://sandwich.r-forge.r-project.org/articles/jss_2020.html) von den Autoren von `{sandwich}` zu diesem Thema.  -->
+<!-- ## Appendix: Predictions with `marginaleffects` and "Manual" Visualization {#marginsplot} -->
 
-## Anhang: Predictions mit `marginaleffects` und "manuelle" Darstellung {#marginsplot}
-
-Wir hatten im Kapitel [Interaktionen](#interaktionen) folgendes Modell geschätzt:
+In the [Interactions](#interactions) chapter, we estimated the following model:
 ```{r}
 summary(m5)
 ```
 
-Mit `predictions()` aus `{marginaleffects}` können wir basierend auf unserem Modell vorhergesagte Werte für bestimmte Werte berechnen.
-Dazu geben wir die die gewünschten mit einem `datagrid()` an - dieses setzt automatisch die weiteren Variablen auf das arithm. Mittel:
+With `predictions()` from `{marginaleffects}`, we can calculate predicted values for specific values based on our model.
+We specify the desired values with a `datagrid()` - which automatically sets other variables to their mean:
 ```{r}
-# Kombinationen aller Werte erstellen
+# Create combinations of all values
 datagrid(var1 = 1:5,
          g_fct =  c("women","men"),model = m5)
 ```
 
-Diese Werte geben wir dann in `predictions()` als `newdata =` an:
+We then provide these values to `predictions()` as `newdata =`:
 ```{r}
 library(marginaleffects)
 p <- predictions(m5, 
                  newdata = datagrid(var1 = 1:5,
-                                    g_fct =  c("women","men"))) # ,model = m5 unnötig weil schon predictions angegeben:
+                                    g_fct =  c("women","men"))) # ,model = m5 unnecessary since predictions are already specified:
                  
 head(data.frame(p))
 ```
 
-Für den `ggplot()` verwenden wir dann `geom_line()` zusammen mit 
+For `ggplot()`, we use `geom_line()` together with 
 
-+ `geom_errorbar()` für eine Darstellung mit Konfidenzintervallen als Error Bars 
-+ mit `geom_ribbon()` erhalten wir die Konfidenzintervalle als Konfidenzbänder (hier müssen wir mit `alpha = ` die Deckkraft der etwas heruntersetzen und die Farbe mit `fill=` angeben um den Bereich einzufärben). 
++ `geom_errorbar()` for a visualization with confidence intervals as error bars 
++ `geom_ribbon()` for confidence intervals as shaded bands (here, we need to set the opacity with `alpha =` and specify the color with `fill=` to color the area). 
 ```{r}
 #| layout-ncol: 2
 pred_plt <- 
@@ -370,22 +424,25 @@ pred_plt <-
                ymin = conf.low,ymax = conf.high,
                color = g_fct)) + 
       geom_line() + 
-      scale_color_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Frauen","Männer")) +
-      labs(title = "Vorhergesagte Werte für var2",
-           color = "Gender",
-           x = "Werte für var1",
-           y = "Vorhergesagte Werte für var1") +
+      scale_color_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Women","Men")) +
+      labs(title = "Predicted Values for var2",
+           color = "Gender", fill = "Gender",
+           x = "Values for var1",
+           y = "Predicted Values for var2") +
       theme_minimal()
 
-# Konfidenzintervalle
+# Confidence intervals
 pred_plt + 
   geom_point(size = 2.75) +
   geom_errorbar(width = .1)
 
-# mit Konfidenzbändern
+# With confidence bands
 pred_plt + 
   geom_ribbon(alpha = .1, color = NA,aes(fill = g_fct)) +
-  scale_fill_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Frauen","Männer")) +
-  labs(fill = "Gender")
+  scale_fill_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Women","Men")) +
+  labs(title = "Predicted Values for var2",
+           color = "Gender", fill = "Gender",
+           x = "Values for var1",
+           y = "Predicted Values for var2") +
+      theme_minimal()
 ```
-

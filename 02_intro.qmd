@@ -410,7 +410,7 @@ over_10k
 -  within a given range:  `between()`
 
 ```{r}
-#| label: "Beispiele"
+#| label: "filter_examples"
 #| warning: false
 #| eval: false
 
@@ -437,8 +437,20 @@ dat1 %>% select(-profs) # all but profs
 :::{.callout-tip collapse="true"}
 
 ### `select()` helpers {#selecthelpers}
--   `contains("b")`: Variable name *contains* `...`, see `select(dat1,contains("b"))`
--   `matches()`: Variable selection using [*regular expressions*](https://jfjelstul.github.io/regular-expressions-tutorial/), see `select(dat1,matches("b$"))`: all variables ending on a `b`
+
+-   `contains("b")`: Variable name *contains* `...`, 
+-   `matches()`: Variable selection using [*regular expressions*](https://jfjelstul.github.io/regular-expressions-tutorial/)
+
+```{r}
+#| label: "select_examples"
+#| warning: false
+#| eval: false
+dat1 %>% select(contains("s")) # all variables containing s
+dat1 %>% select(matches("s$")) # all variables ending on s
+```
+
+
+
 
 :::
 
