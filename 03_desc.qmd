@@ -144,10 +144,10 @@ t2x <- cumsum(prop.table(table(pend$statakt)))
 
 `r sprintf("%2.3f",round(t2x[2]*100,3))`% of respondents are employed or unemployed (and not inactive).
 
-#### [Exercise](#descue1) {#ue3_1}
+### [Exercise](#descue1) {#ue3_1}
 
 
-## Creating a Contingency Table
+## Contingency Tables
 
 Contingency tables allow us to explore how frequently combinations of different variables occur together. 
 Let's look at two ways to create contingency tables in R. 

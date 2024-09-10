@@ -22,7 +22,7 @@ knitr::include_graphics("./pic/01_frontpage_iab2.png")
 
 {{< fa location-dot >}} &nbsp; E09
 
-{{< fa calendar-alt >}} &nbsp; 11.09.2024 &nbsp; {{< fa clock >}} &nbsp; 10:45 – 16:00  
+{{< fa calendar-alt >}} &nbsp; 11.09.2024 &nbsp; {{< fa clock >}} &nbsp; 10:30 – 16:00  
 
 {{< fa calendar-alt >}} &nbsp; 13.09.2024 &nbsp; {{< fa clock >}} &nbsp;  8:30 – 15:30 
 
