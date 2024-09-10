@@ -124,10 +124,10 @@ tab2 %>%
   pend_kap5 %>% 
     select(zpsex,PSM0100) %>% 
     distinct() %>%  
+    data.frame() %>% 
     pivot_longer(cols = everything()) %>% 
     distinct() %>% 
     arrange(name,value) %>% 
-  data.frame() %>% 
   xlsx::write.xlsx(file = "./data/label.xlsx",row.names = F)
 
   

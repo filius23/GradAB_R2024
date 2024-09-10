@@ -165,7 +165,7 @@ tab2
 tab2 %>% mutate(pct_zpsex= prop.table(n), .by = zpsex)
 ```
 
-
+### [*Exercise*](#descue2) {#ue3_2}
 
 ## Summary Statistics
 
