@@ -193,6 +193,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references_translated.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Links &amp; Further Reading</span></a>
   </div>
@@ -230,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="wrang2" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></h1>
+<h1 class="title"><span id="wrang3" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></h1>
 </div>
 
 
@@ -283,10 +289,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ids_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula
-#&gt; 1   8    2
-#&gt; 2   4    1
-#&gt; 3   9   14
-#&gt; 4   7   15</code></pre>
+#&gt; 1   5    2
+#&gt; 2   6    1
+#&gt; 3   8   14
+#&gt; 4   4   15</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>alo_bula</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -303,10 +309,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ids_df <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(alo_bula,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Bula"</span><span class="ot">=</span><span class="st">"bundesland"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula Werte
-#&gt; 1   8    2     m
-#&gt; 2   4    1     g
-#&gt; 3   9   14  &lt;NA&gt;
-#&gt; 4   7   15  &lt;NA&gt;</code></pre>
+#&gt; 1   5    2     m
+#&gt; 2   6    1     g
+#&gt; 3   8   14  &lt;NA&gt;
+#&gt; 4   4   15  &lt;NA&gt;</code></pre>
 </div>
 </div>
 <p>A quick check for the matching cases can be done using:</p>
@@ -323,8 +329,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ids_df <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(alo_bula,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Bula"</span><span class="ot">=</span><span class="st">"bundesland"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula
-#&gt; 1   9   14
-#&gt; 2   7   15</code></pre>
+#&gt; 1   8   14
+#&gt; 2   4   15</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alo_bula <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(ids_df,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"bundesland"</span><span class="ot">=</span><span class="st">"Bula"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

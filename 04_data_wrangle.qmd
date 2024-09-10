@@ -12,37 +12,17 @@ windowsFonts(mono=windowsFont("Fira Code"))
 library(tidyverse)
 ```
 
-We return to the university dataset from the beginning:
+To keep it nice and simple, we'll use yet another university dataset:
 
 ```{r}
-dat1 <- data.frame(
-  studs = c(19173, 5333, 15643), 
-  profs = c(322, 67, 210),
-  gegr  = c(1971, 1830, 1973),
-  prom_recht = rep(TRUE, 3),
-  uni = c("Uni Bremen", "Uni Vechta", "Uni Oldenburg")
-)
-
-dat2 <- data.frame(
+dat3 <- data.frame(
   studs = c(14954, 47269, 23659, 9415, 38079), 
   profs = c(250, 553, 438, 150, 636),
   prom_recht = c(FALSE, TRUE, TRUE, TRUE, FALSE),
   gegr  = c(1971, 1870, 1457, 1818, 1995),
   uni = c("FH Aachen", "RWTH Aachen", "Uni Freiburg", "Uni Bonn", "FH Bonn-Rhein-Sieg")
 )
-
-dat1
-dat2
 ```
-
-With `bind_rows()` from `{dplyr}`, we can combine the two `data.frame`s:
-
-```{r}
-dat3 <- bind_rows(dat1, dat2)
-dat3
-```
-
-There is also `bind_cols()` to combine datasets column-wise. We'll learn more about merging datasets based on one or more identifier variables [later](#wrang3).
 
 ## Creating Variables {#var}
 
@@ -122,7 +102,6 @@ dat3 %>% mutate(
 ```
 :::
 
-### [Exercise](#mutate1) {#ue06_1}
 
 ## Grouping with `.by=` {#group_by}
 
@@ -357,25 +336,10 @@ sat_small %>%
 
 ## Exercises
 
-### Exercise {#mutate1}
-
-+ Create `dat3` as [shown above](#var) from `dat1` and `dat2`.
-+ Calculate the student-to-professor ratio (students per professor `studs/profs`) at the universities relative to the mean of the ratio (`rel_studprofs`).
-+ Is the ratio above or below the mean? How can you adjust the command so that the variable `rel_studprofs` only contains `TRUE` or `FALSE` instead of numeric values?
-+ Convert `rel_studprofs` into a dummy variable with 0/1 values instead of `TRUE`/`FALSE`.
-
-::: callout-tip
-
-A rule of thumb to decide whether `mutate()` or `...$newvar <-` is more suitable: Whenever it's just about quickly creating/deleting a variable, `...$newvar <-` is the simpler choice. When it goes beyond that, `mutate()` offers significant advantages ([next section](#group_by)).
-
-:::
-
-[Back to top](#ue06_1)
-
-
 ### Exercise {#grp_ue}
 
-+ Continue using the university dataset.
++ Continue using the university dataset `dat3` as [shown above](#var) from `dat1` and `dat2`.
++ Calculate the student-to-professor ratio (students per professor `studs/profs`) at the universities relative to the mean of the ratio (`rel_studprofs`).
 + Calculate the student-to-professor ratio (`studprofs`) relative to the mean, separated by universities with and without the right to award doctorates, and add this as a new column.
 
 [Back to top](#ue06_2)
@@ -497,30 +461,12 @@ pend_small %>%
 [Back to top](#ue06_4)
 
 
-### Exercise {#ifcase}
-
-+ Work on `pend_small2`:
-```{r}
-pend_small2 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
-                         col_select = c("palter","PEO0400a","PEO0400b","PEO0400c","statakt")) 
-pend_small2 <- pend_small2 %>% slice(5624:5640)
-pend_small2
-```
-
-
-+ Use `ifelse()` to label people 50 years and older as "ü50" - for those under 50, label them as "u50".
-+ Create a three-way division: people under 40 are labeled "u40", people under 50 "u50", and people 50 and older as "ü50". How would you approach this with `case_when()`?
-+ Use `ifelse()` to overwrite values < 0 in the variables `PEO0400a`, `PEO0400b`, `PEO0400c`, and `statakt` in `pend_small2` with `NA`.
-+ First, write an `ifelse()` function that overwrites all values < 0 in `PEO0400a` with `NA` and otherwise keeps the original value `PEO0400a`.
-+ How would the function look if you applied it to `PEO0400a`, `PEO0400b`, `PEO0400c`, and `statakt` at the same time using `across()`?
-
-[Back to top](#ue06_5)
-
-
 ## Appendix
 
-### Helper functions `ifelse()` and `case_when()`
+### Helper functions 
 
+
+#### `ifelse()`
 `ifelse()` is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether `studs-mean(studs)` is greater than `0` - if so, `above` is used, otherwise `below`:
 
 ```{r}
@@ -528,7 +474,29 @@ dat3 %>% mutate(rel_to_mean = studs-mean(studs),
                 ab_mean_lab = ifelse(rel_to_mean > 0,"above","below"))
 ```
 
-`case_when()` (`{dplyr}`) extends this principle, allowing us to specify more than two options.  
+This can be helpful to replace negative values with `NA`, for example in the PASS data:
+
+```{r}
+pend_small2 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+                               col_select = c("palter","PEO0400a","PEO0400b","PEO0400c","statakt"))  %>% 
+  slice(5624:5640)
+```
+
+The basic idea is to use `ifelse()` to replace negative values in a variable with `NA`:
+```{r}
+#| eval: false
+pend_small2 %>% mutate(PEO0400a = ifelse(PEO0400a<0,NA,PEO0400a))
+```
+
+`across()` allows us to apply this `ifelse()`-function to replace `NA` in `PEO0400a`,`PEO0400b`, `PEO0400c` and `statakt`:
+```{r}
+pend_small2 %>% mutate(across(c("PEO0400a","PEO0400b","PEO0400c","statakt"), ~ifelse(.x<0,NA,.x)))  
+pend_small2 %>% mutate(across(matches("PEO0400|statakt"), ~ifelse(.x<0,NA,.x)))  # even shorter: matches()
+```
+
+
+#### `case_when()`
+`case_when()` (`{dplyr}`) extends the principle `ifelse()`, allowing us to specify more than two options.  
 The syntax is slightly different: first, we specify the condition, then after a `~` the values to be used: 
 
 ```{r}
@@ -553,26 +521,8 @@ dat3 %>% mutate(age = case_when(gegr < 1500 & prom_recht  == T ~ "very old unive
                                 gegr > 1900 & prom_recht  == F ~ "young college"))
 ```
 
-### [Exercise](#ifcase) {#ue06_5}
 
-
-### Renaming variables
-
-
-To rename variables, use `rename(new_name = old_name)`
-
-```{r}
-sat_small %>% rename(newname = PEO0300a)
-```
-
-For advanced transformations, it's worth looking into `rename_with()`. This allows us to use [Regular Expressions](https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf), for example from [{stringr}](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf). Here’s just an example:
-
-```{r}
-sat_small %>% rename_with(~tolower(.))
-sat_small %>% rename_with(~str_remove(.x,"PEO0300"))
-sat_small %>% rename_with(~str_replace(.x,"PEO0300","Occupation_"))
-```
-### Creating Classes with `cut()`
+#### `cut()`: creating classes
 
 ```{r}
 dat3
@@ -627,6 +577,22 @@ cut(bsp,breaks = c(1990,2000,2010),labels = FALSE)
 cut(bsp,breaks = c(1990,2000,2010),labels = c("90s","00s"))
 ```
 
+### Renaming variables
+
+
+To rename variables, use `rename(new_name = old_name)`
+
+```{r}
+sat_small %>% rename(newname = PEO0300a)
+```
+
+For advanced transformations, it's worth looking into `rename_with()`. This allows us to use [Regular Expressions](https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf), for example from [{stringr}](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf). Here’s just an example:
+
+```{r}
+sat_small %>% rename_with(~tolower(.))
+sat_small %>% rename_with(~str_remove(.x,"PEO0300"))
+sat_small %>% rename_with(~str_replace(.x,"PEO0300","Occupation_"))
+```
 ### String Functions for *regex*
 
 [{stringr}](https://stringr.tidyverse.org/) provides a series of very useful string functions with [regular expressions](https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf). You can get an overview from this [cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf).

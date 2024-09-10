@@ -497,6 +497,18 @@ dat1 %>% arrange(uni_fct)
 
 This may seem trivial at the moment but is very useful later for ordering variables in plots or setting the reference category in regression models.
 
+We can use the `levels =` and `labels =` for a lazy recode:
+```{r}
+dat1$gegr_fct <- factor(dat1$gegr,
+                       levels = c(1830,1971,1973) ,
+                       labels = c("early","70s","70s")) # labels do not need to be unique
+dat1
+dat1 %>% arrange(desc(gegr_fct))
+dat1 %>% arrange(desc(gegr_fct),gegr)
+```
+
+
+
 
 ### [Exercise](#data3) {#ue_3}
 
@@ -839,7 +851,7 @@ c("FH Aachen","RWTH Aachen","Uni Freiburg","Uni Bonn","FH Bonn-Rhein-Sieg")
 
 ### Exercise 3 {#data3}
 
--   Continue using the dataset from Exercises 1 & 2.
+-   Continue using the dataset from Exercises 1 & 2 (dat2)
 -   Display only the universities that were founded in 1971, 1457, or 1995, and for these cases, show only the name and founding year.
 -   Sort the dataset according to the following order. (Create a `factor` variable that defines this order.)
 ```{r}
@@ -856,17 +868,11 @@ c("RWTH Aachen", "Uni Freiburg", "Uni Bonn", "FH Aachen", "FH Bonn-Rhein-Sieg")
 -   Save the personal data from the PASS-CampusFile (`PENDDAT_cf_W13.dta`) in your directory in the subfolder *orig*.
 -   Read the dataset `PENDDAT_cf_W13.dta` [as shown above](#import) into R and assign it to the object name `pend`.
 -   Use `head()` and `View()` to get an overview of the dataset.
--   How many respondents (rows) does the dataset contain?
+-   How many entries (rows) does the dataset contain?
 -   Display the variable names of `pend` using `names()`!
--   How can you display the rows that contain the respondent with the `pnr` 1000908201?
--   Select all respondents older than 60 (Age: `palter`) and save this selection as `ue_1960`.
--   How do you need to adjust the command so that `ue_1960` contains only the variables `pnr`, `hnr`, `welle`, `pintjahr`, and `palter`?
--   How many columns does `ue_1960` have? How many rows?
-
-**Bonus Exercises**:
-
->  - How old is the respondent with the `pnr` 1000908201 in `welle` 10 (in `pintjahr` 2016)?
->  - Create a new variable with the birth year of the respondents (based on the age `palter` and the interview year `pintjahr`).
+-   How old is the respondent with the `pnr` 1000908201 in `welle` 10 (in `pintjahr` 2016)?
+  -   Display the wave (`welle`) and age (`palter`) of respondent with the `pnr` 1000908201?
+  -   Store the resulting data.frame in an object, e.g. `resp_1000908201`.
 
 [Back to top](#ue_4)
 
@@ -874,9 +880,9 @@ c("RWTH Aachen", "Uni Freiburg", "Uni Bonn", "FH Aachen", "FH Bonn-Rhein-Sieg")
 
 ### Exercise 5 {#data5}
 
--  Export the `data.frame` with the smaller dataset version (`ue_1960`) created in the previous exercise as an `.Rdata` file.
--  Load the exported `.Rdata` file under a different name, e.g., `ue_1960_neu`.
--  Did everything work? Compare the newly loaded object with the original one: `identical(ue_1960, ue_1960_neu)` - are both objects identical?
+-  Export the `data.frame` `resp_1000908201` created in the previous exercise as an `.Rdata` file.
+-  Load the exported `.Rdata` file under a different name, e.g., `resp_1000908201_new`.
+-  Did everything work? Compare the newly loaded object with the original one: `identical(resp_1000908201, resp_1000908201_new)` - are both objects identical?
 
 [Back to top](#ue_5)
 

@@ -193,6 +193,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references_translated.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Links &amp; Further Reading</span></a>
   </div>
@@ -211,7 +217,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#base-r-...newvar--" id="toc-base-r-...newvar--" class="nav-link" data-scroll-target="#base-r-...newvar--"><span class="header-section-number">4.1.1</span> Base R: <code>...$newvar &lt;-</code></a></li>
   <li><a href="#dplyr-mutatenew_var" id="toc-dplyr-mutatenew_var" class="nav-link" data-scroll-target="#dplyr-mutatenew_var"><span class="header-section-number">4.1.2</span> {dplyr}: <code>mutate(new_var= )</code></a></li>
-  <li><a href="#ue06_1" id="toc-ue06_1" class="nav-link" data-scroll-target="#ue06_1"><span class="header-section-number">4.1.3</span> Exercise</a></li>
   </ul></li>
   <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">4.2</span> Grouping with <code>.by=</code></a>
   <ul class="collapse">
@@ -227,19 +232,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.5</span> Exercises</a>
   <ul class="collapse">
-  <li><a href="#mutate1" id="toc-mutate1" class="nav-link" data-scroll-target="#mutate1"><span class="header-section-number">4.5.1</span> Exercise</a></li>
-  <li><a href="#grp_ue" id="toc-grp_ue" class="nav-link" data-scroll-target="#grp_ue"><span class="header-section-number">4.5.2</span> Exercise</a></li>
-  <li><a href="#across_ue" id="toc-across_ue" class="nav-link" data-scroll-target="#across_ue"><span class="header-section-number">4.5.3</span> Exercise</a></li>
-  <li><a href="#fnct" id="toc-fnct" class="nav-link" data-scroll-target="#fnct"><span class="header-section-number">4.5.4</span> Exercise</a></li>
-  <li><a href="#ifcase" id="toc-ifcase" class="nav-link" data-scroll-target="#ifcase"><span class="header-section-number">4.5.5</span> Exercise</a></li>
+  <li><a href="#grp_ue" id="toc-grp_ue" class="nav-link" data-scroll-target="#grp_ue"><span class="header-section-number">4.5.1</span> Exercise</a></li>
+  <li><a href="#across_ue" id="toc-across_ue" class="nav-link" data-scroll-target="#across_ue"><span class="header-section-number">4.5.2</span> Exercise</a></li>
+  <li><a href="#fnct" id="toc-fnct" class="nav-link" data-scroll-target="#fnct"><span class="header-section-number">4.5.3</span> Exercise</a></li>
   </ul></li>
   <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">4.6</span> Appendix</a>
   <ul class="collapse">
-  <li><a href="#helper-functions-ifelse-and-case_when" id="toc-helper-functions-ifelse-and-case_when" class="nav-link" data-scroll-target="#helper-functions-ifelse-and-case_when"><span class="header-section-number">4.6.1</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></a></li>
-  <li><a href="#ue06_5" id="toc-ue06_5" class="nav-link" data-scroll-target="#ue06_5"><span class="header-section-number">4.6.2</span> Exercise</a></li>
-  <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables"><span class="header-section-number">4.6.3</span> Renaming variables</a></li>
-  <li><a href="#creating-classes-with-cut" id="toc-creating-classes-with-cut" class="nav-link" data-scroll-target="#creating-classes-with-cut"><span class="header-section-number">4.6.4</span> Creating Classes with <code>cut()</code></a></li>
-  <li><a href="#string-functions-for-regex" id="toc-string-functions-for-regex" class="nav-link" data-scroll-target="#string-functions-for-regex"><span class="header-section-number">4.6.5</span> String Functions for <em>regex</em></a></li>
+  <li><a href="#helper-functions" id="toc-helper-functions" class="nav-link" data-scroll-target="#helper-functions"><span class="header-section-number">4.6.1</span> Helper functions</a></li>
+  <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables"><span class="header-section-number">4.6.2</span> Renaming variables</a></li>
+  <li><a href="#string-functions-for-regex" id="toc-string-functions-for-regex" class="nav-link" data-scroll-target="#string-functions-for-regex"><span class="header-section-number">4.6.3</span> String Functions for <em>regex</em></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -269,58 +270,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We return to the university dataset from the beginning:</p>
+<p>To keep it nice and simple, we’ll use yet another university dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">19173</span>, <span class="dv">5333</span>, <span class="dv">15643</span>), </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">322</span>, <span class="dv">67</span>, <span class="dv">210</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>, <span class="dv">1830</span>, <span class="dv">1973</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_recht =</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, <span class="dv">3</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"Uni Bremen"</span>, <span class="st">"Uni Vechta"</span>, <span class="st">"Uni Oldenburg"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">14954</span>, <span class="dv">47269</span>, <span class="dv">23659</span>, <span class="dv">9415</span>, <span class="dv">38079</span>), </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">250</span>, <span class="dv">553</span>, <span class="dv">438</span>, <span class="dv">150</span>, <span class="dv">636</span>),</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_recht =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>, <span class="dv">1870</span>, <span class="dv">1457</span>, <span class="dv">1818</span>, <span class="dv">1995</span>),</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"FH Aachen"</span>, <span class="st">"RWTH Aachen"</span>, <span class="st">"Uni Freiburg"</span>, <span class="st">"Uni Bonn"</span>, <span class="st">"FH Bonn-Rhein-Sieg"</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>dat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht           uni
-1 19173   322 1971       TRUE    Uni Bremen
-2  5333    67 1830       TRUE    Uni Vechta
-3 15643   210 1973       TRUE Uni Oldenburg</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs =</span> <span class="fu">c</span>(<span class="dv">14954</span>, <span class="dv">47269</span>, <span class="dv">23659</span>, <span class="dv">9415</span>, <span class="dv">38079</span>), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs =</span> <span class="fu">c</span>(<span class="dv">250</span>, <span class="dv">553</span>, <span class="dv">438</span>, <span class="dv">150</span>, <span class="dv">636</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_recht =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gegr  =</span> <span class="fu">c</span>(<span class="dv">1971</span>, <span class="dv">1870</span>, <span class="dv">1457</span>, <span class="dv">1818</span>, <span class="dv">1995</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">uni =</span> <span class="fu">c</span>(<span class="st">"FH Aachen"</span>, <span class="st">"RWTH Aachen"</span>, <span class="st">"Uni Freiburg"</span>, <span class="st">"Uni Bonn"</span>, <span class="st">"FH Bonn-Rhein-Sieg"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dat2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs prom_recht gegr                uni
-1 14954   250      FALSE 1971          FH Aachen
-2 47269   553       TRUE 1870        RWTH Aachen
-3 23659   438       TRUE 1457       Uni Freiburg
-4  9415   150       TRUE 1818           Uni Bonn
-5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg</code></pre>
-</div>
-</div>
-<p>With <code>bind_rows()</code> from <code>{dplyr}</code>, we can combine the two <code>data.frame</code>s:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(dat1, dat2)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni
-1 19173   322 1971       TRUE         Uni Bremen
-2  5333    67 1830       TRUE         Uni Vechta
-3 15643   210 1973       TRUE      Uni Oldenburg
-4 14954   250 1971      FALSE          FH Aachen
-5 47269   553 1870       TRUE        RWTH Aachen
-6 23659   438 1457       TRUE       Uni Freiburg
-7  9415   150 1818       TRUE           Uni Bonn
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
-</div>
-</div>
-<p>There is also <code>bind_cols()</code> to combine datasets column-wise. We’ll learn more about merging datasets based on one or more identifier variables <a href="#wrang3">later</a>.</p>
 <section id="var" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="var"><span class="header-section-number">4.1</span> Creating Variables</h2>
 <p>Let’s take a closer look at creating variables in R. There are two basic ways to add variables to a <code>data.frame</code>:</p>
@@ -331,34 +290,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="base-r-...newvar--" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="base-r-...newvar--"><span class="header-section-number">4.1.1</span> Base R: <code>...$newvar &lt;-</code></h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> dat3<span class="sc">$</span>studs <span class="sc">-</span> <span class="fu">mean</span>(dat3<span class="sc">$</span>studs)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> dat3<span class="sc">$</span>studs <span class="sc">-</span> <span class="fu">mean</span>(dat3<span class="sc">$</span>studs)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni studs_to_mean
-1 19173   322 1971       TRUE         Uni Bremen     -2517.625
-2  5333    67 1830       TRUE         Uni Vechta    -16357.625
-3 15643   210 1973       TRUE      Uni Oldenburg     -6047.625
-4 14954   250 1971      FALSE          FH Aachen     -6736.625
-5 47269   553 1870       TRUE        RWTH Aachen     25578.375
-6 23659   438 1457       TRUE       Uni Freiburg      1968.375
-7  9415   150 1818       TRUE           Uni Bonn    -12275.625
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni studs_to_mean
+1 14954   250      FALSE 1971          FH Aachen      -11721.2
+2 47269   553       TRUE 1870        RWTH Aachen       20593.8
+3 23659   438       TRUE 1457       Uni Freiburg       -3016.2
+4  9415   150       TRUE 1818           Uni Bonn      -17260.2
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg       11403.8</code></pre>
 </div>
 </div>
 <p>You can also delete variables using <code>&lt;- NULL</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>studs_to_mean <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni
-1 19173   322 1971       TRUE         Uni Bremen
-2  5333    67 1830       TRUE         Uni Vechta
-3 15643   210 1973       TRUE      Uni Oldenburg
-4 14954   250 1971      FALSE          FH Aachen
-5 47269   553 1870       TRUE        RWTH Aachen
-6 23659   438 1457       TRUE       Uni Freiburg
-7  9415   150 1818       TRUE           Uni Bonn
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni
+1 14954   250      FALSE 1971          FH Aachen
+2 47269   553       TRUE 1870        RWTH Aachen
+3 23659   438       TRUE 1457       Uni Freiburg
+4  9415   150       TRUE 1818           Uni Bonn
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg</code></pre>
 </div>
 </div>
 </section>
@@ -366,88 +319,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="dplyr-mutatenew_var"><span class="header-section-number">4.1.2</span> {dplyr}: <code>mutate(new_var= )</code></h3>
 <p>An alternative way to create variables is using <code>mutate(new_variable = )</code> from <code>{dplyr}</code> (<code>{tidyverse}</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni studs_to_mean
-1 19173   322 1971       TRUE         Uni Bremen     -2517.625
-2  5333    67 1830       TRUE         Uni Vechta    -16357.625
-3 15643   210 1973       TRUE      Uni Oldenburg     -6047.625
-4 14954   250 1971      FALSE          FH Aachen     -6736.625
-5 47269   553 1870       TRUE        RWTH Aachen     25578.375
-6 23659   438 1457       TRUE       Uni Freiburg      1968.375
-7  9415   150 1818       TRUE           Uni Bonn    -12275.625
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni studs_to_mean
+1 14954   250      FALSE 1971          FH Aachen      -11721.2
+2 47269   553       TRUE 1870        RWTH Aachen       20593.8
+3 23659   438       TRUE 1457       Uni Freiburg       -3016.2
+4  9415   150       TRUE 1818           Uni Bonn      -17260.2
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg       11403.8</code></pre>
 </div>
 </div>
 <p>You can also create multiple variables within a single <code>mutate()</code> command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs_to_mean =</span> profs <span class="sc">-</span> <span class="fu">mean</span>(profs)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">studs_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profs_to_mean =</span> profs <span class="sc">-</span> <span class="fu">mean</span>(profs)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni studs_to_mean profs_to_mean
-1 19173   322 1971       TRUE         Uni Bremen     -2517.625         -6.25
-2  5333    67 1830       TRUE         Uni Vechta    -16357.625       -261.25
-3 15643   210 1973       TRUE      Uni Oldenburg     -6047.625       -118.25
-4 14954   250 1971      FALSE          FH Aachen     -6736.625        -78.25
-5 47269   553 1870       TRUE        RWTH Aachen     25578.375        224.75
-6 23659   438 1457       TRUE       Uni Freiburg      1968.375        109.75
-7  9415   150 1818       TRUE           Uni Bonn    -12275.625       -178.25
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     16388.375        307.75</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni studs_to_mean profs_to_mean
+1 14954   250      FALSE 1971          FH Aachen      -11721.2        -155.4
+2 47269   553       TRUE 1870        RWTH Aachen       20593.8         147.6
+3 23659   438       TRUE 1457       Uni Freiburg       -3016.2          32.6
+4  9415   150       TRUE 1818           Uni Bonn      -17260.2        -255.4
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg       11403.8         230.6</code></pre>
 </div>
 </div>
 <p>Or variables can be reused within <code>mutate()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni rel_to_mean above_mean
-1 19173   322 1971       TRUE         Uni Bremen   -2517.625      FALSE
-2  5333    67 1830       TRUE         Uni Vechta  -16357.625      FALSE
-3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625      FALSE
-4 14954   250 1971      FALSE          FH Aachen   -6736.625      FALSE
-5 47269   553 1870       TRUE        RWTH Aachen   25578.375       TRUE
-6 23659   438 1457       TRUE       Uni Freiburg    1968.375       TRUE
-7  9415   150 1818       TRUE           Uni Bonn  -12275.625      FALSE
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       TRUE</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni rel_to_mean above_mean
+1 14954   250      FALSE 1971          FH Aachen    -11721.2      FALSE
+2 47269   553       TRUE 1870        RWTH Aachen     20593.8       TRUE
+3 23659   438       TRUE 1457       Uni Freiburg     -3016.2      FALSE
+4  9415   150       TRUE 1818           Uni Bonn    -17260.2      FALSE
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg     11403.8       TRUE</code></pre>
 </div>
 </div>
 <p>The original dataset remains unchanged:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni
-1 19173   322 1971       TRUE         Uni Bremen
-2  5333    67 1830       TRUE         Uni Vechta
-3 15643   210 1973       TRUE      Uni Oldenburg
-4 14954   250 1971      FALSE          FH Aachen
-5 47269   553 1870       TRUE        RWTH Aachen
-6 23659   438 1457       TRUE       Uni Freiburg
-7  9415   150 1818       TRUE           Uni Bonn
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni
+1 14954   250      FALSE 1971          FH Aachen
+2 47269   553       TRUE 1870        RWTH Aachen
+3 23659   438       TRUE 1457       Uni Freiburg
+4  9415   150       TRUE 1818           Uni Bonn
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg</code></pre>
 </div>
 </div>
 <p>To keep the results, store them in an object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>dat4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_to_mean =</span> studs <span class="sc">-</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">above_mean =</span> rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>dat4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni rel_to_mean above_mean
-1 19173   322 1971       TRUE         Uni Bremen   -2517.625      FALSE
-2  5333    67 1830       TRUE         Uni Vechta  -16357.625      FALSE
-3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625      FALSE
-4 14954   250 1971      FALSE          FH Aachen   -6736.625      FALSE
-5 47269   553 1870       TRUE        RWTH Aachen   25578.375       TRUE
-6 23659   438 1457       TRUE       Uni Freiburg    1968.375       TRUE
-7  9415   150 1818       TRUE           Uni Bonn  -12275.625      FALSE
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       TRUE</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni rel_to_mean above_mean
+1 14954   250      FALSE 1971          FH Aachen    -11721.2      FALSE
+2 47269   553       TRUE 1870        RWTH Aachen     20593.8       TRUE
+3 23659   438       TRUE 1457       Uni Freiburg     -3016.2      FALSE
+4  9415   150       TRUE 1818           Uni Bonn    -17260.2      FALSE
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg     11403.8       TRUE</code></pre>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip callout-titled">
@@ -464,28 +402,22 @@ Creating Dummy Variables with <code>as.numeric()</code>
 <div class="callout-body-container callout-body">
 <p>You can convert logical variables into numeric dummy variables (0/1) using <code>as.numeric()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_dummy =</span> <span class="fu">as.numeric</span>(prom_recht),</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">over10k =</span> <span class="fu">as.numeric</span>(studs <span class="sc">&gt;</span> <span class="dv">10000</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">prom_dummy =</span> <span class="fu">as.numeric</span>(prom_recht),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">over10k =</span> <span class="fu">as.numeric</span>(studs <span class="sc">&gt;</span> <span class="dv">10000</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni prom_dummy over10k
-1 19173   322 1971       TRUE         Uni Bremen          1       1
-2  5333    67 1830       TRUE         Uni Vechta          1       0
-3 15643   210 1973       TRUE      Uni Oldenburg          1       1
-4 14954   250 1971      FALSE          FH Aachen          0       1
-5 47269   553 1870       TRUE        RWTH Aachen          1       1
-6 23659   438 1457       TRUE       Uni Freiburg          1       1
-7  9415   150 1818       TRUE           Uni Bonn          1       0
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg          0       1</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni prom_dummy over10k
+1 14954   250      FALSE 1971          FH Aachen          0       1
+2 47269   553       TRUE 1870        RWTH Aachen          1       1
+3 23659   438       TRUE 1457       Uni Freiburg          1       1
+4  9415   150       TRUE 1818           Uni Bonn          1       0
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg          0       1</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="ue06_1" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="ue06_1"><span class="header-section-number">4.1.3</span> <a href="#mutate1">Exercise</a></h3>
 </section>
 </section>
 <section id="group_by" class="level2" data-number="4.2">
@@ -493,37 +425,34 @@ Creating Dummy Variables with <code>as.numeric()</code>
 <p>The true power of <code>mutate()</code> becomes apparent when combined with other <code>{dplyr}</code> functions. A common task in data preparation involves grouped values.</p>
 <p>We’ll make our example dataset a bit smaller:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="ot">&lt;-</span> dat3 <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>uni,<span class="sc">-</span>gegr) <span class="co"># to ensure everything is visible</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="ot">&lt;-</span> dat3 <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>uni,<span class="sc">-</span>gegr) <span class="co"># to ensure everything is visible</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since <code>{dplyr}</code> version 1.1.1, we can specify a grouping directly in <code>mutate()</code> using the <code>.by=</code> argument. This <code>.by=</code> grouping is applied only to the immediate calculations within <code>mutate()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">.by =</span> prom_recht) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">.by =</span> prom_recht) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs prom_recht  m_studs m_profs m_studs2 m_profs2
-1 19173   322       TRUE 21690.62  328.25  20082.0   328.25
-2  5333    67       TRUE 21690.62  328.25  20082.0   328.25
-3 15643   210       TRUE 21690.62  328.25  20082.0   328.25
-4 14954   250      FALSE 21690.62  328.25  26516.5   328.25
-5 47269   553       TRUE 21690.62  328.25  20082.0   328.25
-6 23659   438       TRUE 21690.62  328.25  20082.0   328.25
-7  9415   150       TRUE 21690.62  328.25  20082.0   328.25
-8 38079   636      FALSE 21690.62  328.25  26516.5   328.25</code></pre>
+<pre><code>  studs profs prom_recht m_studs m_profs m_studs2 m_profs2
+1 14954   250      FALSE 26675.2   405.4  26516.5    405.4
+2 47269   553       TRUE 26675.2   405.4  26781.0    405.4
+3 23659   438       TRUE 26675.2   405.4  26781.0    405.4
+4  9415   150       TRUE 26675.2   405.4  26781.0    405.4
+5 38079   636      FALSE 26675.2   405.4  26516.5    405.4</code></pre>
 </div>
 </div>
 <p>Using <code>summarise()</code> instead of <code>mutate()</code> provides an overview:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),<span class="at">.by =</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),<span class="at">.by =</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  prom_recht m_studs
-1       TRUE 20082.0
-2      FALSE 26516.5</code></pre>
+1      FALSE 26516.5
+2       TRUE 26781.0</code></pre>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip callout-titled">
@@ -540,48 +469,42 @@ Creating Dummy Variables with <code>as.numeric()</code>
 <div class="callout-body-container callout-body">
 <p>Before <code>{dplyr}</code> 1.1.1, grouping a dataset relied on <code>group_by()</code>. After setting <code>group_by()</code> along the values of a variable, all subsequent <code>mutate()</code> calculations are performed only within those groups:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prom_recht) <span class="sc">%&gt;%</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prom_recht) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 7
+<pre><code># A tibble: 5 × 7
 # Groups:   prom_recht [2]
   studs profs prom_recht m_studs m_profs m_studs2 m_profs2
   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 19173   322 TRUE        21691.    328.   20082       290
-2  5333    67 TRUE        21691.    328.   20082       290
-3 15643   210 TRUE        21691.    328.   20082       290
-4 14954   250 FALSE       21691.    328.   26516.      443
-5 47269   553 TRUE        21691.    328.   20082       290
-6 23659   438 TRUE        21691.    328.   20082       290
-7  9415   150 TRUE        21691.    328.   20082       290
-8 38079   636 FALSE       21691.    328.   26516.      443</code></pre>
+1 14954   250 FALSE       26675.    405.   26516.     443 
+2 47269   553 TRUE        26675.    405.   26781      380.
+3 23659   438 TRUE        26675.    405.   26781      380.
+4  9415   150 TRUE        26675.    405.   26781      380.
+5 38079   636 FALSE       26675.    405.   26516.     443 </code></pre>
 </div>
 </div>
 <p>After using <code>group_by()</code>, it’s good practice to remove the grouping with <code>ungroup()</code> once it’s no longer needed:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prom_recht) <span class="sc">%&gt;%</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dat5 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_profs =</span> <span class="fu">mean</span>(profs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(prom_recht) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_studs2 =</span> <span class="fu">mean</span>(studs)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_profs2 =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 7
+<pre><code># A tibble: 5 × 7
   studs profs prom_recht m_studs m_profs m_studs2 m_profs2
   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 19173   322 TRUE        21691.    328.   20082      328.
-2  5333    67 TRUE        21691.    328.   20082      328.
-3 15643   210 TRUE        21691.    328.   20082      328.
-4 14954   250 FALSE       21691.    328.   26516.     328.
-5 47269   553 TRUE        21691.    328.   20082      328.
-6 23659   438 TRUE        21691.    328.   20082      328.
-7  9415   150 TRUE        21691.    328.   20082      328.
-8 38079   636 FALSE       21691.    328.   26516.     328.</code></pre>
+1 14954   250 FALSE       26675.    405.   26516.     405.
+2 47269   553 TRUE        26675.    405.   26781      405.
+3 23659   438 TRUE        26675.    405.   26781      405.
+4  9415   150 TRUE        26675.    405.   26781      405.
+5 38079   636 FALSE       26675.    405.   26516.     405.</code></pre>
 </div>
 </div>
 <!-- :heart: -->
@@ -596,93 +519,87 @@ Creating Dummy Variables with <code>as.numeric()</code>
 <h2 data-number="4.3" class="anchored" data-anchor-id="across"><span class="header-section-number">4.3</span> <code>across()</code>: Processing Multiple Variables</h2>
 <p>A highly versatile addition to <code>mutate()</code> and <code>summarise()</code> is <code>across()</code>. This allows us to apply a function to multiple columns simultaneously, without repeating code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">studs =</span> <span class="fu">mean</span>(studs),</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">profs =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">studs =</span> <span class="fu">mean</span>(studs),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">profs =</span> <span class="fu">mean</span>(profs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     studs  profs
-1 21690.62 328.25</code></pre>
+<pre><code>    studs profs
+1 26675.2 405.4</code></pre>
 </div>
 </div>
 <p>Here, <code>across()</code> offers a much shorter syntax for variable selection, and we can use <a href="./02_intro.html#selecthelpers"><code>?select_helpers</code></a> like <code>matches()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">matches</span>(<span class="st">"studs|profs"</span>),<span class="at">.fns =</span> <span class="sc">~</span><span class="fu">mean</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">matches</span>(<span class="st">"studs|profs"</span>),<span class="at">.fns =</span> <span class="sc">~</span><span class="fu">mean</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     studs  profs
-1 21690.62 328.25</code></pre>
+<pre><code>    studs profs
+1 26675.2 405.4</code></pre>
 </div>
 </div>
 <p>This is also compatible with <code>.by=</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), <span class="sc">~</span><span class="fu">mean</span>(.x)), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), <span class="sc">~</span><span class="fu">mean</span>(.x)), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  prom_recht   studs profs
-1       TRUE 20082.0   290
-2      FALSE 26516.5   443</code></pre>
+<pre><code>  prom_recht   studs    profs
+1      FALSE 26516.5 443.0000
+2       TRUE 26781.0 380.3333</code></pre>
 </div>
 </div>
 <p>We can apply multiple functions by placing them in a <code>list()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x), <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x))), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x), <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x))), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  prom_recht studs_mean studs_sd profs_mean profs_sd
-1       TRUE    20082.0 14857.84        290 183.2081
-2      FALSE    26516.5 16351.84        443 272.9432</code></pre>
+1      FALSE    26516.5 16351.84   443.0000 272.9432
+2       TRUE    26781.0 19119.14   380.3333 207.5966</code></pre>
 </div>
 </div>
 <p>You can define this <code>list()</code> in advance and use it later:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>wert_liste <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">MEAN =</span> <span class="sc">~</span><span class="fu">mean</span>(.x), <span class="at">SD =</span> <span class="sc">~</span><span class="fu">sd</span>(.x))</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), wert_liste), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>wert_liste <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">MEAN =</span> <span class="sc">~</span><span class="fu">mean</span>(.x), <span class="at">SD =</span> <span class="sc">~</span><span class="fu">sd</span>(.x))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), wert_liste), <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  prom_recht studs_MEAN studs_SD profs_MEAN profs_SD
-1       TRUE    20082.0 14857.84        290 183.2081
-2      FALSE    26516.5 16351.84        443 272.9432</code></pre>
+1      FALSE    26516.5 16351.84   443.0000 272.9432
+2       TRUE    26781.0 19119.14   380.3333 207.5966</code></pre>
 </div>
 </div>
 <p>The <code>.names()</code> argument allows us to control the naming of columns. <code>{.fn}</code> stands for the function being applied, and <code>{.col}</code> represents the name of the variable being processed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), </span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                   wert_liste,</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.names =</span> <span class="st">"{.fn}_{.col}"</span>),</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>), </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                   wert_liste,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.names =</span> <span class="st">"{.fn}_{.col}"</span>),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.by=</span> prom_recht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  prom_recht MEAN_studs SD_studs MEAN_profs SD_profs
-1       TRUE    20082.0 14857.84        290 183.2081
-2      FALSE    26516.5 16351.84        443 272.9432</code></pre>
+1      FALSE    26516.5 16351.84   443.0000 272.9432
+2       TRUE    26781.0 19119.14   380.3333 207.5966</code></pre>
 </div>
 </div>
 <p>All these functions also work with <code>mutate()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>),</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                wert_liste, </span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.names =</span> <span class="st">"{.col}XX{.fn}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"studs|profs"</span>),</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                wert_liste, </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.names =</span> <span class="st">"{.col}XX{.fn}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni studsXXMEAN studsXXSD
-1 19173   322 1971       TRUE         Uni Bremen    21690.62  14309.16
-2  5333    67 1830       TRUE         Uni Vechta    21690.62  14309.16
-3 15643   210 1973       TRUE      Uni Oldenburg    21690.62  14309.16
-4 14954   250 1971      FALSE          FH Aachen    21690.62  14309.16
-5 47269   553 1870       TRUE        RWTH Aachen    21690.62  14309.16
-6 23659   438 1457       TRUE       Uni Freiburg    21690.62  14309.16
-7  9415   150 1818       TRUE           Uni Bonn    21690.62  14309.16
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg    21690.62  14309.16
+<pre><code>  studs profs prom_recht gegr                uni studsXXMEAN studsXXSD
+1 14954   250      FALSE 1971          FH Aachen     26675.2  15799.92
+2 47269   553       TRUE 1870        RWTH Aachen     26675.2  15799.92
+3 23659   438       TRUE 1457       Uni Freiburg     26675.2  15799.92
+4  9415   150       TRUE 1818           Uni Bonn     26675.2  15799.92
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg     26675.2  15799.92
   profsXXMEAN profsXXSD
-1      328.25  199.0827
-2      328.25  199.0827
-3      328.25  199.0827
-4      328.25  199.0827
-5      328.25  199.0827
-6      328.25  199.0827
-7      328.25  199.0827
-8      328.25  199.0827</code></pre>
+1       405.4   203.349
+2       405.4   203.349
+3       405.4   203.349
+4       405.4   203.349
+5       405.4   203.349</code></pre>
 </div>
 </div>
 <p><a href="https://dplyr.tidyverse.org/reference/across.html">More examples in the across() documentation</a></p>
@@ -696,23 +613,23 @@ Creating Dummy Variables with <code>as.numeric()</code>
 <p>To do so, let’s examine three satisfaction variables for respondents in rows 12-16:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bfjqabzyrn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bfjqabzyrn table {
+<div id="ktkarmzftl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ktkarmzftl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bfjqabzyrn thead, #bfjqabzyrn tbody, #bfjqabzyrn tfoot, #bfjqabzyrn tr, #bfjqabzyrn td, #bfjqabzyrn th {
+#ktkarmzftl thead, #ktkarmzftl tbody, #ktkarmzftl tfoot, #ktkarmzftl tr, #ktkarmzftl td, #ktkarmzftl th {
   border-style: none;
 }
 
-#bfjqabzyrn p {
+#ktkarmzftl p {
   margin: 0;
   padding: 0;
 }
 
-#bfjqabzyrn .gt_table {
+#ktkarmzftl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -738,12 +655,12 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-left-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_caption {
+#ktkarmzftl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bfjqabzyrn .gt_title {
+#ktkarmzftl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -755,7 +672,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-width: 0;
 }
 
-#bfjqabzyrn .gt_subtitle {
+#ktkarmzftl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -767,7 +684,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-width: 0;
 }
 
-#bfjqabzyrn .gt_heading {
+#ktkarmzftl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -779,13 +696,13 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_bottom_border {
+#ktkarmzftl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_col_headings {
+#ktkarmzftl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -800,7 +717,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_col_heading {
+#ktkarmzftl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -820,7 +737,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#bfjqabzyrn .gt_column_spanner_outer {
+#ktkarmzftl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -832,15 +749,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 4px;
 }
 
-#bfjqabzyrn .gt_column_spanner_outer:first-child {
+#ktkarmzftl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bfjqabzyrn .gt_column_spanner_outer:last-child {
+#ktkarmzftl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bfjqabzyrn .gt_column_spanner {
+#ktkarmzftl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -852,11 +769,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   width: 100%;
 }
 
-#bfjqabzyrn .gt_spanner_row {
+#ktkarmzftl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bfjqabzyrn .gt_group_heading {
+#ktkarmzftl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -882,7 +799,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   text-align: left;
 }
 
-#bfjqabzyrn .gt_empty_group_heading {
+#ktkarmzftl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -897,15 +814,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: middle;
 }
 
-#bfjqabzyrn .gt_from_md > :first-child {
+#ktkarmzftl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bfjqabzyrn .gt_from_md > :last-child {
+#ktkarmzftl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bfjqabzyrn .gt_row {
+#ktkarmzftl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -924,7 +841,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#bfjqabzyrn .gt_stub {
+#ktkarmzftl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -937,7 +854,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#bfjqabzyrn .gt_stub_row_group {
+#ktkarmzftl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -951,15 +868,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: top;
 }
 
-#bfjqabzyrn .gt_row_group_first td {
+#ktkarmzftl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bfjqabzyrn .gt_row_group_first th {
+#ktkarmzftl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bfjqabzyrn .gt_summary_row {
+#ktkarmzftl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -969,16 +886,16 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#bfjqabzyrn .gt_first_summary_row {
+#ktkarmzftl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_first_summary_row.thick {
+#ktkarmzftl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bfjqabzyrn .gt_last_summary_row {
+#ktkarmzftl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -988,7 +905,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_grand_summary_row {
+#ktkarmzftl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -998,7 +915,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#bfjqabzyrn .gt_first_grand_summary_row {
+#ktkarmzftl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1008,7 +925,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_last_grand_summary_row_top {
+#ktkarmzftl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1018,11 +935,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_striped {
+#ktkarmzftl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bfjqabzyrn .gt_table_body {
+#ktkarmzftl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1031,7 +948,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_footnotes {
+#ktkarmzftl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1045,7 +962,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_footnote {
+#ktkarmzftl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1054,7 +971,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#bfjqabzyrn .gt_sourcenotes {
+#ktkarmzftl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1068,7 +985,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#bfjqabzyrn .gt_sourcenote {
+#ktkarmzftl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1076,72 +993,72 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#bfjqabzyrn .gt_left {
+#ktkarmzftl .gt_left {
   text-align: left;
 }
 
-#bfjqabzyrn .gt_center {
+#ktkarmzftl .gt_center {
   text-align: center;
 }
 
-#bfjqabzyrn .gt_right {
+#ktkarmzftl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bfjqabzyrn .gt_font_normal {
+#ktkarmzftl .gt_font_normal {
   font-weight: normal;
 }
 
-#bfjqabzyrn .gt_font_bold {
+#ktkarmzftl .gt_font_bold {
   font-weight: bold;
 }
 
-#bfjqabzyrn .gt_font_italic {
+#ktkarmzftl .gt_font_italic {
   font-style: italic;
 }
 
-#bfjqabzyrn .gt_super {
+#ktkarmzftl .gt_super {
   font-size: 65%;
 }
 
-#bfjqabzyrn .gt_footnote_marks {
+#ktkarmzftl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bfjqabzyrn .gt_asterisk {
+#ktkarmzftl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bfjqabzyrn .gt_indent_1 {
+#ktkarmzftl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bfjqabzyrn .gt_indent_2 {
+#ktkarmzftl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bfjqabzyrn .gt_indent_3 {
+#ktkarmzftl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bfjqabzyrn .gt_indent_4 {
+#ktkarmzftl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bfjqabzyrn .gt_indent_5 {
+#ktkarmzftl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bfjqabzyrn .katex-display {
+#ktkarmzftl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bfjqabzyrn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ktkarmzftl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1184,23 +1101,23 @@ Creating Dummy Variables with <code>as.numeric()</code>
 </div>
 </div>
 <div class="cell-output-display">
-<div id="wenitdabwk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wenitdabwk table {
+<div id="eynjzkiidq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eynjzkiidq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wenitdabwk thead, #wenitdabwk tbody, #wenitdabwk tfoot, #wenitdabwk tr, #wenitdabwk td, #wenitdabwk th {
+#eynjzkiidq thead, #eynjzkiidq tbody, #eynjzkiidq tfoot, #eynjzkiidq tr, #eynjzkiidq td, #eynjzkiidq th {
   border-style: none;
 }
 
-#wenitdabwk p {
+#eynjzkiidq p {
   margin: 0;
   padding: 0;
 }
 
-#wenitdabwk .gt_table {
+#eynjzkiidq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1226,12 +1143,12 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-left-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_caption {
+#eynjzkiidq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wenitdabwk .gt_title {
+#eynjzkiidq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1243,7 +1160,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-width: 0;
 }
 
-#wenitdabwk .gt_subtitle {
+#eynjzkiidq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1255,7 +1172,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-width: 0;
 }
 
-#wenitdabwk .gt_heading {
+#eynjzkiidq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1267,13 +1184,13 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_bottom_border {
+#eynjzkiidq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_col_headings {
+#eynjzkiidq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1288,7 +1205,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_col_heading {
+#eynjzkiidq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1308,7 +1225,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#wenitdabwk .gt_column_spanner_outer {
+#eynjzkiidq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1320,15 +1237,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 4px;
 }
 
-#wenitdabwk .gt_column_spanner_outer:first-child {
+#eynjzkiidq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wenitdabwk .gt_column_spanner_outer:last-child {
+#eynjzkiidq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wenitdabwk .gt_column_spanner {
+#eynjzkiidq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1340,11 +1257,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   width: 100%;
 }
 
-#wenitdabwk .gt_spanner_row {
+#eynjzkiidq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wenitdabwk .gt_group_heading {
+#eynjzkiidq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1370,7 +1287,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   text-align: left;
 }
 
-#wenitdabwk .gt_empty_group_heading {
+#eynjzkiidq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1385,15 +1302,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: middle;
 }
 
-#wenitdabwk .gt_from_md > :first-child {
+#eynjzkiidq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wenitdabwk .gt_from_md > :last-child {
+#eynjzkiidq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wenitdabwk .gt_row {
+#eynjzkiidq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1412,7 +1329,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   overflow-x: hidden;
 }
 
-#wenitdabwk .gt_stub {
+#eynjzkiidq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1425,7 +1342,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#wenitdabwk .gt_stub_row_group {
+#eynjzkiidq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1439,15 +1356,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
   vertical-align: top;
 }
 
-#wenitdabwk .gt_row_group_first td {
+#eynjzkiidq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wenitdabwk .gt_row_group_first th {
+#eynjzkiidq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wenitdabwk .gt_summary_row {
+#eynjzkiidq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1457,16 +1374,16 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#wenitdabwk .gt_first_summary_row {
+#eynjzkiidq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_first_summary_row.thick {
+#eynjzkiidq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wenitdabwk .gt_last_summary_row {
+#eynjzkiidq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1476,7 +1393,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_grand_summary_row {
+#eynjzkiidq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1486,7 +1403,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#wenitdabwk .gt_first_grand_summary_row {
+#eynjzkiidq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1496,7 +1413,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-top-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_last_grand_summary_row_top {
+#eynjzkiidq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1506,11 +1423,11 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_striped {
+#eynjzkiidq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wenitdabwk .gt_table_body {
+#eynjzkiidq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1519,7 +1436,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-bottom-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_footnotes {
+#eynjzkiidq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1533,7 +1450,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_footnote {
+#eynjzkiidq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1542,7 +1459,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#wenitdabwk .gt_sourcenotes {
+#eynjzkiidq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1556,7 +1473,7 @@ Creating Dummy Variables with <code>as.numeric()</code>
   border-right-color: #D3D3D3;
 }
 
-#wenitdabwk .gt_sourcenote {
+#eynjzkiidq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1564,72 +1481,72 @@ Creating Dummy Variables with <code>as.numeric()</code>
   padding-right: 5px;
 }
 
-#wenitdabwk .gt_left {
+#eynjzkiidq .gt_left {
   text-align: left;
 }
 
-#wenitdabwk .gt_center {
+#eynjzkiidq .gt_center {
   text-align: center;
 }
 
-#wenitdabwk .gt_right {
+#eynjzkiidq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wenitdabwk .gt_font_normal {
+#eynjzkiidq .gt_font_normal {
   font-weight: normal;
 }
 
-#wenitdabwk .gt_font_bold {
+#eynjzkiidq .gt_font_bold {
   font-weight: bold;
 }
 
-#wenitdabwk .gt_font_italic {
+#eynjzkiidq .gt_font_italic {
   font-style: italic;
 }
 
-#wenitdabwk .gt_super {
+#eynjzkiidq .gt_super {
   font-size: 65%;
 }
 
-#wenitdabwk .gt_footnote_marks {
+#eynjzkiidq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wenitdabwk .gt_asterisk {
+#eynjzkiidq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wenitdabwk .gt_indent_1 {
+#eynjzkiidq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wenitdabwk .gt_indent_2 {
+#eynjzkiidq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wenitdabwk .gt_indent_3 {
+#eynjzkiidq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wenitdabwk .gt_indent_4 {
+#eynjzkiidq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wenitdabwk .gt_indent_5 {
+#eynjzkiidq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wenitdabwk .katex-display {
+#eynjzkiidq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wenitdabwk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eynjzkiidq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1659,15 +1576,15 @@ Creating Dummy Variables with <code>as.numeric()</code>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>sat_small <span class="ot">&lt;-</span> </span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">"PEO0300(a|b|c)"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">12</span><span class="sc">:</span><span class="dv">16</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    haven<span class="sc">::</span><span class="fu">zap_labels</span>() <span class="sc">%&gt;%</span> haven<span class="sc">::</span><span class="fu">zap_label</span>() <span class="co"># remove labels</span></span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>sat_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>sat_small <span class="ot">&lt;-</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">"PEO0300(a|b|c)"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">12</span><span class="sc">:</span><span class="dv">16</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    haven<span class="sc">::</span><span class="fu">zap_labels</span>() <span class="sc">%&gt;%</span> haven<span class="sc">::</span><span class="fu">zap_label</span>() <span class="co"># remove labels</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>sat_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   PEO0300a PEO0300b PEO0300c
@@ -1680,13 +1597,13 @@ Creating Dummy Variables with <code>as.numeric()</code>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="ot">&lt;-</span> sat_small <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(),<span class="sc">~</span><span class="fu">as.numeric</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="ot">&lt;-</span> sat_small <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(),<span class="sc">~</span><span class="fu">as.numeric</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Sometimes we want to process multiple variables in the same way. Above, we saw how to handle this with <a href="#across"><code>across()</code></a> for existing functions. But what if we want to perform a calculation that isn’t as simple as applying <code>mean()</code>, <code>sd()</code>, etc.?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> </span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dmean_PEO0300a =</span> PEO0300a <span class="sc">-</span> <span class="fu">mean</span>(PEO0300a,<span class="at">na.rm =</span> T),</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">dmean_PEO0300c =</span> PEO0300c <span class="sc">-</span> <span class="fu">mean</span>(PEO0300c,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dmean_PEO0300a =</span> PEO0300a <span class="sc">-</span> <span class="fu">mean</span>(PEO0300a,<span class="at">na.rm =</span> T),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">dmean_PEO0300c =</span> PEO0300c <span class="sc">-</span> <span class="fu">mean</span>(PEO0300c,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
   PEO0300a PEO0300b PEO0300c dmean_PEO0300a dmean_PEO0300c
@@ -1701,23 +1618,23 @@ Creating Dummy Variables with <code>as.numeric()</code>
 <p>…and now what about <code>F1450_06</code>? Typing this out three times would violate the “DRY” principle<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, especially considering the PASS CampusFile contains 5 columns of similar satisfaction variables. Copying and pasting is not a practical option.</p>
 <p>Custom functions allow us to adhere to the DRY principle in R. We’ll make our calculation steps part of a <code>function()</code> and apply it to the desired variables. A function takes an input, defined as a placeholder within the <code>()</code>. This placeholder is used within the function, and we return the result with <code>return()</code>. Only one output can be returned:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>dtomean <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  d_x <span class="ot">&lt;-</span> x <span class="sc">-</span> <span class="fu">mean</span>(x,<span class="at">na.rm =</span> T)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(d_x)</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>dtomean <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  d_x <span class="ot">&lt;-</span> x <span class="sc">-</span> <span class="fu">mean</span>(x,<span class="at">na.rm =</span> T)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(d_x)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How can we now apply our function <code>dtomean()</code> to the variables from our <code>sat_small</code>?<br>
 In principle, we saw <a href="#02_intro">at the beginning</a> that a <code>data.frame</code> is simply a combined collection of vectors (the variables).<br>
 Accordingly, we can now apply our <code>dtomean()</code> to a variable (a vector) by calling it with <code>data.frame$variablename</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dtomean</span>(sat_small<span class="sc">$</span>PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dtomean</span>(sat_small<span class="sc">$</span>PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.6 -0.4 -0.4  0.6 -0.4</code></pre>
 </div>
 </div>
 <p>To apply our function to each variable of a <code>data.frame</code>, we can use <code>lapply()</code> - the output will then be a list, with elements named after the variable names:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(sat_small,<span class="at">FUN =</span> dtomean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(sat_small,<span class="at">FUN =</span> dtomean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$PEO0300a
 [1]  0.6 -0.4 -0.4  0.6 -0.4
@@ -1728,15 +1645,15 @@ $PEO0300b
 $PEO0300c
 [1] -0.2  0.8  0.8 -1.2 -0.2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sat_small,<span class="at">FUN =</span> dtomean)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sat_small,<span class="at">FUN =</span> dtomean)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
 </div>
 <p><code>map()</code> from <code>{purrr}</code> is an alternative to <code>lapply</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="sc">~</span><span class="fu">dtomean</span>(.x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="sc">~</span><span class="fu">dtomean</span>(.x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$PEO0300a
 [1]  0.6 -0.4 -0.4  0.6 -0.4
@@ -1750,8 +1667,8 @@ $PEO0300c
 </div>
 <p>This <em>formula syntax</em> can also be found in <code>across()</code> - additionally, with <code>.names =</code> we have the option to modify the variable names for the results:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> </span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"PEO0300"</span>),<span class="sc">~</span><span class="fu">dtomean</span>(.x),<span class="at">.names =</span> <span class="st">"dmean_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"PEO0300"</span>),<span class="sc">~</span><span class="fu">dtomean</span>(.x),<span class="at">.names =</span> <span class="st">"dmean_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 6
   PEO0300a PEO0300b PEO0300c dmean_PEO0300a dmean_PEO0300b dmean_PEO0300c
@@ -1769,68 +1686,49 @@ $PEO0300c
 </section>
 <section id="exercises" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.5</span> Exercises</h2>
-<section id="mutate1" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="mutate1"><span class="header-section-number">4.5.1</span> Exercise</h3>
+<section id="grp_ue" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="grp_ue"><span class="header-section-number">4.5.1</span> Exercise</h3>
 <ul>
-<li>Create <code>dat3</code> as <a href="#var">shown above</a> from <code>dat1</code> and <code>dat2</code>.</li>
+<li>Continue using the university dataset <code>dat3</code> as <a href="#var">shown above</a> from <code>dat1</code> and <code>dat2</code>.</li>
 <li>Calculate the student-to-professor ratio (students per professor <code>studs/profs</code>) at the universities relative to the mean of the ratio (<code>rel_studprofs</code>).</li>
-<li>Is the ratio above or below the mean? How can you adjust the command so that the variable <code>rel_studprofs</code> only contains <code>TRUE</code> or <code>FALSE</code> instead of numeric values?</li>
-<li>Convert <code>rel_studprofs</code> into a dummy variable with 0/1 values instead of <code>TRUE</code>/<code>FALSE</code>.</li>
-</ul>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>A rule of thumb to decide whether <code>mutate()</code> or <code>...$newvar &lt;-</code> is more suitable: Whenever it’s just about quickly creating/deleting a variable, <code>...$newvar &lt;-</code> is the simpler choice. When it goes beyond that, <code>mutate()</code> offers significant advantages (<a href="#group_by">next section</a>).</p>
-</div>
-</div>
-</div>
-<p><a href="#ue06_1">Back to top</a></p>
-</section>
-<section id="grp_ue" class="level3" data-number="4.5.2">
-<h3 data-number="4.5.2" class="anchored" data-anchor-id="grp_ue"><span class="header-section-number">4.5.2</span> Exercise</h3>
-<ul>
-<li>Continue using the university dataset.</li>
 <li>Calculate the student-to-professor ratio (<code>studprofs</code>) relative to the mean, separated by universities with and without the right to award doctorates, and add this as a new column.</li>
 </ul>
 <p><a href="#ue06_2">Back to top</a></p>
 </section>
-<section id="across_ue" class="level3" data-number="4.5.3">
-<h3 data-number="4.5.3" class="anchored" data-anchor-id="across_ue"><span class="header-section-number">4.5.3</span> Exercise</h3>
+<section id="across_ue" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="across_ue"><span class="header-section-number">4.5.2</span> Exercise</h3>
 <ul>
 <li>Use the <code>pend_small</code> dataset:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"welle"</span>,<span class="st">"zpsex"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"PEO0400d"</span>)</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>                               ) <span class="sc">%&gt;%</span> </span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"welle"</span>,<span class="st">"zpsex"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"PEO0400d"</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>                               ) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Calculate the mean for the variables <code>PEO0400a</code>, <code>PEO0400b</code>, <code>PEO0400c</code>, and <code>PEO0400d</code>:</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mzfqqzxaqx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mzfqqzxaqx table {
+<div id="izketrigzz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#izketrigzz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mzfqqzxaqx thead, #mzfqqzxaqx tbody, #mzfqqzxaqx tfoot, #mzfqqzxaqx tr, #mzfqqzxaqx td, #mzfqqzxaqx th {
+#izketrigzz thead, #izketrigzz tbody, #izketrigzz tfoot, #izketrigzz tr, #izketrigzz td, #izketrigzz th {
   border-style: none;
 }
 
-#mzfqqzxaqx p {
+#izketrigzz p {
   margin: 0;
   padding: 0;
 }
 
-#mzfqqzxaqx .gt_table {
+#izketrigzz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1856,12 +1754,12 @@ $PEO0300c
   border-left-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_caption {
+#izketrigzz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mzfqqzxaqx .gt_title {
+#izketrigzz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1873,7 +1771,7 @@ $PEO0300c
   border-bottom-width: 0;
 }
 
-#mzfqqzxaqx .gt_subtitle {
+#izketrigzz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1885,7 +1783,7 @@ $PEO0300c
   border-top-width: 0;
 }
 
-#mzfqqzxaqx .gt_heading {
+#izketrigzz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1897,13 +1795,13 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_bottom_border {
+#izketrigzz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_col_headings {
+#izketrigzz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1918,7 +1816,7 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_col_heading {
+#izketrigzz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1938,7 +1836,7 @@ $PEO0300c
   overflow-x: hidden;
 }
 
-#mzfqqzxaqx .gt_column_spanner_outer {
+#izketrigzz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1950,15 +1848,15 @@ $PEO0300c
   padding-right: 4px;
 }
 
-#mzfqqzxaqx .gt_column_spanner_outer:first-child {
+#izketrigzz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mzfqqzxaqx .gt_column_spanner_outer:last-child {
+#izketrigzz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mzfqqzxaqx .gt_column_spanner {
+#izketrigzz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1970,11 +1868,11 @@ $PEO0300c
   width: 100%;
 }
 
-#mzfqqzxaqx .gt_spanner_row {
+#izketrigzz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mzfqqzxaqx .gt_group_heading {
+#izketrigzz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2000,7 +1898,7 @@ $PEO0300c
   text-align: left;
 }
 
-#mzfqqzxaqx .gt_empty_group_heading {
+#izketrigzz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2015,15 +1913,15 @@ $PEO0300c
   vertical-align: middle;
 }
 
-#mzfqqzxaqx .gt_from_md > :first-child {
+#izketrigzz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mzfqqzxaqx .gt_from_md > :last-child {
+#izketrigzz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mzfqqzxaqx .gt_row {
+#izketrigzz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2042,7 +1940,7 @@ $PEO0300c
   overflow-x: hidden;
 }
 
-#mzfqqzxaqx .gt_stub {
+#izketrigzz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2055,7 +1953,7 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#mzfqqzxaqx .gt_stub_row_group {
+#izketrigzz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2069,15 +1967,15 @@ $PEO0300c
   vertical-align: top;
 }
 
-#mzfqqzxaqx .gt_row_group_first td {
+#izketrigzz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mzfqqzxaqx .gt_row_group_first th {
+#izketrigzz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mzfqqzxaqx .gt_summary_row {
+#izketrigzz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2087,16 +1985,16 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#mzfqqzxaqx .gt_first_summary_row {
+#izketrigzz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_first_summary_row.thick {
+#izketrigzz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mzfqqzxaqx .gt_last_summary_row {
+#izketrigzz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2106,7 +2004,7 @@ $PEO0300c
   border-bottom-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_grand_summary_row {
+#izketrigzz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2116,7 +2014,7 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#mzfqqzxaqx .gt_first_grand_summary_row {
+#izketrigzz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2126,7 +2024,7 @@ $PEO0300c
   border-top-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_last_grand_summary_row_top {
+#izketrigzz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2136,11 +2034,11 @@ $PEO0300c
   border-bottom-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_striped {
+#izketrigzz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mzfqqzxaqx .gt_table_body {
+#izketrigzz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2149,7 +2047,7 @@ $PEO0300c
   border-bottom-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_footnotes {
+#izketrigzz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2163,7 +2061,7 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_footnote {
+#izketrigzz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2172,7 +2070,7 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#mzfqqzxaqx .gt_sourcenotes {
+#izketrigzz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2186,7 +2084,7 @@ $PEO0300c
   border-right-color: #D3D3D3;
 }
 
-#mzfqqzxaqx .gt_sourcenote {
+#izketrigzz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2194,72 +2092,72 @@ $PEO0300c
   padding-right: 5px;
 }
 
-#mzfqqzxaqx .gt_left {
+#izketrigzz .gt_left {
   text-align: left;
 }
 
-#mzfqqzxaqx .gt_center {
+#izketrigzz .gt_center {
   text-align: center;
 }
 
-#mzfqqzxaqx .gt_right {
+#izketrigzz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mzfqqzxaqx .gt_font_normal {
+#izketrigzz .gt_font_normal {
   font-weight: normal;
 }
 
-#mzfqqzxaqx .gt_font_bold {
+#izketrigzz .gt_font_bold {
   font-weight: bold;
 }
 
-#mzfqqzxaqx .gt_font_italic {
+#izketrigzz .gt_font_italic {
   font-style: italic;
 }
 
-#mzfqqzxaqx .gt_super {
+#izketrigzz .gt_super {
   font-size: 65%;
 }
 
-#mzfqqzxaqx .gt_footnote_marks {
+#izketrigzz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mzfqqzxaqx .gt_asterisk {
+#izketrigzz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mzfqqzxaqx .gt_indent_1 {
+#izketrigzz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mzfqqzxaqx .gt_indent_2 {
+#izketrigzz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mzfqqzxaqx .gt_indent_3 {
+#izketrigzz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mzfqqzxaqx .gt_indent_4 {
+#izketrigzz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mzfqqzxaqx .gt_indent_5 {
+#izketrigzz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mzfqqzxaqx .katex-display {
+#izketrigzz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mzfqqzxaqx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#izketrigzz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2323,11 +2221,11 @@ $PEO0300c
 </ul>
 <p><a href="#ue06_3">Back to top</a></p>
 </section>
-<section id="fnct" class="level3" data-number="4.5.4">
-<h3 data-number="4.5.4" class="anchored" data-anchor-id="fnct"><span class="header-section-number">4.5.4</span> Exercise</h3>
+<section id="fnct" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="fnct"><span class="header-section-number">4.5.3</span> Exercise</h3>
 <p>Continue using <code>pend_small</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>pend_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>pend_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -2353,8 +2251,8 @@ $PEO0300c
 <li>Standardize the variables <code>PEO0400a</code> - <code>PEO0400d</code> from <code>pend_small</code> using the following pattern:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">std_PEO0400b =</span> (PEO0400b <span class="sc">-</span> <span class="fu">mean</span>(PEO0400b,<span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(PEO0400b,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">std_PEO0400b =</span> (PEO0400b <span class="sc">-</span> <span class="fu">mean</span>(PEO0400b,<span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(PEO0400b,<span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Use a function so that you don’t have to repeatedly enter the same steps.</li>
@@ -2362,131 +2260,231 @@ $PEO0300c
 </ul>
 <p><a href="#ue06_4">Back to top</a></p>
 </section>
-<section id="ifcase" class="level3" data-number="4.5.5">
-<h3 data-number="4.5.5" class="anchored" data-anchor-id="ifcase"><span class="header-section-number">4.5.5</span> Exercise</h3>
-<ul>
-<li>Work on <code>pend_small2</code>:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"palter"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"statakt"</span>)) </span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> pend_small2 <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">5624</span><span class="sc">:</span><span class="dv">5640</span>)</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>pend_small2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 17 × 5
-   palter    PEO0400a                       PEO0400b          PEO0400c statakt  
-   &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;                      &lt;dbl+lbl&gt;         &lt;dbl+lb&gt; &lt;dbl+lbl&gt;
- 1 77         1 [Completely agree]           3 [Rather not a…  3 [Rat… -10 [Ite…
- 2 78        -9 [Item not surveyed in wave] -9 [Item not sur… -9 [Ite… -10 [Ite…
- 3 51         2 [Rather agree]               4 [Do not agree…  1 [Com…  -9 [Ite…
- 4 23         3 [Rather not agree]           3 [Rather not a…  2 [Rat…  -9 [Ite…
- 5 17         3 [Rather not agree]           2 [Rather agree]  1 [Com…  -9 [Ite…
- 6 47         3 [Rather not agree]           2 [Rather agree]  2 [Rat…  -9 [Ite…
- 7 24         3 [Rather not agree]           4 [Do not agree…  1 [Com…   1 [In …
- 8 52         2 [Rather agree]               3 [Rather not a…  1 [Com…   1 [In …
- 9 19         2 [Rather agree]               3 [Rather not a…  2 [Rat…   3 [Pup…
-10 48         2 [Rather agree]               3 [Rather not a…  1 [Com…   1 [In …
-11 49        -9 [Item not surveyed in wave] -9 [Item not sur… -9 [Ite…  -5 [Can…
-12 47         2 [Rather agree]               3 [Rather not a…  1 [Com…  -9 [Ite…
-13 48         2 [Rather agree]               3 [Rather not a…  1 [Com…   1 [In …
-14 49        -9 [Item not surveyed in wave] -9 [Item not sur… -9 [Ite…   1 [In …
-15 39         4 [Do not agree at all]        3 [Rather not a…  1 [Com…  -9 [Ite…
-16 37         3 [Rather not agree]           4 [Do not agree…  1 [Com…  -9 [Ite…
-17 38         3 [Rather not agree]           3 [Rather not a…  1 [Com…   1 [In …</code></pre>
-</div>
-</div>
-<ul>
-<li>Use <code>ifelse()</code> to label people 50 years and older as “ü50” - for those under 50, label them as “u50”.</li>
-<li>Create a three-way division: people under 40 are labeled “u40”, people under 50 “u50”, and people 50 and older as “ü50”. How would you approach this with <code>case_when()</code>?</li>
-<li>Use <code>ifelse()</code> to overwrite values &lt; 0 in the variables <code>PEO0400a</code>, <code>PEO0400b</code>, <code>PEO0400c</code>, and <code>statakt</code> in <code>pend_small2</code> with <code>NA</code>.</li>
-<li>First, write an <code>ifelse()</code> function that overwrites all values &lt; 0 in <code>PEO0400a</code> with <code>NA</code> and otherwise keeps the original value <code>PEO0400a</code>.</li>
-<li>How would the function look if you applied it to <code>PEO0400a</code>, <code>PEO0400b</code>, <code>PEO0400c</code>, and <code>statakt</code> at the same time using <code>across()</code>?</li>
-</ul>
-<p><a href="#ue06_5">Back to top</a></p>
-</section>
 </section>
 <section id="appendix" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="appendix"><span class="header-section-number">4.6</span> Appendix</h2>
-<section id="helper-functions-ifelse-and-case_when" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="helper-functions-ifelse-and-case_when"><span class="header-section-number">4.6.1</span> Helper functions <code>ifelse()</code> and <code>case_when()</code></h3>
+<section id="helper-functions" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="helper-functions"><span class="header-section-number">4.6.1</span> Helper functions</h3>
+<section id="ifelse" class="level4" data-number="4.6.1.1">
+<h4 data-number="4.6.1.1" class="anchored" data-anchor-id="ifelse"><span class="header-section-number">4.6.1.1</span> <code>ifelse()</code></h4>
 <p><code>ifelse()</code> is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether <code>studs-mean(studs)</code> is greater than <code>0</code> - if so, <code>above</code> is used, otherwise <code>below</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ab_mean_lab =</span> <span class="fu">ifelse</span>(rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span>,<span class="st">"above"</span>,<span class="st">"below"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rel_to_mean =</span> studs<span class="sc">-</span><span class="fu">mean</span>(studs),</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ab_mean_lab =</span> <span class="fu">ifelse</span>(rel_to_mean <span class="sc">&gt;</span> <span class="dv">0</span>,<span class="st">"above"</span>,<span class="st">"below"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni rel_to_mean ab_mean_lab
-1 19173   322 1971       TRUE         Uni Bremen   -2517.625       below
-2  5333    67 1830       TRUE         Uni Vechta  -16357.625       below
-3 15643   210 1973       TRUE      Uni Oldenburg   -6047.625       below
-4 14954   250 1971      FALSE          FH Aachen   -6736.625       below
-5 47269   553 1870       TRUE        RWTH Aachen   25578.375       above
-6 23659   438 1457       TRUE       Uni Freiburg    1968.375       above
-7  9415   150 1818       TRUE           Uni Bonn  -12275.625       below
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg   16388.375       above</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni rel_to_mean ab_mean_lab
+1 14954   250      FALSE 1971          FH Aachen    -11721.2       below
+2 47269   553       TRUE 1870        RWTH Aachen     20593.8       above
+3 23659   438       TRUE 1457       Uni Freiburg     -3016.2       below
+4  9415   150       TRUE 1818           Uni Bonn    -17260.2       below
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg     11403.8       above</code></pre>
 </div>
 </div>
-<p><code>case_when()</code> (<code>{dplyr}</code>) extends this principle, allowing us to specify more than two options.<br>
+<p>This can be helpful to replace negative values with <code>NA</code>, for example in the PASS data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"palter"</span>,<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"statakt"</span>))  <span class="sc">%&gt;%</span> </span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">5624</span><span class="sc">:</span><span class="dv">5640</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The basic idea is to use <code>ifelse()</code> to replace negative values in a variable with <code>NA</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">PEO0400a =</span> <span class="fu">ifelse</span>(PEO0400a<span class="sc">&lt;</span><span class="dv">0</span>,<span class="cn">NA</span>,PEO0400a))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>across()</code> allows us to apply this <code>ifelse()</code>-function to replace <code>NA</code> in <code>PEO0400a</code>,<code>PEO0400b</code>, <code>PEO0400c</code> and <code>statakt</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"PEO0400a"</span>,<span class="st">"PEO0400b"</span>,<span class="st">"PEO0400c"</span>,<span class="st">"statakt"</span>), <span class="sc">~</span><span class="fu">ifelse</span>(.x<span class="sc">&lt;</span><span class="dv">0</span>,<span class="cn">NA</span>,.x)))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 5
+   palter    PEO0400a PEO0400b PEO0400c statakt
+   &lt;dbl+lbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+ 1 77               1        3        3      NA
+ 2 78              NA       NA       NA      NA
+ 3 51               2        4        1      NA
+ 4 23               3        3        2      NA
+ 5 17               3        2        1      NA
+ 6 47               3        2        2      NA
+ 7 24               3        4        1       1
+ 8 52               2        3        1       1
+ 9 19               2        3        2       3
+10 48               2        3        1       1
+11 49              NA       NA       NA      NA
+12 47               2        3        1      NA
+13 48               2        3        1       1
+14 49              NA       NA       NA       1
+15 39               4        3        1      NA
+16 37               3        4        1      NA
+17 38               3        3        1       1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>pend_small2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"PEO0400|statakt"</span>), <span class="sc">~</span><span class="fu">ifelse</span>(.x<span class="sc">&lt;</span><span class="dv">0</span>,<span class="cn">NA</span>,.x)))  <span class="co"># even shorter: matches()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 5
+   palter    PEO0400a PEO0400b PEO0400c statakt
+   &lt;dbl+lbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+ 1 77               1        3        3      NA
+ 2 78              NA       NA       NA      NA
+ 3 51               2        4        1      NA
+ 4 23               3        3        2      NA
+ 5 17               3        2        1      NA
+ 6 47               3        2        2      NA
+ 7 24               3        4        1       1
+ 8 52               2        3        1       1
+ 9 19               2        3        2       3
+10 48               2        3        1       1
+11 49              NA       NA       NA      NA
+12 47               2        3        1      NA
+13 48               2        3        1       1
+14 49              NA       NA       NA       1
+15 39               4        3        1      NA
+16 37               3        4        1      NA
+17 38               3        3        1       1</code></pre>
+</div>
+</div>
+</section>
+<section id="case_when" class="level4" data-number="4.6.1.2">
+<h4 data-number="4.6.1.2" class="anchored" data-anchor-id="case_when"><span class="header-section-number">4.6.1.2</span> <code>case_when()</code></h4>
+<p><code>case_when()</code> (<code>{dplyr}</code>) extends the principle <code>ifelse()</code>, allowing us to specify more than two options.<br>
 The syntax is slightly different: first, we specify the condition, then after a <code>~</code> the values to be used:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni      age
-1 19173   322 1971       TRUE         Uni Bremen     &lt;NA&gt;
-2  5333    67 1830       TRUE         Uni Vechta      old
-3 15643   210 1973       TRUE      Uni Oldenburg     &lt;NA&gt;
-4 14954   250 1971      FALSE          FH Aachen     &lt;NA&gt;
-5 47269   553 1870       TRUE        RWTH Aachen      old
-6 23659   438 1457       TRUE       Uni Freiburg very old
-7  9415   150 1818       TRUE           Uni Bonn      old
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg     &lt;NA&gt;</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni      age
+1 14954   250      FALSE 1971          FH Aachen     &lt;NA&gt;
+2 47269   553       TRUE 1870        RWTH Aachen      old
+3 23659   438       TRUE 1457       Uni Freiburg very old
+4  9415   150       TRUE 1818           Uni Bonn      old
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg     &lt;NA&gt;</code></pre>
 </div>
 </div>
 <p>With <code>TRUE</code>, we can address all cases that have not met any conditions so far:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>,</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"relatively new"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"very old"</span>,</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">~</span> <span class="st">"old"</span>,</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"relatively new"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni            age
-1 19173   322 1971       TRUE         Uni Bremen relatively new
-2  5333    67 1830       TRUE         Uni Vechta            old
-3 15643   210 1973       TRUE      Uni Oldenburg relatively new
-4 14954   250 1971      FALSE          FH Aachen relatively new
-5 47269   553 1870       TRUE        RWTH Aachen            old
-6 23659   438 1457       TRUE       Uni Freiburg       very old
-7  9415   150 1818       TRUE           Uni Bonn            old
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg relatively new</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni            age
+1 14954   250      FALSE 1971          FH Aachen relatively new
+2 47269   553       TRUE 1870        RWTH Aachen            old
+3 23659   438       TRUE 1457       Uni Freiburg       very old
+4  9415   150       TRUE 1818           Uni Bonn            old
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg relatively new</code></pre>
 </div>
 </div>
 <p>This doesn’t have to be limited to one variable:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"very old university"</span>,</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"old university"</span>,</span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"young university"</span>,</span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"old college"</span>,</span>
-<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"young college"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">case_when</span>(gegr <span class="sc">&lt;</span> <span class="dv">1500</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"very old university"</span>,</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"old university"</span>,</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> T <span class="sc">~</span> <span class="st">"young university"</span>,</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&lt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"old college"</span>,</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>                                gegr <span class="sc">&gt;</span> <span class="dv">1900</span> <span class="sc">&amp;</span> prom_recht  <span class="sc">==</span> F <span class="sc">~</span> <span class="st">"young college"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni                 age
-1 19173   322 1971       TRUE         Uni Bremen    young university
-2  5333    67 1830       TRUE         Uni Vechta      old university
-3 15643   210 1973       TRUE      Uni Oldenburg    young university
-4 14954   250 1971      FALSE          FH Aachen       young college
-5 47269   553 1870       TRUE        RWTH Aachen      old university
-6 23659   438 1457       TRUE       Uni Freiburg very old university
-7  9415   150 1818       TRUE           Uni Bonn      old university
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg       young college</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni                 age
+1 14954   250      FALSE 1971          FH Aachen       young college
+2 47269   553       TRUE 1870        RWTH Aachen      old university
+3 23659   438       TRUE 1457       Uni Freiburg very old university
+4  9415   150       TRUE 1818           Uni Bonn      old university
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg       young college</code></pre>
 </div>
 </div>
 </section>
-<section id="ue06_5" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="ue06_5"><span class="header-section-number">4.6.2</span> <a href="#ifcase">Exercise</a></h3>
+<section id="cut-creating-classes" class="level4" data-number="4.6.1.3">
+<h4 data-number="4.6.1.3" class="anchored" data-anchor-id="cut-creating-classes"><span class="header-section-number">4.6.1.3</span> <code>cut()</code>: creating classes</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs prom_recht gegr                uni
+1 14954   250      FALSE 1971          FH Aachen
+2 47269   553       TRUE 1870        RWTH Aachen
+3 23659   438       TRUE 1457       Uni Freiburg
+4  9415   150       TRUE 1818           Uni Bonn
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg</code></pre>
+</div>
+</div>
+<p>A common task in data preparation is classifying a continuous variable, such as the number of professors. We want to group <code>profs</code> in steps of 150. To create these classes, we use <code>cut()</code> and specify the class boundaries with <code>breaks</code>. We can use <code>seq()</code> to generate the breakpoints. In <code>seq()</code>, we specify the lower and upper limits along with the step size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">350</span>, <span class="dv">500</span>, <span class="dv">650</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] (200,350] (500,650] (350,500] (50,200]  (500,650]
+Levels: (50,200] (200,350] (350,500] (500,650]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">650</span>,<span class="dv">150</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] (200,350] (500,650] (350,500] (50,200]  (500,650]
+Levels: (50,200] (200,350] (350,500] (500,650]</code></pre>
+</div>
+</div>
+<p>We store these values in a new variable in the <code>dat3</code> dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>prof_class <span class="ot">&lt;-</span> <span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">650</span>,<span class="dv">150</span>))</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  studs profs prom_recht gegr                uni prof_class
+1 14954   250      FALSE 1971          FH Aachen  (200,350]
+2 47269   553       TRUE 1870        RWTH Aachen  (500,650]
+3 23659   438       TRUE 1457       Uni Freiburg  (350,500]
+4  9415   150       TRUE 1818           Uni Bonn   (50,200]
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg  (500,650]</code></pre>
+</div>
+</div>
+<p>For this new variable, we can request a frequency table using <code>count()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">count</span>(prof_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  prof_class n
+1   (50,200] 1
+2  (200,350] 1
+3  (350,500] 1
+4  (500,650] 2</code></pre>
+</div>
+</div>
+<p>The parentheses <code>(</code> indicate exclusion, while the brackets <code>]</code> indicate inclusion. There are 1 universities in the dataset that have more than 200 and up to 350 professors.</p>
+<p>For the following examples, we delete the <code>prof_class</code> variable again:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>prof_class <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Some useful options for <code>cut()</code> in the appendix</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>bsp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">1998</span>,<span class="dv">2001</span>,<span class="dv">2009</span>)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>bsp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1990 1998 2001 2009</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &lt;NA&gt;             (1.99e+03,2e+03] (2e+03,2.01e+03] (2e+03,2.01e+03]
+Levels: (1.99e+03,2e+03] (2e+03,2.01e+03]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the number of digits in the labels</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">dig.lab =</span> <span class="dv">4</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &lt;NA&gt;        (1990,2000] (2000,2010] (2000,2010]
+Levels: (1990,2000] (2000,2010]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Include the lower boundary</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">dig.lab =</span> <span class="dv">4</span>,<span class="at">include.lowest =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] [1990,2000] [1990,2000] (2000,2010] (2000,2010]
+Levels: [1990,2000] (2000,2010]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number the categories instead of labels:</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">labels =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA  1  2  2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify your own labels:</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"90s"</span>,<span class="st">"00s"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &lt;NA&gt; 90s  00s  00s 
+Levels: 90s 00s</code></pre>
+</div>
+</div>
 </section>
-<section id="renaming-variables" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="renaming-variables"><span class="header-section-number">4.6.3</span> Renaming variables</h3>
+</section>
+<section id="renaming-variables" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="renaming-variables"><span class="header-section-number">4.6.2</span> Renaming variables</h3>
 <p>To rename variables, use <code>rename(new_name = old_name)</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">newname =</span> PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">newname =</span> PEO0300a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   newname PEO0300b PEO0300c
@@ -2500,7 +2498,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
 </div>
 <p>For advanced transformations, it’s worth looking into <code>rename_with()</code>. This allows us to use <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf">Regular Expressions</a>, for example from <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf">{stringr}</a>. Here’s just an example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">tolower</span>(.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">tolower</span>(.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   peo0300a peo0300b peo0300c
@@ -2511,7 +2509,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
 4        2        1        1
 5        1        1        2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_remove</span>(.x,<span class="st">"PEO0300"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_remove</span>(.x,<span class="st">"PEO0300"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
       a     b     c
@@ -2522,7 +2520,7 @@ The syntax is slightly different: first, we specify the condition, then after a 
 4     2     1     1
 5     1     1     2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(.x,<span class="st">"PEO0300"</span>,<span class="st">"Occupation_"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>sat_small <span class="sc">%&gt;%</span> <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(.x,<span class="st">"PEO0300"</span>,<span class="st">"Occupation_"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   Occupation_a Occupation_b Occupation_c
@@ -2535,149 +2533,40 @@ The syntax is slightly different: first, we specify the condition, then after a 
 </div>
 </div>
 </section>
-<section id="creating-classes-with-cut" class="level3" data-number="4.6.4">
-<h3 data-number="4.6.4" class="anchored" data-anchor-id="creating-classes-with-cut"><span class="header-section-number">4.6.4</span> Creating Classes with <code>cut()</code></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni
-1 19173   322 1971       TRUE         Uni Bremen
-2  5333    67 1830       TRUE         Uni Vechta
-3 15643   210 1973       TRUE      Uni Oldenburg
-4 14954   250 1971      FALSE          FH Aachen
-5 47269   553 1870       TRUE        RWTH Aachen
-6 23659   438 1457       TRUE       Uni Freiburg
-7  9415   150 1818       TRUE           Uni Bonn
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg</code></pre>
-</div>
-</div>
-<p>A common task in data preparation is classifying a continuous variable, such as the number of professors. We want to group <code>profs</code> in steps of 150. To create these classes, we use <code>cut()</code> and specify the class boundaries with <code>breaks</code>. We can use <code>seq()</code> to generate the breakpoints. In <code>seq()</code>, we specify the lower and upper limits along with the step size.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">350</span>, <span class="dv">500</span>, <span class="dv">650</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] (200,350] (50,200]  (200,350] (200,350] (500,650] (350,500] (50,200] 
-[8] (500,650]
-Levels: (50,200] (200,350] (350,500] (500,650]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">650</span>,<span class="dv">150</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] (200,350] (50,200]  (200,350] (200,350] (500,650] (350,500] (50,200] 
-[8] (500,650]
-Levels: (50,200] (200,350] (350,500] (500,650]</code></pre>
-</div>
-</div>
-<p>We store these values in a new variable in the <code>dat3</code> dataset:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>prof_class <span class="ot">&lt;-</span> <span class="fu">cut</span>(dat3<span class="sc">$</span>profs,<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">650</span>,<span class="dv">150</span>))</span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>dat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni prof_class
-1 19173   322 1971       TRUE         Uni Bremen  (200,350]
-2  5333    67 1830       TRUE         Uni Vechta   (50,200]
-3 15643   210 1973       TRUE      Uni Oldenburg  (200,350]
-4 14954   250 1971      FALSE          FH Aachen  (200,350]
-5 47269   553 1870       TRUE        RWTH Aachen  (500,650]
-6 23659   438 1457       TRUE       Uni Freiburg  (350,500]
-7  9415   150 1818       TRUE           Uni Bonn   (50,200]
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg  (500,650]</code></pre>
-</div>
-</div>
-<p>For this new variable, we can request a frequency table using <code>count()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">count</span>(prof_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  prof_class n
-1   (50,200] 2
-2  (200,350] 3
-3  (350,500] 1
-4  (500,650] 2</code></pre>
-</div>
-</div>
-<p>The parentheses <code>(</code> indicate exclusion, while the brackets <code>]</code> indicate inclusion. There are 3 universities in the dataset that have more than 200 and up to 350 professors.</p>
-<p>For the following examples, we delete the <code>prof_class</code> variable again:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>prof_class <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Some useful options for <code>cut()</code> in the appendix</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>bsp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">1998</span>,<span class="dv">2001</span>,<span class="dv">2009</span>)</span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>bsp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1990 1998 2001 2009</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &lt;NA&gt;             (1.99e+03,2e+03] (2e+03,2.01e+03] (2e+03,2.01e+03]
-Levels: (1.99e+03,2e+03] (2e+03,2.01e+03]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the number of digits in the labels</span></span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">dig.lab =</span> <span class="dv">4</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &lt;NA&gt;        (1990,2000] (2000,2010] (2000,2010]
-Levels: (1990,2000] (2000,2010]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Include the lower boundary</span></span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">dig.lab =</span> <span class="dv">4</span>,<span class="at">include.lowest =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] [1990,2000] [1990,2000] (2000,2010] (2000,2010]
-Levels: [1990,2000] (2000,2010]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number the categories instead of labels:</span></span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">labels =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA  1  2  2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify your own labels:</span></span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(bsp,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2000</span>,<span class="dv">2010</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"90s"</span>,<span class="st">"00s"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &lt;NA&gt; 90s  00s  00s 
-Levels: 90s 00s</code></pre>
-</div>
-</div>
-</section>
-<section id="string-functions-for-regex" class="level3" data-number="4.6.5">
-<h3 data-number="4.6.5" class="anchored" data-anchor-id="string-functions-for-regex"><span class="header-section-number">4.6.5</span> String Functions for <em>regex</em></h3>
+<section id="string-functions-for-regex" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="string-functions-for-regex"><span class="header-section-number">4.6.3</span> String Functions for <em>regex</em></h3>
 <p><a href="https://stringr.tidyverse.org/">{stringr}</a> provides a series of very useful string functions with <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf">regular expressions</a>. You can get an overview from this <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf">cheatsheet</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">uni_fh =</span> <span class="fu">str_detect</span>(uni,<span class="st">"Uni"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">uni_fh =</span> <span class="fu">str_detect</span>(uni,<span class="st">"Uni"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni uni_fh
-1 19173   322 1971       TRUE         Uni Bremen   TRUE
-2  5333    67 1830       TRUE         Uni Vechta   TRUE
-3 15643   210 1973       TRUE      Uni Oldenburg   TRUE
-4 14954   250 1971      FALSE          FH Aachen  FALSE
-5 47269   553 1870       TRUE        RWTH Aachen  FALSE
-6 23659   438 1457       TRUE       Uni Freiburg   TRUE
-7  9415   150 1818       TRUE           Uni Bonn   TRUE
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg  FALSE</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni uni_fh
+1 14954   250      FALSE 1971          FH Aachen  FALSE
+2 47269   553       TRUE 1870        RWTH Aachen  FALSE
+3 23659   438       TRUE 1457       Uni Freiburg   TRUE
+4  9415   150       TRUE 1818           Uni Bonn   TRUE
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg  FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">bula =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(uni,<span class="st">"Bremen"</span>)<span class="sc">~</span> <span class="st">"HB"</span>,</span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Oldenb|Vechta"</span>)<span class="sc">~</span> <span class="st">"NDS"</span>,</span>
-<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Bonn|Aachen"</span>)<span class="sc">~</span> <span class="st">"NRW"</span>,</span>
-<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Freiburg"</span>)<span class="sc">~</span> <span class="st">"BW"</span></span>
-<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>                                 ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">bula =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(uni,<span class="st">"Bremen"</span>)<span class="sc">~</span> <span class="st">"HB"</span>,</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Oldenb|Vechta"</span>)<span class="sc">~</span> <span class="st">"NDS"</span>,</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Bonn|Aachen"</span>)<span class="sc">~</span> <span class="st">"NRW"</span>,</span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">str_detect</span>(uni,<span class="st">"Freiburg"</span>)<span class="sc">~</span> <span class="st">"BW"</span></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>                                 ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni bula
-1 19173   322 1971       TRUE         Uni Bremen   HB
-2  5333    67 1830       TRUE         Uni Vechta  NDS
-3 15643   210 1973       TRUE      Uni Oldenburg  NDS
-4 14954   250 1971      FALSE          FH Aachen  NRW
-5 47269   553 1870       TRUE        RWTH Aachen  NRW
-6 23659   438 1457       TRUE       Uni Freiburg   BW
-7  9415   150 1818       TRUE           Uni Bonn  NRW
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg  NRW</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni bula
+1 14954   250      FALSE 1971          FH Aachen  NRW
+2 47269   553       TRUE 1870        RWTH Aachen  NRW
+3 23659   438       TRUE 1457       Uni Freiburg   BW
+4  9415   150       TRUE 1818           Uni Bonn  NRW
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg  NRW</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ort =</span> <span class="fu">str_remove</span>(uni,<span class="st">"Uni |FH |RWTH "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ort =</span> <span class="fu">str_remove</span>(uni,<span class="st">"Uni |FH |RWTH "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  studs profs gegr prom_recht                uni             ort
-1 19173   322 1971       TRUE         Uni Bremen          Bremen
-2  5333    67 1830       TRUE         Uni Vechta          Vechta
-3 15643   210 1973       TRUE      Uni Oldenburg       Oldenburg
-4 14954   250 1971      FALSE          FH Aachen          Aachen
-5 47269   553 1870       TRUE        RWTH Aachen          Aachen
-6 23659   438 1457       TRUE       Uni Freiburg        Freiburg
-7  9415   150 1818       TRUE           Uni Bonn            Bonn
-8 38079   636 1995      FALSE FH Bonn-Rhein-Sieg Bonn-Rhein-Sieg</code></pre>
+<pre><code>  studs profs prom_recht gegr                uni             ort
+1 14954   250      FALSE 1971          FH Aachen          Aachen
+2 47269   553       TRUE 1870        RWTH Aachen          Aachen
+3 23659   438       TRUE 1457       Uni Freiburg        Freiburg
+4  9415   150       TRUE 1818           Uni Bonn            Bonn
+5 38079   636      FALSE 1995 FH Bonn-Rhein-Sieg Bonn-Rhein-Sieg</code></pre>
 </div>
 </div>
 

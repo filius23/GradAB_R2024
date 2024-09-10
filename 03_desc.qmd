@@ -104,7 +104,6 @@ pend %>% filter(!is.na(statakt)) %>% count(statakt)
 ```
 
 
-### [Exercise](#descue1) {#ue3_1}
 
 ## Other Table Values
 
@@ -145,7 +144,10 @@ t2x <- cumsum(prop.table(table(pend$statakt)))
 
 `r sprintf("%2.3f",round(t2x[2]*100,3))`% of respondents are employed or unemployed (and not inactive).
 
-### Creating a Contingency Table
+#### [Exercise](#descue1) {#ue3_1}
+
+
+## Creating a Contingency Table
 
 Contingency tables allow us to explore how frequently combinations of different variables occur together. 
 Let's look at two ways to create contingency tables in R. 
@@ -159,6 +161,11 @@ tab2 <- pend %>% count(zpsex, statakt)
 tab2$pct <- prop.table(tab2$n)
 tab2
 ```
+```{r}
+tab2 %>% mutate(pct_zpsex= prop.table(n), .by = zpsex)
+```
+
+
 
 ## Summary Statistics
 
@@ -241,7 +248,6 @@ These methods allow for thorough analysis of both categorical and numerical data
 
 ## Exercises
 
-<!-- {{< include _03_0_ueb.qmd >}} -->
 Use the PASS CampusFile `PENDDAT_cf_W13.dta` for all exercises:
 
 ```{r einls, eval=F, echo = T}
@@ -260,10 +266,7 @@ We are interested in the variable `famstand`, which contains the marital status 
 library(gt)
 pend %>% count(famstand) %>% 
   mutate(label = haven::as_factor(famstand)) %>% 
-  select(-n) %>% gt() %>% tab_options(  table.font.size = 9)
-# %>% kable(.) %>% 
-#   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>% 
-#   row_spec(0, color = "white",font_size = 0)
+  select(-n) %>% gt() %>% tab_options(  table.font.size = 11)
 ```
 
 + Display a table with absolute frequencies of `famstand` using both `table()` and `count()` (Remember to load `{tidyverse}` for `count()`). 

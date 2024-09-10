@@ -193,6 +193,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references_translated.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Links &amp; Further Reading</span></a>
   </div>
@@ -208,30 +214,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#frequency-counts" id="toc-frequency-counts" class="nav-link active" data-scroll-target="#frequency-counts"><span class="header-section-number">3.1</span> Frequency Counts</a></li>
-  <li><a href="#NA03" id="toc-NA03" class="nav-link" data-scroll-target="#NA03"><span class="header-section-number">3.2</span> Missing Values in R: <code>NA</code></a>
+  <li><a href="#NA03" id="toc-NA03" class="nav-link" data-scroll-target="#NA03"><span class="header-section-number">3.2</span> Missing Values in R: <code>NA</code></a></li>
+  <li><a href="#other-table-values" id="toc-other-table-values" class="nav-link" data-scroll-target="#other-table-values"><span class="header-section-number">3.3</span> Other Table Values</a></li>
+  <li><a href="#creating-a-contingency-table" id="toc-creating-a-contingency-table" class="nav-link" data-scroll-target="#creating-a-contingency-table"><span class="header-section-number">3.4</span> Creating a Contingency Table</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">3.5</span> Summary Statistics</a>
   <ul class="collapse">
-  <li><a href="#ue3_1" id="toc-ue3_1" class="nav-link" data-scroll-target="#ue3_1"><span class="header-section-number">3.2.1</span> Exercise</a></li>
+  <li><a href="#calculating-specific-statistics" id="toc-calculating-specific-statistics" class="nav-link" data-scroll-target="#calculating-specific-statistics"><span class="header-section-number">3.5.1</span> Calculating Specific Statistics</a></li>
+  <li><a href="#custom-summary-with-summarise" id="toc-custom-summary-with-summarise" class="nav-link" data-scroll-target="#custom-summary-with-summarise"><span class="header-section-number">3.5.2</span> Custom Summary with <code>summarise()</code></a></li>
+  <li><a href="#comparing-across-groups" id="toc-comparing-across-groups" class="nav-link" data-scroll-target="#comparing-across-groups"><span class="header-section-number">3.5.3</span> Comparing Across Groups</a></li>
+  <li><a href="#ue3_3" id="toc-ue3_3" class="nav-link" data-scroll-target="#ue3_3"><span class="header-section-number">3.5.4</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#other-table-values" id="toc-other-table-values" class="nav-link" data-scroll-target="#other-table-values"><span class="header-section-number">3.3</span> Other Table Values</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.6</span> Exercises</a>
   <ul class="collapse">
-  <li><a href="#creating-a-contingency-table" id="toc-creating-a-contingency-table" class="nav-link" data-scroll-target="#creating-a-contingency-table"><span class="header-section-number">3.3.1</span> Creating a Contingency Table</a></li>
+  <li><a href="#descue1" id="toc-descue1" class="nav-link" data-scroll-target="#descue1"><span class="header-section-number">3.6.1</span> Exercise 1</a></li>
+  <li><a href="#descue2" id="toc-descue2" class="nav-link" data-scroll-target="#descue2"><span class="header-section-number">3.6.2</span> Exercise 2</a></li>
+  <li><a href="#descue3" id="toc-descue3" class="nav-link" data-scroll-target="#descue3"><span class="header-section-number">3.6.3</span> Exercise 3</a></li>
   </ul></li>
-  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">3.4</span> Summary Statistics</a>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes"><span class="header-section-number">3.7</span> Notes</a>
   <ul class="collapse">
-  <li><a href="#calculating-specific-statistics" id="toc-calculating-specific-statistics" class="nav-link" data-scroll-target="#calculating-specific-statistics"><span class="header-section-number">3.4.1</span> Calculating Specific Statistics</a></li>
-  <li><a href="#custom-summary-with-summarise" id="toc-custom-summary-with-summarise" class="nav-link" data-scroll-target="#custom-summary-with-summarise"><span class="header-section-number">3.4.2</span> Custom Summary with <code>summarise()</code></a></li>
-  <li><a href="#comparing-across-groups" id="toc-comparing-across-groups" class="nav-link" data-scroll-target="#comparing-across-groups"><span class="header-section-number">3.4.3</span> Comparing Across Groups</a></li>
-  <li><a href="#ue3_3" id="toc-ue3_3" class="nav-link" data-scroll-target="#ue3_3"><span class="header-section-number">3.4.4</span> Exercise</a></li>
-  </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.5</span> Exercises</a>
-  <ul class="collapse">
-  <li><a href="#descue1" id="toc-descue1" class="nav-link" data-scroll-target="#descue1"><span class="header-section-number">3.5.1</span> Exercise 1</a></li>
-  <li><a href="#descue2" id="toc-descue2" class="nav-link" data-scroll-target="#descue2"><span class="header-section-number">3.5.2</span> Exercise 2</a></li>
-  <li><a href="#descue3" id="toc-descue3" class="nav-link" data-scroll-target="#descue3"><span class="header-section-number">3.5.3</span> Exercise 3</a></li>
-  </ul></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes"><span class="header-section-number">3.6</span> Notes</a>
-  <ul class="collapse">
-  <li><a href="#round" id="toc-round" class="nav-link" data-scroll-target="#round"><span class="header-section-number">3.6.1</span> Rounding with <code>round()</code></a></li>
+  <li><a href="#round" id="toc-round" class="nav-link" data-scroll-target="#round"><span class="header-section-number">3.7.1</span> Rounding with <code>round()</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -432,9 +433,6 @@ Labels:
 3 3 [Pupil/student (school)]                          5481</code></pre>
 </div>
 </div>
-<section id="ue3_1" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="ue3_1"><span class="header-section-number">3.2.1</span> <a href="#descue1">Exercise</a></h3>
-</section>
 </section>
 <section id="other-table-values" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="other-table-values"><span class="header-section-number">3.3</span> Other Table Values</h2>
@@ -486,8 +484,12 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 </div>
 </div>
 <p>74.011% of respondents are employed or unemployed (and not inactive).</p>
-<section id="creating-a-contingency-table" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="creating-a-contingency-table"><span class="header-section-number">3.3.1</span> Creating a Contingency Table</h3>
+<section id="ue3_1" class="level4" data-number="3.3.0.1">
+<h4 data-number="3.3.0.1" class="anchored" data-anchor-id="ue3_1"><span class="header-section-number">3.3.0.1</span> <a href="#descue1">Exercise</a></h4>
+</section>
+</section>
+<section id="creating-a-contingency-table" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="creating-a-contingency-table"><span class="header-section-number">3.4</span> Creating a Contingency Table</h2>
 <p>Contingency tables allow us to explore how frequently combinations of different variables occur together. Let’s look at two ways to create contingency tables in R.</p>
 <p>Using <code>count()</code> from the <code>{dplyr}</code> package, we create a contingency table by inserting two variables. For instance, if we want to see the frequencies of employment status (<code>statakt</code>) by gender (<code>zpsex</code>), we can use the following command:</p>
 <div class="cell">
@@ -522,26 +524,41 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 8 2 [Female] NA                                                   3779 0.133 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tab2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pct_zpsex=</span> <span class="fu">prop.table</span>(n), <span class="at">.by =</span> zpsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 5
+  zpsex      statakt                                          n    pct pct_zpsex
+  &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt;                                    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+1 1 [Male]    1 [In occupation with earnings &gt;400 EUR pe…  4685 0.165      0.346
+2 1 [Male]    2 [Unemployed, registered]                   3240 0.114      0.240
+3 1 [Male]    3 [Pupil/student (school)]                   2047 0.0720     0.151
+4 1 [Male]   NA                                            3555 0.125      0.263
+5 2 [Female]  1 [In occupation with earnings &gt;400 EUR pe…  4785 0.168      0.321
+6 2 [Female]  2 [Unemployed, registered]                   2899 0.102      0.195
+7 2 [Female]  3 [Pupil/student (school)]                   3434 0.121      0.231
+8 2 [Female] NA                                            3779 0.133      0.254</code></pre>
+</div>
+</div>
 </section>
-</section>
-<section id="summary-statistics" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">3.4</span> Summary Statistics</h2>
+<section id="summary-statistics" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">3.5</span> Summary Statistics</h2>
 <p>For numerical variables, such as income (<code>netges</code>), we often compute summary statistics like the mean, median, or quantiles. To get a quick overview, use <code>summary()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
     -5.0     -3.0     -3.0    567.9    990.0 111419.0 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>netges[pend<span class="sc">$</span>netges <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># Handling Missing Data</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>netges[pend<span class="sc">$</span>netges <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># Handling Missing Data</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
       0     880    1320    1562    1890  111419   18056 </code></pre>
 </div>
 </div>
-<section id="calculating-specific-statistics" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="calculating-specific-statistics"><span class="header-section-number">3.4.1</span> Calculating Specific Statistics</h3>
+<section id="calculating-specific-statistics" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="calculating-specific-statistics"><span class="header-section-number">3.5.1</span> Calculating Specific Statistics</h3>
 <p>To calculate specific statistics, we can use:</p>
 <ul>
 <li>Minimum: <code>min()</code></li>
@@ -554,27 +571,27 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 </ul>
 <p>For instance, the mean of income. Setting <code>na.rm = TRUE</code> forces R to ignore missing values:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pend<span class="sc">$</span>netges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pend<span class="sc">$</span>netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pend<span class="sc">$</span>netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1562.3</code></pre>
 </div>
 </div>
 </section>
-<section id="custom-summary-with-summarise" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="custom-summary-with-summarise"><span class="header-section-number">3.4.2</span> Custom Summary with <code>summarise()</code></h3>
+<section id="custom-summary-with-summarise" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="custom-summary-with-summarise"><span class="header-section-number">3.5.2</span> Custom Summary with <code>summarise()</code></h3>
 <p>You can use <code>summarise()</code> from <code>{dplyr}</code> to create custom summary tables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
   Minimum   Median  Mean Maximum  
@@ -583,18 +600,18 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 </div>
 </div>
 </section>
-<section id="comparing-across-groups" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="comparing-across-groups"><span class="header-section-number">3.4.3</span> Comparing Across Groups</h3>
+<section id="comparing-across-groups" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="comparing-across-groups"><span class="header-section-number">3.5.3</span> Comparing Across Groups</h3>
 <p>To compare statistics across groups, use <code>.by</code> in <code>summarise()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(welle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(welle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 5
    welle                   Minimum   Median  Mean Maximum  
@@ -616,15 +633,15 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 </div>
 <p>You can also filter for specific waves if needed:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   welle                   Minimum   Median  Mean Maximum  
@@ -635,48 +652,47 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 </div>
 <p>These methods allow for thorough analysis of both categorical and numerical data in R.</p>
 </section>
-<section id="ue3_3" class="level3" data-number="3.4.4">
-<h3 data-number="3.4.4" class="anchored" data-anchor-id="ue3_3"><span class="header-section-number">3.4.4</span> <a href="#descue3">Exercise</a></h3>
+<section id="ue3_3" class="level3" data-number="3.5.4">
+<h3 data-number="3.5.4" class="anchored" data-anchor-id="ue3_3"><span class="header-section-number">3.5.4</span> <a href="#descue3">Exercise</a></h3>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.5</span> Exercises</h2>
-<!-- {{< include _03_0_ueb.qmd >}} -->
+<section id="exercises" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.6</span> Exercises</h2>
 <p>Use the PASS CampusFile <code>PENDDAT_cf_W13.dta</code> for all exercises:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong><a href="./02_intro.html#import">As a reminder: you can find an overview of the data import commands here</a></strong></p>
-<section id="descue1" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="descue1"><span class="header-section-number">3.5.1</span> Exercise 1</h3>
+<section id="descue1" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="descue1"><span class="header-section-number">3.6.1</span> Exercise 1</h3>
 <p>We are interested in the variable <code>famstand</code>, which contains the marital status of the respondents:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="vipaugirnk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vipaugirnk table {
+<div id="hmvptpqsmy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hmvptpqsmy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vipaugirnk thead, #vipaugirnk tbody, #vipaugirnk tfoot, #vipaugirnk tr, #vipaugirnk td, #vipaugirnk th {
+#hmvptpqsmy thead, #hmvptpqsmy tbody, #hmvptpqsmy tfoot, #hmvptpqsmy tr, #hmvptpqsmy td, #hmvptpqsmy th {
   border-style: none;
 }
 
-#vipaugirnk p {
+#hmvptpqsmy p {
   margin: 0;
   padding: 0;
 }
 
-#vipaugirnk .gt_table {
+#hmvptpqsmy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -695,12 +711,12 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-left-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_caption {
+#hmvptpqsmy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vipaugirnk .gt_title {
+#hmvptpqsmy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -712,7 +728,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-width: 0;
 }
 
-#vipaugirnk .gt_subtitle {
+#hmvptpqsmy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -724,7 +740,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-top-width: 0;
 }
 
-#vipaugirnk .gt_heading {
+#hmvptpqsmy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -736,13 +752,13 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_bottom_border {
+#hmvptpqsmy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_col_headings {
+#hmvptpqsmy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -757,7 +773,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_col_heading {
+#hmvptpqsmy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -777,7 +793,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   overflow-x: hidden;
 }
 
-#vipaugirnk .gt_column_spanner_outer {
+#hmvptpqsmy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -789,15 +805,15 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 4px;
 }
 
-#vipaugirnk .gt_column_spanner_outer:first-child {
+#hmvptpqsmy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vipaugirnk .gt_column_spanner_outer:last-child {
+#hmvptpqsmy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vipaugirnk .gt_column_spanner {
+#hmvptpqsmy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -809,11 +825,11 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   width: 100%;
 }
 
-#vipaugirnk .gt_spanner_row {
+#hmvptpqsmy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vipaugirnk .gt_group_heading {
+#hmvptpqsmy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -839,7 +855,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   text-align: left;
 }
 
-#vipaugirnk .gt_empty_group_heading {
+#hmvptpqsmy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -854,15 +870,15 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   vertical-align: middle;
 }
 
-#vipaugirnk .gt_from_md > :first-child {
+#hmvptpqsmy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vipaugirnk .gt_from_md > :last-child {
+#hmvptpqsmy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vipaugirnk .gt_row {
+#hmvptpqsmy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -881,7 +897,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   overflow-x: hidden;
 }
 
-#vipaugirnk .gt_stub {
+#hmvptpqsmy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -894,7 +910,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#vipaugirnk .gt_stub_row_group {
+#hmvptpqsmy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -908,15 +924,15 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   vertical-align: top;
 }
 
-#vipaugirnk .gt_row_group_first td {
+#hmvptpqsmy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vipaugirnk .gt_row_group_first th {
+#hmvptpqsmy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vipaugirnk .gt_summary_row {
+#hmvptpqsmy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -926,16 +942,16 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#vipaugirnk .gt_first_summary_row {
+#hmvptpqsmy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_first_summary_row.thick {
+#hmvptpqsmy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vipaugirnk .gt_last_summary_row {
+#hmvptpqsmy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -945,7 +961,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_grand_summary_row {
+#hmvptpqsmy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -955,7 +971,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#vipaugirnk .gt_first_grand_summary_row {
+#hmvptpqsmy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -965,7 +981,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-top-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_last_grand_summary_row_top {
+#hmvptpqsmy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -975,11 +991,11 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_striped {
+#hmvptpqsmy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vipaugirnk .gt_table_body {
+#hmvptpqsmy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -988,7 +1004,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_footnotes {
+#hmvptpqsmy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1002,7 +1018,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_footnote {
+#hmvptpqsmy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1011,7 +1027,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#vipaugirnk .gt_sourcenotes {
+#hmvptpqsmy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1025,7 +1041,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#vipaugirnk .gt_sourcenote {
+#hmvptpqsmy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1033,72 +1049,72 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#vipaugirnk .gt_left {
+#hmvptpqsmy .gt_left {
   text-align: left;
 }
 
-#vipaugirnk .gt_center {
+#hmvptpqsmy .gt_center {
   text-align: center;
 }
 
-#vipaugirnk .gt_right {
+#hmvptpqsmy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vipaugirnk .gt_font_normal {
+#hmvptpqsmy .gt_font_normal {
   font-weight: normal;
 }
 
-#vipaugirnk .gt_font_bold {
+#hmvptpqsmy .gt_font_bold {
   font-weight: bold;
 }
 
-#vipaugirnk .gt_font_italic {
+#hmvptpqsmy .gt_font_italic {
   font-style: italic;
 }
 
-#vipaugirnk .gt_super {
+#hmvptpqsmy .gt_super {
   font-size: 65%;
 }
 
-#vipaugirnk .gt_footnote_marks {
+#hmvptpqsmy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vipaugirnk .gt_asterisk {
+#hmvptpqsmy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vipaugirnk .gt_indent_1 {
+#hmvptpqsmy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vipaugirnk .gt_indent_2 {
+#hmvptpqsmy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vipaugirnk .gt_indent_3 {
+#hmvptpqsmy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vipaugirnk .gt_indent_4 {
+#hmvptpqsmy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vipaugirnk .gt_indent_5 {
+#hmvptpqsmy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vipaugirnk .katex-display {
+#hmvptpqsmy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vipaugirnk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hmvptpqsmy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1161,23 +1177,23 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 </ul>
 <p><a href="#ue3_1">Back to top</a></p>
 </section>
-<section id="descue2" class="level3" data-number="3.5.2">
-<h3 data-number="3.5.2" class="anchored" data-anchor-id="descue2"><span class="header-section-number">3.5.2</span> Exercise 2</h3>
+<section id="descue2" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="descue2"><span class="header-section-number">3.6.2</span> Exercise 2</h3>
 <ul>
 <li>Create a contingency table for <code>famstand</code> and <code>zpsex</code> using <code>count()</code>.</li>
 <li>What percentage of the respondents are divorced women? Use <code>prop.table()</code></li>
 </ul>
 <p><a href="#ue3_2">Back to top</a></p>
 </section>
-<section id="descue3" class="level3" data-number="3.5.3">
-<h3 data-number="3.5.3" class="anchored" data-anchor-id="descue3"><span class="header-section-number">3.5.3</span> Exercise 3</h3>
+<section id="descue3" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="descue3"><span class="header-section-number">3.6.3</span> Exercise 3</h3>
 <p>Describe the age of respondents (<code>palter</code>) using <code>summary</code> and create your own overview using <code>summarise()</code> to compare respondent age by marital status.</p>
 <ul>
 <li>First, overwrite missing values with <code>NA</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>palter[pend<span class="sc">$</span>palter<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>famstand[pend<span class="sc">$</span>famstand<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>palter[pend<span class="sc">$</span>palter<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>pend<span class="sc">$</span>famstand[pend<span class="sc">$</span>famstand<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Create an overview using <code>summary()</code>.</li>
@@ -1187,30 +1203,30 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 <p><a href="#ue3_3">Back to top</a></p>
 </section>
 </section>
-<section id="notes" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="notes"><span class="header-section-number">3.6</span> Notes</h2>
-<section id="round" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="round"><span class="header-section-number">3.6.1</span> Rounding with <code>round()</code></h3>
+<section id="notes" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="notes"><span class="header-section-number">3.7</span> Notes</h2>
+<section id="round" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="round"><span class="header-section-number">3.7.1</span> Rounding with <code>round()</code></h3>
 <p>Explanation: You can round values to a certain number of digits using <code>round(x , 3)</code>. The second number in the parentheses (after the comma) specifies how many decimal places you want:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 21.121</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 21.12121</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">21.12121123</span>,<span class="at">digits =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 21</code></pre>
 </div>
 </div>
 <p>We can round the relative frequencies to make the table above more readable:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>zpsex<span class="sc">+</span>statakt, <span class="at">data =</span> pend) <span class="sc">%&gt;%</span> </span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(.,<span class="at">margin =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(.,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>zpsex<span class="sc">+</span>statakt, <span class="at">data =</span> pend) <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(.,<span class="at">margin =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(.,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     statakt
 zpsex     1     2     3

@@ -1,4 +1,4 @@
-# Merging & reshaping {#wrang2}
+# Merging & reshaping {#wrang3}
 
 ```{r setup}
 #| include: false
@@ -148,8 +148,8 @@ bsp_df2 %>% pivot_wider(names_from = alter, values_from = alo)
 
 ```{r}
 #| include: false
-pass_df <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
-                               col_select = c("welle","PEO0400a","PEO0400b","PEO0400c","PEO0400d"))
+# pass_df <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
+#                                col_select = c("welle","PEO0400a","PEO0400b","PEO0400c","PEO0400d"))
 
 # pass_df %>% 
 #   pivot_longer(cols = matches("PE")) %>% 

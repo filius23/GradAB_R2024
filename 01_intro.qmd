@@ -186,6 +186,12 @@ y1
 y1/x1
 ```
 
+`ls()` lists all existing objects, we can use the `pattern =` option to display only objects with a name that contains "1":
+```{r}
+ls()
+ls(pattern = "1")
+```
+
 ### Deleting Values
 
 Of course, we can also delete objects using `rm()`. If we try to call a non-existent object, we will get an error message:
@@ -194,6 +200,8 @@ Of course, we can also delete objects using `rm()`. If we try to call a non-exis
 rm(x1)
 x1
 ```
+
+
 
 With `rm(list = ls())`, all objects can be removed from the environment.
 
@@ -260,7 +268,6 @@ y/x
 
 ## Exercises
 
--   Create a sequence of numbers from 7 to 13. How can you adjust the sequence with `seq()` so that only the odd numbers are generated?
 -   Store the number of students at the University of Oldenburg (15643) in `stud`.
 -   Store the number of professorships at the University of Oldenburg (210) in `prof`.
 -   Calculate the number of students per professorship at the University of Oldenburg using the objects `stud` and `prof`.
