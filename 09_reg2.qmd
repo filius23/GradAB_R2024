@@ -220,7 +220,7 @@ pend10_lab <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",n_max = 1,col_select =
 ```
 
 For binary dependent variables, logistic regression models are a widely used tool. 
-We can fit logistic regression models in R using `glm()` - for an example, we turn to `PSM0100` (`r attributes(pend10_lab$PSM0100)$label` yes = 2, no = 1) :
+We can fit logistic regression models in R using `glm()` - for an example, we turn to `PSM0100` (`r attributes(pend10_lab$PSM0100)$label` yes = 1, no = 2) :
 
 \begin{equation*}
 \widehat{Logit(soc\_med=1)} = \widehat{ln\left(\frac{P(soc\_med=1)}{1-P(soc\_med=1)}\right)} = \hat\beta0 + \hat{\beta1}\times \texttt{palter}
@@ -230,9 +230,9 @@ We can fit logistic regression models in R using `glm()` - for an example, we tu
 pend10 <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
                           col_select = c("palter","PSM0100")) %>% 
   filter(PSM0100>0) %>% 
-  mutate(soc_med = 2- PSM0100)  
+  mutate(soc_med = 2- PSM0100)  # convert into 0/1 dummy variable
 
-pend10 %>% count(soc_med,PSM0100)
+pend10 %>% count(soc_med,PSM0100) # check: soc_med = 1 -> yes, soc_med = 0 -> no
 ```
 
 ```{r}
@@ -242,7 +242,7 @@ summary(m2)
 
 
 The interpretation of the $\beta$ coefficients from a logistic regression model pertains to the logits (the logarithms of the odds):
-*There is a statistically significant relationship at the 0.001 level between age and the likelihood of using social media. With each additional year of age, there is a decrease of `r sprintf("%2.6f",abs(m2$coefficients[2]))` in the *logits* of the respondents using social media.*
+*There is a statistically significant relationship at the 0.001 level between age and the probability of using social media. With each additional year of age, there is a decrease of `r sprintf("%2.6f",abs(m2$coefficients[2]))` in the *logits* of the respondents using social media.*
 
 
 ### average marginal effects
@@ -291,17 +291,18 @@ pend <- haven::read_dta("./orig/PENDDAT_cf_W13.dta") %>% filter(netges > 0 , pal
 wgt_df <- haven::read_dta("./orig/pweights_cf_W13.dta")
 pend_wgt <- pend %>% left_join(wgt_df, by = join_by(pnr,welle))
 
-modx <- lm(netges ~ palter + I(palter^2),data=pend)
+modx <- lm(netges ~ palter + I(palter^2),data=pend) # conventional lm() model
 
-pend_weighted <- svydesign(id      = ~pnr,
-                           weights = ~wqp,
-                           data    = pend_wgt)
+# create new data.frame including weights using svydesign() from survey-package
+pend_weighted <- svydesign(id      = ~pnr, # id variable
+                           weights = ~wqp, # weight variable
+                           data    = pend_wgt) # original unweighted data 
 
-# family = gaussian() provides a linear regression model, like lm() - but weighted
+# family = gaussian() provides a linear regression model, like lm() - but respecting weights
 survey_modx <- svyglm(netges ~ palter + I(palter^2), 
                     family = gaussian(), data = etb18,design = pend_weighted)
 
-modelsummary(list("lm()"=modx,"svyglm()"= survey_modx),gof_omit = "RM|IC|Log",output = "flextable")
+modelsummary(list("lm()"=modx,"svyglm()"= survey_modx),gof_omit = "RM|IC|Log")
 ```
 
 ## "Robust" Standard Errors {#rbst}
@@ -322,12 +323,12 @@ Based on [the data read above](#gew), we can estimate the following model:
 mod1 <- lm(netges ~ palter + I(palter^2),data=pend) 
 
 library(modelsummary)
-modelsummary(list(mod1,mod1,mod1,mod1),vcov = c("classical","HC","HC2","stata"),gof_omit = "RM|IC|Log",output = "flextable")
+modelsummary(list(mod1,mod1,mod1,mod1),vcov = c("classical","HC","HC2","stata"),gof_omit = "RM|IC|Log")
 ```
 
 For clustered SEs, we specify `~clustervariable`:
 ```{r}
-modelsummary(mod1, vcov = c("classical",~pnr), stars = T,gof_omit = "RM|IC|Log|F",output = "flextable")
+modelsummary(mod1, vcov = c("classical",~pnr), stars = T,gof_omit = "RM|IC|Log|F")
 ```
 
 ## Fixed Effects Models with `{fixest}` {#fe}
@@ -360,7 +361,7 @@ summary(fe_mod1, cluster = ~pnr)
 
 `{modelsummary}` shows the clustered SEs:
 ```{r, message=FALSE}
-modelsummary(fe_mod1,gof_omit = "R|IC|Log|F",stars = T,output = "flextable")
+modelsummary(fe_mod1,gof_omit = "R|IC|Log|F",stars = T)
 ```
 
 ## Multilevel Models with `{lme4}` {#mlvl}
@@ -370,7 +371,7 @@ With `lmer()`, we can estimate a random intercept model by specifying `( 1 | pnr
 library(lme4)
 ml_m3 <- lmer(netges ~ palter + I(palter^2) + ( 1 | pnr), data=pend)
 
-modelsummary(list(ml_m3),gof_omit = "R|IC|Log|F",output = "flextable")
+modelsummary(list(ml_m3),gof_omit = "R|IC|Log|F")
 ```
 
 More about multilevel models and `{lme4}` in blog posts by [Rense Nieuwenhuis](http://www.rensenieuwenhuis.nl/r-sessions-16-multilevel-model-specification-lme4/) and [Tristan Mahr](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/).
