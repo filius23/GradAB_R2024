@@ -447,3 +447,7 @@ pred_plt +
            y = "Predicted Values for var2") +
       theme_minimal()
 ```
+
+## Links
+
+[How to interpret statistical models in R using `{marginaleffects}`](https://marginaleffects.com/) - deep dive into the background of marginal effects, predictions, adjusted predictions, elasticities, ... and how you can fit them using R. Fans of Stata's `margins` should take a look at [a special chapter comparing margins to marginaleffects](https://marginaleffects.com/vignettes/alternative_software.html#stata)
