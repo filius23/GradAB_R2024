@@ -81,10 +81,13 @@ pend_small$azges1[pend_small$azges1<0] <- NA
 
 ...alternatively, we use `ifelse()` and `across()` [see here](#ifelse):
 ```{r}
-pend_small$palter[pend_small$palter>100] <- NA 
-pend_small <-
-  pend_small %>%
-  mutate(across(c("casmin", "PAS0100", "azges1"),  ~ ifelse(.x < 0, NA, .x)))
+# pend_small$palter[pend_small$palter>100] <- NA 
+# pend_small <-
+#   pend_small %>%
+#   mutate(across(c("casmin", "PAS0100", "azges1"),  ~ ifelse(.x < 0, NA, .x)))
+pend_small <- pend %>% 
+  filter(welle==13, palter < 100,
+         casmin >0 , PAS0100 > 0 , azges1 > 0)
 ```
 
 
@@ -280,37 +283,44 @@ Next, we’ll look at a way to visualize the contingency table from [Chapter 2](
 #| label: "table041"
 pend_small$PD0400[pend_small$PD0400<0] <- NA # exclude missings
 pend_small %>% 
-  count(zpsex, PD0400) 
+  count(zpsex, PD0400) %>% 
+  filter(!is.na(PD0400))
 ```
 
 With `geom_bar()`, we can create bars by setting the height as the count of observations with `..count..` for y:
 ```{r}
 #| cache: true
 pend_small %>% 
+  count(zpsex, PD0400) %>% 
   filter(!is.na(PD0400)) %>% 
   ggplot(data = ., aes(x = as_factor(PD0400), fill = factor(zpsex),
-                       y = ..count..)) +
-  geom_bar(position = position_dodge()) 
+                       y = n)) +
+  geom_col(position = position_dodge()) 
 ```
 
-How do we get relative frequencies? We adjust our `aes` to `y = (..count..)/sum(..count..)`.
+How do we get relative frequencies? 
+We add `mutate(pct = prop.table(n), .by = zpsex)` to our pipe.
 With `scale_y_continuous(labels = scales::label_percent(accuracy = 1))`, we can also display percentages on the y-axis.
 To create a bar chart instead of a column chart, simply swap `x` and `y` and adjust the percentage labels using `scale_x_continuous`:
 ```{r}
 #| cache: true
 #| layout-ncol: 2
 pend_small %>% 
+  count(zpsex, PD0400) %>% 
   filter(!is.na(PD0400)) %>% 
+  mutate(pct = prop.table(n), .by = zpsex) %>% 
   ggplot(data = ., aes(x = as_factor(PD0400), fill = factor(zpsex),
-                       y = (..count..)/sum(..count..) )) +
-  geom_bar(position = position_dodge()) +
+                       y = pct )) +
+  geom_col(position = position_dodge()) +
   scale_y_continuous(labels = scales::label_percent(accuracy = 1)) 
 # horizontal -> swap x and y axis
 pend_small %>% 
+  count(zpsex, PD0400) %>% 
   filter(!is.na(PD0400)) %>% 
+  mutate(pct = prop.table(n), .by = zpsex) %>% 
   ggplot(data = ., aes(y = as_factor(PD0400), fill = factor(zpsex),
-                       x = (..count..)/sum(..count..) )) +
-  geom_bar(position = position_dodge()) +
+                       x = pct )) +
+  geom_col(position = position_dodge()) +
   scale_x_continuous(labels = scales::label_percent(accuracy = 1)) 
 ```
 
@@ -318,18 +328,16 @@ These charts can also be customized with `scale_...` and labeled in detail using
 
 ```{r fullplot}
 pend_small %>% 
+  count(zpsex, PD0400) %>% 
   filter(!is.na(PD0400)) %>% 
-  ggplot(data = ., aes(y = PD0400, fill = factor(zpsex),
-                       x = (..count..)/sum(..count..) )) +
-  geom_bar(position=position_dodge()) +
+  mutate(pct = prop.table(n), .by = zpsex) %>% 
+  ggplot(data = ., aes(y = as_factor(PD0400), 
+                       fill = factor(zpsex),
+                       x = pct )) +
+  geom_col(position = position_dodge()) +
   scale_fill_manual(values = c("deepskyblue3","deepskyblue4"),
                     breaks = c(1,2), labels = c("Men", "Women")) +
   scale_x_continuous(labels = scales::label_percent(accuracy = 1)) +
-  scale_y_continuous(breaks = 1:4, 
-                     labels = c("Überhaupt nicht",
-                                "Eher nicht",
-                                "Eher schon",
-                                "Sehr")) +
   labs(title = "Religiösität nach Geschlecht",
        subtitle = "Relative Häufigkeiten",
        caption = "Quelle: PASS-CF 0619",
@@ -341,7 +349,7 @@ pend_small %>%
 
 ## Exercises
 
-For all tasks, use the first 150 observations (`pend_small`) to keep the plot simple. Remember to exclude missing values with `filter()`; you can use the following command:
+To keep the data simple, you can use the following command:
 
 ```{r}
 #| eval: false
@@ -353,11 +361,13 @@ pend <-
 
 ### Exercise 1 {#pltue1}
 
+Use this data set:
 ```{r}
 #| eval: false
 pend_u41 <- 
   pend %>% 
-  filter(welle == 13, bilzeit > 0, PA0445 > 0) 
+  filter(welle == 13, bilzeit > 0, PA0445 > 0) %>% 
+  mutate(zpsex = factor(zpsex))
 ```
 
 + Create a scatter plot for the variables "Duration of total unemployment experience in months" (`PA0445`, y-axis) and "Duration of education" (`bilzeit`, x-axis).
@@ -369,6 +379,7 @@ pend_u41 <-
 
 ### *Exercise 2* {#pltue2}
 
+Use this data set:
 ```{r}
 #| eval: false
 pend_u42 <- 
@@ -379,12 +390,13 @@ pend_u42 <-
 + Create a boxplot or histogram for the distribution of the number of cigarettes and cigarillos smoked per day (in the last week) (`PG1270`).
 + Customize this graphic so that the distributions for men and women are shown separately.
 + How can you also set the colors based on gender? (Remember `color =` and `fill =`).
-+ Change the bar colors using `scale_fill_manual`, `scale_fill_brewer`, or `scale_fill_viridis` (see the sections [Colors](#farben), [ColorBrewer](#brewer), and [viridis](#viridis) under "other options").
++ Change the bar colors using `scale_color_manual`, `scale_color_brewer`, or `scale_color_viridis` (see the sections [Colors](#farben), [ColorBrewer](#brewer), and [viridis](#viridis) under "other options").
 
 [Back to top](#ue4_02)
 
 ### Exercise 3 {#pltue3}
 
+Use this data set:
 ```{r}
 #| eval: false
 pend_u43 <- 

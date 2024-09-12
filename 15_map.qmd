@@ -169,9 +169,25 @@ lan17 %>%
       theme_void()
 ```
 
+## Modify sf shape data.frames
+
+We can use the familiar `{dplyr}` functions to amend the sf data.
+Here's are rather silly example how to combine Saxony, Saxony-Anhalt and Thuringa into one unit:
+```{r}
+lan17_15länder <- 
+  lan17 %>% 
+  filter(GF==4) %>%
+  mutate(newid = case_when(as.numeric(AGS)>13 ~ "17",  TRUE ~ AGS)) %>% # same ID for SN, SA, TH
+  summarise(geometry = st_union(geometry),.by = newid) # summarise -> combine based on newid
+  
+ggplot(lan17_15länder) + 
+  geom_sf(size = .1, aes(fill = as.numeric(newid)) )  +
+  scale_fill_scico(palette = "oslo") + # requires scico package
+  theme_minimal()
+```
 
 ## Exercise
 
 Create a map yourself - for the country, district, or municipality level.
 
-+ You can find the shapefile for the year 2017 in the course folder under `/orig` in the quick access.
++ You can find the shapefile for the year 2017 in the course folder under `/orig` in the Quickablage.

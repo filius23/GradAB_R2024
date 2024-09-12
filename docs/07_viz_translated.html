@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.5</span> Exercises</a>
   <ul class="collapse">
   <li><a href="#pltue1" id="toc-pltue1" class="nav-link" data-scroll-target="#pltue1"><span class="header-section-number">5.5.1</span> Exercise 1</a></li>
-  <li><a href="#pltue2" id="toc-pltue2" class="nav-link" data-scroll-target="#pltue2"><span class="header-section-number">5.5.2</span> Exercise 2</a></li>
+  <li><a href="#pltue2" id="toc-pltue2" class="nav-link" data-scroll-target="#pltue2"><span class="header-section-number">5.5.2</span> <em>Exercise 2</em></a></li>
   <li><a href="#pltue3" id="toc-pltue3" class="nav-link" data-scroll-target="#pltue3"><span class="header-section-number">5.5.3</span> Exercise 3</a></li>
   </ul></li>
   <li><a href="#more-options-for-ggplot2" id="toc-more-options-for-ggplot2" class="nav-link" data-scroll-target="#more-options-for-ggplot2"><span class="header-section-number">5.6</span> More options for <code>{ggplot2}</code></a>
@@ -345,10 +345,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>…alternatively, we use <code>ifelse()</code> and <code>across()</code> <a href="04_data_wrangle.html#ifelse">see here</a>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pend_small<span class="sc">$</span>palter[pend_small<span class="sc">$</span>palter<span class="sc">&gt;</span><span class="dv">100</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pend_small <span class="ot">&lt;-</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  pend_small <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"casmin"</span>, <span class="st">"PAS0100"</span>, <span class="st">"azges1"</span>),  <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, .x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pend_small$palter[pend_small$palter&gt;100] &lt;- NA </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pend_small &lt;-</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   pend_small %&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(across(c("casmin", "PAS0100", "azges1"),  ~ ifelse(.x &lt; 0, NA, .x)))</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>pend_small <span class="ot">&lt;-</span> pend <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle<span class="sc">==</span><span class="dv">13</span>, palter <span class="sc">&lt;</span> <span class="dv">100</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>         casmin <span class="sc">&gt;</span><span class="dv">0</span> , PAS0100 <span class="sc">&gt;</span> <span class="dv">0</span> , azges1 <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="ggplot2-and-the-grammar-of-graphics" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="ggplot2-and-the-grammar-of-graphics"><span class="header-section-number">5.1</span> ggplot2 and the Grammar of Graphics</h2>
@@ -441,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> palter, <span class="at">y =</span> azges1, <span class="at">color =</span> <span class="fu">as.character</span>(zpsex))) <span class="sc">+</span> </span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -550,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>With the following syntax we can create a boxplot using <code>ggplot2</code>. Since we are only considering one variable, we only need to specify <code>y =</code> or <code>x =</code> depending on whether the box should be oriented vertically or horizontally.</p>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">y =</span> azges1)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> azges1)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -586,7 +589,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()  </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> azges1)) <span class="sc">+</span> </span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"sienna1"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -609,7 +612,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pend_small, <span class="fu">aes</span>(<span class="at">x =</span> azges1, <span class="at">fill =</span> <span class="fu">factor</span>(zpsex))) <span class="sc">+</span> </span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -653,30 +656,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pend_small<span class="sc">$</span>PD0400[pend_small<span class="sc">$</span>PD0400<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># exclude missings</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(zpsex, PD0400) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(zpsex, PD0400) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-   zpsex      PD0400                        n
-   &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt;                 &lt;int&gt;
- 1 1 [Male]    1 [Not at all religious]    40
- 2 1 [Male]    2 [Rather not religious]    41
- 3 1 [Male]    3 [Rather religious]        49
- 4 1 [Male]    4 [Very religious]          22
- 5 1 [Male]   NA                          780
- 6 2 [Female]  1 [Not at all religious]    26
- 7 2 [Female]  2 [Rather not religious]    34
- 8 2 [Female]  3 [Rather religious]        40
- 9 2 [Female]  4 [Very religious]          16
-10 2 [Female] NA                          816</code></pre>
+<pre><code># A tibble: 8 × 3
+  zpsex      PD0400                       n
+  &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt;                &lt;int&gt;
+1 1 [Male]   1 [Not at all religious]     9
+2 1 [Male]   2 [Rather not religious]     6
+3 1 [Male]   3 [Rather religious]         9
+4 1 [Male]   4 [Very religious]           5
+5 2 [Female] 1 [Not at all religious]     8
+6 2 [Female] 2 [Rather not religious]     2
+7 2 [Female] 3 [Rather religious]         5
+8 2 [Female] 4 [Very religious]           3</code></pre>
 </div>
 </div>
 <p>With <code>geom_bar()</code>, we can create bars by setting the height as the count of observations with <code>..count..</code> for y:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_factor</span>(PD0400), <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> ..count..)) <span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(zpsex, PD0400) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_factor</span>(PD0400), <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -685,21 +688,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>How do we get relative frequencies? We adjust our <code>aes</code> to <code>y = (..count..)/sum(..count..)</code>. With <code>scale_y_continuous(labels = scales::label_percent(accuracy = 1))</code>, we can also display percentages on the y-axis. To create a bar chart instead of a column chart, simply swap <code>x</code> and <code>y</code> and adjust the percentage labels using <code>scale_x_continuous</code>:</p>
+<p>How do we get relative frequencies? We add <code>mutate(pct = prop.table(n), .by = zpsex)</code> to our pipe. With <code>scale_y_continuous(labels = scales::label_percent(accuracy = 1))</code>, we can also display percentages on the y-axis. To create a bar chart instead of a column chart, simply swap <code>x</code> and <code>y</code> and adjust the percentage labels using <code>scale_x_continuous</code>:</p>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_factor</span>(PD0400), <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> (..count..)<span class="sc">/</span><span class="fu">sum</span>(..count..) )) <span class="sc">+</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)) </span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># horizontal -&gt; swap x and y axis</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">as_factor</span>(PD0400), <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">x =</span> (..count..)<span class="sc">/</span><span class="fu">sum</span>(..count..) )) <span class="sc">+</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(zpsex, PD0400) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">prop.table</span>(n), <span class="at">.by =</span> zpsex) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_factor</span>(PD0400), <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> pct )) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)) </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># horizontal -&gt; swap x and y axis</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(zpsex, PD0400) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">prop.table</span>(n), <span class="at">.by =</span> zpsex) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">as_factor</span>(PD0400), <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">x =</span> pct )) <span class="sc">+</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -720,24 +727,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>These charts can also be customized with <code>scale_...</code> and labeled in detail using <code>labs()</code>—all options are consistent across different types of visualizations. Additionally, we can label the categories ourselves with <code>breaks =</code> and <code>labels =</code> if we don’t like the default labels:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pend_small <span class="sc">%&gt;%</span> </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">y =</span> PD0400, <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">x =</span> (..count..)<span class="sc">/</span><span class="fu">sum</span>(..count..) )) <span class="sc">+</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"deepskyblue3"</span>,<span class="st">"deepskyblue4"</span>),</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>)) <span class="sc">+</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, </span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Überhaupt nicht"</span>,</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Eher nicht"</span>,</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Eher schon"</span>,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Sehr"</span>)) <span class="sc">+</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Religiösität nach Geschlecht"</span>,</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Relative Häufigkeiten"</span>,</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Quelle: PASS-CF 0619"</span>,</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Religiösität"</span>,</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Relative Häufigkeit"</span>,</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Geschlecht"</span> ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(zpsex, PD0400) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PD0400)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">prop.table</span>(n), <span class="at">.by =</span> zpsex) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> ., <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">as_factor</span>(PD0400), </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">fill =</span> <span class="fu">factor</span>(zpsex),</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">x =</span> pct )) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"deepskyblue3"</span>,<span class="st">"deepskyblue4"</span>),</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>)) <span class="sc">+</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Religiösität nach Geschlecht"</span>,</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Relative Häufigkeiten"</span>,</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Quelle: PASS-CF 0619"</span>,</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Religiösität"</span>,</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Relative Häufigkeit"</span>,</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Geschlecht"</span> ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -752,7 +757,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exercises" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.5</span> Exercises</h2>
-<p>For all tasks, use the first 150 observations (<code>pend_small</code>) to keep the plot simple. Remember to exclude missing values with <code>filter()</code>; you can use the following command:</p>
+<p>To keep the data simple, you can use the following command:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pend <span class="ot">&lt;-</span> </span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>, </span>
@@ -761,10 +766,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="pltue1" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="pltue1"><span class="header-section-number">5.5.1</span> Exercise 1</h3>
+<p>Use this data set:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pend_u41 <span class="ot">&lt;-</span> </span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">13</span>, bilzeit <span class="sc">&gt;</span> <span class="dv">0</span>, PA0445 <span class="sc">&gt;</span> <span class="dv">0</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">13</span>, bilzeit <span class="sc">&gt;</span> <span class="dv">0</span>, PA0445 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zpsex =</span> <span class="fu">factor</span>(zpsex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Create a scatter plot for the variables “Duration of total unemployment experience in months” (<code>PA0445</code>, y-axis) and “Duration of education” (<code>bilzeit</code>, x-axis).</li>
@@ -775,7 +782,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="#ue4_01">Back to top</a></p>
 </section>
 <section id="pltue2" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="pltue2"><span class="header-section-number">5.5.2</span> Exercise 2</h3>
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="pltue2"><span class="header-section-number">5.5.2</span> <em>Exercise 2</em></h3>
+<p>Use this data set:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pend_u42 <span class="ot">&lt;-</span> </span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
@@ -785,12 +793,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Create a boxplot or histogram for the distribution of the number of cigarettes and cigarillos smoked per day (in the last week) (<code>PG1270</code>).</li>
 <li>Customize this graphic so that the distributions for men and women are shown separately.</li>
 <li>How can you also set the colors based on gender? (Remember <code>color =</code> and <code>fill =</code>).</li>
-<li>Change the bar colors using <code>scale_fill_manual</code>, <code>scale_fill_brewer</code>, or <code>scale_fill_viridis</code> (see the sections <a href="#farben">Colors</a>, <a href="#brewer">ColorBrewer</a>, and <a href="#viridis">viridis</a> under “other options”).</li>
+<li>Change the bar colors using <code>scale_color_manual</code>, <code>scale_color_brewer</code>, or <code>scale_color_viridis</code> (see the sections <a href="#farben">Colors</a>, <a href="#brewer">ColorBrewer</a>, and <a href="#viridis">viridis</a> under “other options”).</li>
 </ul>
 <p><a href="#ue4_02">Back to top</a></p>
 </section>
 <section id="pltue3" class="level3" data-number="5.5.3">
 <h3 data-number="5.5.3" class="anchored" data-anchor-id="pltue3"><span class="header-section-number">5.5.3</span> Exercise 3</h3>
+<p>Use this data set:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pend_u43 <span class="ot">&lt;-</span> </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  pend <span class="sc">%&gt;%</span> </span>
@@ -837,7 +846,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 
 </div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -896,7 +905,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>) )</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#005b96"</span>,<span class="st">"#6497b1"</span>),</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -939,7 +948,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span></span>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option=</span><span class="st">"magma"</span>,<span class="at">begin =</span> .<span class="dv">65</span>,<span class="at">end =</span> .<span class="dv">85</span>,</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>) ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -1002,7 +1011,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span></span>
 <span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_met_d</span>(<span class="at">name =</span> <span class="st">"Kandinsky"</span>,</span>
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>) ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-align="center">
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">

@@ -319,10 +319,13 @@ The help page for `{modelsummary}` provides a [list of all options](https://vinc
 
 One option is also `stata`, to replicate results from Stata’s `, robust`. [More here](https://declaredesign.org/r/estimatr/articles/stata-wls-hat.html) about the background and differences.
 
-Based on [the data read above](#gew), we can estimate the following model:
+We can estimate the following model:
 ```{r}
-mod1 <- lm(netges ~ palter + I(palter^2),data=pend) 
+mod1 <- lm(netges ~ palter + I(palter^2),data=pend)
+```
 
+In the `modelsummary()`, we can now display the same model with different adjustments for the standard errors:
+```{r}
 library(modelsummary)
 modelsummary(list(mod1,mod1,mod1,mod1),vcov = c("classical","HC","HC2","stata"),gof_omit = "RM|IC|Log")
 ```

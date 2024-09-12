@@ -231,7 +231,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link active" data-scroll-target="#exercise"><span class="header-section-number">11.1</span> Exercise</a></li>
+  <li><a href="#modify-sf-shape-data.frames" id="toc-modify-sf-shape-data.frames" class="nav-link active" data-scroll-target="#modify-sf-shape-data.frames"><span class="header-section-number">11.1</span> Modify sf shape data.frames</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">11.2</span> Exercise</a></li>
   </ul>
 </nav>
     </div>
@@ -320,12 +321,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(alo_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ags   alq
-1  01 0.030
-2  02 0.078
-3  03 0.046
-4  04 0.031
-5  05 0.087
-6  06 0.054</code></pre>
+1  01 0.052
+2  02 0.033
+3  03 0.094
+4  04 0.060
+5  05 0.032
+6  06 0.071</code></pre>
 </div>
 </div>
 <p>We can now join the <code>alo_df</code> data to the <code>lan17</code> shapefile using a <a href="05_merge_pivot.html#join"><code>left_join()</code></a>.</p>
@@ -345,12 +346,12 @@ Projected CRS: ETRS89 / UTM zone 32N
 # A tibble: 6 × 4
   AGS   GEN                   alq                                       geometry
   &lt;chr&gt; &lt;chr&gt;               &lt;dbl&gt;                             &lt;MULTIPOLYGON [m]&gt;
-1 01    Schleswig-Holstein  0.03  (((464810.7 6100447, 464936.7 6100389, 465073…
-2 02    Hamburg             0.078 (((578219 5954278, 578433.9 5954189, 578557.7…
-3 03    Niedersachsen       0.046 (((479451.1 5971302, 479365.8 5971220, 479213…
-4 04    Bremen              0.031 (((466930.3 5897851, 467015.7 5897733, 467379…
-5 05    Nordrhein-Westfalen 0.087 (((477607.3 5818769, 477708 5818638, 477758.9…
-6 06    Hessen              0.054 (((534242 5721822, 534214.5 5721748, 534149.4…</code></pre>
+1 01    Schleswig-Holstein  0.052 (((464810.7 6100447, 464936.7 6100389, 465073…
+2 02    Hamburg             0.033 (((578219 5954278, 578433.9 5954189, 578557.7…
+3 03    Niedersachsen       0.094 (((479451.1 5971302, 479365.8 5971220, 479213…
+4 04    Bremen              0.06  (((466930.3 5897851, 467015.7 5897733, 467379…
+5 05    Nordrhein-Westfalen 0.032 (((477607.3 5818769, 477708 5818638, 477758.9…
+6 06    Hessen              0.071 (((534242 5721822, 534214.5 5721748, 534149.4…</code></pre>
 </div>
 </div>
 <p>The syntax for the actual plot is then similar to any other <code>ggplot()</code> - with <code>fill =</code> we can specify a fill color and with <code>scale_fill_...</code> we can choose a color palette:</p>
@@ -374,11 +375,34 @@ Projected CRS: ETRS89 / UTM zone 32N
 </div>
 </div>
 </div>
-<section id="exercise" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">11.1</span> Exercise</h2>
+<section id="modify-sf-shape-data.frames" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="modify-sf-shape-data.frames"><span class="header-section-number">11.1</span> Modify sf shape data.frames</h2>
+<p>We can use the familiar <code>{dplyr}</code> functions to amend the sf data. Here’s are rather silly example how to combine Saxony, Saxony-Anhalt and Thuringa into one unit:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lan17_15länder <span class="ot">&lt;-</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  lan17 <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(GF<span class="sc">==</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">newid =</span> <span class="fu">case_when</span>(<span class="fu">as.numeric</span>(AGS)<span class="sc">&gt;</span><span class="dv">13</span> <span class="sc">~</span> <span class="st">"17"</span>,  <span class="cn">TRUE</span> <span class="sc">~</span> AGS)) <span class="sc">%&gt;%</span> <span class="co"># same ID for SN, SA, TH</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">geometry =</span> <span class="fu">st_union</span>(geometry),<span class="at">.by =</span> newid) <span class="co"># summarise -&gt; combine based on newid</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lan17_15länder) <span class="sc">+</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size =</span> .<span class="dv">1</span>, <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.numeric</span>(newid)) )  <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_scico</span>(<span class="at">palette =</span> <span class="st">"oslo"</span>) <span class="sc">+</span> <span class="co"># requires scico package</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15_map_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="exercise"><span class="header-section-number">11.2</span> Exercise</h2>
 <p>Create a map yourself - for the country, district, or municipality level.</p>
 <ul>
-<li>You can find the shapefile for the year 2017 in the course folder under <code>/orig</code> in the quick access.</li>
+<li>You can find the shapefile for the year 2017 in the course folder under <code>/orig</code> in the Quickablage.</li>
 </ul>
 
 
