@@ -1,15 +1,15 @@
-# Weitere Visualisierungen mit `{ggplot2}` {#viz2}
+
+# Creating map Visualizations with `{ggplot2}` {#map}
 
 ```{r mapinit, include=F}
 # http://hbiostat.org/rmsc/
 
-if(Sys.getenv("USERNAME") == "filse" ) .libPaths("D:/R-library4") 
 library(tidyverse)
 library(patchwork)
 library(sf)
 
 mark_color <- "grey25"
-color1x =  "#00519E" # uol farbe
+color1x =  "#00519E" # uol color
 colorhex <- "#FCFCFC" #"#FCF9F0FF"7
 colorhex <- NA #"#FCF9F0FF"7
 
@@ -34,26 +34,25 @@ theme_x <-
 
 ```
 
-Neben den in [Kapitel 4](#viz) vorgestellten klassischen Grafiken gibt es eine ganze Reihe an Erweiterungen, die `{ggplot2}` 
+In addition to the classic graphics presented in [Chapter 5](#viz), there is a whole range of extensions available in `{ggplot2}`.
 
-## Karten ("Choroplethen") {#map}
 
-Für Karten und Arbeiten mit räumlichen Daten steht das Paket `{sf}` zur Verfügung. 
-Das tolle ist: wir können `{sf}`-Daten mit den bekannten  `{tidyverse}` Befehlen bearbeiten. 
-Um eine Karte zu erstellen, benötigen wir ein *shapefile*, welches Informationen zu den darzustellenden Gebieten enthält. 
-Für Deutschland stellt das [Geodatenzentrum des Bundesamts für Kartographie und Geodäsie](http://gdz.bkg.bund.de/) shapefiles für die Gemeinden, Kreise und Länder zur Verfügung.
+For maps and spatial data work, the `{sf}` package is available and allows to plot "Choropleths" (thematic maps) with `{ggplot2}`.
+The great thing is: we can process `{sf}` data with the familiar `{tidyverse}` commands. 
+To create a map, we need a *shapefile* that contains information about the areas to be displayed. 
+For Germany, the [Geodata Center of the Federal Agency for Cartography and Geodesy](http://gdz.bkg.bund.de/) provides shapefiles for municipalities, districts, and states.
 
 ::: {.callout-tip}
-## [Hier](https://daten.gdz.bkg.bund.de/produkte/vg/vg250_ebenen_0101/) finden sich die shapefiles der verschiedenen Jahre.
+## [Here](https://daten.gdz.bkg.bund.de/produkte/vg/vg250_ebenen_0101/) you can find shapefiles for different years.
 
-Meist liegen Ergebnisse oder Daten, die wir darstellen möchten auf Basis eines bestimmten Gebietsstands vor (durch Gebietsreformen gibt es kontinuierliche Änderungen sowohl der Gebiete als auch der Kennziffern).
-Um ein aufwändiges record linkage zu vermeinden, ist es hilfreich das shape file für das entsprechende Jahr zu verwenden. 
-[Auf dieser Seite](https://daten.gdz.bkg.bund.de/produkte/vg/vg250_ebenen_0101/) finden sich auch vergangene Gebietsstände.
-Die Dateien mit dem Namensschema **`vg250_01-01.utm32s.shape.ebenen.zip`** enthalten die benötigten Infos, wie wir sie im folgenden verwenden.
+Usually, the results or data we want to display are based on a specific area status (due to territorial reforms, there are continuous changes in both areas and identifiers).
+To avoid complex record linkage, it is helpful to use the shapefile for the relevant year. 
+[On this page](https://daten.gdz.bkg.bund.de/produkte/vg/vg250_ebenen_0101/) you can also find past territorial statuses.
+The files with the name scheme **`vg250_01-01.utm32s.shape.ebenen.zip`** contain the necessary information that we will use in the following.
 
 :::
 
-Diese shapefiles können wir dann auf Basis der AGS ([Amtlicher Gemeindeschlüssel](https://de.wikipedia.org/wiki/Amtlicher_Gemeindeschl%C3%BCssel)) mit Daten verbinden und dann als Karte darstellen:
+We can then join these shapefiles with data based on the AGS ([Official Municipality Key](https://de.wikipedia.org/wiki/Amtlicher_Gemeindeschl%C3%BCssel)) and display them as a map:
 
 ```{r map1}
 #| echo: false
@@ -61,48 +60,50 @@ Diese shapefiles können wir dann auf Basis der AGS ([Amtlicher Gemeindeschlüss
 #| fig-height: 4
 dpath17 <- "D:/Datenspeicher/regstat/shapefiles/vg250_2017.utm32s.shape.ebenen/vg250_ebenen"
 kreis <- sf::read_sf(dpath17, layer="VG250_KRS")
+lan17 <- sf::read_sf(dpath17, layer="VG250_LAN")
 
 ggplot(kreis) + 
     geom_sf(size = .1,aes(fill = as.numeric(AGS)))  +
     scale_fill_viridis_c(option = "mako", name = "AGS") +
-    labs(title = "Landkreise nach Gebietsstand 2017") +
+    labs(title = "Districts by Area Status 2017") +
     theme_minimal()
 ```
 
-Um ein shapefile zu laden, installieren wir zunächst `{sf}` und laden es dann mit `library()`. 
-Das eigentliche Laden leistet dann der Befehl `read_sf()`, wobei wir neben dem Dateipfad in den entpackten Ordner mit den shapefiles zusätzlich das `layer`, also die Ebene angeben müssen. 
-In den shapefiles des BKG gibt es folgende Layer:
+To load a shapefile, we first install `{sf}` and then load it with `library()`. 
+The actual loading is done by the `read_sf()` command, where we need to specify both the file path in the unpacked folder with the shapefiles and the `layer`, i.e., the level. 
+In the BKG shapefiles, there are the following layers:
 
-+ `VG250_LAN`: Bundesländer (2-stellige AGS)
-+ `VG250_KRS`: Kreise und kreisfreie Städte (5-stellige AGS)
-+ `VG250_GEM`: Städte und Gemeinden (8-stellige AGS)
++ `VG250_LAN`: Federal States (2-digit AGS)
++ `VG250_KRS`: Districts and Independent Cities (5-digit AGS)
++ `VG250_GEM`: Cities and Municipalities (8-digit AGS)
 
-Wenn wir also die Bundesländer laden möchten gehen wir wie folgt vor:
+So, if we want to load the federal states, we proceed as follows:
 ```{r mapload}
-lan17 <- sf::read_sf("D:/Datenspeicher/regstat/shapefiles/vg250_2017.utm32s.shape.ebenen/vg250_ebenen",
+#| eval: false
+lan17 <- sf::read_sf("./orig/vg250_2017.utm32s.shape.ebenen/vg250_ebenen",
                      layer="VG250_LAN")
 ```
 
-Das Objekt `lan17` können wir nun für einen `ggplot()`-Befehl verwenden.
-`lan17` enthält außerdem die Seegebiete, diese können wir mittels eines `filter()`-Befehls auf die Landgebiete einschränken (`GF` = 4):
+The `lan17` object can now be used for a `ggplot()` command.
+`lan17` also contains the sea areas, which we can filter to land areas only using a `filter()` command (`GF` = 4):
 ```{r mapplot}
 #| layout-ncol: 2
 #| fig-height: 6
 #| fig-width: 6
 ggplot(lan17) + 
     geom_sf(size = .1)  +
-    labs(title = "Bundesländer nach Gebietsstand 2017") +
-    theme_minimal()
+    labs(title = "Federal States by Area Status 2017") +
+    theme_void()
 
 ggplot(lan17 %>% filter(GF==4)) + 
     geom_sf(size = .1)  +
-    labs(title = "Bundesländer nach Gebietsstand 2017") +
-    theme_minimal()
+    labs(title = "Federal States by Area Status 2017") +
+    theme_void()
 ```
 
 
-Möchten wir nun die Bundesländer bspw. nach der Arbeitslosenquote einfärben, müssen wir diese an die Daten heranspielen. 
-Der Einfachheit halber simuliere ich hier die Werte:
+If we now want to color the federal states, for example, by the unemployment rate, we need to incorporate this data. 
+For simplicity, I will simulate the values here:
 
 ```{r}
 alo_df <- 
@@ -139,7 +140,7 @@ stringi::stri_trans_general(c("äöüø"),"latin-ascii")
 data.frame()
 ```
 
-Jetzt können wir den `alo_df` an das `lan17` shapefile heranspielen mit Hilfe eines [`left_join()`](#join).
+We can now join the `alo_df` data to the `lan17` shapefile using a [`left_join()`](#join).
 ```{r}
 #| eval: false
 lan17 %>% filter(GF==4) %>% left_join(alo_df,by = join_by("AGS"=="ags"))
@@ -151,24 +152,26 @@ lan17 %>% filter(GF==4) %>% left_join(alo_df,by = join_by("AGS"=="ags")) %>%
   head()
 ```
 
-Die Syntax für den eigentlichen Plot ist dann wieder wie für jeden anderen `ggplot()` auch - mit `fill =` können wir eine Flächenfarbe angeben und mit `scale_fill_...` eine Farbpalette auswählen:
+The syntax for the actual plot is then similar to any other `ggplot()` - with `fill =` we can specify a fill color and with `scale_fill_...` we can choose a color palette:
 ```{r mapplot2}
 #| fig-height: 4
 #| fig-width: 5
 library(scico)
-lan17 %>% filter(GF==4) %>% left_join(alo_df,by = join_by("AGS"=="ags")) %>% 
+lan17 %>% 
+  filter(GF==4) %>% 
+  left_join(alo_df,by = join_by("AGS"=="ags")) %>% 
   ggplot() + 
       geom_sf(size = .1, aes(fill = alq))  +
-      labs(title = "Arbeitslosenquote für Bundesländer",
-           subtitle = "(keine echten Daten)",
-           fill = "Arbeitslosen-\nquote") +
-      scale_fill_scico(palette = "oslo") + # setzt scico Paket voraus
-      theme_minimal()
+      labs(title = "Unemployment Rate for Federal States",
+           subtitle = "(not real data)",
+           fill = "Unemployment\nrate") +
+      scale_fill_scico(palette = "oslo") + # requires scico package
+      theme_void()
 ```
 
 
-## Übung
+## Exercise
 
-Erstellen Sie selbst eine Karte - für die Länder-, Kreis- oder Gemeindeebene.
+Create a map yourself - for the country, district, or municipality level.
 
-+ Das Shapefile für das Jahr 2017 finden Sie im Kursordner unter `/orig` in der Quickablage.
++ You can find the shapefile for the year 2017 in the course folder under `/orig` in the quick access.

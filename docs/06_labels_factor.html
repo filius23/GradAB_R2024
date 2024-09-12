@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Labels &amp; factors – GradAB R Intro 2024</title>
+<title>10&nbsp; Labels &amp; factors – GradAB R Intro 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07_viz_translated.html" rel="next">
+<link href="./15_map.html" rel="next">
 <link href="./05_merge_pivot.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_labels_factor.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_labels_factor.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,32 +179,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./07_viz_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression Models: Extensions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regression Models: Extensions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_raw_to_table.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From data to table &amp; graph</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling II: Merging &amp; reshaping</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15_map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating map Visualizations with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -223,14 +235,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#labels-from-other-programs-in-r" id="toc-labels-from-other-programs-in-r" class="nav-link active" data-scroll-target="#labels-from-other-programs-in-r"><span class="header-section-number">6.1</span> Labels from Other Programs in R</a></li>
-  <li><a href="#creating-or-editing-factor-manually" id="toc-creating-or-editing-factor-manually" class="nav-link" data-scroll-target="#creating-or-editing-factor-manually"><span class="header-section-number">6.2</span> Creating or editing <code>factor</code> manually</a></li>
-  <li><a href="#creating-label-data.frame-and-merging-with-data" id="toc-creating-label-data.frame-and-merging-with-data" class="nav-link" data-scroll-target="#creating-label-data.frame-and-merging-with-data"><span class="header-section-number">6.3</span> Creating label <code>data.frame</code> and merging with data</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">6.4</span> Exercise</a></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">6.5</span> Appendix</a>
+  <li><a href="#labels-from-other-programs-in-r" id="toc-labels-from-other-programs-in-r" class="nav-link active" data-scroll-target="#labels-from-other-programs-in-r"><span class="header-section-number">10.1</span> Labels from Other Programs in R</a></li>
+  <li><a href="#creating-or-editing-factor-manually" id="toc-creating-or-editing-factor-manually" class="nav-link" data-scroll-target="#creating-or-editing-factor-manually"><span class="header-section-number">10.2</span> Creating or editing <code>factor</code> manually</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">10.3</span> Exercise</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">10.4</span> Appendix</a>
   <ul class="collapse">
-  <li><a href="#remove-labels-with-zap_...-from-haven" id="toc-remove-labels-with-zap_...-from-haven" class="nav-link" data-scroll-target="#remove-labels-with-zap_...-from-haven"><span class="header-section-number">6.5.1</span> Remove labels with <code>zap_...</code> from <code>{haven}</code></a></li>
-  <li><a href="#creating-labels-in-r-and-exporting-to-stata" id="toc-creating-labels-in-r-and-exporting-to-stata" class="nav-link" data-scroll-target="#creating-labels-in-r-and-exporting-to-stata"><span class="header-section-number">6.5.2</span> Creating labels in R and exporting to Stata</a></li>
+  <li><a href="#remove-labels-with-zap_...-from-haven" id="toc-remove-labels-with-zap_...-from-haven" class="nav-link" data-scroll-target="#remove-labels-with-zap_...-from-haven"><span class="header-section-number">10.4.1</span> Remove labels with <code>zap_...</code> from <code>{haven}</code></a></li>
+  <li><a href="#creating-labels-in-r-and-exporting-to-stata" id="toc-creating-labels-in-r-and-exporting-to-stata" class="nav-link" data-scroll-target="#creating-labels-in-r-and-exporting-to-stata"><span class="header-section-number">10.4.2</span> Creating labels in R and exporting to Stata</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -240,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="lab_fct" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></h1>
+<h1 class="title"><span id="lab_fct" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></h1>
 </div>
 
 
@@ -264,8 +275,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>,<span class="st">"welle"</span>, <span class="st">"zpsex"</span>, <span class="st">"PSM0100"</span>,<span class="st">"azges1"</span>,<span class="st">"palter"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">==</span> <span class="dv">8</span>, palter <span class="sc">&gt;</span> <span class="dv">0</span>,azges1 <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="labels-from-other-programs-in-r" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="labels-from-other-programs-in-r"><span class="header-section-number">6.1</span> Labels from Other Programs in R</h2>
+<section id="labels-from-other-programs-in-r" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="labels-from-other-programs-in-r"><span class="header-section-number">10.1</span> Labels from Other Programs in R</h2>
 <p>In many software packages like Stata or SPSS, labels are often retained through various operations and then displayed automatically. This is not the case in R. Instead, in R, we can assign labels using the <code>factor</code> variable type. This approach might seem unusual for those who have worked extensively with Stata or SPSS, but it is quite useful in practice if you get accustomed to the workflow.</p>
 <p>Generally, you <em>can</em> use value labels from other software packages in are. For example, when we create a count summary with <code>count()</code>, the labels from the <code>.dta</code>-file are displayed:</p>
 <div class="cell">
@@ -338,8 +349,8 @@ How can we use the <code>attributes()</code>-labels as <code>factor</code> to sa
 </div>
 </div>
 </section>
-<section id="creating-or-editing-factor-manually" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="creating-or-editing-factor-manually"><span class="header-section-number">6.2</span> Creating or editing <code>factor</code> manually</h2>
+<section id="creating-or-editing-factor-manually" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="creating-or-editing-factor-manually"><span class="header-section-number">10.2</span> Creating or editing <code>factor</code> manually</h2>
 <p>Alternatively, we can also label with <code>factor()</code> using the <code>levels</code> and <code>labels</code> options ourselves. The <code>labels</code> are assigned in order to the numbers from <code>levels</code>. Additionally, all unspecified <code>levels</code> automatically become <code>NA</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pend_kap5<span class="sc">$</span>PSM0100_fct2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(pend_kap5<span class="sc">$</span>PSM0100,</span>
@@ -394,111 +405,17 @@ How can we use the <code>attributes()</code>-labels as <code>factor</code> to sa
 </div>
 <p>More <code>fct_....()</code> functions from <code>{forcats}</code> can be found in this <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf">Cheatsheet</a>.</p>
 </section>
-<section id="creating-label-data.frame-and-merging-with-data" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="creating-label-data.frame-and-merging-with-data"><span class="header-section-number">6.3</span> Creating label <code>data.frame</code> and merging with data</h2>
-<p>An alternative approach involves creating a small label <code>data.frame</code> and <code>left_join()</code> (more on <code>left_join()</code> later.)</p>
+<section id="exercise" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="exercise"><span class="header-section-number">10.3</span> Exercise</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tab2 <span class="ot">&lt;-</span> pend_kap5 <span class="sc">%&gt;%</span> <span class="fu">count</span>(PSM0100)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tab2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  PSM0100                            n
-  &lt;dbl+lbl&gt;                      &lt;int&gt;
-1 -5 [Does not use the internet]    28
-2  1 [Yes]                         318
-3  2 [No]                          337</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lab_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">PSM0100=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>lab_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  PSM0100
-1       1
-2       2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>lab_df<span class="sc">$</span>PD0400_lab <span class="ot">&lt;-</span> <span class="fu">factor</span>(lab_df<span class="sc">$</span>PSM0100,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Uses social networks"</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Does not use social networks"</span>))</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>lab_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  PSM0100                   PD0400_lab
-1       1         Uses social networks
-2       2 Does not use social networks</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tab2 <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(lab_df,<span class="at">by =</span> <span class="st">"PSM0100"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  PSM0100                            n PD0400_lab                  
-  &lt;dbl+lbl&gt;                      &lt;int&gt; &lt;fct&gt;                       
-1 -5 [Does not use the internet]    28 &lt;NA&gt;                        
-2  1 [Yes]                         318 Uses social networks        
-3  2 [No]                          337 Does not use social networks</code></pre>
-</div>
-</div>
-<p>…or if you have multiple variables, create an Excel sheet and merge it:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>  pend_kap5 <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(zpsex,PSM0100) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>() <span class="sc">%&gt;%</span>  </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(name,value) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  xlsx<span class="sc">::</span><span class="fu">write.xlsx</span>(<span class="at">file =</span> <span class="st">"./data/label.xlsx"</span>,<span class="at">row.names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `zpsex` and `PSM0100` have conflicting value labels.
-ℹ Labels for these values will be taken from `zpsex`.
-✖ Values: 1 and 2</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in if (is.na(value)) {: Bedingung hat Länge &gt; 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>lab_df2 <span class="ot">&lt;-</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  xlsx<span class="sc">::</span><span class="fu">read.xlsx</span>(<span class="at">file =</span> <span class="st">"./data/label_read.xlsx"</span>,<span class="at">sheetIndex =</span> <span class="dv">1</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>pend_kap5 <span class="sc">%&gt;%</span> </span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(zpsex,PSM0100) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-  zpsex      PSM0100                            n
-  &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt;                      &lt;int&gt;
-1 1 [Male]   -5 [Does not use the internet]    13
-2 1 [Male]    1 [Yes]                         150
-3 1 [Male]    2 [No]                          161
-4 2 [Female] -5 [Does not use the internet]    15
-5 2 [Female]  1 [Yes]                         168
-6 2 [Female]  2 [No]                          176</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>lab_df2 <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 3
-  label                     PSM0100 zpsex
-  &lt;chr&gt;                     &lt;chr&gt;   &lt;chr&gt;
-1 &lt;NA&gt;                      -5      &lt;NA&gt; 
-2 Uses Social Media         1       &lt;NA&gt; 
-3 Does not use social media 2       &lt;NA&gt; 
-4 Men                       &lt;NA&gt;    1    
-5 Women                     &lt;NA&gt;    2    </code></pre>
-</div>
-</div>
-</section>
-<section id="exercise" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="exercise"><span class="header-section-number">6.4</span> Exercise</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pend_ue5 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>,<span class="st">"welle"</span>,<span class="st">"PD0400"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PD0400<span class="sc">&gt;</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pend_ue5 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>,<span class="st">"welle"</span>,<span class="st">"PD0400"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PD0400<span class="sc">&gt;</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Edit the <em>value labels</em> of <code>PD0400</code>: Religiousness, self-rating</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-6a225c58{}.cl-6a12f92a{font-family:'Red Hat Display';font-size:8pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(64, 64, 64, 1.00);background-color:transparent;}.cl-6a12f948{font-family:'Red Hat Display';font-size:8pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(64, 64, 64, 1.00);background-color:transparent;}.cl-6a1a0436{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-6a1a0440{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-6a1a044a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:5pt;padding-right:15pt;line-height: 1;background-color:transparent;}.cl-6a1a2bdc{width:0.384in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6a1a2be6{width:1.434in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6a1a2bf0{width:0.384in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6a1a2bf1{width:1.434in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6a1a2bfa{width:0.384in;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6a1a2bfb{width:1.434in;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-6a225c58"><thead><tr style="overflow-wrap:break-word;"><th class="cl-6a1a2bdc"><p class="cl-6a1a0436"><span class="cl-6a12f92a">value</span></p></th><th class="cl-6a1a2be6"><p class="cl-6a1a0436"><span class="cl-6a12f92a">label</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-6a1a2bf0"><p class="cl-6a1a0440"><span class="cl-6a12f948">1</span></p></td><td class="cl-6a1a2bf1"><p class="cl-6a1a044a"><span class="cl-6a12f948">Not at all religious</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-6a1a2bfa"><p class="cl-6a1a0440"><span class="cl-6a12f948">2</span></p></td><td class="cl-6a1a2bfb"><p class="cl-6a1a044a"><span class="cl-6a12f948">Rather not religious</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-6a1a2bf0"><p class="cl-6a1a0440"><span class="cl-6a12f948">3</span></p></td><td class="cl-6a1a2bf1"><p class="cl-6a1a044a"><span class="cl-6a12f948">Rather religious</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-6a1a2bfa"><p class="cl-6a1a0440"><span class="cl-6a12f948">4</span></p></td><td class="cl-6a1a2bfb"><p class="cl-6a1a044a"><span class="cl-6a12f948">Very religious</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-f27f6eae{}.cl-f274ac94{font-family:'Red Hat Display';font-size:8pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(64, 64, 64, 1.00);background-color:transparent;}.cl-f274aca8{font-family:'Red Hat Display';font-size:8pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(64, 64, 64, 1.00);background-color:transparent;}.cl-f27896ec{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-f2789700{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-f2789701{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:5pt;padding-right:15pt;line-height: 1;background-color:transparent;}.cl-f278b820{width:0.384in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f278b82a{width:1.434in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f278b82b{width:0.384in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f278b82c{width:1.434in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f278b834{width:0.384in;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f278b835{width:1.434in;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-f27f6eae"><thead><tr style="overflow-wrap:break-word;"><th class="cl-f278b820"><p class="cl-f27896ec"><span class="cl-f274ac94">value</span></p></th><th class="cl-f278b82a"><p class="cl-f27896ec"><span class="cl-f274ac94">label</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f278b82b"><p class="cl-f2789700"><span class="cl-f274aca8">1</span></p></td><td class="cl-f278b82c"><p class="cl-f2789701"><span class="cl-f274aca8">Not at all religious</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f278b834"><p class="cl-f2789700"><span class="cl-f274aca8">2</span></p></td><td class="cl-f278b835"><p class="cl-f2789701"><span class="cl-f274aca8">Rather not religious</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f278b82b"><p class="cl-f2789700"><span class="cl-f274aca8">3</span></p></td><td class="cl-f278b82c"><p class="cl-f2789701"><span class="cl-f274aca8">Rather religious</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f278b834"><p class="cl-f2789700"><span class="cl-f274aca8">4</span></p></td><td class="cl-f278b835"><p class="cl-f2789701"><span class="cl-f274aca8">Very religious</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 <ul>
@@ -508,13 +425,13 @@ How can we use the <code>attributes()</code>-labels as <code>factor</code> to sa
 </ul>
 <p><strong>Bonus exercise:</strong> Use the labeled variable for a bar chart.</p>
 </section>
-<section id="appendix" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="appendix"><span class="header-section-number">6.5</span> Appendix</h2>
-<section id="remove-labels-with-zap_...-from-haven" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="remove-labels-with-zap_...-from-haven"><span class="header-section-number">6.5.1</span> Remove labels with <code>zap_...</code> from <code>{haven}</code></h3>
+<section id="appendix" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="appendix"><span class="header-section-number">10.4</span> Appendix</h2>
+<section id="remove-labels-with-zap_...-from-haven" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="remove-labels-with-zap_...-from-haven"><span class="header-section-number">10.4.1</span> Remove labels with <code>zap_...</code> from <code>{haven}</code></h3>
 <p>The label <code>attributes()</code> often cause problems in further processing. With <code>haven::zap_labels()</code>, we can remove value labels from a dataset, and with <code>haven::zap_label()</code>, we can remove variable labels.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pend_kap5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pend_kap5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 683 × 6
           pnr welle             zpsex      PSM0100                 azges1 palter
@@ -531,8 +448,8 @@ How can we use the <code>attributes()</code>-labels as <code>factor</code> to sa
 10 1000053101 8 [Wave 8 (2014)] 1 [Male]    1 [Yes]                27     47    
 # ℹ 673 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pend_kap5 <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">zap_labels</span>() <span class="co"># remove value labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pend_kap5 <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">zap_labels</span>() <span class="co"># remove value labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 683 × 6
           pnr welle zpsex PSM0100 azges1 palter
@@ -551,57 +468,56 @@ How can we use the <code>attributes()</code>-labels as <code>factor</code> to sa
 </div>
 </div>
 </section>
-<section id="creating-labels-in-r-and-exporting-to-stata" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="creating-labels-in-r-and-exporting-to-stata"><span class="header-section-number">6.5.2</span> Creating labels in R and exporting to Stata</h3>
+<section id="creating-labels-in-r-and-exporting-to-stata" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="creating-labels-in-r-and-exporting-to-stata"><span class="header-section-number">10.4.2</span> Creating labels in R and exporting to Stata</h3>
 <p>If we want to label a dataset for Stata, for example, <code>{labelled}</code> comes in handy again:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in library(labelled): es gibt kein Paket namens 'labelled'</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fdz_install</span>(<span class="st">"labelled"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>pend_kap5<span class="sc">$</span>zpsex_num2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(pend_kap5<span class="sc">$</span>zpsex)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pend_kap5<span class="sc">$</span>zpsex_num2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pend_kap5<span class="sc">$</span>zpsex_num2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(pend_kap5<span class="sc">$</span>zpsex)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pend_kap5<span class="sc">$</span>zpsex_num2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(pend_kap5<span class="sc">$</span>zpsex_num2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Men"</span><span class="ot">=</span><span class="dv">1</span>,<span class="st">"Women"</span><span class="ot">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in val_labels(pend_kap5$zpsex_num2) &lt;- c(Men = 1, Women = 2): konnte Funktion "val_labels&lt;-" nicht finden</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pend_kap5<span class="sc">$</span>zpsex_num2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(pend_kap5<span class="sc">$</span>zpsex_num2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Männer Testtesttest"</span><span class="ot">=</span><span class="dv">1</span>,<span class="st">"Frauen"</span><span class="ot">=</span><span class="dv">2</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pend_kap5<span class="sc">$</span>zpsex_num2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
+<pre><code>$labels
+Männer Testtesttest              Frauen 
+                  1                   2 
+
+$class
+[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pend_kap5 <span class="sc">%&gt;%</span> <span class="fu">count</span>(zpsex_num2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pend_kap5 <span class="sc">%&gt;%</span> <span class="fu">count</span>(zpsex_num2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
-  zpsex_num2     n
-       &lt;dbl&gt; &lt;int&gt;
-1          1   324
-2          2   359</code></pre>
+  zpsex_num2                  n
+  &lt;dbl+lbl&gt;               &lt;int&gt;
+1 1 [Männer Testtesttest]   324
+2 2 [Frauen]                359</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>pend_kap5 <span class="sc">%&gt;%</span> </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(zpsex_num2) <span class="sc">%&gt;%</span> </span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">write_dta</span>(.,<span class="at">path =</span> <span class="st">"./data/pend_kap5.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pend_kap5 <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(zpsex_num2) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">write_dta</span>(.,<span class="at">path =</span> <span class="st">"./data/pend_kap5.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>…in <em>Stata</em>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"./data/pend_kap5.dta"</span> </span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> zpsex_num2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"./data/pend_kap5.dta"</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> zpsex_num2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(PASS V3, 2006-2019, 21 Jul 2021, PENDDAT)
-
-
- zpsex_num2 |      Freq.     Percent        Cum.
-------------+-----------------------------------
-     Männer |        324       47.44       47.44
-     Frauen |        359       52.56      100.00
-------------+-----------------------------------
-      Total |        683      100.00</code></pre>
+<pre><code>         zpsex_num2 |      Freq.     Percent        Cum.
+--------------------+-----------------------------------
+Männer Testtesttest |        324       47.44       47.44
+             Frauen |        359       52.56      100.00
+--------------------+-----------------------------------
+              Total |        683      100.00</code></pre>
 </div>
 </div>
 <p><a href="https://joseph.larmarange.net/intro_labelled.html">More on <code>labels</code> in <code>{labelled}</code></a>.</p>
@@ -1039,13 +955,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./05_merge_pivot.html" class="pagination-link" aria-label="Merging &amp; reshaping">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span>
+      <a href="./05_merge_pivot.html" class="pagination-link" aria-label="Data Wrangling II: Merging &amp; reshaping">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling II: Merging &amp; reshaping</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07_viz_translated.html" class="pagination-link" aria-label="Visualization with `{ggplot2}`">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./15_map.html" class="pagination-link" aria-label="Creating map Visualizations with `{ggplot2}`">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating map Visualizations with <code>{ggplot2}</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

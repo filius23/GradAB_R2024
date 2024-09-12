@@ -227,18 +227,18 @@ pend %>%
   ) %>% arrange(welle)
 ```
 
-You can also filter for specific waves if needed:
+Given that the resulting 'table' is a data.frame, we can also filter for specific waves if needed:
 
 ```{r}
 pend %>% 
-  filter(welle %in% c(1, 10)) %>% 
   summarise(
     Minimum = min(netges, na.rm = TRUE),
     Median = median(netges, na.rm = TRUE),
     Mean = mean(netges, na.rm = TRUE),
     Maximum = max(netges, na.rm = TRUE),
     .by = welle
-  )
+  ) %>% 
+  filter(welle %in% c(1, 10)) 
 ```
 
 These methods allow for thorough analysis of both categorical and numerical data in R.

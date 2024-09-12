@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Merging &amp; reshaping – GradAB R Intro 2024</title>
+<title>9&nbsp; Data Wrangling II: Merging &amp; reshaping – GradAB R Intro 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./06_labels_factor.html" rel="next">
-<link href="./04_data_wrangle.html" rel="prev">
+<link href="./10_raw_to_table.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_merge_pivot.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_merge_pivot.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling II: Merging &amp; reshaping</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -175,32 +175,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./07_viz_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression Models: Extensions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regression Models: Extensions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_raw_to_table.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From data to table &amp; graph</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling II: Merging &amp; reshaping</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15_map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating map Visualizations with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -219,20 +231,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#join" id="toc-join" class="nav-link active" data-scroll-target="#join"><span class="header-section-number">5.1</span> Joining/merging data sets</a>
+  <li><a href="#join" id="toc-join" class="nav-link active" data-scroll-target="#join"><span class="header-section-number">9.1</span> Joining/merging data sets</a>
   <ul class="collapse">
-  <li><a href="#uejoin" id="toc-uejoin" class="nav-link" data-scroll-target="#uejoin"><span class="header-section-number">5.1.1</span> Exercise</a></li>
+  <li><a href="#uejoin" id="toc-uejoin" class="nav-link" data-scroll-target="#uejoin"><span class="header-section-number">9.1.1</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#reshaping-data-pivot_longer-pivot_wider" id="toc-reshaping-data-pivot_longer-pivot_wider" class="nav-link" data-scroll-target="#reshaping-data-pivot_longer-pivot_wider"><span class="header-section-number">5.2</span> Reshaping Data: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></a>
+  <li><a href="#reshaping-data-pivot_longer-pivot_wider" id="toc-reshaping-data-pivot_longer-pivot_wider" class="nav-link" data-scroll-target="#reshaping-data-pivot_longer-pivot_wider"><span class="header-section-number">9.2</span> Reshaping Data: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></a>
   <ul class="collapse">
-  <li><a href="#wide-to-long" id="toc-wide-to-long" class="nav-link" data-scroll-target="#wide-to-long"><span class="header-section-number">5.2.1</span> Wide to Long</a></li>
-  <li><a href="#long-to-wide" id="toc-long-to-wide" class="nav-link" data-scroll-target="#long-to-wide"><span class="header-section-number">5.2.2</span> Long to Wide</a></li>
-  <li><a href="#uepivot" id="toc-uepivot" class="nav-link" data-scroll-target="#uepivot"><span class="header-section-number">5.2.3</span> Exercise</a></li>
+  <li><a href="#wide-to-long" id="toc-wide-to-long" class="nav-link" data-scroll-target="#wide-to-long"><span class="header-section-number">9.2.1</span> Wide to Long</a></li>
+  <li><a href="#long-to-wide" id="toc-long-to-wide" class="nav-link" data-scroll-target="#long-to-wide"><span class="header-section-number">9.2.2</span> Long to Wide</a></li>
+  <li><a href="#uepivot" id="toc-uepivot" class="nav-link" data-scroll-target="#uepivot"><span class="header-section-number">9.2.3</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.3</span> Exercises</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">9.3</span> Exercises</a>
   <ul class="collapse">
-  <li><a href="#join_ue" id="toc-join_ue" class="nav-link" data-scroll-target="#join_ue"><span class="header-section-number">5.3.1</span> Exercise 1: Joining</a></li>
-  <li><a href="#pivot_ue" id="toc-pivot_ue" class="nav-link" data-scroll-target="#pivot_ue"><span class="header-section-number">5.3.2</span> Exercise 2: Reshaping</a></li>
+  <li><a href="#join_ue" id="toc-join_ue" class="nav-link" data-scroll-target="#join_ue"><span class="header-section-number">9.3.1</span> Exercise 1: Joining</a></li>
+  <li><a href="#pivot_ue" id="toc-pivot_ue" class="nav-link" data-scroll-target="#pivot_ue"><span class="header-section-number">9.3.2</span> Exercise 2: Reshaping</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -242,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="wrang3" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></h1>
+<h1 class="title"><span id="wrang3" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling II: Merging &amp; reshaping</span></span></h1>
 </div>
 
 
@@ -259,8 +271,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="join" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="join"><span class="header-section-number">5.1</span> Joining/merging data sets</h2>
+<section id="join" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="join"><span class="header-section-number">9.1</span> Joining/merging data sets</h2>
 <p>A mutating join allows you to combine variables from two data.frames. It first matches observations by their keys, then copies across variables from one table to the other.<br>
 <a href="http://r4ds.had.co.nz/relational-data.html#mutating-joins">R for Data Science: Mutating joins</a></p>
 <p>A quick illustration:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
@@ -274,7 +286,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <!-- <img src="pic/static/png/original-dfs.png" width="480px" /> -->
-<p><img src="pic/inner-join.gif" class="img-fluid" alt="inner_join"> <img src="pic/left-join-extra.gif" class="img-fluid" alt="left_join"> <img src="pic/full-join.gif" class="img-fluid" alt="full_join"></p>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pic/inner-join.gif" class="img-fluid figure-img" width="200"></p>
+<figcaption>inner_join</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pic/left-join-extra.gif" class="img-fluid figure-img" width="200"></p>
+<figcaption>left_join</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pic/full-join.gif" class="img-fluid figure-img" width="200"></p>
+<figcaption>full_join</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<!-- join variants -->
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1
+</figcaption>
+</figure>
+</div>
 <!-- ![](pic/anti-join.gif) -->
 <!-- ![](pic/right-join.gif) -->
 <p>There are also <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html"><code>right_join()</code></a> and <a href="https://dplyr.tidyverse.org/reference/filter-joins.html"><code>anti_join()</code></a>. For a more in-depth introduction, the chapter on <a href="https://r4ds.had.co.nz/relational-data.html#relational-data">Relational Data</a> in <a href="https://r4ds.had.co.nz/">R for Data Science</a> is highly recommended.</p>
@@ -295,10 +346,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ids_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula
-#&gt; 1   5    2
-#&gt; 2   6    1
-#&gt; 3   8   14
-#&gt; 4   4   15</code></pre>
+#&gt; 1   8    2
+#&gt; 2   4    1
+#&gt; 3   2   14
+#&gt; 4   1   15</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>alo_bula</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -315,10 +366,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ids_df <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(alo_bula,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Bula"</span><span class="ot">=</span><span class="st">"bundesland"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula Werte
-#&gt; 1   5    2     m
-#&gt; 2   6    1     g
-#&gt; 3   8   14  &lt;NA&gt;
-#&gt; 4   4   15  &lt;NA&gt;</code></pre>
+#&gt; 1   8    2     m
+#&gt; 2   4    1     g
+#&gt; 3   2   14  &lt;NA&gt;
+#&gt; 4   1   15  &lt;NA&gt;</code></pre>
 </div>
 </div>
 <p>A quick check for the matching cases can be done using:</p>
@@ -335,8 +386,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ids_df <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(alo_bula,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Bula"</span><span class="ot">=</span><span class="st">"bundesland"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   pnr Bula
-#&gt; 1   8   14
-#&gt; 2   4   15</code></pre>
+#&gt; 1   2   14
+#&gt; 2   1   15</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alo_bula <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(ids_df,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"bundesland"</span><span class="ot">=</span><span class="st">"Bula"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -349,14 +400,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 6          8     h</code></pre>
 </div>
 </div>
-<section id="uejoin" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="uejoin"><span class="header-section-number">5.1.1</span> <a href="#join_ue">Exercise</a></h3>
+<section id="uejoin" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="uejoin"><span class="header-section-number">9.1.1</span> <a href="#join_ue">Exercise</a></h3>
 </section>
 </section>
-<section id="reshaping-data-pivot_longer-pivot_wider" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="reshaping-data-pivot_longer-pivot_wider"><span class="header-section-number">5.2</span> Reshaping Data: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></h2>
-<section id="wide-to-long" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="wide-to-long"><span class="header-section-number">5.2.1</span> Wide to Long</h3>
+<section id="reshaping-data-pivot_longer-pivot_wider" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="reshaping-data-pivot_longer-pivot_wider"><span class="header-section-number">9.2</span> Reshaping Data: <code>pivot_longer()</code> &amp; <code>pivot_wider()</code></h2>
+<section id="wide-to-long" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="wide-to-long"><span class="header-section-number">9.2.1</span> Wide to Long</h3>
 <p>Reshaping data from wide to long format is useful when you want to store multiple observations per row. For example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bsp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">bula =</span> <span class="fu">c</span>(<span class="st">"NRW"</span>, <span class="st">"NDS"</span>), <span class="at">alo2018 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">alo2017 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
@@ -394,8 +445,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="long-to-wide" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="long-to-wide"><span class="header-section-number">5.2.2</span> Long to Wide</h3>
+<section id="long-to-wide" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="long-to-wide"><span class="header-section-number">9.2.2</span> Long to Wide</h3>
 <p>To convert from long format back to wide:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bsp_df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">land =</span> <span class="fu">c</span>(<span class="st">"NRW"</span>, <span class="st">"NDS"</span>, <span class="st">"NRW"</span>, <span class="st">"NDS"</span>), <span class="at">alo =</span> <span class="fu">c</span>(<span class="fl">2.1</span>, <span class="fl">1.8</span>, <span class="fl">2.4</span>, <span class="fl">2.2</span>), <span class="at">alter =</span> <span class="fu">c</span>(<span class="st">"age_1825"</span>, <span class="st">"age_1825"</span>, <span class="st">"age_2630"</span>, <span class="st">"age_2630"</span>))</span>
@@ -419,14 +470,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="uepivot" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="uepivot"><span class="header-section-number">5.2.3</span> <a href="#pivot_ue">Exercise</a></h3>
+<section id="uepivot" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="uepivot"><span class="header-section-number">9.2.3</span> <a href="#pivot_ue">Exercise</a></h3>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.3</span> Exercises</h2>
-<section id="join_ue" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="join_ue"><span class="header-section-number">5.3.1</span> Exercise 1: Joining</h3>
+<section id="exercises" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">9.3</span> Exercises</h2>
+<section id="join_ue" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="join_ue"><span class="header-section-number">9.3.1</span> Exercise 1: Joining</h3>
 <p>Join the selected observations from <code>PENDDAT_cf_W13.dta</code> with the household data to include the <code>region</code> where the respondents live, using <code>hnr</code> and <code>welle</code> as keys.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pend_ue11 <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>, <span class="st">"welle"</span>)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
@@ -453,8 +504,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><a href="#uejoin">Back to top</a></p>
 </section>
-<section id="pivot_ue" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="pivot_ue"><span class="header-section-number">5.3.2</span> Exercise 2: Reshaping</h3>
+<section id="pivot_ue" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="pivot_ue"><span class="header-section-number">9.3.2</span> Exercise 2: Reshaping</h3>
 <p>Bring the following data into long format:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pend_ue11b <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"./orig/PENDDAT_cf_W13.dta"</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">"pnr"</span>, <span class="st">"welle"</span>, <span class="st">"famstand"</span>)) <span class="sc">%&gt;%</span></span>
@@ -918,13 +969,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./04_data_wrangle.html" class="pagination-link" aria-label="Data Wrangling I: Creating Variables">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling I: Creating Variables</span></span>
+      <a href="./10_raw_to_table.html" class="pagination-link" aria-label="From data to table &amp; graph">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From data to table &amp; graph</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./06_labels_factor.html" class="pagination-link" aria-label="Labels &amp; factors">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

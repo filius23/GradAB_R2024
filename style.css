@@ -41,11 +41,13 @@ div.note {
 }
 
 div.inter {
+  border-radius: 15px;
   padding: 1em;
   margin: 1em 0;
-  background-color: #94BFE0;
-  border: solid 1px #000000;
+  background-color: #68E0E8;
+  border: solid 1px grey;
 }
+
 
 
 .cell-output code {

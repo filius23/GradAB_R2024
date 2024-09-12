@@ -116,32 +116,6 @@ dat3 %>%
 dat3 %>%
   summarise(across(matches("studs|profs"), ~mean(.x)), .by= prom_recht)
 
-
-# multiple values in one go 
-dat3 %>%
-  summarise(across(matches("studs|profs"), list(mean = ~mean(.x), sd = ~sd(.x))), .by= prom_recht)
-
-
-## create a list of statistics beforehand  -------------------------------------
-wert_liste <- list(MEAN = ~mean(.x), SD = ~sd(.x))
-dat3 %>%
-  summarise(across(matches("studs|profs"), wert_liste), .by= prom_recht)
-
-
-## amending the names ----------------------------------------------------------
-dat3 %>%
-  summarise(across(matches("studs|profs"), 
-                   wert_liste,
-                   .names = "{.fn}_{.col}"),
-            .by= prom_recht)
-
-
-dat3 %>%
-  mutate(across(matches("studs|profs"),
-                wert_liste, 
-                .names = "{.col}XX{.fn}"))
-
-
 # Exercise -----
 
 # Custom Functions -------------------------------------------------------------
@@ -185,4 +159,31 @@ sat_small %>%
 sat_small %>% map_dfc(~dtomean(.x))
 sat_small %>% map(~dtomean(.x)) %>% bind_cols()
 
+
+# Appendix: more across() -----------------------------------------------------
+
+
+## multiple values in one go ---------------------------------------------------
+dat3 %>%
+  summarise(across(matches("studs|profs"), list(mean = ~mean(.x), sd = ~sd(.x))))
+
+
+## create a list of statistics beforehand  ------------------------------------
+wert_liste <- list(MEAN = ~mean(.x), SD = ~sd(.x))
+dat3 %>%
+  summarise(across(matches("studs|profs"), wert_liste), .by= prom_recht)
+
+
+## amending the names ---------------------------------------------------------
+dat3 %>%
+  summarise(across(matches("studs|profs"), 
+                   wert_liste,
+                   .names = "{.fn}_{.col}"),
+            .by= prom_recht)
+
+
+dat3 %>%
+  mutate(across(matches("studs|profs"),
+                wert_liste, 
+                .names = "{.col}XX{.fn}"))
 

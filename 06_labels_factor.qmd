@@ -95,52 +95,6 @@ pend_kap5 %>% select(contains("PSM0100")) %>% head()
 
 More `fct_....()` functions from `{forcats}` can be found in this [Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf).
 
-## Creating label `data.frame` and merging with data
-
-An alternative approach involves creating a small label `data.frame` and `left_join()` (more on `left_join()` later.)
-
-```{r}
-tab2 <- pend_kap5 %>% count(PSM0100)
-tab2
-```
-```{r}
-lab_df <- data.frame(PSM0100=1:2)
-lab_df
-lab_df$PD0400_lab <- factor(lab_df$PSM0100,
-                            levels = 1:2,
-                            labels = c("Uses social networks",
-                                       "Does not use social networks"))
-lab_df
-```
-
-```{r}
-tab2 %>% 
-  left_join(lab_df,by = "PSM0100")
-```
-
-...or if you have multiple variables, create an Excel sheet and merge it:
-
-```{r}
-  pend_kap5 %>% 
-    select(zpsex,PSM0100) %>% 
-    distinct() %>%  
-    data.frame() %>% 
-    pivot_longer(cols = everything()) %>% 
-    distinct() %>% 
-    arrange(name,value) %>% 
-  xlsx::write.xlsx(file = "./data/label.xlsx",row.names = F)
-
-  
-lab_df2 <- 
-  xlsx::read.xlsx(file = "./data/label_read.xlsx",sheetIndex = 1)
-
-
-pend_kap5 %>% 
-    count(zpsex,PSM0100) 
-
-
-lab_df2 %>% pivot_wider(names_from = name)
-```
 
 
 
@@ -203,18 +157,23 @@ pend_kap5 %>%
 If we want to label a dataset for Stata, for example, `{labelled}` comes in handy again:
 
 ```{r}
+#| eval: false
+fdz_install("labelled")
+```
+
+
+```{r}
 library(labelled)
 ```
 
 ```{r}
 pend_kap5$zpsex_num2 <- as.numeric(pend_kap5$zpsex)
 attributes(pend_kap5$zpsex_num2)
-val_labels(pend_kap5$zpsex_num2) <- c("Men"=1,"Women"=2)
+val_labels(pend_kap5$zpsex_num2) <- c("Männer Testtesttest"=1,"Frauen"=2)
 attributes(pend_kap5$zpsex_num2)
 pend_kap5 %>% count(zpsex_num2)
 ```
 ```{r}
-#| eval: false
 pend_kap5 %>% 
   select(zpsex_num2) %>% 
   haven::write_dta(.,path = "./data/pend_kap5.dta")

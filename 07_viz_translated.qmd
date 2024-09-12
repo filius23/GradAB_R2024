@@ -79,6 +79,14 @@ pend_small$PAS0100[pend_small$PAS0100<0] <- NA
 pend_small$azges1[pend_small$azges1<0] <- NA
 ```
 
+...alternatively, we use `ifelse()` and `across()` [see here](#ifelse):
+```{r}
+pend_small$palter[pend_small$palter>100] <- NA 
+pend_small <-
+  pend_small %>%
+  mutate(across(c("casmin", "PAS0100", "azges1"),  ~ ifelse(.x < 0, NA, .x)))
+```
+
 
 ## ggplot2 and the Grammar of Graphics 
 
@@ -191,7 +199,7 @@ ggplot(data = pend_small, aes(x = palter, y = azges1,
                                shape = as.factor(zpsex),
                                color = as.factor(zpsex))) + 
   geom_point(size = 4) + 
-  scale_color_manual(values = c("lightskyblue","orange"),
+  scale_color_manual(values = c("lightskyblue4","orange"),
                      breaks = c(1,2), labels = c("Men", "Women")
                      ) +
   scale_shape_manual(values = c(18,20),
@@ -209,6 +217,7 @@ ggplot(data = pend_small, aes(x = palter, y = azges1,
 
 [Übersicht zu shapes](#shape1)
 
+### [Exercise](#pltue1) {#ue4_01}
 
 ## Visualizing distributions 
 
@@ -296,6 +305,7 @@ pend_small %>%
                        y = (..count..)/sum(..count..) )) +
   geom_bar(position = position_dodge()) +
   scale_y_continuous(labels = scales::label_percent(accuracy = 1)) 
+# horizontal -> swap x and y axis
 pend_small %>% 
   filter(!is.na(PD0400)) %>% 
   ggplot(data = ., aes(y = as_factor(PD0400), fill = factor(zpsex),
@@ -312,7 +322,7 @@ pend_small %>%
   ggplot(data = ., aes(y = PD0400, fill = factor(zpsex),
                        x = (..count..)/sum(..count..) )) +
   geom_bar(position=position_dodge()) +
-  scale_fill_manual(values = c("navajowhite","navy"),
+  scale_fill_manual(values = c("deepskyblue3","deepskyblue4"),
                     breaks = c(1,2), labels = c("Men", "Women")) +
   scale_x_continuous(labels = scales::label_percent(accuracy = 1)) +
   scale_y_continuous(breaks = 1:4, 
@@ -357,7 +367,7 @@ pend_u41 <-
 
 [Back to top](#ue4_01)
 
-### Exercise 2 {#pltue2}
+### *Exercise 2* {#pltue2}
 
 ```{r}
 #| eval: false
@@ -505,20 +515,19 @@ p1 + theme_gray() + labs(title="theme_grey() - Standard") + theme(plot.title = e
 p1 + theme_bw() + labs(title="theme_bw()") + theme(plot.title = element_text(size = rel(2.5),hjust = 0.5))
 p1 + theme_minimal() + labs(title="theme_minimal()") + theme(plot.title = element_text(size = rel(2.5),hjust = 0.5))
 p1 + theme_dark() + labs(title="theme_dark()") + theme(plot.title = element_text(size = rel(2.5),hjust = 0.5))
+p1 + theme_void() + labs(title="theme_void()") + theme(plot.title = element_text(size = rel(2.5),hjust = 0.5))
 ```
-
-### Farben {#farben}
+### Colors {#colors}
 
 ```{r}
 p1 <- ggplot(data = pend_small, aes(x = palter, y = azges1, color = factor(zpsex))) + 
   geom_point(size = 3) 
 ```
 
+In addition to the colors used in the example for `fill`, countless other colors can be used with `scale_fill_manual` and `scale_color_manual`:
 
-Neben den im Beispiel verwendeten Farben für `fill` können natürlich auch noch unzählige weitere Farben in `scale_fill_manual`  und `scale_color_manual` verwendet werden:
-
-+ [Hier](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) findet sich eine Übersicht mit allen Farbnamen, die verstanden werden
-+ Alternativ können auch sog. HEX-Codes angeben werden, die bspw. mit dem [Adobe Color Wheel](https://color.adobe.com/de/create/color-wheel) oder [Color Hex](https://www.color-hex.com/) erstellt werden können.
++ [Here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) you can find an overview of all color names that are recognized.
++ Alternatively, HEX codes can also be specified, which can be created using tools like the [Adobe Color Wheel](https://color.adobe.com/de/create/color-wheel) or [Color Hex](https://www.color-hex.com/).
 
 ```{r}
 #| layout-ncol: 2
@@ -529,9 +538,9 @@ p1 +  scale_color_manual(values = c("#005b96","#6497b1"),
                     breaks = c(1,2), labels = c("Men", "Women") )
 ```
 
-#### ColorBreweR {#brewer}
+#### ColorBrewer {#brewer}
 
-Alternativ zur manuellen Auswahl der Farben mit `scale_fill_manual` und `scale_color_manual` können mit `scale_fill_brewer()` auch vorgegebene Farbpaletten des *colorbrewer* verwendet werden. Dazu muss lediglich `scale_fill_brewer()` anstelle von `scale_fill_manual` angeben werden und statt `values` eine der Paletten - eine Übersicht findet sich [hier](http://colorbrewer2.org/). Die Farbpaletten von ColorBreweR sind alle in ggplot2 integriert.
+As an alternative to manually selecting colors with `scale_fill_manual` and `scale_color_manual`, you can use predefined color palettes from *colorbrewer* with `scale_fill_brewer()`. Simply use `scale_fill_brewer()` instead of `scale_fill_manual` and specify one of the palettes instead of `values`—an overview can be found [here](http://colorbrewer2.org/). ColorBrewer palettes are integrated into ggplot2.
 
 ```{r}
 p1 +
@@ -539,10 +548,10 @@ p1 +
                     breaks = c(1,2), labels = c("Men", "Women") ) 
 ```
 
-
 #### viridis {#viridis}
 
-Analog dazu gibt es auch die [{viridis}](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)-Paletten, welche durchgängig "colorblind-safe" und ebenfalls in {ggplot2} integriert sind. Allerdings ist hier zu beachten, dass für Farbauswahlen basierend auf einer kategorialen Variable `scale_color_viridis_d()` zu verwenden ist. Soll die Farbe entlang einer numerischen/metrischen Variable bestimmt werden, dann ist `scale_color_viridis_c()` zu verwenden. Außerdem kann mit `begin` und `end` die Breite der Farbskala angepasst werden:
+Similarly, there are [{viridis}](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) palettes, which are "colorblind-safe" and are also integrated into {ggplot2}. However, note that for color selections based on a categorical variable, `scale_color_viridis_d()` should be used. For determining color along a numerical/metric variable, `scale_color_viridis_c()` should be used. Additionally, you can adjust the width of the color scale with `begin` and `end`:
+
 ```{r}
 #| layout-ncol: 2
 p1 +
@@ -559,24 +568,24 @@ p1 +
 knitr::include_graphics("./pic/104_viridis-scales.png")
 ```
 
+#### Additional Color Palettes
 
-#### Weitere Farbpaletten
+In addition, there are countless packages that also offer `scale_color_` and `scale_fill_` functions:
+Here are two examples with [{scico}](https://github.com/thomasp85/scico) and [{MetBrewer}](https://github.com/BlakeRMills/MetBrewer), which contains colors from images in the Metropolitan Museum of Art:
 
-Darüber hinaus gibt es unzählige Pakete, die ebenfalls `scale_color_` und `scale_fill_`-Funktionen bieten:
-Hier noch zwei Beispiele mit  [{scico}](https://github.com/thomasp85/scico) und [{MetBrewer}](https://github.com/BlakeRMills/MetBrewer), welches Farben aus Bildern im Metropolitan Museum of Art enthält:
 ```{r, eval =F}
 install.packages('scico')
 install.packages("MetBrewer")
 ```
 
-[{scico}](https://github.com/thomasp85/scico) Farbpaletten
+[{scico}](https://github.com/thomasp85/scico) color palettes
 ```{r}
 #| echo: false
 #| out-height: 60%
 scico::scico_palette_show()
 ```
 
-[{MetBrewer}](https://github.com/BlakeRMills/MetBrewer) Farbpaletten
+[{MetBrewer}](https://github.com/BlakeRMills/MetBrewer) color palettes
 ```{r}
 #| out-width: 100%
 #| echo: false
@@ -596,7 +605,6 @@ p1 +
   scale_color_met_d(name = "Kandinsky",
                     breaks = c(1,2), labels = c("Men", "Women") ) 
 ```
-
 
 Comparable packages also exist for:
 

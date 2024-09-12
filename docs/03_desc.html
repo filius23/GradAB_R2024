@@ -175,32 +175,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Merging &amp; reshaping</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./07_viz_translated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_reg2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression Models: Extensions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regression Models: Extensions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_raw_to_table.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From data to table &amp; graph</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_merge_pivot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling II: Merging &amp; reshaping</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_labels_factor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Labels &amp; factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15_map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating map Visualizations with <code>{ggplot2}</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -646,17 +658,17 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 13 13 [Wave 13 (2019)]     0          1550  1816.  88453   </code></pre>
 </div>
 </div>
-<p>You can also filter for specific waves if needed:</p>
+<p>Given that the resulting ‘table’ is a data.frame, we can also filter for specific waves if needed:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pend <span class="sc">%&gt;%</span> </span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Minimum =</span> <span class="fu">min</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximum =</span> <span class="fu">max</span>(netges, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> welle</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(welle <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   welle                   Minimum   Median  Mean Maximum  
@@ -684,23 +696,23 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
 <p>We are interested in the variable <code>famstand</code>, which contains the marital status of the respondents:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="otxlqrhtkt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#otxlqrhtkt table {
+<div id="ogxtqbhvxt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ogxtqbhvxt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#otxlqrhtkt thead, #otxlqrhtkt tbody, #otxlqrhtkt tfoot, #otxlqrhtkt tr, #otxlqrhtkt td, #otxlqrhtkt th {
+#ogxtqbhvxt thead, #ogxtqbhvxt tbody, #ogxtqbhvxt tfoot, #ogxtqbhvxt tr, #ogxtqbhvxt td, #ogxtqbhvxt th {
   border-style: none;
 }
 
-#otxlqrhtkt p {
+#ogxtqbhvxt p {
   margin: 0;
   padding: 0;
 }
 
-#otxlqrhtkt .gt_table {
+#ogxtqbhvxt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -726,12 +738,12 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-left-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_caption {
+#ogxtqbhvxt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#otxlqrhtkt .gt_title {
+#ogxtqbhvxt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -743,7 +755,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-width: 0;
 }
 
-#otxlqrhtkt .gt_subtitle {
+#ogxtqbhvxt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -755,7 +767,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-top-width: 0;
 }
 
-#otxlqrhtkt .gt_heading {
+#ogxtqbhvxt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -767,13 +779,13 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_bottom_border {
+#ogxtqbhvxt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_col_headings {
+#ogxtqbhvxt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -788,7 +800,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_col_heading {
+#ogxtqbhvxt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -808,7 +820,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   overflow-x: hidden;
 }
 
-#otxlqrhtkt .gt_column_spanner_outer {
+#ogxtqbhvxt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -820,15 +832,15 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 4px;
 }
 
-#otxlqrhtkt .gt_column_spanner_outer:first-child {
+#ogxtqbhvxt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#otxlqrhtkt .gt_column_spanner_outer:last-child {
+#ogxtqbhvxt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#otxlqrhtkt .gt_column_spanner {
+#ogxtqbhvxt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -840,11 +852,11 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   width: 100%;
 }
 
-#otxlqrhtkt .gt_spanner_row {
+#ogxtqbhvxt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#otxlqrhtkt .gt_group_heading {
+#ogxtqbhvxt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -870,7 +882,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   text-align: left;
 }
 
-#otxlqrhtkt .gt_empty_group_heading {
+#ogxtqbhvxt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -885,15 +897,15 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   vertical-align: middle;
 }
 
-#otxlqrhtkt .gt_from_md > :first-child {
+#ogxtqbhvxt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#otxlqrhtkt .gt_from_md > :last-child {
+#ogxtqbhvxt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#otxlqrhtkt .gt_row {
+#ogxtqbhvxt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -912,7 +924,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   overflow-x: hidden;
 }
 
-#otxlqrhtkt .gt_stub {
+#ogxtqbhvxt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -925,7 +937,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#otxlqrhtkt .gt_stub_row_group {
+#ogxtqbhvxt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -939,15 +951,15 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   vertical-align: top;
 }
 
-#otxlqrhtkt .gt_row_group_first td {
+#ogxtqbhvxt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#otxlqrhtkt .gt_row_group_first th {
+#ogxtqbhvxt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#otxlqrhtkt .gt_summary_row {
+#ogxtqbhvxt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -957,16 +969,16 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#otxlqrhtkt .gt_first_summary_row {
+#ogxtqbhvxt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_first_summary_row.thick {
+#ogxtqbhvxt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#otxlqrhtkt .gt_last_summary_row {
+#ogxtqbhvxt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -976,7 +988,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_grand_summary_row {
+#ogxtqbhvxt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -986,7 +998,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#otxlqrhtkt .gt_first_grand_summary_row {
+#ogxtqbhvxt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -996,7 +1008,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-top-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_last_grand_summary_row_top {
+#ogxtqbhvxt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1006,11 +1018,11 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_striped {
+#ogxtqbhvxt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#otxlqrhtkt .gt_table_body {
+#ogxtqbhvxt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1019,7 +1031,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-bottom-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_footnotes {
+#ogxtqbhvxt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1033,7 +1045,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_footnote {
+#ogxtqbhvxt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1042,7 +1054,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#otxlqrhtkt .gt_sourcenotes {
+#ogxtqbhvxt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1056,7 +1068,7 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   border-right-color: #D3D3D3;
 }
 
-#otxlqrhtkt .gt_sourcenote {
+#ogxtqbhvxt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1064,72 +1076,72 @@ In occupation with earnings &gt;400 EUR pe |      9,470       44.90       44.90
   padding-right: 5px;
 }
 
-#otxlqrhtkt .gt_left {
+#ogxtqbhvxt .gt_left {
   text-align: left;
 }
 
-#otxlqrhtkt .gt_center {
+#ogxtqbhvxt .gt_center {
   text-align: center;
 }
 
-#otxlqrhtkt .gt_right {
+#ogxtqbhvxt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#otxlqrhtkt .gt_font_normal {
+#ogxtqbhvxt .gt_font_normal {
   font-weight: normal;
 }
 
-#otxlqrhtkt .gt_font_bold {
+#ogxtqbhvxt .gt_font_bold {
   font-weight: bold;
 }
 
-#otxlqrhtkt .gt_font_italic {
+#ogxtqbhvxt .gt_font_italic {
   font-style: italic;
 }
 
-#otxlqrhtkt .gt_super {
+#ogxtqbhvxt .gt_super {
   font-size: 65%;
 }
 
-#otxlqrhtkt .gt_footnote_marks {
+#ogxtqbhvxt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#otxlqrhtkt .gt_asterisk {
+#ogxtqbhvxt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#otxlqrhtkt .gt_indent_1 {
+#ogxtqbhvxt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#otxlqrhtkt .gt_indent_2 {
+#ogxtqbhvxt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#otxlqrhtkt .gt_indent_3 {
+#ogxtqbhvxt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#otxlqrhtkt .gt_indent_4 {
+#ogxtqbhvxt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#otxlqrhtkt .gt_indent_5 {
+#ogxtqbhvxt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#otxlqrhtkt .katex-display {
+#ogxtqbhvxt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#otxlqrhtkt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ogxtqbhvxt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

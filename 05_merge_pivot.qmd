@@ -1,4 +1,4 @@
-# Merging & reshaping {#wrang3}
+# Data Wrangling II: Merging & reshaping {#wrang3}
 
 ```{r setup}
 #| include: false
@@ -65,7 +65,15 @@ g
 # source("tidyexplain/anti_join.R")
 ```
 
-![inner_join](pic/inner-join.gif) ![left_join](pic/left-join-extra.gif) ![full_join](pic/full-join.gif)
+::: {#fig-elephants layout-ncol=3}
+![inner_join](pic/inner-join.gif){width=200} 
+
+![left_join](pic/left-join-extra.gif){width=200} 
+
+![full_join](pic/full-join.gif){width=200}
+
+<!-- join variants -->
+:::
 
 <!-- ![](pic/anti-join.gif) -->
 

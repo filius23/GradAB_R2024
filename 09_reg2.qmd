@@ -67,7 +67,7 @@ When we compare models `m1` and `m3`, we see different sample sizes:
 ```{r}
 m1 <- lm(var2 ~ var1, data = dat1)  
 m4 <- lm(var2 ~ ed_fct + var1, data = dat1)
-modelsummary(list("m1"=m1,"m4"=m4), gof_omit = "IC|RM|Log|F", output = "flextable")
+modelsummary(list("m1"=m1,"m4"=m4), gof_omit = "IC|RM|Log|F")
 ```
 
 It appears that in model `m4`, one case is lost with `ed_fct`. Why is that? It’s worth taking a look at the data:
@@ -138,7 +138,7 @@ We can now create model `m1` to include only cases that are also considered in m
 
 ```{r}
 m1_m4vars <- lm(var2 ~ var1, data = filter(dat1, compl_m4 == T))
-modelsummary(list("m1"=m1,"m1 with m4vars"=m1_m4vars,"m4"=m4), gof_omit = "IC|RM|Log|F", output = "flextable")
+modelsummary(list("m1"=m1,"m1 with m4vars"=m1_m4vars,"m4"=m4), gof_omit = "IC|RM|Log|F")
 ```
 
 Now, both `m1 with m4vars` and `m4` have the same number of cases, allowing for a direct comparison of the results.
@@ -185,7 +185,8 @@ plot_predictions(m5, condition = c("var1", "g_fct")) +
   labs(title = "Predicted Values for var2",
        color = "Gender", fill = "Gender",
        x = "Values for var1",
-       y = "Predicted Values for var1")
+       y = "Predicted Values for var1") +
+  theme_minimal()
 ```
 **[Alternatively, we can create the "marginsplot" step by step ourselves](#marginsplot)**
 
@@ -389,64 +390,6 @@ More about multilevel models and `{lme4}` in blog posts by [Rense Nieuwenhuis](h
 
 <!-- ## Appendix: Predictions with `marginaleffects` and "Manual" Visualization {#marginsplot} -->
 
-In the [Interactions](#interactions) chapter, we estimated the following model:
-```{r}
-summary(m5)
-```
-
-With `predictions()` from `{marginaleffects}`, we can calculate predicted values for specific values based on our model.
-We specify the desired values with a `datagrid()` - which automatically sets other variables to their mean:
-```{r}
-# Create combinations of all values
-datagrid(var1 = 1:5,
-         g_fct =  c("women","men"),model = m5)
-```
-
-We then provide these values to `predictions()` as `newdata =`:
-```{r}
-library(marginaleffects)
-p <- predictions(m5, 
-                 newdata = datagrid(var1 = 1:5,
-                                    g_fct =  c("women","men"))) # ,model = m5 unnecessary since predictions are already specified:
-                 
-head(data.frame(p))
-```
-
-For `ggplot()`, we use `geom_line()` together with 
-
-+ `geom_errorbar()` for a visualization with confidence intervals as error bars 
-+ `geom_ribbon()` for confidence intervals as shaded bands (here, we need to set the opacity with `alpha =` and specify the color with `fill=` to color the area). 
-```{r}
-#| layout-ncol: 2
-pred_plt <- 
-    ggplot(data= data.frame(p),
-           aes(x = var1, 
-               y =  estimate, 
-               ymin = conf.low,ymax = conf.high,
-               color = g_fct)) + 
-      geom_line() + 
-      scale_color_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Women","Men")) +
-      labs(title = "Predicted Values for var2",
-           color = "Gender", fill = "Gender",
-           x = "Values for var1",
-           y = "Predicted Values for var2") +
-      theme_minimal()
-
-# Confidence intervals
-pred_plt + 
-  geom_point(size = 2.75) +
-  geom_errorbar(width = .1)
-
-# With confidence bands
-pred_plt + 
-  geom_ribbon(alpha = .1, color = NA,aes(fill = g_fct)) +
-  scale_fill_manual(values = c("orange","lightskyblue3"),breaks = c("women","men"),labels=c("Women","Men")) +
-  labs(title = "Predicted Values for var2",
-           color = "Gender", fill = "Gender",
-           x = "Values for var1",
-           y = "Predicted Values for var2") +
-      theme_minimal()
-```
 
 ## Links
 

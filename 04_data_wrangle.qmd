@@ -163,9 +163,6 @@ dat5 %>%
 
 :::
 
-
-### [Exercise](#grpue) {#ue06_2}
-
 ## `across()`: Processing Multiple Variables {#across}
 
 A highly versatile addition to `mutate()` and `summarise()` is `across()`. This allows us to apply a function to multiple columns simultaneously, without repeating code:
@@ -189,48 +186,13 @@ dat3 %>%
   summarise(across(matches("studs|profs"), ~mean(.x)), .by= prom_recht)
 ```
 
-We can apply multiple functions by placing them in a `list()`:
-```{r}
-dat3 %>%
-  summarise(across(matches("studs|profs"), list(mean = ~mean(.x), sd = ~sd(.x))), .by= prom_recht)
-```
+[For more examples on how apply multiple functions, include renaming etc. see below](#across)
 
-You can define this `list()` in advance and use it later:
-```{r}
-wert_liste <- list(MEAN = ~mean(.x), SD = ~sd(.x))
-
-dat3 %>%
-  summarise(across(matches("studs|profs"), wert_liste), .by= prom_recht)
-```
-
-The `.names()` argument allows us to control the naming of columns. `{.fn}` stands for the function being applied, and `{.col}` represents the name of the variable being processed.
-
-```{r}
-dat3 %>%
-  summarise(across(matches("studs|profs"), 
-                   wert_liste,
-                   .names = "{.fn}_{.col}"),
-            .by= prom_recht)
-```
-
-All these functions also work with `mutate()`:
-
-```{r}
-dat3 %>%
-  mutate(across(matches("studs|profs"),
-                wert_liste, 
-                .names = "{.col}XX{.fn}"))
-```
-
-[More examples in the across() documentation](https://dplyr.tidyverse.org/reference/across.html)
-
-### [Exercise](#across_ue) {#ue06_3}
+### [Exercise](#mutsum_ue) {#ue06_2}
 
 ## Custom Functions
 
-What’s with the `~`[^tilde] in `across()`? Let's take a look at the basics of functions in R to understand.
-
-[^tilde]: "tilde": <br> **Windows**: Press `Alt Gr` + `*` (The asterisk is on the same key as the plus sign). <br> **macOS**: Press `Alt` (Option) + `N`, then press the space bar to insert the tilde.
+So far, we only used functions written by others. We can also use own functions to avoid repetition:
 
 To do so, let’s examine three satisfaction variables for respondents in rows 12-16:
 ```{r}
@@ -327,7 +289,7 @@ sat_small %>% map(~dtomean(.x))
 This *formula syntax* can also be found in `across()` - additionally, with `.names =` we have the option to modify the variable names for the results:
 ```{r}
 sat_small %>% 
-  mutate(across(matches("PEO0300"),~dtomean(.x),.names = "dmean_{.col}"))
+  mutate(across(matches("PEO0300"),~dtomean(.x)) )
 ```
 
 
@@ -336,42 +298,28 @@ sat_small %>%
 
 ## Exercises
 
-### Exercise {#grp_ue}
+### Exercise {#mutsum_ue}
 
-+ Continue using the university dataset `dat3` as [shown above](#wrang1).
-+ Calculate the student-to-professor ratio (students per professor `studs/profs`) at the universities relative to the mean of the ratio (`rel_studprofs`).
-+ Calculate the student-to-professor ratio (`studprofs`) relative to the mean separately for universities with and without the right to award doctorates (`prom_recht`), and add this as a new column.
+<!-- + Continue using the university dataset `dat3` as [shown above](#wrang1). -->
+<!-- + Calculate the student-to-professor ratio (students per professor `studs/profs`) at the universities relative to the mean of the ratio (`rel_studprofs`). -->
+<!-- + Calculate the student-to-professor ratio (`studprofs`) relative to the mean separately for universities with and without the right to award doctorates (`prom_recht`), and add this as a new column. -->
 
-[Back to top](#ue06_2)
 
-### Exercise {#across_ue}
 
 + Use the `pend_small` dataset:
-
-```{r}
-#| include: false
-haven::read_dta("./orig/PENDDAT_cf_W13.dta",
-                               col_select = c("welle","PEO0400a","PEO0400b","PEO0400c","PEO0400d")
-                               ) %>%  
-  filter(welle == 2) %>% 
-  mutate(id = floor(as.numeric(rownames(.))/10),
-         across(matches("PE"),~.x<0)) %>% 
-  mutate(na = rowSums(select(., matches("PE") )) ) %>% 
-  summarise(sum_na = sum(na),.by = id) %>% 
-  arrange(sum_na) %>% 
-  filter(id %in% 13:15)
-```
-
-
 ```{r}
 pend_small <- haven::read_dta("./orig/PENDDAT_cf_W13.dta",
                                col_select = c("welle","zpsex","PEO0400a","PEO0400b","PEO0400c","PEO0400d")
                                ) %>% 
+  haven::zap_labels() %>% # drop labels to have a clean data.frame
   filter(welle == 2) %>% 
-  slice(1:15)
+  slice(1:10)
 ```
 
-+ Calculate the mean for the variables `PEO0400a`, `PEO0400b`, `PEO0400c`, and `PEO0400d`:
+
++ Calculate the mean for the variables PEO0400a by gender (`zpsex`):
++ Calculate the mean for the variables `PEO0400a`, `PEO0400b`, `PEO0400c`, and `PEO0400d` by gender (`zpsex`):
++ Use `across()` to calculate the means for all four variables.
 ```{r}
 #| echo: false
 #| warning: false
@@ -395,21 +343,18 @@ etb18_smallx %>% select(starts_with("PEO0400")) %>%
 data.frame(pend_small)
 ```
 
-+ Use `across()` to calculate the means for all four variables.
-+ Calculate the means separately by gender (`zpsex`) using `.by =`.
-+ Also add the variance (`var()`), and use `.names=` to name the columns following the pattern `metric.variable`.
-
++ Standardize the variables `PEO0400a` - `PEO0400d` from `pend_small` using the following pattern:
 ```{r}
-#| echo: false
-library(gt)
+#| eval: false
 pend_small %>% 
-  mutate(across(matches("PE"),list(mean=~mean(.x),var=~var(.x)),.names = "{.fn}.{.col}"), .by = zpsex) %>% 
-  mutate(across(everything(),~as.numeric(.x)) ) %>% 
-  head(0) %>% 
-  gt::gt() %>% 
-tab_options(table.font.size = 9)
-
+  mutate(std_PEO0400b = (PEO0400b - mean(PEO0400b,na.rm = T))/sd(PEO0400b,na.rm = T))
 ```
++ Use a function so that you don't have to repeatedly enter the same steps.
++ Additionally, use `across()` to apply the function to the desired variables.
++ Calculate the standardization separately by gender (`zpsex`) using `.by =`.
+
+
+[Back to top](#ue06_2)
 
 [Back to top](#ue06_3)
 
@@ -475,10 +420,69 @@ pend_small %>%
 
 ## Appendix
 
+### `across()`: Processing Multiple Variables {#across}
+
+A highly versatile addition to `mutate()` and `summarise()` is `across()`. This allows us to apply a function to multiple columns simultaneously, without repeating code:
+
+```{r}
+dat3 %>%
+  summarise(studs = mean(studs),
+            profs = mean(profs))
+```
+
+Here, `across()` offers a much shorter syntax for variable selection, and we can use [`?select_helpers`](02_intro.qmd#selecthelpers) like `matches()`:
+
+```{r}
+dat3 %>%
+  summarise(across(.cols = matches("studs|profs"),.fns = ~mean(.x)))
+```
+
+This is also compatible with `.by=`:
+```{r}
+dat3 %>%
+  summarise(across(matches("studs|profs"), ~mean(.x)), .by= prom_recht)
+```
+
+We can apply multiple functions by placing them in a `list()`:
+```{r}
+dat3 %>%
+  summarise(across(matches("studs|profs"), list(mean = ~mean(.x), sd = ~sd(.x))), .by= prom_recht)
+```
+
+You can define this `list()` in advance and use it later:
+```{r}
+wert_liste <- list(MEAN = ~mean(.x), SD = ~sd(.x))
+
+dat3 %>%
+  summarise(across(matches("studs|profs"), wert_liste), .by= prom_recht)
+```
+
+The `.names()` argument allows us to control the naming of columns. `{.fn}` stands for the function being applied, and `{.col}` represents the name of the variable being processed.
+
+```{r}
+dat3 %>%
+  summarise(across(matches("studs|profs"), 
+                   wert_liste,
+                   .names = "{.fn}_{.col}"),
+            .by= prom_recht)
+```
+
+All these functions also work with `mutate()`:
+
+```{r}
+dat3 %>%
+  mutate(across(matches("studs|profs"),
+                wert_liste, 
+                .names = "{.col}XX{.fn}"))
+```
+
+[More examples in the across() documentation](https://dplyr.tidyverse.org/reference/across.html)
+
+#### [Exercise](#across_ue) {#ue06_3}
+
+
 ### Helper functions 
-
-
-#### `ifelse()`
+#### `ifelse()` {#ifelse}
 `ifelse()` is a great help for all recoding tasks: we formulate a condition and if it is met, the first value is used; if not, the second value is used. Here we check whether `studs-mean(studs)` is greater than `0` - if so, `above` is used, otherwise `below`:
 
 ```{r}
